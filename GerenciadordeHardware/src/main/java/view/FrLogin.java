@@ -36,7 +36,6 @@ public class FrLogin extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         lblLoginIcon = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +97,7 @@ public class FrLogin extends javax.swing.JDialog {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        lblLoginIcon.setIcon(new javax.swing.ImageIcon("/home/ruiz/NetBeansProjects/GerenciadordeHardware/src/main/resources/images/userIcon_256.png")); // NOI18N
+        lblLoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/userIcon_256.png"))); // NOI18N
         lblLoginIcon.setMaximumSize(new java.awt.Dimension(32, 32));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

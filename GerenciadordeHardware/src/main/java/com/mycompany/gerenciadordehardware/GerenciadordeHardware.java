@@ -4,6 +4,8 @@
 
 package com.mycompany.gerenciadordehardware;
 
+import view.dlgCadastrarPeca;
+
 /**
  *
  * @author ruiz
@@ -11,6 +13,7 @@ package com.mycompany.gerenciadordehardware;
 public class GerenciadordeHardware {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        dlgCadastrarPeca home = new dlgCadastrarPeca();
+        home.setVisible(true);  
     }
 }
