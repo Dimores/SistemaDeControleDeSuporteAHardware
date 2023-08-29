@@ -4,6 +4,8 @@
 
 package com.mycompany.gerenciadordehardware;
 
+import java.text.ParseException;
+import view.FrLogin;
 import view.dlgCadastrarPeca;
 
 /**
@@ -12,8 +14,8 @@ import view.dlgCadastrarPeca;
  */
 public class GerenciadordeHardware {
 
-    public static void main(String[] args) {
-        dlgCadastrarPeca home = new dlgCadastrarPeca();
+    public static void main(String[] args) throws ParseException {
+        FrLogin home = new FrLogin();
         home.setVisible(true);  
     }
 }

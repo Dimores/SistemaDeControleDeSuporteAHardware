@@ -78,6 +78,8 @@
                               <Component id="btnCadastrarServico" alignment="0" max="32767" attributes="0"/>
                               <Component id="btnGerarRelatorioManutencao" alignment="1" pref="210" max="32767" attributes="0"/>
                               <Component id="btnRegistrarPagamento" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnCadastrarTecnico" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnCadastrarCliente" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -115,6 +117,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSocilitarServico" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnCadastrarCliente" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnCadastrarTecnico" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -178,6 +184,16 @@
             </Property>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btnCadastrarTecnico">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cadastrar Tecnico"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCadastrarCliente">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cadastrar cliente"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JInternalFrame" name="jInternalFrame1">
@@ -186,7 +202,7 @@
           <Border info="null"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Padr&#xe3;o"/>
         </Property>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
