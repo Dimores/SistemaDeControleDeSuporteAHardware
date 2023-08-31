@@ -8,6 +8,6 @@ package model.validations;
  *
  * @author diegomorelo
  */
-public class ValidatePagamento {
+public class PagamentoValidate {
     
 }
