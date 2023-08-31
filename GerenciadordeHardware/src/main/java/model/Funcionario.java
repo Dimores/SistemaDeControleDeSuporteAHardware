@@ -3,14 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
+import lombok.*;
 /**
  *
  * @author diegomorelo
  */
-public class Gerente extends Funcionario{
+@Setter
+@Getter
+
+public class Funcionario {
+    private String matricula;
+    private float salario;
     
- 
-    
-    
+    public Funcionario(){
+        this.matricula = "";
+        this.salario = 0;
+    }
 }
