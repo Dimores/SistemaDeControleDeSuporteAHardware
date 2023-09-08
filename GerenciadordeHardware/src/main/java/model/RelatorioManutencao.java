@@ -15,13 +15,16 @@ import lombok.*;
  */
 public class RelatorioManutencao extends Relatorio {
     private String equipamentos;
+    private String idRelatorio;
+    private Tecnico tecnico;
+    private Cliente cliente;
 
     public RelatorioManutencao() {
         super();
         this.equipamentos = "";
     }
 
-    public RelatorioManutencao(int idRelatorio, Calendar dataRelatorio, String descricao, String equipamentos, Cliente cliente, Tecnico tecnico) {
+    public RelatorioManutencao(String idRelatorio, Calendar dataRelatorio, String descricao, String equipamentos, Cliente cliente, Tecnico tecnico) {
         super(idRelatorio, dataRelatorio, descricao, cliente, tecnico);
         this.equipamentos = equipamentos;
     }
@@ -39,4 +42,5 @@ public class RelatorioManutencao extends Relatorio {
         return super.toString() +
                 "Equipamentos: " + equipamentos + "\n";
     }
+
 }

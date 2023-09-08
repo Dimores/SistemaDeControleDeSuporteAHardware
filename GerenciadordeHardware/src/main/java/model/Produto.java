@@ -7,6 +7,7 @@ import java.util.Calendar;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
+@NoArgsConstructor
 
 /**
  *
@@ -21,18 +22,11 @@ public class Produto {
     private int estoque;
     private String categoria;
     private Calendar dataFabricacao;
+    private String idProduto;
 
-    public Produto() {
-        this.codigo = "";
-        this.nome = "";
-        this.descricao = "";
-        this.preco = 0.0;
-        this.estoque = 0;
-        this.categoria = "";
-        this.dataFabricacao = Calendar.getInstance();
-    }
 
-    public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao) {
+
+    public Produto(String idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -40,6 +34,7 @@ public class Produto {
         this.estoque = estoque;
         this.categoria = categoria;
         this.dataFabricacao = dataFabricacao;
+        this.idProduto = idProduto;
     }
 
     @Override

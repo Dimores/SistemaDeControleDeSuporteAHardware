@@ -15,6 +15,7 @@ import lombok.*;
  */
 
 public class Peca extends Produto {
+    private String idPeca;
     private String tipo;
 
     public Peca() {
@@ -22,8 +23,8 @@ public class Peca extends Produto {
         this.tipo = "";
     }
 
-    public Peca(String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao, String tipo) {
-        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
+    public Peca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao, String tipo) {
+        super(idPeca, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
         this.tipo = tipo;
     }
 

@@ -18,6 +18,7 @@ public class Cabo extends Peca {
     private Color cor;
     private int bitola;
     private String tipoDeCabo;
+    private String idCabo;
 
     public Cabo() {
         super();
@@ -27,8 +28,8 @@ public class Cabo extends Peca {
         this.tipoDeCabo = "";
     }
 
-    public Cabo(String codigo, String nome, String descricao, double preco, int estoque, String categoria, java.util.Calendar dataFabricacao, String tipo, int comprimento, Color cor, int bitola, String tipoDeCabo) {
-        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, tipo);
+    public Cabo(String id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, java.util.Calendar dataFabricacao, String tipo, int comprimento, Color cor, int bitola, String tipoDeCabo) {
+        super(id, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, tipo);
         this.comprimento = comprimento;
         this.cor = cor;
         this.bitola = bitola;

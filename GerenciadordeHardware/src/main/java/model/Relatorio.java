@@ -17,21 +17,21 @@ import lombok.*;
 
 
 public class Relatorio {
-    private int idRelatorio;
+    private String idRelatorio;
     private Calendar dataRelatorio;
     private String descricao;
     private Cliente clienteRelacionado;
     private Tecnico tecnicoResponsavel;
 
     public Relatorio() {
-        this.idRelatorio = 0;
+        this.idRelatorio = "";
         this.dataRelatorio = Calendar.getInstance();
         this.descricao = "";
         this.clienteRelacionado = null;
         this.tecnicoResponsavel = null;
     }
 
-    public Relatorio(int idRelatorio, Calendar dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
+    public Relatorio(String idRelatorio, Calendar dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
         this.idRelatorio = idRelatorio;
         this.dataRelatorio = dataRelatorio;
         this.descricao = descricao;

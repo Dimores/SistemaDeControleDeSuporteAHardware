@@ -19,7 +19,7 @@ public class RelatorioRede extends Relatorio {
         this.tipoRede = "";
     }
 
-    public RelatorioRede(int idRelatorio, Calendar dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
+    public RelatorioRede(String idRelatorio, Calendar dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
         super(idRelatorio,dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.tipoRede = tipoRede;
     }
