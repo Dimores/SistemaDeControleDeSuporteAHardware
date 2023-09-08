@@ -7,8 +7,10 @@ package view;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.validations.EmailValidate;
+import model.validations.LoginValidate;
 
 /**
  *
@@ -159,8 +161,13 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_fEdtEmailActionPerformed
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-        EmailValidate ev = new EmailValidate(fEdtEmail.getText());
-        ev.validarEmail();
+       LoginValidate loginValidate = new LoginValidate();
+        try {
+            loginValidate.validar(fEdtEmail.getText(), fEdtSenha.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
+            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
