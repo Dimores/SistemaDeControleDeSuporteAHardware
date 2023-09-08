@@ -27,7 +27,7 @@ public class ServicoDAO implements IDao {
 
         sql = " INSERT INTO "
                 + " servico(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido) "
-                + " VALUES(?,?,?,?,?,?,?) ";
+                + " VALUES(?,?,?,?,?,?) ";
         try {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);

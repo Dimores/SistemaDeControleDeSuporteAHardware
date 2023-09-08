@@ -28,7 +28,7 @@ public class ClienteDAO implements IDao {
 
         sql = " INSERT INTO "
                 + " cliente(nome, CPF, dataNasc, senha, email, telefone) "
-                + " VALUES(?,?,?,?,?) ";
+                + " VALUES(?,?,?,?,?,?) ";
         try {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);

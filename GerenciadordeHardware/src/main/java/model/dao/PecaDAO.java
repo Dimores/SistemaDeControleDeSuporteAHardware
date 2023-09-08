@@ -26,26 +26,25 @@ public class PecaDAO implements IDao {
         Peca peca = (Peca) obj;
 
         sql = " INSERT INTO "
-                + " peca(idPeca, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, tipo) "
-                + " VALUES(?,?,?,?,?,?,?,?,?) ";
+                + " peca(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, tipo) "
+                + " VALUES(?,?,?,?,?,?,?,?) ";
         try {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
 
             // Preencher cada ? com o campo adequado
-            statement.setString(1, peca.getIdPeca());
-            statement.setString(2, peca.getCodigo());
-            statement.setString(3, peca.getNome());
-            statement.setString(4, peca.getDescricao());
-            statement.setDouble(5, peca.getPreco());
-            statement.setInt(6, peca.getEstoque());
-            statement.setString(7, peca.getCategoria());
+            statement.setString(1, peca.getCodigo());
+            statement.setString(2, peca.getNome());
+            statement.setString(3, peca.getDescricao());
+            statement.setDouble(4, peca.getPreco());
+            statement.setInt(5, peca.getEstoque());
+            statement.setString(6, peca.getCategoria());
 
             // Converter o Calendar para java.sql.Date
             java.sql.Date dataFabricacaoSql = new java.sql.Date(peca.getDataFabricacao().getTimeInMillis());
-            statement.setDate(8, dataFabricacaoSql);
+            statement.setDate(7, dataFabricacaoSql);
 
-            statement.setString(9, peca.getTipo());
+            statement.setString(8, peca.getTipo());
 
             statement.execute();
             statement.close();
