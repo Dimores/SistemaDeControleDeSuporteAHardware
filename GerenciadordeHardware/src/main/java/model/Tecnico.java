@@ -5,13 +5,17 @@
 package model;
 
 import java.util.Calendar;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import model.interfaces.IUsuario;
 
 
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
+@NoArgsConstructor
 
 
 /**
@@ -22,12 +26,7 @@ public class Tecnico extends Usuario implements IUsuario {
     private String id;
     private double salario;
 
-    public Tecnico() {
-        super();
-        this.id = "";
-        this.salario = 0.0;
-    }
-
+    
     public Tecnico(String id, double salario, String nome, String CPF, Calendar dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.id = id;
