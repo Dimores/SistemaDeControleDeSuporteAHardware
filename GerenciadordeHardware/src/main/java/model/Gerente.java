@@ -6,6 +6,11 @@ package model;
 import java.util.Calendar;
 import lombok.*;
 import model.interfaces.IUsuario;
+
+import java.util.Calendar;
+
+
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 
@@ -92,4 +97,5 @@ public class Gerente extends Usuario implements IUsuario {
         this.departamento = vetor[8];
     }
 }
+
 
