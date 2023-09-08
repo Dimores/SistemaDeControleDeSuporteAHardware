@@ -11,10 +11,6 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import model.interfaces.IDao;
 
-/**
- *
- * author jose
- */
 public class PecaDAO implements IDao {
 
     protected Connection connection;

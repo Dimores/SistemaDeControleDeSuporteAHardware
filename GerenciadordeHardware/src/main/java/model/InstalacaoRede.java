@@ -25,7 +25,7 @@ public class InstalacaoRede extends Servico {
         this.enderecoRede = "";
     }
 
-    public InstalacaoRede(int idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+    public InstalacaoRede(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                           Calendar dataServico, Calendar dataConclusao, boolean concluido, String tipoRede, String enderecoRede) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.tipoRede = tipoRede;

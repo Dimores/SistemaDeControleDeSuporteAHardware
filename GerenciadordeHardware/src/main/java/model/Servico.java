@@ -15,16 +15,18 @@ import lombok.*;
  */
 
 public class Servico {
-    private int idServico;
+    private String idServico;
     private Tecnico tecnicoResponsavel;
     private Cliente clienteAtendido;
     private float valor;
     private String descricaoServico;
     private Calendar dataServico;
     private boolean concluido;
+    private Cliente cliente;
+    private Tecnico tecnico;
 
     public Servico() {
-        this.idServico = 0;
+        this.idServico = "";
         this.tecnicoResponsavel = null;
         this.clienteAtendido = null;
         this.valor = 0.0f;
@@ -33,7 +35,7 @@ public class Servico {
         this.concluido = false;
     }
 
-    public Servico(int idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, Calendar dataServico, boolean concluido) {
+    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, Calendar dataServico, boolean concluido) {
         this.idServico = idServico;
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
@@ -81,7 +83,7 @@ public class Servico {
 
     public void CSVToAtributo(String csv, Tecnico tecnico, Cliente cliente) {
         String[] vetor = csv.split(";");
-        this.idServico = Integer.parseInt(vetor[0]);
+        this.idServico = (vetor[0]);
         this.tecnicoResponsavel = tecnico;
         this.clienteAtendido = cliente;
         this.valor = Float.parseFloat(vetor[3]);

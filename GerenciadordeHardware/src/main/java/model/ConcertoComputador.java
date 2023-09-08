@@ -28,7 +28,7 @@ public class ConcertoComputador extends Servico {
         this.pecasSubstituidas = null;
     }
 
-    public ConcertoComputador(int idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+    public ConcertoComputador(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                               Calendar dataServico, boolean concluido, String descricaoProblema, ArrayList pecasSubstituidas) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.descricaoProblema = descricaoProblema;
