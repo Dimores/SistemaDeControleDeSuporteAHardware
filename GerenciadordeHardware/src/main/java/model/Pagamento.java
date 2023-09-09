@@ -3,12 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import model.interfaces.*;
 
 import lombok.*;
 
 @Getter
 @Setter
-public class Pagamento {
+@NoArgsConstructor
+
+public class Pagamento implements IPagamento{
     private Double dinheiro;
+
+    @Override
+    public void pagar(Double valorEmDinheiro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
