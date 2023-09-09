@@ -4,10 +4,11 @@
  */
 package model;
 
-/**
- *
- * @author diegomorelo
- */
+import lombok.*;
+
+@Getter
+@Setter
 public class Pagamento {
+    private Double dinheiro;
     
 }
