@@ -13,7 +13,7 @@ import lombok.*;
  *
  * @author ruiz
  */
-public class DispositivoDeRede {
+public class DispositivoDeRede extends Produto {
     private String nome;
     private String enderecoIP;
     private String tipo;

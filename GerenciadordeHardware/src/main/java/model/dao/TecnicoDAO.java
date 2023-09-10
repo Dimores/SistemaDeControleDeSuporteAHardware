@@ -27,19 +27,19 @@ public class TecnicoDAO implements IDao {
 
         sql = " INSERT INTO "
                 + " tecnico(salario,  nome, CPF, dataNasc, senha, email, telefone) "
-                + " VALUES(?,?,?,?,?) ";
+                + " VALUES(?,?,?,?,?,?,?) ";
         try {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
 
             //preencher cada ? com o campo adequado
-            statement.setString(1, tecnico.getNome());
-            statement.setDouble(2, tecnico.getSalario());
+
+            statement.setDouble(1, tecnico.getSalario());
+            statement.setString(2, tecnico.getNome());
             statement.setString(3, tecnico.getCPF());
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataNascSql = new java.sql.Date(tecnico.getDataNasc().getTimeInMillis());
-            statement.setDate(4, dataNascSql);
+            statement.setString(4, tecnico.getDataNasc());
+
 
             statement.setString(5, tecnico.getSenha());
             statement.setString(6, tecnico.getEmail());
@@ -48,6 +48,7 @@ public class TecnicoDAO implements IDao {
             statement.execute();
             statement.close();
         } catch (SQLException u) {
+            System.out.println("Erro ao salvar");
             throw new RuntimeException(u);
         } finally {
             Persistencia.closeConnection();
@@ -69,9 +70,7 @@ public class TecnicoDAO implements IDao {
             statement.setDouble(2, tecnico.getSalario());
             statement.setString(3, tecnico.getCPF());
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataNascSql = new java.sql.Date(tecnico.getDataNasc().getTimeInMillis());
-            statement.setDate(4, dataNascSql);
+            statement.setString(4, tecnico.getDataNasc());
 
             statement.setString(5, tecnico.getSenha());
             statement.setString(6, tecnico.getEmail());
@@ -99,17 +98,14 @@ public List<Object> findAll() {
         ResultSet resultset = statement.executeQuery();
         while (resultset.next()) {
             
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(5);
-            Calendar dataNasc = Calendar.getInstance();
-            dataNasc.setTimeInMillis(sqlDate.getTime());
+
 
             Tecnico tecnico = new Tecnico(
                     resultset.getString(1),
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
-                    dataNasc, // Usar o Calendar convertido
+                    resultset.getString(5),
                     resultset.getString(6),
                     resultset.getString(7),
                     resultset.getString(8));
@@ -139,10 +135,7 @@ public List<Object> findAll() {
 
             ResultSet resultset = statement.executeQuery();
             
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(5);
-            Calendar dataNasc = Calendar.getInstance();
-            dataNasc.setTimeInMillis(sqlDate.getTime());
+
 
             Tecnico t = null;
             while (resultset.next()) {
@@ -151,10 +144,11 @@ public List<Object> findAll() {
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
-                    dataNasc, // Usar o Calendar convertido
+                    resultset.getString(5),
                     resultset.getString(6),
                     resultset.getString(7),
                     resultset.getString(8));
+
             }
             statement.close();
             return t;
@@ -184,20 +178,18 @@ public List<Object> findAll() {
 
             ResultSet resultset = statement.executeQuery();
             
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(5);
-            Calendar dataNasc = Calendar.getInstance();
-            dataNasc.setTimeInMillis(sqlDate.getTime());
+
             while (resultset.next()) {
                 tecnico = new Tecnico(
                     resultset.getString(1),
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
-                    dataNasc, // Usar o Calendar convertido
+                    resultset.getString(5),
                     resultset.getString(6),
                     resultset.getString(7),
                     resultset.getString(8));
+
             }
             statement.close();
         } catch (SQLException ex) {

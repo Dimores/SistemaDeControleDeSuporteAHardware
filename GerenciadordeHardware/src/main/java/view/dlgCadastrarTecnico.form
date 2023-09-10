@@ -30,50 +30,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="152" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" pref="152" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="156" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" pref="156" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNome" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="lblEmail" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jTextField2" min="-2" pref="161" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="fEdtCpf" min="-2" pref="154" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblDataNasc" min="-2" pref="37" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="fEdtEmail" max="32767" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblTelefone" min="-2" pref="73" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="fEdtTelefone" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="fEdtDataNasc" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblSalario" min="-2" pref="61" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="fEdtSalario" min="-2" pref="142" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <Component id="panFormulario" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="868" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -83,35 +50,23 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNome" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCpf" alignment="3" max="32767" attributes="0"/>
-                  <Component id="lblDataNasc" alignment="3" max="32767" attributes="0"/>
-                  <Component id="fEdtDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fEdtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                      <Component id="lblSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fEdtSalario" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="panFormulario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblEmail" alignment="3" max="32767" attributes="0"/>
-                  <Component id="fEdtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fEdtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="278" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton1" pref="52" max="32767" attributes="0"/>
-                  <Component id="jButton2" max="32767" attributes="0"/>
+                  <Component id="btnSalvar" pref="52" max="32767" attributes="0"/>
+                  <Component id="btnCancelar" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -152,7 +107,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="grdClientes">
+        <Component class="javax.swing.JTable" name="grdTecnicos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="4"/>
@@ -162,35 +117,156 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="grdClientesMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="grdTecnicosMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Container class="javax.swing.JPanel" name="panFormulario">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="655" max="32767" attributes="0"/>
+                  <Component id="lblSalario" min="-2" pref="61" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNome" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="lblEmail" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="edtNome" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="fEdtCpf" min="-2" pref="154" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblDataNasc" min="-2" pref="37" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="fEdtEmail" min="-2" pref="321" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblTelefone" min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="fEdtTelefone" min="-2" pref="160" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="fEdtDataNasc" min="-2" pref="160" max="-2" attributes="0"/>
+                              <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
+                              <Component id="fEdtSalario" min="-2" pref="142" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="lblSalario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="69" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="fEdtSalario" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lblNome" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="edtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCpf" alignment="3" max="32767" attributes="0"/>
+                              <Component id="lblDataNasc" alignment="3" max="32767" attributes="0"/>
+                              <Component id="fEdtDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="fEdtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblEmail" alignment="3" max="32767" attributes="0"/>
+                          <Component id="fEdtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fEdtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtSalario">
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtTelefone">
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtEmail">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fEdtEmailActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtCpf">
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtDataNasc">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDataNasc">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nasc:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEmail">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Email:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTelefone">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefone:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCpf">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CPF:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNome">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSalario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Salario:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtNome">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="btnSalvar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Confirmar"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblNome">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nome:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCpf">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CPF:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
 
@@ -198,10 +274,12 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jButton3" min="-2" pref="136" max="-2" attributes="0"/>
+                  <Component id="btnEditar" min="-2" pref="136" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" pref="145" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
+                  <Component id="btnExcluir" min="-2" pref="145" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnNovo" min="-2" pref="150" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -210,8 +288,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="btnEditar" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="btnNovo" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -219,50 +298,31 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnEditar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnExcluir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnNovo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Novo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblDataNasc">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nasc:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtDataNasc">
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtCpf">
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtEmail">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fEdtEmailActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEmail">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtTelefone">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTelefone">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Telefone:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtSalario">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSalario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Salario:"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

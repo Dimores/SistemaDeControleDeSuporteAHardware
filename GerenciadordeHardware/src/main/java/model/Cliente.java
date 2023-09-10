@@ -21,7 +21,7 @@ public class Cliente extends Usuario implements IUsuario{
         this.idCliente = "";
     }
 
-    public Cliente(String idCliente, String nome, String CPF, Calendar dataNasc, String senha, String email, String telefone) {
+    public Cliente(String idCliente, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.idCliente = idCliente;
     }
@@ -31,7 +31,7 @@ public class Cliente extends Usuario implements IUsuario{
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
                 + "CPF: " + this.CPF + "\n"
-                + "Data de Nascimento: " + this.dataNasc.getTime() + "\n"
+                + "Data de Nascimento: " + this.dataNasc + "\n"
                 + "Senha: " + this.senha + "\n"
                 + "Email: " + this.email + "\n"
                 + "Telefone: " + this.telefone + "\n"
@@ -58,7 +58,7 @@ public void copiar(Cliente outro) {
     public String atributoToCSV() {
         String aux = this.nome + ";" +
                 this.CPF + ";" +
-                this.dataNasc.getTime() + ";" +
+                this.dataNasc+ ";" +
                 this.senha + ";" +
                 this.email + ";" +
                 this.telefone + ";" +

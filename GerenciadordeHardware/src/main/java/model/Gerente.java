@@ -32,7 +32,7 @@ public class Gerente extends Usuario implements IUsuario {
         this.departamento = "";
     }
 
-    public Gerente(String id, double salario, String nome, String CPF, Calendar dataNasc, String senha, String email, String telefone, String departamento) {
+    public Gerente(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone, String departamento) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.id = id;
         this.salario = salario;
@@ -43,7 +43,7 @@ public class Gerente extends Usuario implements IUsuario {
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
                 + "CPF: " + this.CPF + "\n"
-                + "Data de Nascimento: " + this.dataNasc.getTime() + "\n"
+                + "Data de Nascimento: " + this.dataNasc+ "\n"
                 + "Senha: " + this.senha + "\n"
                 + "Email: " + this.email + "\n"
                 + "Telefone: " + this.telefone + "\n"
@@ -72,7 +72,7 @@ public class Gerente extends Usuario implements IUsuario {
     public String atributoToCSV() {
         String aux = this.nome + ";" +
                 this.CPF + ";" +
-                this.dataNasc.getTime() + ";" +
+                this.dataNasc + ";" +
                 this.senha + ";" +
                 this.email + ";" +
                 this.telefone + ";" +

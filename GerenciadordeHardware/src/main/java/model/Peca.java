@@ -7,7 +7,7 @@ import java.util.Calendar;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
- 
+@NoArgsConstructor
 
 /**
  *
@@ -18,10 +18,6 @@ public class Peca extends Produto {
     private String idPeca;
     private String tipo;
 
-    public Peca() {
-        super();
-        this.tipo = "";
-    }
 
     public Peca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao, String tipo) {
         super(idPeca, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);

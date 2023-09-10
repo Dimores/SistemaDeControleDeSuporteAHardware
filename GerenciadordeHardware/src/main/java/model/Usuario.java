@@ -17,7 +17,7 @@ import model.interfaces.IUsuario;
 public class Usuario implements IUsuario{
     String nome;
     String CPF;
-    Calendar dataNasc;
+    String dataNasc;
     String senha;
     String email;
     String telefone;
@@ -25,13 +25,13 @@ public class Usuario implements IUsuario{
     public Usuario() {
         this.nome = "";
         this.CPF = "";
-        this.dataNasc = Calendar.getInstance();
+        this.dataNasc = " ";
         this.senha = "";
         this.email = "";
         this.telefone = "";
     }
 
-    public Usuario(String nome, String CPF, Calendar dataNasc, String senha, String email, String telefone) {
+    public Usuario(String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         this.nome = nome;
         this.CPF = CPF;
         this.dataNasc = dataNasc;
@@ -44,7 +44,7 @@ public class Usuario implements IUsuario{
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
                 + "CPF: " + this.CPF + "\n"
-                + "Data de Nascimento: " + this.dataNasc.getTime() + "\n"
+                + "Data de Nascimento: " + this.dataNasc + "\n"
                 + "Senha: " + this.senha + "\n"
                 + "Email: " + this.email + "\n"
                 + "Telefone: " + this.telefone + "\n";

@@ -10,7 +10,7 @@ public class Persistencia {
 
     private static Persistencia instance = null;
     private Connection connection = null;
-    private static final String DB_URL = "jdbc:sqlite:dbEscola.sqlite";
+    private static final String DB_URL = "jdbc:sqlite:dbHardware.sqlite";
 
     private Persistencia() {
         try {

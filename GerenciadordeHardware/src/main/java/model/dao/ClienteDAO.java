@@ -38,8 +38,8 @@ public class ClienteDAO implements IDao {
             statement.setString(2, cliente.getCPF());
 
             // Converter o Calendar para java.sql.Date
-            java.sql.Date dataNascSql = new java.sql.Date(cliente.getDataNasc().getTimeInMillis());
-            statement.setDate(3, dataNascSql);
+
+            statement.setString(3, cliente.getDataNasc());
 
             statement.setString(4, cliente.getSenha());
             statement.setString(5, cliente.getEmail());
@@ -68,9 +68,7 @@ public class ClienteDAO implements IDao {
             statement.setString(1, cliente.getNome());
             statement.setString(2, cliente.getCPF());
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataNascSql = new java.sql.Date(cliente.getDataNasc().getTimeInMillis());
-            statement.setDate(3, dataNascSql);
+            statement.setString(3, cliente.getDataNasc());
 
             statement.setString(4, cliente.getSenha());
             statement.setString(5, cliente.getEmail());
@@ -98,19 +96,16 @@ public class ClienteDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
 
-                // Converter o java.sql.Date para Calendar
-                java.sql.Date sqlDate = resultset.getDate(5);
-                Calendar dataNasc = Calendar.getInstance();
-                dataNasc.setTimeInMillis(sqlDate.getTime());
+
 
                 Cliente cliente = new Cliente(
                         resultset.getString(1),
                         resultset.getString(2),
                         resultset.getString(3),
-                        dataNasc, // Usar o Calendar convertido
                         resultset.getString(4),
                         resultset.getString(5),
-                        resultset.getString(6));
+                        resultset.getString(6),
+                        resultset.getString(7));
 
                 list.add(cliente);
             }
@@ -136,10 +131,7 @@ public class ClienteDAO implements IDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(5);
-            Calendar dataNasc = Calendar.getInstance();
-            dataNasc.setTimeInMillis(sqlDate.getTime());
+
 
             Cliente c = null;
             while (resultset.next()) {
@@ -147,10 +139,10 @@ public class ClienteDAO implements IDao {
                         resultset.getString(1),
                         resultset.getString(2),
                         resultset.getString(3),
-                        dataNasc, // Usar o Calendar convertido
                         resultset.getString(4),
                         resultset.getString(5),
-                        resultset.getString(6));
+                        resultset.getString(6),
+                        resultset.getString(7));
             }
             statement.close();
             return c;
@@ -180,19 +172,16 @@ public class ClienteDAO implements IDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(5);
-            Calendar dataNasc = Calendar.getInstance();
-            dataNasc.setTimeInMillis(sqlDate.getTime());
+
             while (resultset.next()) {
                 cliente = new Cliente(
                         resultset.getString(1),
                         resultset.getString(2),
                         resultset.getString(3),
-                        dataNasc, // Usar o Calendar convertido
                         resultset.getString(4),
                         resultset.getString(5),
-                        resultset.getString(6));
+                        resultset.getString(6),
+                        resultset.getString(7));
             }
             statement.close();
         } catch (SQLException ex) {
