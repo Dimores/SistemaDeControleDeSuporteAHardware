@@ -339,7 +339,7 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame {
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                    "Deseja exlcuir o Aluno  \n("
+                    "Deseja exlcuir o Tecnico  \n("
                     + tecnicoExcluido.getNome() + ", "
                     + tecnicoExcluido.getEmail() + ") ?",
                     "Confirmar exclusão",
@@ -400,7 +400,7 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame {
         public void preencherFormulario(Tecnico t) {
             edtNome.setText(t.getNome());
             fEdtCpf.setText(t.getCPF());
-            fEdtDataNasc.setText(t.getNome());
+            fEdtDataNasc.setText(t.getDataNasc());
             fEdtEmail.setText(t.getEmail());
             fEdtSalario.setText(String.valueOf(t.getSalario()));
             fEdtTelefone.setText(t.getTelefone());

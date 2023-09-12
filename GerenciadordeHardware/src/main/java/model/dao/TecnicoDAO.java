@@ -66,8 +66,8 @@ public class TecnicoDAO implements IDao {
             statement = connection.prepareStatement(sql);
 
             //preencher cada ? com o campo adequado
-            statement.setString(1, tecnico.getNome());
-            statement.setDouble(2, tecnico.getSalario());
+            statement.setDouble(1, tecnico.getSalario());
+            statement.setString(2, tecnico.getNome());
             statement.setString(3, tecnico.getCPF());
 
             statement.setString(4, tecnico.getDataNasc());
