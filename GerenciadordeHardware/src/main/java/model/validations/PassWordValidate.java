@@ -4,35 +4,26 @@
  */
 package model.validations;
 
-import lombok.Getter;
-import lombok.Setter;
 import model.interfaces.Ivalidate;
 
-@Getter
-@Setter
 /**
  *
  * @author ruiz
  */
-public class EmailValidate implements Ivalidate{
-   
-    
-    public EmailValidate(){
-       
-    }
-    
-    public boolean validar(String email)  {
-        if("".equals(email)){
-            return false;
-        }else if(!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
-            return false;
-        }return true;
-                
+public class PassWordValidate implements Ivalidate {
+    @Override
+    public boolean validar(String text) {
+       if(text.length() < 8){
+           return false;
+       }
+       if(!text.matches("senha1234")){
+           return false;
+       }
+       return true;
     }
 
     @Override
     public boolean validar(int number) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
 }

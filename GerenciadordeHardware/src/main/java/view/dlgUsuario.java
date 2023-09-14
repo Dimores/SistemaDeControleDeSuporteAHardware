@@ -17,8 +17,14 @@ public class dlgUsuario extends javax.swing.JDialog {
      */
     public dlgUsuario() {
         initComponents();
+         habilitarCamposDeAcordoComPrevilegio();
     }
 
+    
+    
+    public void habilitarCamposDeAcordoComPrevilegio(){
+        btnSocilitarSuporte.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

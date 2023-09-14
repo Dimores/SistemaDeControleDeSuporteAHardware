@@ -21,13 +21,17 @@ import lombok.*;
 public class Login {
     private String email;
     private String passWord;
+    private String user;
+    
     
     public Login(){
         this.email = "";
         this.passWord = "";
     }
-    public void validateLogin(String txtEmail, String txtSenha) throws ParseException{
-       
+    
+    public Login(String email, String senha){
+        this.email = email;
+        this.passWord = senha;
     }
     
     

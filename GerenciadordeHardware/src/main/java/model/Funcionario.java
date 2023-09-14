@@ -4,15 +4,19 @@
  */
 package model;
 import lombok.*;
-@Getter //constroi os metodos get
-@Setter //constroi os metodos set
-@EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
-
 /**
  *
- * @author ruiz
+ * @author diegomorelo
  */
-public class ConsertoComputador extends Servico{
+@Setter
+@Getter
+
+public class Funcionario {
+    private String matricula;
+    private float salario;
     
+    public Funcionario(){
+        this.matricula = "";
+        this.salario = 0;
+    }
 }
