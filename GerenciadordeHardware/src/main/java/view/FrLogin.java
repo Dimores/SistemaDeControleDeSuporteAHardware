@@ -6,6 +6,7 @@ package view;
 
 import controller.LoginController;
 import controller.TecnicoController;
+import controller.UsuarioController;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,11 +167,11 @@ public class FrLogin extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
        LoginController loginValidate = new LoginController();
-       TecnicoController tecnicoController = new TecnicoController();
+       UsuarioController usuarioController = new UsuarioController();
        Tecnico tec = null; 
        try {
            loginValidate.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
-           tec = tecnicoController.buscarTecnico(fEdtEmail.getText());
+           tec = usuarioController.buscarUsuario(fEdtEmail.getText());
            if (tec.getSenha().equals(fEdtSenha.getText())){
                 telaUsuario = new dlgUsuario(true);
                 telaUsuario.getLblUserName().setText(tec.getNome());

@@ -4,6 +4,7 @@
  */
 package model.validations;
 
+import model.Tecnico;
 import model.Usuario;
 import model.exceptions.UserException;
 
@@ -16,8 +17,10 @@ public class UsuarioValidate {
     SenhaValidate validaSenha;
     
 
-    public Usuario validaCamposEntrada(String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
-        Usuario user = new Usuario();
+    public Usuario validaCamposEntrada(Usuario user, String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
+        
+        validaCPF = new CPFValidate();
+        validaSenha = new SenhaValidate();
         
         if (nome.isEmpty())
             throw new UserException("Error - Campo vazio: 'nome'.");

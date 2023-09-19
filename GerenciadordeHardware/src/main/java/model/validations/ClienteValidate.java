@@ -5,6 +5,7 @@
 package model.validations;
 
 import model.Cliente;
+import model.Usuario;
 
 /**
  *
@@ -12,9 +13,8 @@ import model.Cliente;
  */
 public class ClienteValidate extends UsuarioValidate{
       public Cliente validaCamposEntrada(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
-          Cliente cliente = new Cliente();
-          super.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone);
-          
-          return cliente; 
+         Usuario cliente = new Cliente();
+         cliente = (Cliente) super.validaCamposEntrada(cliente, id, nome, CPF, dataNasc, senha, email, telefone);
+          return (Cliente) cliente; 
       }
 }

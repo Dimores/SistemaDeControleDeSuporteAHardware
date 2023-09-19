@@ -54,7 +54,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         btnCadastrarTecnico = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        itfTelaPrincipal = new javax.swing.JInternalFrame();
         jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -90,6 +90,11 @@ public class dlgUsuario extends javax.swing.JDialog {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
 
         btnCadastrarTecnico.setText("Cadastrar Tecnico");
+        btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarTecnicoActionPerformed(evt);
+            }
+        });
 
         btnCadastrarCliente.setText("Cadastrar cliente");
 
@@ -153,18 +158,18 @@ public class dlgUsuario extends javax.swing.JDialog {
                 .addGap(65, 65, 65))
         );
 
-        jInternalFrame1.setBorder(null);
-        jInternalFrame1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jInternalFrame1.setVisible(true);
+        itfTelaPrincipal.setBorder(null);
+        itfTelaPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        itfTelaPrincipal.setVisible(true);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout itfTelaPrincipalLayout = new javax.swing.GroupLayout(itfTelaPrincipal.getContentPane());
+        itfTelaPrincipal.getContentPane().setLayout(itfTelaPrincipalLayout);
+        itfTelaPrincipalLayout.setHorizontalGroup(
+            itfTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 690, Short.MAX_VALUE)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        itfTelaPrincipalLayout.setVerticalGroup(
+            itfTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
 
@@ -180,7 +185,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jInternalFrame1)
+                    .addComponent(itfTelaPrincipal)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -193,7 +198,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jInternalFrame1)
+                .addComponent(itfTelaPrincipal)
                 .addContainerGap())
         );
 
@@ -207,6 +212,11 @@ public class dlgUsuario extends javax.swing.JDialog {
     private void btnCadastrarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarServicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarServicoActionPerformed
+
+    private void btnCadastrarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTecnicoActionPerformed
+        dlgCadastrarTecnico telaTecnico = new dlgCadastrarTecnico();
+        telaTecnico.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarTecnicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,8 +271,8 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistrarPagamento;
     private javax.swing.JButton btnSocilitarServico;
     private javax.swing.JButton btnSocilitarSuporte;
+    private javax.swing.JInternalFrame itfTelaPrincipal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

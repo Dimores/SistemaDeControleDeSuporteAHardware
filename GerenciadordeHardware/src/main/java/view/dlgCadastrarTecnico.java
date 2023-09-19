@@ -18,7 +18,7 @@ import model.exceptions.TecnicoException;
  *
  * @author diego
  */
-public class dlgCadastrarTecnico extends javax.swing.JFrame {
+public class dlgCadastrarTecnico extends javax.swing.JFrame{
     TecnicoController tecnicoController;
     int idTecnicoEditando;
 
@@ -33,6 +33,7 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame {
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
         this.limparCampos();
+        //this.setModal(true);
         tecnicoController.atualizarTabela(grdTecnicos);
     }
 

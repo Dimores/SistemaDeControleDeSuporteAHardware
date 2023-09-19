@@ -27,4 +27,8 @@ public class UsuarioController {
         Tecnico novoTecnico = new Tecnico(id, salario, nome, CPF, dataNasc,senha, email, telefone);
         repositorio.update(novoTecnico);
     }
+
+    public Tecnico buscarUsuario(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
