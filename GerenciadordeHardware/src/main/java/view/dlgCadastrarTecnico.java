@@ -299,12 +299,12 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_grdTecnicosMouseClicked
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        
         try {
                 if (idTecnicoEditando > 0) {
-                    tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , "xxxxx ", fEdtEmail.getText(), fEdtTelefone.getText());
+                    tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , "!xxxXxx1", fEdtEmail.getText(), fEdtTelefone.getText());
                 } else {
-                    tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , "xxxxx ", fEdtEmail.getText(), fEdtTelefone.getText());
+                    tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , "!xxxXxx1", fEdtEmail.getText(), fEdtTelefone.getText());
                 }
                 //Comando bastante importante
                 this.idTecnicoEditando = -1;

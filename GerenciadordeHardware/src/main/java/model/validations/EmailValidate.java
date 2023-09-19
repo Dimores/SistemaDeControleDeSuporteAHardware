@@ -21,7 +21,8 @@ public class EmailValidate implements Ivalidate{
        
     }
     
-    public boolean validar(String email)  {
+    public boolean validar(Object o)  {
+        String email = (String) o;
         if("".equals(email)){
             return false;
         }else if(!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
@@ -30,9 +31,4 @@ public class EmailValidate implements Ivalidate{
                 
     }
 
-    @Override
-    public boolean validar(int number) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

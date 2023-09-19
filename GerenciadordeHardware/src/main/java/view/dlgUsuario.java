@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.JDialog;
 
+
 /**
  *
  * @author ruiz
@@ -17,10 +18,16 @@ public class dlgUsuario extends javax.swing.JDialog {
      */
     public dlgUsuario() {
         initComponents();
-         habilitarCamposDeAcordoComPrevilegio();
+        habilitarCamposDeAcordoComPrevilegio();
+    }
+    public dlgUsuario(boolean modal){
+        initComponents();
+        setModal(modal);
     }
 
-    
+    javax.swing.JLabel getLblUserName(){
+        return this.lblUserName;
+    }
     
     public void habilitarCamposDeAcordoComPrevilegio(){
         btnSocilitarSuporte.setVisible(false);
@@ -35,7 +42,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
         btnGerarRelatorioManutencao = new javax.swing.JButton();
         btnCadastrarServico = new javax.swing.JButton();
         btnSocilitarSuporte = new javax.swing.JButton();
@@ -50,9 +57,9 @@ public class dlgUsuario extends javax.swing.JDialog {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel2 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(19, 16, 16));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("nome_do_usuario");
+        lblUserName.setText("nome_do_usuario");
 
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +103,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -119,7 +126,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel1))
+                        .addComponent(lblUserName))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)))
@@ -256,9 +263,9 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnSocilitarSuporte;
     private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblUserName;
     // End of variables declaration//GEN-END:variables
 }

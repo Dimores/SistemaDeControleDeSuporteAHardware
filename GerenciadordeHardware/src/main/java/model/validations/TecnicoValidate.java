@@ -14,6 +14,9 @@ import model.exceptions.TecnicoException;
  * @author diego
  */
 public class TecnicoValidate  {
+    CPFValidate validaCPF;
+    SenhaValidate validaSenha;
+    
 
     public Tecnico validaCamposEntrada(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
         Tecnico tecnico = new Tecnico();
@@ -29,6 +32,9 @@ public class TecnicoValidate  {
         
         if (CPF.isEmpty())
             throw new TecnicoException("Error - Campo vazio: 'CPF'.");
+        if(!validaCPF.validar(CPF)){
+            throw new TecnicoException("Error - CPF invalido");
+        }
         tecnico.setCPF(CPF);
         
         // Nao verificar o calendar por enquanto 
@@ -36,6 +42,9 @@ public class TecnicoValidate  {
         
         if (senha.isEmpty())
             throw new TecnicoException("Error - Campo vazio: 'senha'.");
+        if(!validaSenha.validar(senha)){
+             throw new TecnicoException("Error - Campo vazio: 'senha'.");
+        }
         tecnico.setSenha(senha);
         
         if (email.isEmpty())

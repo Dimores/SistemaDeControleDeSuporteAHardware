@@ -1,7 +1,6 @@
 package controller;
 
 import controller.tableModel.TMCadTecnico;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.JTable;
 import model.Tecnico;
@@ -14,7 +13,7 @@ import model.validations.TecnicoValidate;
  *
  * @author diego
  */
-public class TecnicoController { 
+public class TecnicoController  extends UsuarioController{ 
 
     private TecnicoDAO repositorio; 
 
@@ -25,7 +24,6 @@ public class TecnicoController {
     public void cadastrarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) { 
         TecnicoValidate valid = new TecnicoValidate(); 
         Tecnico novoTecnico = valid.validaCamposEntrada(id, salario, nome, CPF, dataNasc, senha, email, telefone); 
-
             if(repositorio.findByEmail(email) == null){
                 repositorio.save(novoTecnico);
             }else{

@@ -22,7 +22,8 @@ public class CPFValidate implements Ivalidate {
      */
     
     @Override
-    public boolean validar(String cpf) {        
+    public boolean validar(Object o) {   
+        String cpf = (String) o;
         //vamos verificar o tamanho primeiro        
         if(cpf.length() != 11  && cpf.length() != 14){
             return false;
@@ -89,8 +90,4 @@ public class CPFValidate implements Ivalidate {
         return false;    
     }
 
-    @Override
-    public boolean validar(int number) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

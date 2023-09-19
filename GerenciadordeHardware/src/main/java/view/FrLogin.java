@@ -5,11 +5,13 @@
 package view;
 
 import controller.LoginController;
+import controller.TecnicoController;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import model.Tecnico;
 import model.validations.EmailValidate;
 import model.validations.LoginValidate;
 
@@ -18,7 +20,7 @@ import model.validations.LoginValidate;
  * @author ruiz
  */
 public class FrLogin extends javax.swing.JFrame {
-
+    dlgUsuario telaUsuario;
     /**
      * Creates new form FrLogin
      */
@@ -164,12 +166,28 @@ public class FrLogin extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
        LoginController loginValidate = new LoginController();
-        try {
-            loginValidate.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
+       TecnicoController tecnicoController = new TecnicoController();
+       Tecnico tec = null; 
+       try {
+           loginValidate.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
+           tec = tecnicoController.buscarTecnico(fEdtEmail.getText());
+           if (tec.getSenha().equals(fEdtSenha.getText())){
+                telaUsuario = new dlgUsuario(true);
+                telaUsuario.getLblUserName().setText(tec.getNome());
+                telaUsuario.pack();
+                this.setVisible(false);
+                telaUsuario.setVisible(true);
+                this.setVisible(true);
+                
+           }
+        
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
             Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
+
     }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
