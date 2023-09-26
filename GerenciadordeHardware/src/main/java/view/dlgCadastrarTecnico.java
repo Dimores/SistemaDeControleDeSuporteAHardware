@@ -18,7 +18,7 @@ import model.exceptions.TecnicoException;
  *
  * @author diego
  */
-public class dlgCadastrarTecnico extends javax.swing.JFrame{
+public class dlgCadastrarTecnico extends javax.swing.JDialog{
     TecnicoController tecnicoController;
     int idTecnicoEditando;
 
@@ -33,8 +33,9 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame{
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
         this.limparCampos();
-        //this.setModal(true);
+        this.setModal(true);
         tecnicoController.atualizarTabela(grdTecnicos);
+        setDefaultCloseOperation(dlgCadastrarTecnico.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -70,7 +71,7 @@ public class dlgCadastrarTecnico extends javax.swing.JFrame{
         btnExcluir = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N

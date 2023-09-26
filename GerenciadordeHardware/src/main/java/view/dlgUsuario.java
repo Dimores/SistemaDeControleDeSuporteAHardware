@@ -57,7 +57,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         itfTelaPrincipal = new javax.swing.JInternalFrame();
         jLabel2 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         lblUserName.setText("nome_do_usuario");
 

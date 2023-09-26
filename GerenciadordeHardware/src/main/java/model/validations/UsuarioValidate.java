@@ -13,14 +13,16 @@ import model.exceptions.UserException;
  * @author diegomorelo
  */
 public class UsuarioValidate {
-        CPFValidate validaCPF;
+    CPFValidate validaCPF;
     SenhaValidate validaSenha;
+    EmailValidate validaEmail;
     
 
     public Usuario validaCamposEntrada(Usuario user, String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
         
         validaCPF = new CPFValidate();
         validaSenha = new SenhaValidate();
+        validaEmail = new EmailValidate();
         
         if (nome.isEmpty())
             throw new UserException("Error - Campo vazio: 'nome'.");
@@ -32,8 +34,9 @@ public class UsuarioValidate {
             throw new UserException("Error - CPF invalido");
         }
         user.setCPF(CPF);
-        
-        // Nao verificar o calendar por enquanto 
+        if(dataNasc.isEmpty()){
+            throw new UserException("Error - Campo vazio: 'Data de nascimento'.");
+        }
         user.setDataNasc(dataNasc);
         
         if (senha.isEmpty())
@@ -45,6 +48,9 @@ public class UsuarioValidate {
         
         if (email.isEmpty())
             throw new UserException("Error - Campo vazio: 'email'.");
+        if(!validaEmail.validar(email)){
+             throw new UserException("Error -'email' invalido.");
+        }
         user.setEmail(email);
         
         if (telefone.isEmpty())

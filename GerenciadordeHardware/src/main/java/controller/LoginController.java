@@ -5,9 +5,6 @@
 package controller;
 
 import model.*;
-import java.text.ParseException;
-import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
 import lombok.*;
 import model.validations.LoginValidate;
 @Getter //constroi os metodos get
@@ -20,10 +17,12 @@ import model.validations.LoginValidate;
  * @author ruiz
  */
 public class LoginController {
+
+    private UsuarioController usuarioController;
         
     public Login validarLogin(String email , String senha) throws Exception{
         LoginValidate loginValidate = new LoginValidate();
         return loginValidate.validar(email, senha);
-    }    
+    } 
     
 }

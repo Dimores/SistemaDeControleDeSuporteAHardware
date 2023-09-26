@@ -53,7 +53,7 @@ public class ClienteDAO implements IDao {
             Persistencia.closeConnection();
         }
     }
-
+    
     public void update(Object obj) {
         Cliente cliente = (Cliente) obj;
 

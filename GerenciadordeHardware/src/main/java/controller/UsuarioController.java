@@ -4,8 +4,9 @@
  */
 package controller;
 import lombok.*;
-import model.Tecnico;
+import model.dao.ClienteDAO;
 import model.dao.TecnicoDAO;
+
 import utils.Criptografia;
 import utils.interfaces.ICriptografia;
 @Getter //constroi os metodos get
@@ -18,17 +19,25 @@ import utils.interfaces.ICriptografia;
  * @author ruiz
  */
 public class UsuarioController {
-    private TecnicoDAO repositorio;
+    private TecnicoDAO repositorioTecnico;
+    private ClienteDAO repositorioCliente;
     private ICriptografia criptografia;
     
     public void atualizarSenha(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws Exception{
         criptografia = new Criptografia();
         senha = criptografia.encrypt(senha);
-        Tecnico novoTecnico = new Tecnico(id, salario, nome, CPF, dataNasc,senha, email, telefone);
-        repositorio.update(novoTecnico);
+  
     }
 
-    public Tecnico buscarUsuario(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Object buscarUsuario(String text) {
+        repositorioTecnico = new TecnicoDAO();
+        repositorioCliente = new ClienteDAO();
+        Object usuario;
+        usuario = repositorioTecnico.findByEmail(text);
+        if(usuario == null){
+            usuario = repositorioCliente.findByEmail(text);
+        }  
+        return usuario;
     }
+    
 }

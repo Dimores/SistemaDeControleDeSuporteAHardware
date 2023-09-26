@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
 import lombok.*;
 import model.interfaces.IUsuario;
 @Getter //constroi os metodos get
@@ -70,4 +69,7 @@ public class Usuario implements IUsuario{
     public void copiar(Usuario outro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
+    
 }

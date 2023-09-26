@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.Tecnico;
+import model.Usuario;
 import model.validations.EmailValidate;
 import model.validations.LoginValidate;
 
@@ -166,26 +167,29 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_fEdtEmailActionPerformed
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-       LoginController loginValidate = new LoginController();
+       LoginController loginController = new LoginController();
        UsuarioController usuarioController = new UsuarioController();
-       Tecnico tec = null; 
        try {
-           loginValidate.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
-           tec = usuarioController.buscarUsuario(fEdtEmail.getText());
-           if (tec.getSenha().equals(fEdtSenha.getText())){
-                telaUsuario = new dlgUsuario(true);
-                telaUsuario.getLblUserName().setText(tec.getNome());
-                telaUsuario.pack();
+           loginController.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
+            Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
+            if(usuario.getSenha().equals(fEdtSenha.getText())){
                 this.setVisible(false);
+                telaUsuario = new dlgUsuario(true);
+                telaUsuario.getLblUserName().setText(usuario.getNome());
                 telaUsuario.setVisible(true);
                 this.setVisible(true);
-                
-           }
-        
+
+            }
+           
+          
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
             Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+  
+
+       
 
 
 
