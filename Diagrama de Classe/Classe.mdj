@@ -21,6 +21,20 @@
 					"defaultDiagram": true,
 					"ownedViews": [
 						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGKrUE911C5GJI=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;18;0",
+							"left": 1720,
+							"top": 472,
+							"width": 553,
+							"height": 272,
+							"text": "FACTORY",
+							"horzAlign": 2
+						},
+						{
 							"_type": "UMLClassView",
 							"_id": "AAAAAAGJ3yc61LooEEk=",
 							"_parent": {
@@ -11028,8 +11042,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
-									"top": -64,
+									"left": 104,
+									"top": 536,
 									"width": 10,
 									"height": 10
 								},
@@ -11044,8 +11058,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
-									"top": -64,
+									"left": 104,
+									"top": 536,
 									"width": 10,
 									"height": 10
 								}
@@ -11310,8 +11324,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 104,
-									"top": -200,
+									"left": 216,
+									"top": 152,
 									"width": 10,
 									"height": 10
 								},
@@ -11326,8 +11340,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 104,
-									"top": -200,
+									"left": 216,
+									"top": 152,
 									"width": 10,
 									"height": 10
 								}
