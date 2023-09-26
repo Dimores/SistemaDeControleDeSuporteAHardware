@@ -172,9 +172,11 @@ public class FrLogin extends javax.swing.JFrame {
        try {
            loginController.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
             Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
+            Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
+            
             if(usuario.getSenha().equals(fEdtSenha.getText())){
                 this.setVisible(false);
-                telaUsuario = new dlgUsuario(true);
+                telaUsuario = new dlgUsuario(loginController.accessManager(obj));
                 telaUsuario.getLblUserName().setText(usuario.getNome());
                 telaUsuario.setVisible(true);
                 this.setVisible(true);

@@ -16,21 +16,50 @@ public class dlgUsuario extends javax.swing.JDialog {
     /**
      * Creates new form FrMain
      */
-    public dlgUsuario() {
-        initComponents();
-        habilitarCamposDeAcordoComPrevilegio();
-    }
+ 
     public dlgUsuario(boolean modal){
         initComponents();
-        setModal(modal);
+    
     }
+    
+    public dlgUsuario(int code) {
+        initComponents();
+        setModal(true);
+        habilitarCamposDeAcordoComPrevilegio(code);
+    }
+    
+    
 
     javax.swing.JLabel getLblUserName(){
         return this.lblUserName;
     }
     
-    public void habilitarCamposDeAcordoComPrevilegio(){
-        btnSocilitarSuporte.setVisible(false);
+    public void habilitarCamposDeAcordoComPrevilegio(int code){
+        switch (code){
+            case 1:
+                   btnCadastrarTecnico.setVisible(false);
+                   btnCadastrarCliente.setVisible(false);
+                   btnCadastrarPeça.setVisible(false);
+                   btnGerarRelatorioManutencao.setVisible(false);
+                   btnCadastrarServico.setVisible(false);
+                   btnRegistrarPagamento.setVisible(false);
+            break;
+                
+            case 2: 
+                btnGerarRelatorioRede.setVisible(false);
+                btnSocilitarSuporte.setVisible(false);
+                btnCadastrarTecnico.setVisible(false);
+                btnSocilitarServico.setVisible(false);
+                btnCadastrarCliente.setVisible(false);
+            break;
+            case 3:
+                btnGerarRelatorioRede.setVisible(false);
+                btnSocilitarSuporte.setVisible(false);
+                btnSocilitarServico.setVisible(false);
+            break;
+            default: break;
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,8 +70,9 @@ public class dlgUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        lblLoginIcone = new javax.swing.JLabel();
         lblUserName = new javax.swing.JLabel();
+        panOpcoes = new javax.swing.JPanel();
         btnGerarRelatorioManutencao = new javax.swing.JButton();
         btnCadastrarServico = new javax.swing.JButton();
         btnSocilitarSuporte = new javax.swing.JButton();
@@ -51,15 +81,16 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarPeça = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnSocilitarServico = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnCadastrarTecnico = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
-        itfTelaPrincipal = new javax.swing.JInternalFrame();
-        jLabel2 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
 
         lblUserName.setText("nome_do_usuario");
+
+        panOpcoes.setBackground(new java.awt.Color(102, 102, 102));
+        panOpcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panOpcoes.setLayout(new javax.swing.BoxLayout(panOpcoes, javax.swing.BoxLayout.PAGE_AXIS));
 
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +98,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnGerarRelatorioManutencaoActionPerformed(evt);
             }
         });
+        panOpcoes.add(btnGerarRelatorioManutencao);
 
         btnCadastrarServico.setText("Cadastrar serviço");
         btnCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
@@ -74,20 +106,25 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnCadastrarServicoActionPerformed(evt);
             }
         });
+        panOpcoes.add(btnCadastrarServico);
 
         btnSocilitarSuporte.setText("Socilitar Suporte");
+        panOpcoes.add(btnSocilitarSuporte);
 
         btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
+        panOpcoes.add(btnGerarRelatorioRede);
 
         btnRegistrarPagamento.setText("Registrar pagamento");
+        panOpcoes.add(btnRegistrarPagamento);
 
         btnCadastrarPeça.setText("Cadastrar peça");
+        panOpcoes.add(btnCadastrarPeça);
 
         jButton1.setText("Cadastrar dispositivo de rede");
+        panOpcoes.add(jButton1);
 
         btnSocilitarServico.setText("Socilitar serviço");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
+        panOpcoes.add(btnSocilitarServico);
 
         btnCadastrarTecnico.setText("Cadastrar Tecnico");
         btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
@@ -95,111 +132,31 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnCadastrarTecnicoActionPerformed(evt);
             }
         });
+        panOpcoes.add(btnCadastrarTecnico);
 
         btnCadastrarCliente.setText("Cadastrar cliente");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSocilitarServico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(35, 35, 35))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblUserName))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addGap(82, 82, 82)
-                .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSocilitarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
-        );
-
-        itfTelaPrincipal.setBorder(null);
-        itfTelaPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        itfTelaPrincipal.setVisible(true);
-
-        javax.swing.GroupLayout itfTelaPrincipalLayout = new javax.swing.GroupLayout(itfTelaPrincipal.getContentPane());
-        itfTelaPrincipal.getContentPane().setLayout(itfTelaPrincipalLayout);
-        itfTelaPrincipalLayout.setHorizontalGroup(
-            itfTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
-        );
-        itfTelaPrincipalLayout.setVerticalGroup(
-            itfTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
-        );
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Serviços");
+        panOpcoes.add(btnCadastrarCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblLoginIcone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(itfTelaPrincipal)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(lblUserName)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(itfTelaPrincipal)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLoginIcone)
+                    .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,7 +206,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dlgUsuario().setVisible(true);
+                new dlgUsuario(0).setVisible(true);
             }
         });
     }
@@ -271,11 +228,9 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistrarPagamento;
     private javax.swing.JButton btnSocilitarServico;
     private javax.swing.JButton btnSocilitarSuporte;
-    private javax.swing.JInternalFrame itfTelaPrincipal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblLoginIcone;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JPanel panOpcoes;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,10 @@
  */
 package model.validations;
 
+import model.Cliente;
+import model.Gerente;
 import model.Login;
+import model.Tecnico;
 import model.exceptions.LoginException;
 import model.interfaces.Ivalidate;
 
@@ -32,6 +35,17 @@ public class LoginValidate {
         }
         
         return new Login();               
+    }
+    
+    public int  accessManager(Object obj){
+        if (obj instanceof Cliente){
+            return 1;
+        }if(obj instanceof Tecnico){
+            return 2;
+        }if( obj instanceof Gerente){
+            return 3;
+        }
+        return 0;
     }
     
 }

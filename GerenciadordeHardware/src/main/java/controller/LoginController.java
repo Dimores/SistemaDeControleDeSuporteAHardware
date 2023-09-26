@@ -23,6 +23,11 @@ public class LoginController {
     public Login validarLogin(String email , String senha) throws Exception{
         LoginValidate loginValidate = new LoginValidate();
         return loginValidate.validar(email, senha);
-    } 
+    }
+    
+    public int accessManager(Object obj){
+        LoginValidate loginValidate = new LoginValidate();
+        return loginValidate.accessManager(obj);
+    }
     
 }
