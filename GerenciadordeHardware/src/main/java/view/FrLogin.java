@@ -5,7 +5,6 @@
 package view;
 
 import controller.LoginController;
-import controller.TecnicoController;
 import controller.UsuarioController;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -13,10 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import model.Tecnico;
 import model.Usuario;
-import model.validations.EmailValidate;
-import model.validations.LoginValidate;
 import utils.Criptografia;
 
 /**
@@ -46,8 +42,8 @@ public class FrLogin extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         btnLogar = new javax.swing.JButton();
         btnResetPassword = new javax.swing.JButton();
-        fEdtSenha = new javax.swing.JFormattedTextField();
         fEdtEmail = new javax.swing.JFormattedTextField();
+        edtSenha = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         lblLoginIcon = new javax.swing.JLabel();
 
@@ -66,12 +62,6 @@ public class FrLogin extends javax.swing.JFrame {
 
         btnResetPassword.setText("Esqueci minha senha");
 
-        fEdtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEdtSenhaActionPerformed(evt);
-            }
-        });
-
         fEdtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fEdtEmailActionPerformed(evt);
@@ -88,15 +78,15 @@ public class FrLogin extends javax.swing.JFrame {
                 .addGap(326, 326, 326))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(fEdtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEmail)
                             .addComponent(lblSenha))
                         .addGap(303, 303, 303))
-                    .addComponent(fEdtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtSenha, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -109,7 +99,7 @@ public class FrLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fEdtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
@@ -160,10 +150,6 @@ public class FrLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fEdtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fEdtSenhaActionPerformed
-
     private void fEdtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fEdtEmailActionPerformed
@@ -175,10 +161,10 @@ public class FrLogin extends javax.swing.JFrame {
            Criptografia crip = new Criptografia();
            
            try {
-               loginController.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
+               loginController.validarLogin(fEdtEmail.getText(), edtSenha.getText());
                Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
                Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
-               if(crip.decrypt(usuario.getSenha()).equals(fEdtSenha.getText())){
+               if(crip.decrypt(usuario.getSenha()).equals(edtSenha.getText())){
                    this.setVisible(false);
                    telaUsuario = new dlgUsuario(loginController.accessManager(obj));
                    telaUsuario.getLblUserName().setText(usuario.getNome());
@@ -248,8 +234,8 @@ public class FrLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogar;
     private javax.swing.JButton btnResetPassword;
+    private javax.swing.JPasswordField edtSenha;
     private javax.swing.JFormattedTextField fEdtEmail;
-    private javax.swing.JFormattedTextField fEdtSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblEmail;
@@ -260,7 +246,6 @@ public class FrLogin extends javax.swing.JFrame {
     private void adicionarMascaranosCampos() throws ParseException {
         MaskFormatter emailMask = new MaskFormatter();
         emailMask.install(fEdtEmail);
-        MaskFormatter senhaMask = new MaskFormatter();
-        senhaMask.install(fEdtSenha);
+
     }
 }

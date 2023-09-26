@@ -12,9 +12,9 @@ import model.Usuario;
  * @author ruiz
  */
 public class ClienteValidate extends UsuarioValidate{
-      public Cliente validaCamposEntrada(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
+      public Cliente validaCamposEntrada(String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
          Usuario cliente = new Cliente();
          cliente = (Cliente) super.validaCamposEntrada(cliente, id, nome, CPF, dataNasc, senha, email, telefone);
-          return (Cliente) cliente; 
+         return (Cliente) cliente; 
       }
 }

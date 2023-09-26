@@ -12,7 +12,8 @@ import view.dlgSenhaUpdate;
  * @author ruiz
  */
 public class dlgUsuario extends javax.swing.JDialog {
-    
+    IntCadastrarCliente telaCliente;
+    IntCadastrarTecnico telaTecnico;
     /**
      * Creates new form FrMain
      */
@@ -26,6 +27,8 @@ public class dlgUsuario extends javax.swing.JDialog {
         initComponents();
         setModal(true);
         habilitarCamposDeAcordoComPrevilegio(code);
+        telaTecnico = new IntCadastrarTecnico();
+        telaCliente = new IntCadastrarCliente();
     }
 
     javax.swing.JLabel getLblUserName(){
@@ -68,93 +71,196 @@ public class dlgUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLoginIcone = new javax.swing.JLabel();
-        lblUserName = new javax.swing.JLabel();
         panOpcoes = new javax.swing.JPanel();
-        btnGerarRelatorioManutencao = new javax.swing.JButton();
-        btnCadastrarServico = new javax.swing.JButton();
         btnSocilitarSuporte = new javax.swing.JButton();
         btnGerarRelatorioRede = new javax.swing.JButton();
         btnRegistrarPagamento = new javax.swing.JButton();
+        btnGerarRelatorioManutencao = new javax.swing.JButton();
         btnCadastrarPeça = new javax.swing.JButton();
+        btnCadastrarServico = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnSocilitarServico = new javax.swing.JButton();
         btnCadastrarTecnico = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
+        panUser = new javax.swing.JPanel();
+        panTelaPrincipal = new javax.swing.JDesktopPane();
+        lblUserName = new javax.swing.JLabel();
+        lblLoginIcone = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
-        lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
-
-        lblUserName.setText("nome_do_usuario");
+        setResizable(false);
 
         panOpcoes.setBackground(new java.awt.Color(102, 102, 102));
         panOpcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        panOpcoes.setLayout(new javax.swing.BoxLayout(panOpcoes, javax.swing.BoxLayout.PAGE_AXIS));
 
+        btnSocilitarSuporte.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnSocilitarSuporte.setText("Socilitar Suporte");
+
+        btnGerarRelatorioRede.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
+
+        btnRegistrarPagamento.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnRegistrarPagamento.setText("Registrar pagamento");
+
+        btnGerarRelatorioManutencao.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarRelatorioManutencaoActionPerformed(evt);
             }
         });
-        panOpcoes.add(btnGerarRelatorioManutencao);
 
+        btnCadastrarPeça.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnCadastrarPeça.setText("Cadastrar peça");
+
+        btnCadastrarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarServico.setText("Cadastrar serviço");
         btnCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarServicoActionPerformed(evt);
             }
         });
-        panOpcoes.add(btnCadastrarServico);
 
-        btnSocilitarSuporte.setText("Socilitar Suporte");
-        panOpcoes.add(btnSocilitarSuporte);
-
-        btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
-        panOpcoes.add(btnGerarRelatorioRede);
-
-        btnRegistrarPagamento.setText("Registrar pagamento");
-        panOpcoes.add(btnRegistrarPagamento);
-
-        btnCadastrarPeça.setText("Cadastrar peça");
-        panOpcoes.add(btnCadastrarPeça);
-
+        jButton1.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         jButton1.setText("Cadastrar dispositivo de rede");
-        panOpcoes.add(jButton1);
 
+        btnSocilitarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnSocilitarServico.setText("Socilitar serviço");
-        panOpcoes.add(btnSocilitarServico);
 
+        btnCadastrarTecnico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarTecnico.setText("Cadastrar Tecnico");
         btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarTecnicoActionPerformed(evt);
             }
         });
-        panOpcoes.add(btnCadastrarTecnico);
 
+        btnCadastrarCliente.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarCliente.setText("Cadastrar cliente");
-        panOpcoes.add(btnCadastrarCliente);
+        btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panOpcoesLayout = new javax.swing.GroupLayout(panOpcoes);
+        panOpcoes.setLayout(panOpcoesLayout);
+        panOpcoesLayout.setHorizontalGroup(
+            panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOpcoesLayout.createSequentialGroup()
+                .addGroup(panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSocilitarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panOpcoesLayout.setVerticalGroup(
+            panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panOpcoesLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(btnSocilitarSuporte)
+                .addGap(5, 5, 5)
+                .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnSocilitarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(365, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panUserLayout = new javax.swing.GroupLayout(panUser);
+        panUser.setLayout(panUserLayout);
+        panUserLayout.setHorizontalGroup(
+            panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+        panUserLayout.setVerticalGroup(
+            panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
+        );
+
+        panTelaPrincipal.setOpaque(false);
+
+        javax.swing.GroupLayout panTelaPrincipalLayout = new javax.swing.GroupLayout(panTelaPrincipal);
+        panTelaPrincipal.setLayout(panTelaPrincipalLayout);
+        panTelaPrincipalLayout.setHorizontalGroup(
+            panTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 896, Short.MAX_VALUE)
+        );
+        panTelaPrincipalLayout.setVerticalGroup(
+            panTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        lblUserName.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        lblUserName.setText("nome_do_usuario");
+
+        lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLoginIcone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUserName)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblLoginIcone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUserName))
+                    .addComponent(panOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panTelaPrincipal)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLoginIcone)
-                    .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblUserName)
+                        .addComponent(lblLoginIcone)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panTelaPrincipal)
+                        .addContainerGap())))
         );
 
         pack();
@@ -169,10 +275,24 @@ public class dlgUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarServicoActionPerformed
 
     private void btnCadastrarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTecnicoActionPerformed
-        dlgCadastrarTecnico telaTecnico = new dlgCadastrarTecnico();
+        //panTelaPrincipal.removeAll();
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaTecnico);
         telaTecnico.setVisible(true);
     }//GEN-LAST:event_btnCadastrarTecnicoActionPerformed
 
+    private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
+        //panTelaPrincipal.removeAll();
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaCliente);
+        telaCliente.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarClienteActionPerformed
+
+    public void fecharTodasAsJanelas(){
+        telaCliente.setVisible(false);
+        telaTecnico.setVisible(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -227,8 +347,13 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnSocilitarServico;
     private javax.swing.JButton btnSocilitarSuporte;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblLoginIcone;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JPanel panOpcoes;
+    private javax.swing.JDesktopPane panTelaPrincipal;
+    private javax.swing.JPanel panUser;
     // End of variables declaration//GEN-END:variables
 }
