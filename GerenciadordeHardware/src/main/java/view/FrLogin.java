@@ -7,6 +7,7 @@ package view;
 import controller.LoginController;
 import controller.TecnicoController;
 import controller.UsuarioController;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import model.Tecnico;
 import model.Usuario;
 import model.validations.EmailValidate;
 import model.validations.LoginValidate;
+import utils.Criptografia;
 
 /**
  *
@@ -167,26 +169,33 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_fEdtEmailActionPerformed
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-       LoginController loginController = new LoginController();
-       UsuarioController usuarioController = new UsuarioController();
-       try {
-           loginController.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
-            Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
-            Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
-            
-            if(usuario.getSenha().equals(fEdtSenha.getText())){
-                this.setVisible(false);
-                telaUsuario = new dlgUsuario(loginController.accessManager(obj));
-                telaUsuario.getLblUserName().setText(usuario.getNome());
-                telaUsuario.setVisible(true);
-                this.setVisible(true);
-
-            }
+       try {                                         
+           LoginController loginController = new LoginController();
+           UsuarioController usuarioController = new UsuarioController();
+           Criptografia crip = new Criptografia();
            
-          
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
-            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+           try {
+               loginController.validarLogin(fEdtEmail.getText(), fEdtSenha.getText());
+               Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
+               Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
+               if(crip.decrypt(usuario.getSenha()).equals(fEdtSenha.getText())){
+                   this.setVisible(false);
+                   telaUsuario = new dlgUsuario(loginController.accessManager(obj));
+                   telaUsuario.getLblUserName().setText(usuario.getNome());
+                   telaUsuario.setVisible(true);
+                   this.setVisible(true);
+                   
+               }
+               
+               
+           } catch (Exception ex) {
+               JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
+               Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+           
+       } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE,null, ex);
         }
        
   

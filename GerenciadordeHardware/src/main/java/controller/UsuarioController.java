@@ -4,6 +4,9 @@
  */
 package controller;
 import lombok.*;
+import model.Cliente;
+import model.Tecnico;
+import model.Usuario;
 import model.dao.ClienteDAO;
 import model.dao.TecnicoDAO;
 
@@ -23,10 +26,13 @@ public class UsuarioController {
     private ClienteDAO repositorioCliente;
     private ICriptografia criptografia;
     
-    public void atualizarSenha(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws Exception{
-        criptografia = new Criptografia();
-        senha = criptografia.encrypt(senha);
-  
+    public void atualizarSenha(Usuario user, String senha) throws Exception{
+        user.atualizarSenha(senha);
+        if(user instanceof Cliente){
+            repositorioCliente.update(user);
+        }if(user instanceof Tecnico){
+            repositorioTecnico.update(user);
+        }
     }
 
     public Object buscarUsuario(String text) {

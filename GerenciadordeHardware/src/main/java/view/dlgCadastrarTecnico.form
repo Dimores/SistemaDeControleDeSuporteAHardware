@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -122,10 +121,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="659" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace pref="664" max="32767" attributes="0"/>
                   <Component id="lblSalario" min="-2" pref="61" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fEdtSalario" min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -154,13 +155,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="fEdtTelefone" min="-2" pref="160" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="fEdtDataNasc" min="-2" pref="160" max="-2" attributes="0"/>
-                              <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                              <Component id="fEdtSalario" min="-2" pref="142" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="fEdtDataNasc" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="230" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -168,23 +165,23 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="lblSalario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="fEdtSalario" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSalario" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="fEdtSalario" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="lblNome" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="edtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCpf" alignment="3" max="32767" attributes="0"/>
-                              <Component id="lblDataNasc" alignment="3" max="32767" attributes="0"/>
-                              <Component id="fEdtDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="fEdtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNome" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="edtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCpf" alignment="3" max="32767" attributes="0"/>
+                          <Component id="lblDataNasc" alignment="3" max="32767" attributes="0"/>
+                          <Component id="fEdtDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fEdtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">

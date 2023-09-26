@@ -5,18 +5,18 @@
 package view;
 
 import javax.swing.JDialog;
-
+import view.dlgSenhaUpdate;
 
 /**
  *
  * @author ruiz
  */
 public class dlgUsuario extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form FrMain
      */
- 
+    
     public dlgUsuario(boolean modal){
         initComponents();
     
@@ -27,8 +27,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         setModal(true);
         habilitarCamposDeAcordoComPrevilegio(code);
     }
-    
-    
 
     javax.swing.JLabel getLblUserName(){
         return this.lblUserName;

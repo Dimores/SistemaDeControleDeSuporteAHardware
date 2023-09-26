@@ -75,7 +75,7 @@ public class ClienteDAO implements IDao {
             statement.setString(6, cliente.getTelefone());
 
             //preenche a condição do WHERE
-            statement.setString(7, cliente.getIdCliente());
+            statement.setString(7, cliente.getId());
 
             statement.execute();
             statement.close();
@@ -127,7 +127,7 @@ public class ClienteDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, cliente.getIdCliente());
+            statement.setString(1, cliente.getId());
 
             ResultSet resultset = statement.executeQuery();
 
@@ -208,7 +208,7 @@ public class ClienteDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             //preenche a condição
-            statement.setString(1, cliente.getIdCliente());
+            statement.setString(1, cliente.getId());
 
             statement.execute();
             statement.close();

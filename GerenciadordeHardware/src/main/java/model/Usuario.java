@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.security.NoSuchAlgorithmException;
 import lombok.*;
 import model.interfaces.IUsuario;
+import utils.Criptografia;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
  
@@ -64,7 +66,13 @@ public class Usuario implements IUsuario{
         if (!email.equals(usuario.email)) return false;
         return telefone.equals(usuario.telefone);
     }
-
+    
+    public void atualizarSenha(String pass) throws NoSuchAlgorithmException, Exception{
+        Criptografia criptografia = new Criptografia();
+        String newPass = criptografia.encrypt(pass);
+        setSenha(newPass);
+    }
+    
     @Override
     public void copiar(Usuario outro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

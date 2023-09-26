@@ -10,5 +10,5 @@ package utils.interfaces;
  */
 public interface ICriptografia {
     public String encrypt(String password) throws Exception;
-    public String decrypt(String hascode, Object key) throws Exception;
+    public String decrypt(String hascode) throws Exception;
 }

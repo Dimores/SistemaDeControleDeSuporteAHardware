@@ -3,63 +3,64 @@ package utils;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 
 import utils.interfaces.ICriptografia;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author ruiz
- */
 public class Criptografia implements ICriptografia {
+    private SecretKey key;
+
+    // Chave fixa (coloque a sua chave aqui)
+    private static final String CHAVE_FIXA = "[B@1ebddasdasdasddsfe45@akdjfalk";
+
+    public Criptografia() throws NoSuchAlgorithmException {
+        // Use a chave fixa para criar a chave AES
+        this.key = gerarChaveAES(CHAVE_FIXA);
+        
+    }
 
     @Override
-    public String encrypt(String password) throws Exception{
-           SecretKey chave = gerarChaveAES();
-           return criptografarAES(password, chave);
-
+    public String encrypt(String password) throws Exception {
+        return criptografarAES(password, this.key);
     }
-    
+
     @Override
-    public String decrypt(String hashcode, Object chave) throws Exception{
-        SecretKey key = (SecretKey) chave;
-        return decriptografarAES(hashcode, key);
-    }
-    
-    
-    private SecretKey gerarChaveAES() throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(256); // Tamanho da chave de 256 bits
-        return keyGenerator.generateKey();
+    public String decrypt(String hashcode) throws Exception {
+        return decriptografarAES(hashcode);
     }
 
-    private String criptografarAES(String password, SecretKey chave) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+    private SecretKey gerarChaveAES(String chave) {
+        // Converte a chave em bytes
+        byte[] chaveBytes = chave.getBytes();
+        // Cria a chave secreta usando o algoritmo AES
+        return new SecretKeySpec(chaveBytes, "AES");
+    }
+
+    private String criptografarAES(String password, SecretKey chave)
+            throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, chave);
         byte[] textoCriptografado = cipher.doFinal(password.getBytes());
         return Base64.getEncoder().encodeToString(textoCriptografado);
     }
+    
+    private void gerarChaveAES() throws NoSuchAlgorithmException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(256);
+        System.out.println(keyGenerator.generateKey().getEncoded()); // Tamanho da chave de 256 bits
+    }
 
-    private String decriptografarAES(String textoCriptografado, SecretKey chave) throws Exception{
+    private String decriptografarAES(String textoCriptografado) throws Exception {
         Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, chave);
+        cipher.init(Cipher.DECRYPT_MODE, this.key);
         byte[] textoBytes = Base64.getDecoder().decode(textoCriptografado);
         byte[] textoDescriptografado = cipher.doFinal(textoBytes);
         return new String(textoDescriptografado);
     }
-
-    
 }
