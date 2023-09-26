@@ -21,12 +21,14 @@ import utils.Criptografia;
  */
 public class FrLogin extends javax.swing.JFrame {
     dlgUsuario telaUsuario;
+    dlgSenhaUpdate senhaupdate;
     /**
      * Creates new form FrLogin
      */
     public FrLogin() throws ParseException {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +63,11 @@ public class FrLogin extends javax.swing.JFrame {
         });
 
         btnResetPassword.setText("Esqueci minha senha");
+        btnResetPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetPasswordActionPerformed(evt);
+            }
+        });
 
         fEdtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +198,11 @@ public class FrLogin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnLogarActionPerformed
+
+    private void btnResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetPasswordActionPerformed
+       senhaupdate = new dlgSenhaUpdate( );
+       senhaupdate.setVisible(true);
+    }//GEN-LAST:event_btnResetPasswordActionPerformed
 
     /**
      * @param args the command line arguments

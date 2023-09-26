@@ -20,10 +20,8 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
     /**
      * Creates new form dlgSenhaUpdate
      */
-    
-    
-    public dlgSenhaUpdate(java.awt.Frame parent, boolean modal, String email) {
-        super(parent, modal);
+    public dlgSenhaUpdate() {
+        setModal(true);
         initComponents();
     }
     
@@ -183,7 +181,7 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+    this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void edtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtEmailActionPerformed
