@@ -11,6 +11,7 @@ import model.interfaces.Ivalidate;
  * @author ruiz
  */
 public class PassWordValidate implements Ivalidate {
+    
     @Override
     public boolean validar(String text) {
        if(text.length() < 8){

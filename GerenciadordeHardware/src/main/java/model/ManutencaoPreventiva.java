@@ -26,8 +26,8 @@ public class ManutencaoPreventiva extends Servico {
     }
 
     public ManutencaoPreventiva(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                Calendar dataServico, Calendar dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao) {
-        super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
+                                String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao, String tipoServico) {
+        super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoServico);
         this.equipamentos = equipamentos;
         this.descricaoManutencao = descricaoManutencao;
     }

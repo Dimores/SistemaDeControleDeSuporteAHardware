@@ -20,10 +20,11 @@ public class Servico {
     private Cliente clienteAtendido;
     private float valor;
     private String descricaoServico;
-    private Calendar dataServico;
+    private String dataServico;
     private boolean concluido;
     private Cliente cliente;
     private Tecnico tecnico;
+    private String tipoServico;
 
     public Servico() {
         this.idServico = "";
@@ -31,11 +32,12 @@ public class Servico {
         this.clienteAtendido = null;
         this.valor = 0.0f;
         this.descricaoServico = "";
-        this.dataServico = Calendar.getInstance();
+        this.dataServico = "";
         this.concluido = false;
+        this.tipoServico = "";
     }
 
-    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, Calendar dataServico, boolean concluido) {
+    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico) {
         this.idServico = idServico;
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
@@ -43,6 +45,7 @@ public class Servico {
         this.descricaoServico = descricaoServico;
         this.dataServico = dataServico;
         this.concluido = concluido;
+        this.tipoServico = tipoServico;
     }
 
     @Override
@@ -50,9 +53,10 @@ public class Servico {
         String txt = "ID do Serviço: " + this.idServico + "\n"
                 + "Técnico Responsável: " + this.tecnicoResponsavel.getNome() + "\n"
                 + "Cliente Atendido: " + this.clienteAtendido.getNome() + "\n"
+                + "Tipo de Servico: " + this.tipoServico + "\n"
                 + "Valor: " + this.valor + "\n"
                 + "Descrição do Serviço: " + this.descricaoServico + "\n"
-                + "Data do Serviço: " + this.dataServico.getTime() + "\n"
+                + "Data do Serviço: " + this.dataServico + "\n"
                 + "Concluído: " + (this.concluido ? "Sim" : "Não") + "\n";
         return txt;
     }
@@ -64,6 +68,7 @@ public class Servico {
         this.valor = outro.getValor();
         this.descricaoServico = outro.getDescricaoServico();
         this.dataServico = outro.getDataServico();
+        this.tipoServico = outro.getTipoServico();
         this.concluido = outro.isConcluido();
     }
 
@@ -77,7 +82,7 @@ public class Servico {
                 this.clienteAtendido.getIdCliente() + ";" +
                 this.valor + ";" +
                 this.descricaoServico + ";" +
-                this.dataServico.getTime() + ";" +
+                this.dataServico + ";" +
                 (this.concluido ? "Sim" : "Não") + "\n";
     }
 
