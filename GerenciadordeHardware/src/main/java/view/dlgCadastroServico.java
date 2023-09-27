@@ -7,6 +7,7 @@ package view;
 import controller.ServicoController;
 import model.Cliente;
 import model.Tecnico;
+import java.lang.String;
 
 /**
  *
@@ -198,7 +199,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        servicoController.cadastrarServico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico);
+        //servicoController.cadastrarServico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void boxEscolhaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxEscolhaServicoActionPerformed

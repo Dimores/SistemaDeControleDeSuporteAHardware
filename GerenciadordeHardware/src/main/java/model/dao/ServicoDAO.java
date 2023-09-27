@@ -38,9 +38,10 @@ public class ServicoDAO implements IDao {
             statement.setFloat(3, servico.getValor());
             statement.setString(4, servico.getDescricaoServico());
 
+            // Arrumar aqui pra String
             // Converter o Calendar para java.sql.Date
-            java.sql.Date dataServicoSql = new java.sql.Date(servico.getDataServico().getTimeInMillis());
-            statement.setDate(5, dataServicoSql);
+            //java.sql.Date dataServicoSql = new java.sql.Date(servico.getDataServico().getTimeInMillis());
+            //statement.setDate(5, dataServicoSql);
 
             statement.setBoolean(6, servico.isConcluido());
 
@@ -96,9 +97,9 @@ public class ServicoDAO implements IDao {
             while (resultset.next()) {
 
                 // Converter o java.sql.Date para Calendar
-                java.sql.Date sqlDate = resultset.getDate(6);
-                Calendar dataServico = Calendar.getInstance();
-                dataServico.setTimeInMillis(sqlDate.getTime());
+               // java.sql.Date sqlDate = resultset.getDate(6);
+                //Calendar dataServico = Calendar.getInstance();
+                //dataServico.setTimeInMillis(sqlDate.getTime());
 
                 Servico servico = new Servico(
                         resultset.getString(1),
@@ -106,7 +107,9 @@ public class ServicoDAO implements IDao {
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
                         resultset.getString(5),
-                        dataServico,
+                        // Arrumar aqui pra String
+                        resultset.getString(6),
+                        //dataServico,
                         resultset.getBoolean(7));
 
                 list.add(servico);
@@ -146,7 +149,7 @@ public class ServicoDAO implements IDao {
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
                         resultset.getString(5),
-                        dataServico,
+                        resultset.getString(6),
                         resultset.getBoolean(7));
 
             }
@@ -189,7 +192,7 @@ public class ServicoDAO implements IDao {
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
                         resultset.getString(5),
-                        dataServico,
+                        resultset.getString(6),
                         resultset.getBoolean(7));
 
             }

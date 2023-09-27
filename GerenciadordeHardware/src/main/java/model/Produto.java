@@ -21,12 +21,12 @@ public class Produto {
     private double preco;
     private int estoque;
     private String categoria;
-    private Calendar dataFabricacao;
+    private String dataFabricacao;
     private String idProduto;
 
 
 
-    public Produto(String idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao) {
+    public Produto(String idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -45,7 +45,7 @@ public class Produto {
                 + "Preço: " + this.preco + "\n"
                 + "Estoque: " + this.estoque + "\n"
                 + "Categoria: " + this.categoria + "\n"
-                + "Data de Fabricação: " + this.dataFabricacao.getTime() + "\n";
+                + "Data de Fabricação: " + this.dataFabricacao + "\n";
         return txt;
     }
 
@@ -70,7 +70,7 @@ public class Produto {
                 this.preco + ";" +
                 this.estoque + ";" +
                 this.categoria + ";" +
-                this.dataFabricacao.getTime() + "\n";
+                this.dataFabricacao + "\n";
         return aux;
     }
 

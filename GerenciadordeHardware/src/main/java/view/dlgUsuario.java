@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import view.dlgSenhaUpdate;
 
@@ -24,7 +27,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     
     }
     
-    public dlgUsuario(int code) {
+    public dlgUsuario(int code)  {
         initComponents();
         setModal(true);
         habilitarCamposDeAcordoComPrevilegio(code);
@@ -271,6 +274,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarRelatorioManutencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioManutencaoActionPerformed
@@ -302,10 +306,14 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaCadastroPeca.setVisible(true);
     }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
 
-    public void fecharTodasAsJanelas(){
-        telaCliente.setVisible(false);
-        telaTecnico.setVisible(false);
-        telaCadastroPeca.setVisible(false);
+    public void fecharTodasAsJanelas()  {
+        telaCliente.habilitarCampos(false);
+        telaCliente.dispose();
+        telaTecnico.habilitarCampos(false);
+        telaTecnico.dispose();
+    /*    telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos1(),false);
+        telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos2(),false);*/
+        telaCadastroPeca.dispose();
     }
     
     /**
@@ -339,7 +347,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dlgUsuario(0).setVisible(true);
+                    new dlgUsuario(0).setVisible(true);
             }
         });
     }

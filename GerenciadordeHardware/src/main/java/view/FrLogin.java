@@ -75,6 +75,12 @@ public class FrLogin extends javax.swing.JFrame {
             }
         });
 
+        edtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -203,6 +209,10 @@ public class FrLogin extends javax.swing.JFrame {
        senhaupdate = new dlgSenhaUpdate( );
        senhaupdate.setVisible(true);
     }//GEN-LAST:event_btnResetPasswordActionPerformed
+
+    private void edtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtSenhaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -19,7 +19,7 @@ public class Peca extends Produto {
     private String tipo;
 
 
-    public Peca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, Calendar dataFabricacao, String tipo) {
+    public Peca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo) {
         super(idPeca, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
         this.tipo = tipo;
     }

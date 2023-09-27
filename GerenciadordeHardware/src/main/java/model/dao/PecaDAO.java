@@ -40,9 +40,8 @@ public class PecaDAO implements IDao {
             statement.setInt(5, peca.getEstoque());
             statement.setString(6, peca.getCategoria());
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataFabricacaoSql = new java.sql.Date(peca.getDataFabricacao().getTimeInMillis());
-            statement.setDate(7, dataFabricacaoSql);
+
+            statement.setString(7, peca.getDataFabricacao());
 
             statement.setString(8, peca.getTipo());
 
@@ -72,10 +71,7 @@ public class PecaDAO implements IDao {
             statement.setDouble(4, peca.getPreco());
             statement.setInt(5, peca.getEstoque());
             statement.setString(6, peca.getCategoria());
-
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataFabricacaoSql = new java.sql.Date(peca.getDataFabricacao().getTimeInMillis());
-            statement.setDate(7, dataFabricacaoSql);
+            statement.setString(7, peca.getDataFabricacao());
 
             statement.setString(8, peca.getTipo());
 
@@ -101,10 +97,7 @@ public class PecaDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
 
-                // Converter o java.sql.Date para Calendar
-                java.sql.Date sqlDate = resultset.getDate(8);
-                Calendar dataFabricacao = Calendar.getInstance();
-                dataFabricacao.setTimeInMillis(sqlDate.getTime());
+
 
                 Peca peca = new Peca(
                         resultset.getString(1),
@@ -114,7 +107,7 @@ public class PecaDAO implements IDao {
                         resultset.getDouble(5),
                         resultset.getInt(6),
                         resultset.getString(7),
-                        dataFabricacao,
+                        resultset.getString(8),
                         resultset.getString(9));
 
                 list.add(peca);
@@ -141,10 +134,7 @@ public class PecaDAO implements IDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(8);
-            Calendar dataFabricacao = Calendar.getInstance();
-            dataFabricacao.setTimeInMillis(sqlDate.getTime());
+
 
             Peca p = null;
             while (resultset.next()) {
@@ -156,7 +146,7 @@ public class PecaDAO implements IDao {
                         resultset.getDouble(5),
                         resultset.getInt(6),
                         resultset.getString(7),
-                        dataFabricacao,
+                        resultset.getString(8),
                         resultset.getString(9));
 
             }
@@ -202,7 +192,7 @@ public class PecaDAO implements IDao {
                         resultset.getDouble(5),
                         resultset.getInt(6),
                         resultset.getString(7),
-                        dataFabricacao,
+                        resultset.getString(8),
                         resultset.getString(9));
 
             }

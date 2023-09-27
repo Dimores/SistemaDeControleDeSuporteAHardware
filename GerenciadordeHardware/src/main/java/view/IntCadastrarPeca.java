@@ -4,20 +4,38 @@
  */
 package view;
 
+import controller.PecaController;
+import java.awt.Component;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.text.MaskFormatter;
+import lombok.*;
+import model.Peca;
+import model.exceptions.PecaException;
 
 /**
  *
  * @author diego
  */
+@Getter
+@Setter
 public class IntCadastrarPeca extends javax.swing.JInternalFrame {
+        PecaController pecaController;
+        int idPecaEditando;
 
     /**
      * Creates new form IntCadastrarPeca
      */
-    public IntCadastrarPeca() {
+    public IntCadastrarPeca()  {
         initComponents();
+        this.adicionarMascaranosCampos();
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+
     }
 
     /**
@@ -32,13 +50,13 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        grdClientes = new javax.swing.JTable();
+        grdPecas = new javax.swing.JTable();
         panBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         panCampos1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
@@ -73,7 +91,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        grdClientes.setModel(new javax.swing.table.DefaultTableModel(
+        grdPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -84,34 +102,54 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
 
             }
         ));
-        grdClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        grdPecas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdClientesMouseClicked(evt);
+                grdPecasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(grdClientes);
+        jScrollPane1.setViewportView(grdPecas);
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
 
         btnNovo.setText("Novo");
-        panBotoes.add(btnNovo);
-
-        jButton3.setText("Editar");
-        panBotoes.add(jButton3);
-
-        jButton4.setText("Excluir");
-        panBotoes.add(jButton4);
-
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNovoActionPerformed(evt);
             }
         });
-        panBotoes.add(jButton1);
+        panBotoes.add(btnNovo);
 
-        jButton2.setText("Cancelar");
-        panBotoes.add(jButton2);
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnEditar);
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnExcluir);
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnConfirmar);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnCancelar);
 
         panCampos1.setLayout(new javax.swing.BoxLayout(panCampos1, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -191,26 +229,163 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void grdClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdClientesMouseClicked
+    private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
 
-    }//GEN-LAST:event_grdClientesMouseClicked
+    }//GEN-LAST:event_grdPecasMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+            try {
+            if (idPecaEditando > 0) {
+                pecaController.atualizarPeca();
+            } else {
+                pecaController.cadastrarPeca();
+            }
+            //Comando bastante importante
+            this.idPecaEditando = -1;
+
+            pecaController.atualizarTabela();
+
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+        
+        this.limparCampos();
+        } catch (PecaException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void edtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtCodigoActionPerformed
         // TODO add your handling code here:
-        // Sim eu sou maluco demais
-        System.out.print("Malucio");
+        Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
+
+        if (pecaEditando == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            this.limparCampos();
+            this.habilitarCampos(panCampos1, false);
+            this.habilitarCampos(panCampos2, false);
+            this.preencherFormulario(pecaEditando);
+            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+        }
     }//GEN-LAST:event_edtCodigoActionPerformed
 
     private void fEdtDataFabricacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtDataFabricacaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fEdtDataFabricacaoActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        this.habilitarCampos(panCampos1, true);
+        this.habilitarCampos(panCampos2, true);
+    }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:        
+        Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+
+        if (pecaExcluida == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+
+            int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir a Peca  \n("
+                + pecaExcluida.getNome() + ", "
+                + pecaExcluida.getCodigo() + ") ?",
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+
+                try {
+                    pecaController.excluirPeca();
+
+                    pecaController.atualizarTabela();
+                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                } catch (PecaException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            }
+        }  
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
+
+        if (pecaEditando == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            this.limparCampos();
+        this.habilitarCampos(panCampos1, true);
+        this.habilitarCampos(panCampos2, true);
+            this.preencherFormulario(pecaEditando);
+            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdPecas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdPecas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    public void preencherFormulario(Peca peca) {
+        edtNome.setText(peca.getNome());
+        edtCategoria.setText(peca.getCategoria());
+        edtCodigo.setText(peca.getCodigo());
+        edtEstoque.setText(String.valueOf(peca.getEstoque()));
+        edtTipo.setText(peca.getTipo());
+        edtPreco.setText(String.valueOf(peca.getPreco()));
+        fEdtDataFabricacao.setText(peca.getDataFabricacao());
+
+    }
+    
+    public void habilitarCampos(JPanel panel, boolean flag) {
+        Component[] components = panel.getComponents();
+        for (Component component : components) {
+            component.setEnabled(flag);
+        }
+    }
+        
+    private void limparCampos() {
+        edtCategoria.setText("");
+        edtCodigo.setText("");
+        edtEstoque.setText("");
+        edtNome.setText("");
+        edtPreco.setText("");
+        edtTipo.setText("");
+        fEdtDataFabricacao.setText("");
+    }
+
+    private void adicionarMascaranosCampos()  {
+        try {
+            MaskFormatter dataFabric = new MaskFormatter("##/##/####");
+            dataFabric.install(fEdtDataFabricacao);
+        } catch (ParseException ex) {
+            Logger.getLogger(IntCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtCategoria;
     private javax.swing.JTextField edtCodigo;
@@ -219,11 +394,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
     private javax.swing.JTextField edtPreco;
     private javax.swing.JTextField edtTipo;
     private javax.swing.JFormattedTextField fEdtDataFabricacao;
-    private javax.swing.JTable grdClientes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JTable grdPecas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCategoria;
@@ -238,4 +409,6 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panCampos1;
     private javax.swing.JPanel panCampos2;
     // End of variables declaration//GEN-END:variables
+
+
 }

@@ -37,7 +37,7 @@ public class Servico {
         this.tipoServico = "";
     }
 
-    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico) {
+    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido) {
         this.idServico = idServico;
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
