@@ -73,6 +73,8 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         fEdtDataFabricacao = new javax.swing.JFormattedTextField();
         lblTipo = new javax.swing.JLabel();
         edtTipo = new javax.swing.JTextField();
+        lblDescricao = new javax.swing.JLabel();
+        edtDescricao = new javax.swing.JTextField();
 
         setForeground(java.awt.Color.orange);
 
@@ -195,6 +197,10 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         panCampos2.add(lblTipo);
         panCampos2.add(edtTipo);
 
+        lblDescricao.setText("Descricao");
+        panCampos2.add(lblDescricao);
+        panCampos2.add(edtDescricao);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +212,9 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE))
                     .addComponent(panCampos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panCampos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -237,9 +245,9 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
             try {
             if (idPecaEditando > 0) {
-                pecaController.atualizarPeca();
+                pecaController.atualizarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             } else {
-                pecaController.cadastrarPeca();
+                pecaController.cadastrarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             }
             //Comando bastante importante
             this.idPecaEditando = -1;
@@ -307,7 +315,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
-                    pecaController.excluirPeca();
+                    pecaController.excluirPeca(pecaExcluida);
 
                     pecaController.atualizarTabela();
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
@@ -389,6 +397,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtCategoria;
     private javax.swing.JTextField edtCodigo;
+    private javax.swing.JTextField edtDescricao;
     private javax.swing.JTextField edtEstoque;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtPreco;
@@ -400,6 +409,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblDataFabricacao;
+    private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPreco;

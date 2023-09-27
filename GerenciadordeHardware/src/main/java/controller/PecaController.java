@@ -7,6 +7,8 @@ package controller;
 import model.*;
 import lombok.*;
 import model.dao.PecaDAO;
+import model.exceptions.PecaException;
+import model.validations.PecaValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -27,18 +29,31 @@ public class PecaController extends ProdutoController{
         
     }
     
-    public void cadastrarPeca(){
-        
-        
+    public void cadastrarPeca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+        PecaValidate valid = new PecaValidate(); 
+        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
+        if(repositorio.findByCodigo(codigo) == null){
+            repositorio.save(novaPeca);
+        }else{
+             throw new PecaException("Error - Já existe um tecnico com este 'Codigo'.");
+        }
         
     }
     
-    public void atualizarPeca(){
+    public void atualizarPeca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+        PecaValidate valid = new PecaValidate(); 
+        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
+        novaPeca.setIdPeca(idPeca); 
         
+        repositorio.update(novaPeca);
     }
     
-    public void excluirPeca(){
-        
+    public void excluirPeca(Peca peca){
+        if (peca != null) {
+            repositorio.delete(peca);
+        } else {
+            throw new PecaException("Error - Peca inexistente."); // Alterado de AlunoException para TecnicoException
+        }
     }
     
 }
