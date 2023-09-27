@@ -4,7 +4,11 @@
  */
 package model.validations;
 
+import model.Cliente;
+import model.Gerente;
 import model.Login;
+import model.Tecnico;
+import model.exceptions.LoginException;
 import model.interfaces.Ivalidate;
 
 /**
@@ -17,20 +21,31 @@ public class LoginValidate {
     
     public LoginValidate (){
         validaEmail = new EmailValidate();
-        validaSenha = new PassWordValidate();
+        validaSenha = new SenhaValidate();
     }
     
     public Login validar(String email, String senha) throws Exception{
         if (email.isEmpty()  || senha.isEmpty()){
-            throw new Exception("Campo Vazio");
+            throw new LoginException("Campo Vazio");
         }
         if(!validaEmail.validar(email)){
-            throw new Exception("Email invalido");
+            throw new LoginException("Email invalido");
         }if (!validaSenha.validar(senha)){
-            throw new Exception("Senha invalida");
+            throw new LoginException("Senha invalida");
         }
         
         return new Login();               
+    }
+    
+    public int  accessManager(Object obj){
+        if (obj instanceof Cliente){
+            return 1;
+        }if(obj instanceof Tecnico){
+            return 2;
+        }if( obj instanceof Gerente){
+            return 3;
+        }
+        return 0;
     }
     
 }

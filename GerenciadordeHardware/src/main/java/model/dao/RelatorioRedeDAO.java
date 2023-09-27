@@ -42,7 +42,7 @@ public class RelatorioRedeDAO implements IDao {
             statement.setString(3, relatorioRede.getTipoRede());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioRede.getClienteRelacionado().getIdCliente());
+            statement.setString(4, relatorioRede.getClienteRelacionado().getId());
             statement.setString(5, relatorioRede.getTecnicoResponsavel().getId());
 
             statement.execute();
@@ -74,7 +74,7 @@ public class RelatorioRedeDAO implements IDao {
             statement.setString(3, relatorioRede.getTipoRede());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioRede.getClienteRelacionado().getIdCliente());
+            statement.setString(4, relatorioRede.getClienteRelacionado().getId());
             statement.setString(5, relatorioRede.getTecnicoResponsavel().getId());
 
             // Preencher a condição do WHERE

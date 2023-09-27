@@ -5,25 +5,64 @@
 package view;
 
 import javax.swing.JDialog;
+import view.dlgSenhaUpdate;
 
 /**
  *
  * @author ruiz
  */
 public class dlgUsuario extends javax.swing.JDialog {
-
+    IntCadastrarCliente telaCliente;
+    IntCadastrarTecnico telaTecnico;
+    IntCadastrarPeca telaCadastroPeca;
     /**
      * Creates new form FrMain
      */
-    public dlgUsuario() {
+    
+    public dlgUsuario(boolean modal){
         initComponents();
-         habilitarCamposDeAcordoComPrevilegio();
+    
+    }
+    
+    public dlgUsuario(int code) {
+        initComponents();
+        setModal(true);
+        habilitarCamposDeAcordoComPrevilegio(code);
+        telaTecnico = new IntCadastrarTecnico();
+        telaCliente = new IntCadastrarCliente();
+        telaCadastroPeca = new  IntCadastrarPeca();
     }
 
+    javax.swing.JLabel getLblUserName(){
+        return this.lblUserName;
+    }
     
-    
-    public void habilitarCamposDeAcordoComPrevilegio(){
-        btnSocilitarSuporte.setVisible(false);
+    public void habilitarCamposDeAcordoComPrevilegio(int code){
+        switch (code){
+            case 1:
+                   btnCadastrarTecnico.setVisible(false);
+                   btnCadastrarCliente.setVisible(false);
+                   btnCadastrarPeça.setVisible(false);
+                   btnGerarRelatorioManutencao.setVisible(false);
+                   btnCadastrarServico.setVisible(false);
+                   btnRegistrarPagamento.setVisible(false);
+            break;
+                
+            case 2: 
+                btnGerarRelatorioRede.setVisible(false);
+                btnSocilitarSuporte.setVisible(false);
+                btnCadastrarTecnico.setVisible(false);
+                btnSocilitarServico.setVisible(false);
+                btnCadastrarCliente.setVisible(false);
+            break;
+            case 3:
+                btnGerarRelatorioRede.setVisible(false);
+                btnSocilitarSuporte.setVisible(false);
+                btnSocilitarServico.setVisible(false);
+            break;
+            default: break;
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,26 +73,40 @@ public class dlgUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btnGerarRelatorioManutencao = new javax.swing.JButton();
-        btnCadastrarServico = new javax.swing.JButton();
+        panOpcoes = new javax.swing.JPanel();
         btnSocilitarSuporte = new javax.swing.JButton();
         btnGerarRelatorioRede = new javax.swing.JButton();
         btnRegistrarPagamento = new javax.swing.JButton();
+        btnGerarRelatorioManutencao = new javax.swing.JButton();
         btnCadastrarPeça = new javax.swing.JButton();
+        btnCadastrarServico = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnSocilitarServico = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnCadastrarTecnico = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel2 = new javax.swing.JLabel();
+        panUser = new javax.swing.JPanel();
+        panTelaPrincipal = new javax.swing.JDesktopPane();
+        lblUserName = new javax.swing.JLabel();
+        lblLoginIcone = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
-        jPanel1.setBackground(new java.awt.Color(19, 16, 16));
+        setResizable(false);
 
-        jLabel1.setText("nome_do_usuario");
+        panOpcoes.setBackground(new java.awt.Color(102, 102, 102));
+        panOpcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnSocilitarSuporte.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnSocilitarSuporte.setText("Socilitar Suporte");
+
+        btnGerarRelatorioRede.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
+
+        btnRegistrarPagamento.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnRegistrarPagamento.setText("Registrar pagamento");
+
+        btnGerarRelatorioManutencao.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +114,15 @@ public class dlgUsuario extends javax.swing.JDialog {
             }
         });
 
+        btnCadastrarPeça.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnCadastrarPeça.setText("Cadastrar peça");
+        btnCadastrarPeça.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarPeçaActionPerformed(evt);
+            }
+        });
+
+        btnCadastrarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarServico.setText("Cadastrar serviço");
         btnCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,126 +130,144 @@ public class dlgUsuario extends javax.swing.JDialog {
             }
         });
 
-        btnSocilitarSuporte.setText("Socilitar Suporte");
-
-        btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
-
-        btnRegistrarPagamento.setText("Registrar pagamento");
-
-        btnCadastrarPeça.setText("Cadastrar peça");
-
+        jButton1.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         jButton1.setText("Cadastrar dispositivo de rede");
 
+        btnSocilitarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnSocilitarServico.setText("Socilitar serviço");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
-
+        btnCadastrarTecnico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarTecnico.setText("Cadastrar Tecnico");
+        btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarTecnicoActionPerformed(evt);
+            }
+        });
 
+        btnCadastrarCliente.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarCliente.setText("Cadastrar cliente");
+        btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarClienteActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSocilitarServico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(35, 35, 35))
+        javax.swing.GroupLayout panOpcoesLayout = new javax.swing.GroupLayout(panOpcoes);
+        panOpcoes.setLayout(panOpcoesLayout);
+        panOpcoesLayout.setHorizontalGroup(
+            panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOpcoesLayout.createSequentialGroup()
+                .addGroup(panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSocilitarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addGap(82, 82, 82)
-                .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSocilitarSuporte, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSocilitarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+        panOpcoesLayout.setVerticalGroup(
+            panOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panOpcoesLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(btnSocilitarSuporte)
+                .addGap(5, 5, 5)
+                .addComponent(btnGerarRelatorioRede, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnGerarRelatorioManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnSocilitarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
-        jInternalFrame1.setBorder(null);
-        jInternalFrame1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+        javax.swing.GroupLayout panUserLayout = new javax.swing.GroupLayout(panUser);
+        panUser.setLayout(panUserLayout);
+        panUserLayout.setHorizontalGroup(
+            panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+        panUserLayout.setVerticalGroup(
+            panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Serviços");
+        panTelaPrincipal.setOpaque(false);
+
+        javax.swing.GroupLayout panTelaPrincipalLayout = new javax.swing.GroupLayout(panTelaPrincipal);
+        panTelaPrincipal.setLayout(panTelaPrincipalLayout);
+        panTelaPrincipalLayout.setHorizontalGroup(
+            panTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 896, Short.MAX_VALUE)
+        );
+        panTelaPrincipalLayout.setVerticalGroup(
+            panTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        lblUserName.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        lblUserName.setText("nome_do_usuario");
+
+        lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jInternalFrame1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap()
+                        .addComponent(lblLoginIcone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUserName))
+                    .addComponent(panOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panTelaPrincipal)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jInternalFrame1)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblUserName)
+                        .addComponent(lblLoginIcone)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panTelaPrincipal)
+                        .addContainerGap())))
         );
 
         pack();
@@ -201,6 +281,33 @@ public class dlgUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarServicoActionPerformed
 
+    private void btnCadastrarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTecnicoActionPerformed
+        //panTelaPrincipal.removeAll();
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaTecnico);
+        telaTecnico.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarTecnicoActionPerformed
+
+    private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
+        //panTelaPrincipal.removeAll();
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaCliente);
+        telaCliente.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarClienteActionPerformed
+
+    private void btnCadastrarPeçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeçaActionPerformed
+        // TODO add your handling code here:
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaCadastroPeca);
+        telaCadastroPeca.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
+
+    public void fecharTodasAsJanelas(){
+        telaCliente.setVisible(false);
+        telaTecnico.setVisible(false);
+        telaCadastroPeca.setVisible(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -232,7 +339,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dlgUsuario().setVisible(true);
+                new dlgUsuario(0).setVisible(true);
             }
         });
     }
@@ -255,10 +362,13 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnSocilitarServico;
     private javax.swing.JButton btnSocilitarSuporte;
     private javax.swing.JButton jButton1;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel lblLoginIcone;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JPanel panOpcoes;
+    private javax.swing.JDesktopPane panTelaPrincipal;
+    private javax.swing.JPanel panUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,17 +21,19 @@ import lombok.*;
 public class Login {
     private String email;
     private String passWord;
-    private String user;
+    private Usuario user;
     
     
     public Login(){
         this.email = "";
         this.passWord = "";
+        this.user = null;
     }
     
-    public Login(String email, String senha){
+    public Login(String email, String senha, Usuario user){
         this.email = email;
         this.passWord = senha;
+        this.user = user;
     }
     
     

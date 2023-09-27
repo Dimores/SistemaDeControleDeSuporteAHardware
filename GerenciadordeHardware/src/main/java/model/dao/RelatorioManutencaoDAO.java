@@ -41,7 +41,7 @@ public class RelatorioManutencaoDAO implements IDao {
             statement.setString(3, relatorioManutencao.getEquipamentos());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioManutencao.getCliente().getIdCliente());
+            statement.setString(4, relatorioManutencao.getCliente().getId());
             statement.setString(5, relatorioManutencao.getTecnico().getId());
 
             statement.execute();
@@ -73,7 +73,7 @@ public class RelatorioManutencaoDAO implements IDao {
             statement.setString(3, relatorioManutencao.getEquipamentos());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioManutencao.getCliente().getIdCliente());
+            statement.setString(4, relatorioManutencao.getCliente().getId());
             statement.setString(5, relatorioManutencao.getTecnico().getId());
 
             // Preencher a condição do WHERE

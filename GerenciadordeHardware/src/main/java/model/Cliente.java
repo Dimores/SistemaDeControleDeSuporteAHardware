@@ -14,16 +14,16 @@ import model.interfaces.IUsuario;
  */
 
 public class Cliente extends Usuario implements IUsuario{
-    private String idCliente;
+    private String id;
 
     public Cliente() {
         super();
-        this.idCliente = "";
+        this.id = "";
     }
 
     public Cliente(String idCliente, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
-        this.idCliente = idCliente;
+        this.id = idCliente;
     }
 
 
@@ -35,7 +35,7 @@ public class Cliente extends Usuario implements IUsuario{
                 + "Senha: " + this.senha + "\n"
                 + "Email: " + this.email + "\n"
                 + "Telefone: " + this.telefone + "\n"
-                + "ID do Cliente: " + this.idCliente + "\n";
+                + "ID do Cliente: " + this.id + "\n";
         return txt;
     }
     
@@ -46,7 +46,7 @@ public void copiar(Cliente outro) {
     super.setSenha(outro.getSenha());
     super.setEmail(outro.getEmail());
     super.setTelefone(outro.getTelefone());
-    this.setIdCliente(outro.getIdCliente());
+    this.setId(outro.getId());
 }
 
     
@@ -62,7 +62,7 @@ public void copiar(Cliente outro) {
                 this.senha + ";" +
                 this.email + ";" +
                 this.telefone + ";" +
-                this.idCliente + "\n";
+                this.id + "\n";
         return aux;
     }
 
@@ -81,7 +81,7 @@ public void copiar(Cliente outro) {
         this.senha = vetor[3];
         this.email = vetor[4];
         this.telefone = vetor[5];
-        this.idCliente = vetor[6];
+        this.id = vetor[6];
     }
 
 }

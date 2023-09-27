@@ -17,6 +17,7 @@ public class TecnicoDAO implements IDao {
     private PreparedStatement statement;
     private String sql;
 
+
     public TecnicoDAO() {
         this.sql = "";
     }

@@ -74,7 +74,7 @@ public class Servico {
     public String atributoToCSV() {
         return this.idServico + ";" +
                 this.tecnicoResponsavel.getId() + ";" +
-                this.clienteAtendido.getIdCliente() + ";" +
+                this.clienteAtendido.getId() + ";" +
                 this.valor + ";" +
                 this.descricaoServico + ";" +
                 this.dataServico.getTime() + ";" +

@@ -1,45 +1,57 @@
 package controller;
 
 import controller.tableModel.TMCadTecnico;
-import java.util.Calendar;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import model.Tecnico;
 import model.dao.TecnicoDAO;
 import model.exceptions.TecnicoException;
 import model.validations.TecnicoValidate;
+import utils.Criptografia;
 
 
 /**
  *
  * @author diego
  */
-public class TecnicoController { 
-
+public class TecnicoController  extends UsuarioController{ 
+    private Criptografia crip;
     private TecnicoDAO repositorio; 
 
     public TecnicoController() {
         repositorio = new TecnicoDAO(); 
     }
 
-    public void cadastrarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) { 
+    public void cadastrarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception { 
         TecnicoValidate valid = new TecnicoValidate(); 
+        this.crip = new Criptografia();
         Tecnico novoTecnico = valid.validaCamposEntrada(id, salario, nome, CPF, dataNasc, senha, email, telefone); 
-
-            if(repositorio.findByEmail(email) == null){
-                repositorio.save(novoTecnico);
-            }else{
-                 throw new TecnicoException("Error - Já existe um tecnico com esta 'Email'.");
-            }
-
-
+        novoTecnico.setSenha(crip.encrypt(senha));
+        if(repositorio.findByEmail(email) == null){
+            repositorio.save(novoTecnico);
+        }else{
+             throw new TecnicoException("Error - Já existe um tecnico com esta 'Email'.");
+        }
     }
     
-    public void atualizarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) { 
+    public void atualizarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException { 
         TecnicoValidate valid = new TecnicoValidate(); 
+        this.crip = new Criptografia();
         Tecnico novoTecnico = valid.validaCamposEntrada(id, salario, nome, CPF, dataNasc, senha, email, telefone); 
         novoTecnico.setId(id);
-
+        System.out.println("Senha: "+ senha );
+        
+        try {
+            
+            novoTecnico.setSenha(crip.encrypt(senha));
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TecnicoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         repositorio.update(novoTecnico);
     }
 
