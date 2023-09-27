@@ -14,6 +14,7 @@ import view.dlgSenhaUpdate;
 public class dlgUsuario extends javax.swing.JDialog {
     IntCadastrarCliente telaCliente;
     IntCadastrarTecnico telaTecnico;
+    IntCadastrarPeca telaCadastroPeca;
     /**
      * Creates new form FrMain
      */
@@ -29,6 +30,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         habilitarCamposDeAcordoComPrevilegio(code);
         telaTecnico = new IntCadastrarTecnico();
         telaCliente = new IntCadastrarCliente();
+        telaCadastroPeca = new  IntCadastrarPeca();
     }
 
     javax.swing.JLabel getLblUserName(){
@@ -114,6 +116,11 @@ public class dlgUsuario extends javax.swing.JDialog {
 
         btnCadastrarPeça.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarPeça.setText("Cadastrar peça");
+        btnCadastrarPeça.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarPeçaActionPerformed(evt);
+            }
+        });
 
         btnCadastrarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnCadastrarServico.setText("Cadastrar serviço");
@@ -288,9 +295,17 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaCliente.setVisible(true);
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
+    private void btnCadastrarPeçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeçaActionPerformed
+        // TODO add your handling code here:
+        fecharTodasAsJanelas();
+        panTelaPrincipal.add(this.telaCadastroPeca);
+        telaCadastroPeca.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
+
     public void fecharTodasAsJanelas(){
         telaCliente.setVisible(false);
         telaTecnico.setVisible(false);
+        telaCadastroPeca.setVisible(false);
     }
     
     /**

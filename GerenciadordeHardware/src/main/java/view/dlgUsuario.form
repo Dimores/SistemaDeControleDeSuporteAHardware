@@ -93,7 +93,7 @@
           <Color blue="66" green="66" red="66" type="rgb"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Padr&#xe3;o"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
 
@@ -188,6 +188,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cadastrar pe&#xe7;a"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarPe&#xe7;aActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCadastrarServico">
           <Properties>
