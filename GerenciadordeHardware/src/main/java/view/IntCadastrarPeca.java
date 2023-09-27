@@ -52,7 +52,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         lblCategoria = new javax.swing.JLabel();
         edtCategoria = new javax.swing.JTextField();
         lblDataFabricacao = new javax.swing.JLabel();
-        edtDataFabricacao = new javax.swing.JTextField();
+        fEdtDataFabricacao = new javax.swing.JFormattedTextField();
         lblTipo = new javax.swing.JLabel();
         edtTipo = new javax.swing.JTextField();
 
@@ -145,7 +145,13 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
 
         lblDataFabricacao.setText("DataFabric");
         panCampos2.add(lblDataFabricacao);
-        panCampos2.add(edtDataFabricacao);
+
+        fEdtDataFabricacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fEdtDataFabricacaoActionPerformed(evt);
+            }
+        });
+        panCampos2.add(fEdtDataFabricacao);
 
         lblTipo.setText("Tipo");
         panCampos2.add(lblTipo);
@@ -162,9 +168,9 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
                     .addComponent(panCampos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panCampos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE))
+                    .addComponent(panCampos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -195,18 +201,24 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
 
     private void edtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtCodigoActionPerformed
         // TODO add your handling code here:
+        // Sim eu sou maluco demais
+        System.out.print("Malucio");
     }//GEN-LAST:event_edtCodigoActionPerformed
+
+    private void fEdtDataFabricacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtDataFabricacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fEdtDataFabricacaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtCategoria;
     private javax.swing.JTextField edtCodigo;
-    private javax.swing.JTextField edtDataFabricacao;
     private javax.swing.JTextField edtEstoque;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtPreco;
     private javax.swing.JTextField edtTipo;
+    private javax.swing.JFormattedTextField fEdtDataFabricacao;
     private javax.swing.JTable grdClientes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
