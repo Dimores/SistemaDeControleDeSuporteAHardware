@@ -69,9 +69,7 @@ public class ServicoDAO implements IDao {
             statement.setFloat(3, servico.getValor());
             statement.setString(4, servico.getDescricaoServico());
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataServicoSql = new java.sql.Date(servico.getDataServico().getTimeInMillis());
-            statement.setDate(5, dataServicoSql);
+            statement.setString(5, servico.getDataServico());
 
             statement.setBoolean(6, servico.isConcluido());
 
