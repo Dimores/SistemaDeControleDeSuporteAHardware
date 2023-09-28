@@ -26,14 +26,14 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastrarCliente() {
+    public dlgCadastrarCliente(java.awt.Dialog parent) {
         clienteController = new ClienteController();
         idClienteEditando = -1;
         initComponents();
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
         this.limparCampos();
-        //this.setModal(true);
+        this.setModal(true);
         clienteController.atualizarTabela(grdClientes);
         setDefaultCloseOperation(dlgCadastrarCliente.DISPOSE_ON_CLOSE);
     }
@@ -405,7 +405,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dlgCadastrarCliente().setVisible(true);
+                //new dlgCadastrarCliente().setVisible(true);
             }
         });
     }

@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,9 +16,9 @@ import view.dlgSenhaUpdate;
  * @author ruiz
  */
 public class dlgUsuario extends javax.swing.JDialog {
-    IntCadastrarCliente telaCliente;
-    IntCadastrarTecnico telaTecnico;
-    IntCadastrarPeca telaCadastroPeca;
+    dlgCadastrarCliente telaCliente;
+    dlgCadastrarTecnico telaTecnico;
+    dlgCadastrarPeca telaCadastroPeca;
     /**
      * Creates new form FrMain
      */
@@ -31,9 +32,9 @@ public class dlgUsuario extends javax.swing.JDialog {
         initComponents();
         setModal(true);
         habilitarCamposDeAcordoComPrevilegio(code);
-        telaTecnico = new IntCadastrarTecnico();
-        telaCliente = new IntCadastrarCliente();
-        telaCadastroPeca = new  IntCadastrarPeca();
+        telaTecnico = new dlgCadastrarTecnico(this);
+        telaCliente = new dlgCadastrarCliente(this);
+        telaCadastroPeca = new dlgCadastrarPeca(this);
     }
 
     javax.swing.JLabel getLblUserName(){
@@ -287,34 +288,29 @@ public class dlgUsuario extends javax.swing.JDialog {
 
     private void btnCadastrarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTecnicoActionPerformed
         //panTelaPrincipal.removeAll();
-        fecharTodasAsJanelas();
-        panTelaPrincipal.add(this.telaTecnico);
         telaTecnico.setVisible(true);
     }//GEN-LAST:event_btnCadastrarTecnicoActionPerformed
 
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
         //panTelaPrincipal.removeAll();
-        fecharTodasAsJanelas();
-        panTelaPrincipal.add(this.telaCliente);
         telaCliente.setVisible(true);
+
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     private void btnCadastrarPeçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeçaActionPerformed
         // TODO add your handling code here:
-        fecharTodasAsJanelas();
-        panTelaPrincipal.add(this.telaCadastroPeca);
         telaCadastroPeca.setVisible(true);
     }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
 
-    public void fecharTodasAsJanelas()  {
+    /*public void fecharTodasAsJanelas()  {
         telaCliente.habilitarCampos(false);
         telaCliente.dispose();
         telaTecnico.habilitarCampos(false);
         telaTecnico.dispose();
     /*    telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos1(),false);
-        telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos2(),false);*/
+        telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos2(),false);
         telaCadastroPeca.dispose();
-    }
+    }*/
     
     /**
      * @param args the command line arguments

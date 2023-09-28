@@ -27,7 +27,8 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastrarTecnico() {
+    public dlgCadastrarTecnico(java.awt.Dialog parent) {
+        super(parent);
         tecnicoController = new TecnicoController();
         idTecnicoEditando = -1;
         initComponents();
@@ -463,7 +464,7 @@ private Object getObjetoSelecionadoNaGrid() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dlgCadastrarTecnico().setVisible(true);
+                //new dlgCadastrarTecnico().setVisible(true);
             }
         });
     }
