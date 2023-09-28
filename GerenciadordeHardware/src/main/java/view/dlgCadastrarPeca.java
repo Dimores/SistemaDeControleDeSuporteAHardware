@@ -5,8 +5,16 @@
 package view;
 
 import controller.PecaController;
+import java.awt.Component;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.text.MaskFormatter;
+import model.Peca;
+import model.exceptions.PecaException;
 
 /**
  *
@@ -22,6 +30,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     public dlgCadastrarPeca(java.awt.Dialog parent) {
         initComponents();
         this.setModal(true);
+        pecaController.atualizarTabela();
     }
 
     /**
@@ -36,14 +45,31 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         panTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        grdClientes = new javax.swing.JTable();
+        grdPecas = new javax.swing.JTable();
         panBotoes = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        btnCadastrarPeça = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         panCampos1 = new javax.swing.JPanel();
+        lblNome = new javax.swing.JLabel();
+        edtNome = new javax.swing.JTextField();
+        lblPreco = new javax.swing.JLabel();
+        edtPreco = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        edtCodigo = new javax.swing.JTextField();
+        lblEstoque = new javax.swing.JLabel();
+        edtEstoque = new javax.swing.JTextField();
+        panCampos2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        edtCategoria = new javax.swing.JTextField();
+        lblTipo = new javax.swing.JLabel();
+        edtTipo = new javax.swing.JTextField();
+        lblDataFabricacao = new javax.swing.JLabel();
+        fEdtDataFabricacao = new javax.swing.JFormattedTextField();
+        lblDescricao = new javax.swing.JLabel();
+        edtDescricao = new javax.swing.JTextField();
 
         setResizable(false);
 
@@ -62,7 +88,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        grdClientes.setModel(new javax.swing.table.DefaultTableModel(
+        grdPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -73,50 +99,90 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
             }
         ));
-        grdClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        grdPecas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdClientesMouseClicked(evt);
+                grdPecasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(grdClientes);
+        jScrollPane1.setViewportView(grdPecas);
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButton3.setText("Editar");
-        panBotoes.add(jButton3);
-
-        jButton4.setText("Excluir");
-        panBotoes.add(jButton4);
-
-        btnCadastrarPeça.setText("Cadastrar peça");
-        btnCadastrarPeça.addActionListener(new java.awt.event.ActionListener() {
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarPeçaActionPerformed(evt);
+                btnNovoActionPerformed(evt);
             }
         });
-        panBotoes.add(btnCadastrarPeça);
+        panBotoes.add(btnNovo);
 
-        jButton2.setText("Cancelar");
-        panBotoes.add(jButton2);
-
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        panBotoes.add(jButton1);
+        panBotoes.add(btnEditar);
 
-        javax.swing.GroupLayout panCampos1Layout = new javax.swing.GroupLayout(panCampos1);
-        panCampos1.setLayout(panCampos1Layout);
-        panCampos1Layout.setHorizontalGroup(
-            panCampos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panCampos1Layout.setVerticalGroup(
-            panCampos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnExcluir);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnCancelar);
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnConfirmar);
+
+        panCampos1.setLayout(new javax.swing.BoxLayout(panCampos1, javax.swing.BoxLayout.LINE_AXIS));
+
+        lblNome.setText("Nome:");
+        panCampos1.add(lblNome);
+        panCampos1.add(edtNome);
+
+        lblPreco.setText("Preço:");
+        panCampos1.add(lblPreco);
+        panCampos1.add(edtPreco);
+
+        lblCodigo.setText("Codigo:");
+        panCampos1.add(lblCodigo);
+        panCampos1.add(edtCodigo);
+
+        lblEstoque.setText("Estoque:");
+        panCampos1.add(lblEstoque);
+        panCampos1.add(edtEstoque);
+
+        panCampos2.setLayout(new javax.swing.BoxLayout(panCampos2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel1.setText("Categoria:");
+        panCampos2.add(jLabel1);
+        panCampos2.add(edtCategoria);
+
+        lblTipo.setText("Tipo:");
+        panCampos2.add(lblTipo);
+        panCampos2.add(edtTipo);
+
+        lblDataFabricacao.setText("DataFabric");
+        panCampos2.add(lblDataFabricacao);
+        panCampos2.add(fEdtDataFabricacao);
+
+        lblDescricao.setText("Descricao:");
+        panCampos2.add(lblDescricao);
+        panCampos2.add(edtDescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,10 +193,10 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)))
-                    .addComponent(panCampos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE))
+                    .addComponent(panCampos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panCampos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,19 +205,23 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panCampos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panCampos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addGap(18, 18, 18)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarPeçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPeçaActionPerformed
-        JFrame frame = new JFrame("Exemplo com JOptionPane");
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.habilitarCampos(panCampos1, true);
+        this.habilitarCampos(panCampos2, true);
+        /*JFrame frame = new JFrame("Exemplo com JOptionPane");
         Object[] options = {"Sim", "Não"};
         int result = JOptionPane.showOptionDialog(frame,
             "Era essa peça que você queria?",
@@ -160,17 +230,135 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             JOptionPane.INFORMATION_MESSAGE,
             null,
             options,
-            options[0]);
-    }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
+            options[0]);*/
+    }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+            try {
+            if (idPecaEditando > 0) {
+                pecaController.atualizarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+            } else {
+                pecaController.cadastrarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+            }
+            //Comando bastante importante
+            this.idPecaEditando = -1;
 
-    private void grdClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdClientesMouseClicked
+            pecaController.atualizarTabela();
 
-    }//GEN-LAST:event_grdClientesMouseClicked
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+        
+        this.limparCampos();
+        } catch (PecaException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
+
+    }//GEN-LAST:event_grdPecasMouseClicked
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
+
+        if (pecaEditando == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            this.limparCampos();
+        this.habilitarCampos(panCampos1, true);
+        this.habilitarCampos(panCampos2, true);
+            this.preencherFormulario(pecaEditando);
+            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+                Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+
+        if (pecaExcluida == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+
+            int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir a Peca  \n("
+                + pecaExcluida.getNome() + ", "
+                + pecaExcluida.getCodigo() + ") ?",
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+
+                try {
+                    pecaController.excluirPeca(pecaExcluida);
+
+                    pecaController.atualizarTabela();
+                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                } catch (PecaException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            }
+        }  
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+        private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdPecas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdPecas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    public void preencherFormulario(Peca peca) {
+        edtNome.setText(peca.getNome());
+        edtCategoria.setText(peca.getCategoria());
+        edtCodigo.setText(peca.getCodigo());
+        edtEstoque.setText(String.valueOf(peca.getEstoque()));
+        edtTipo.setText(peca.getTipo());
+        edtPreco.setText(String.valueOf(peca.getPreco()));
+        fEdtDataFabricacao.setText(peca.getDataFabricacao());
+
+    }
+    
+    public void habilitarCampos(JPanel panel, boolean flag) {
+        Component[] components = panel.getComponents();
+        for (Component component : components) {
+            component.setEnabled(flag);
+        }
+    }
+        
+    private void limparCampos() {
+        edtCategoria.setText("");
+        edtCodigo.setText("");
+        edtEstoque.setText("");
+        edtNome.setText("");
+        edtPreco.setText("");
+        edtTipo.setText("");
+        fEdtDataFabricacao.setText("");
+    }
+
+    private void adicionarMascaranosCampos()  {
+        try {
+            MaskFormatter dataFabric = new MaskFormatter("##/##/####");
+            dataFabric.install(fEdtDataFabricacao);
+        } catch (ParseException ex) {
+            Logger.getLogger(IntCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -208,16 +396,33 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrarPeça;
-    private javax.swing.JTable grdClientes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JTextField edtCategoria;
+    private javax.swing.JTextField edtCodigo;
+    private javax.swing.JTextField edtDescricao;
+    private javax.swing.JTextField edtEstoque;
+    private javax.swing.JTextField edtNome;
+    private javax.swing.JTextField edtPreco;
+    private javax.swing.JTextField edtTipo;
+    private javax.swing.JFormattedTextField fEdtDataFabricacao;
+    private javax.swing.JTable grdPecas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblDataFabricacao;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblEstoque;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panCampos1;
+    private javax.swing.JPanel panCampos2;
     private javax.swing.JPanel panTitulo;
     // End of variables declaration//GEN-END:variables
 }
