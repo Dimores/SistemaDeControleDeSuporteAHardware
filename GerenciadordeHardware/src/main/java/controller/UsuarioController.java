@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.*;
 import model.Cliente;
 import model.Tecnico;
@@ -35,14 +37,16 @@ public class UsuarioController {
         }
     }
 
-    public Object buscarUsuario(String text) {
+    public List<Object> buscarUsuario(String text) {
+        List usuario = new ArrayList();
         repositorioTecnico = new TecnicoDAO();
         repositorioCliente = new ClienteDAO();
-        Object usuario;
-        usuario = repositorioTecnico.findByEmail(text);
-        if(usuario == null){
-            usuario = repositorioCliente.findByEmail(text);
-        }  
+        if(repositorioTecnico.findByEmail(text) != null){
+            usuario.add(repositorioTecnico.findByEmail(text));
+        }
+        if(repositorioCliente.findByEmail(text) != null){
+            usuario.add(repositorioCliente.findByEmail(text));
+        }
         return usuario;
     }
     

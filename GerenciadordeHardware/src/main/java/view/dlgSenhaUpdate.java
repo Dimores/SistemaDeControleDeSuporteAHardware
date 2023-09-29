@@ -173,7 +173,9 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
             if(validaSenha.validar(edtSenha.getText())){
                 try {
-                    userControll.atualizarSenha((Usuario) userControll.buscarUsuario(edtEmail.getText()), edtSenha.getText());
+                    for(Object usuario : userControll.buscarUsuario(edtEmail.getText())){
+                        userControll.atualizarSenha((Usuario) usuario, edtSenha.getText());
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(dlgSenhaUpdate.class.getName()).log(Level.SEVERE, null, ex);
                 }

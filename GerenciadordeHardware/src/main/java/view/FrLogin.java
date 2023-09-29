@@ -8,11 +8,13 @@ import controller.LoginController;
 import controller.UsuarioController;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.Usuario;
+import model.validations.LoginValidate;
 import utils.Criptografia;
 
 /**
@@ -22,6 +24,7 @@ import utils.Criptografia;
 public class FrLogin extends javax.swing.JFrame {
     dlgUsuario telaUsuario;
     dlgSenhaUpdate senhaupdate;
+    dlgSectionManager section;
     /**
      * Creates new form FrLogin
      */
@@ -168,41 +171,43 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_fEdtEmailActionPerformed
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-       try {                                         
-           LoginController loginController = new LoginController();
-           UsuarioController usuarioController = new UsuarioController();
-           Criptografia crip = new Criptografia();
-           
-           try {
-               loginController.validarLogin(fEdtEmail.getText(), edtSenha.getText());
-               Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
-               Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
-               if(crip.decrypt(usuario.getSenha()).equals(edtSenha.getText())){
-                   this.setVisible(false);
-                   telaUsuario = new dlgUsuario(loginController.accessManager(obj));
-                   telaUsuario.getLblUserName().setText(usuario.getNome());
-                   telaUsuario.setVisible(true);
-                   this.setVisible(true);
-                   
-               }
-               
-               
-           } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");
-               Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
-           
-       } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE,null, ex);
+        UsuarioController usuarioControll = new UsuarioController();
+        ArrayList usuarios = (ArrayList) usuarioControll.buscarUsuario(fEdtEmail.getText());
+        
+        
+        LoginController validaLogin = new LoginController();        
+        Criptografia crip;
+        
+        try {
+            validaLogin.validarLogin(fEdtEmail.getText(), edtSenha.getText());
+            crip = new Criptografia();
+            Usuario user = (Usuario) usuarios.get(0);
+            if(usuarios.size() == 1){
+                try {
+                    System.out.println( crip.decrypt(user.getSenha()) + edtSenha.getText());
+                    if(crip.decrypt(user.getSenha()).equals(edtSenha.getText())){
+                        this.telaUsuario.getLblUserName().setText(user.getNome());
+                        this.telaUsuario = new dlgUsuario(validaLogin.accessManager(usuarios.get(0)));
+                        this.telaUsuario.setVisible(true);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                if(crip.decrypt(user.getSenha()).equals(edtSenha.getText())){
+                    this.section = new dlgSectionManager(this,true, user.getEmail());
+                    this.section.setVisible(true);
+                }  
+            }
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-  
 
-       
-
-
-
+        
+        
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetPasswordActionPerformed
@@ -211,7 +216,7 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetPasswordActionPerformed
 
     private void edtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_edtSenhaActionPerformed
 
     /**

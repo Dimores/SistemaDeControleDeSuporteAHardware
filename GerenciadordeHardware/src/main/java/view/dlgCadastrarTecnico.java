@@ -5,6 +5,7 @@
 package view;
 
 import controller.TecnicoController;
+import controller.UsuarioController;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import model.exceptions.TecnicoException;
  */
 public class dlgCadastrarTecnico extends javax.swing.JDialog{
     TecnicoController tecnicoController;
+    UsuarioController usuarioController;
     int idTecnicoEditando;
 
 
@@ -29,6 +31,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
      */
     public dlgCadastrarTecnico() {
         tecnicoController = new TecnicoController();
+        usuarioController = new UsuarioController();
         idTecnicoEditando = -1;
         initComponents();
         this.criarMascaraCadastros();
@@ -310,10 +313,13 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
         try {
+            if(usuarioController.buscarUsuario(fEdtEmail.getText()) != null){
+                
+            }
                 if (idTecnicoEditando > 0) {
-                    tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , "!xxxXxx1", fEdtEmail.getText(), fEdtTelefone.getText());
+                    tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
                 } else {
-                    tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , "!xxxXxx1", fEdtEmail.getText(), fEdtTelefone.getText());
+                    tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
                 }
                 //Comando bastante importante
                 this.idTecnicoEditando = -1;

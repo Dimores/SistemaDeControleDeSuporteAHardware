@@ -70,11 +70,10 @@ public class ClienteController extends UsuarioController{
              throw new ClienteException("Error - Já existe um cliente com este 'Email'.");
         }
     
+    }
     
-    
-    
-    
-    
+    public Cliente buscarCliente(String email) { // Alterado de buscarAluno para buscarTecnico
+        return (Cliente) this.repositorio.findByEmail(email); // Alterado de Aluno para Tecnico
     }
 
     public void excluirCliente(Cliente clienteExcluido) {
