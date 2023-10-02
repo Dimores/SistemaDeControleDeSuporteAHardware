@@ -36,6 +36,16 @@ public class Produto {
         this.dataFabricacao = dataFabricacao;
         this.idProduto = idProduto;
     }
+    
+   public Produto( String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.estoque = estoque;
+        this.categoria = categoria;
+        this.dataFabricacao = dataFabricacao;
+    }
 
     @Override
     public String toString() {

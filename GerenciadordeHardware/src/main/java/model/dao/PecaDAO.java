@@ -39,10 +39,7 @@ public class PecaDAO implements IDao {
             statement.setDouble(4, peca.getPreco());
             statement.setInt(5, peca.getEstoque());
             statement.setString(6, peca.getCategoria());
-
-
             statement.setString(7, peca.getDataFabricacao());
-
             statement.setString(8, peca.getTipo());
 
             statement.execute();
@@ -54,6 +51,7 @@ public class PecaDAO implements IDao {
         }
     }
 
+    @Override
     public void update(Object obj) {
         Peca peca = (Peca) obj;
 
@@ -91,16 +89,13 @@ public class PecaDAO implements IDao {
     public List<Object> findAll() {
         List<Object> list = new ArrayList<>();
 
-        sql = "SELECT * FROM peca ORDER BY upper(nome)";
+        sql = "SELECT * FROM peca ORDER BY upper(id)";
         try {
             statement = Persistencia.getConnection().prepareStatement(sql);
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
-
-
-
                 Peca peca = new Peca(
-                        resultset.getString(1),
+                        resultset.getString(1), 
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -109,8 +104,7 @@ public class PecaDAO implements IDao {
                         resultset.getString(7),
                         resultset.getString(8),
                         resultset.getString(9));
-
-                list.add(peca);
+                 list.add(peca);
             }
             statement.close();
         } catch (SQLException ex) {
@@ -179,9 +173,6 @@ public class PecaDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
 
             // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(8);
-            Calendar dataFabricacao = Calendar.getInstance();
-            dataFabricacao.setTimeInMillis(sqlDate.getTime());
 
             while (resultset.next()) {
                 peca = new Peca(

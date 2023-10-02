@@ -6,7 +6,7 @@ import model.Peca;
 
 public class TMCadPeca extends AbstractTableModel {
 
-    private List<Peca> lista;
+    private List<Object> lista;
 
     private final int COL_ID = 0;
     private final int COL_CODIGO = 1;
@@ -18,7 +18,7 @@ public class TMCadPeca extends AbstractTableModel {
     private final int COL_DATA_FABRICACAO = 7;
     private final int COL_TIPO = 8;
 
-    public TMCadPeca(List<Peca> lstPecas) {
+    public TMCadPeca(List<Object> lstPecas) {
         lista = lstPecas;
     }
 
@@ -38,14 +38,16 @@ public class TMCadPeca extends AbstractTableModel {
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = lista.get(rowIndex);
+            aux = (Peca) lista.get(rowIndex);
 
             // Verifica qual valor deve ser retornado
             switch (columnIndex) {
                 case -1:
                     return aux;
                 case COL_ID:
+                    //System.out.println("Id = " + aux.getIdPeca());
                     return aux.getIdPeca();
+
                 case COL_CODIGO:
                     return aux.getCodigo();
                 case COL_NOME:

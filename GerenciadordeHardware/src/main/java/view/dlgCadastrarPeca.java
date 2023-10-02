@@ -28,9 +28,15 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
      * Creates new form dlgCadastroServico
      */
     public dlgCadastrarPeca(java.awt.Dialog parent) {
+        super(parent);
+        pecaController = new PecaController();
+        idPecaEditando = -1;
         initComponents();
         this.setModal(true);
-        pecaController.atualizarTabela();
+        this.adicionarMascaranosCampos();
+        this.habilitarCampos(panCampos1, false);
+        this.habilitarCampos(panCampos2, false);
+        pecaController.atualizarTabela(grdPecas);
     }
 
     /**
@@ -182,6 +188,12 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
         lblDescricao.setText("Descricao:");
         panCampos2.add(lblDescricao);
+
+        edtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtDescricaoActionPerformed(evt);
+            }
+        });
         panCampos2.add(edtDescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,7 +256,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             //Comando bastante importante
             this.idPecaEditando = -1;
 
-            pecaController.atualizarTabela();
+            pecaController.atualizarTabela(grdPecas);
 
         this.habilitarCampos(panCampos1, false);
         this.habilitarCampos(panCampos2, false);
@@ -259,7 +271,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
-
+        
     }//GEN-LAST:event_grdPecasMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -270,8 +282,8 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
-        this.habilitarCampos(panCampos1, true);
-        this.habilitarCampos(panCampos2, true);
+            this.habilitarCampos(panCampos1, true);
+            this.habilitarCampos(panCampos2, true);
             this.preencherFormulario(pecaEditando);
             this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
         }
@@ -279,13 +291,14 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        this.idPecaEditando = -1;
         this.habilitarCampos(panCampos1, false);
         this.habilitarCampos(panCampos2, false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-                Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+        Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
 
         if (pecaExcluida == null)
         JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -303,7 +316,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 try {
                     pecaController.excluirPeca(pecaExcluida);
 
-                    pecaController.atualizarTabela();
+                    pecaController.atualizarTabela(grdPecas);
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
                 } catch (PecaException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -312,7 +325,11 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         }  
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-        private Object getObjetoSelecionadoNaGrid() {
+    private void edtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtDescricaoActionPerformed
+
+    private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdPecas.getSelectedRow();
         Object obj = null;
         if (rowCliked >= 0) {
@@ -328,6 +345,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtEstoque.setText(String.valueOf(peca.getEstoque()));
         edtTipo.setText(peca.getTipo());
         edtPreco.setText(String.valueOf(peca.getPreco()));
+        edtDescricao.setText(peca.getDescricao());
         fEdtDataFabricacao.setText(peca.getDataFabricacao());
 
     }
@@ -346,6 +364,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtNome.setText("");
         edtPreco.setText("");
         edtTipo.setText("");
+        edtDescricao.setText("");
         fEdtDataFabricacao.setText("");
     }
 

@@ -55,6 +55,7 @@ public class TMCadTecnico extends AbstractTableModel {
                     return aux;
                 case COL_ID:
                     return aux.getId();
+
                 case COL_SALARIO:
                     return aux.getSalario();
                 case COL_NOME:

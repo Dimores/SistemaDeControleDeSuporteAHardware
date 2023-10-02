@@ -4,6 +4,10 @@
  */
 package controller;
 
+import controller.tableModel.TMCadPeca;
+import controller.tableModel.TMCadTecnico;
+import java.util.List;
+import javax.swing.JTable;
 import model.*;
 import lombok.*;
 import model.dao.PecaDAO;
@@ -25,7 +29,10 @@ public class PecaController extends ProdutoController{
         repositorio = new PecaDAO();
     }
     
-    public void atualizarTabela(){
+    public void atualizarTabela(JTable grd){
+        List<Object> lst = repositorio.findAll();
+        TMCadPeca tmPeca = new TMCadPeca(lst);
+        grd.setModel(tmPeca);
         
     }
     
@@ -35,7 +42,7 @@ public class PecaController extends ProdutoController{
         if(repositorio.findByCodigo(codigo) == null){
             repositorio.save(novaPeca);
         }else{
-             throw new PecaException("Error - Já existe um tecnico com este 'Codigo'.");
+             throw new PecaException("Error - Já existe uma peca com este 'Codigo'.");
         }
         
     }

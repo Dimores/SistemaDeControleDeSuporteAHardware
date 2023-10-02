@@ -252,7 +252,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
             //Comando bastante importante
             this.idPecaEditando = -1;
 
-            pecaController.atualizarTabela();
+            //pecaController.atualizarTabela();
 
         this.habilitarCampos(panCampos1, false);
         this.habilitarCampos(panCampos2, false);
@@ -317,7 +317,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
                 try {
                     pecaController.excluirPeca(pecaExcluida);
 
-                    pecaController.atualizarTabela();
+                    //pecaController.atualizarTabela();
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
                 } catch (PecaException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
