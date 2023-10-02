@@ -24,7 +24,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -50,36 +50,40 @@
                   <Component id="edtDescricaoServico" alignment="0" pref="819" max="32767" attributes="0"/>
                   <Component id="panBotoes" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" alignment="1" pref="819" max="32767" attributes="0"/>
+                  <Component id="lblServicos" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="128" max="-2" attributes="0"/>
+                              <Component id="lblCpfCliente" min="-2" pref="140" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="boxEscolhaServico" min="-2" pref="231" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="edtValor" min="-2" pref="119" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSelecaoCliente" min="-2" pref="128" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fEdtCpfCliente" min="-2" pref="246" max="-2" attributes="0"/>
+                              <Component id="fEdtEmailCliente" min="-2" pref="241" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnBuscarCliente" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSelecaoCliente1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fEdtCpfTecnico" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="lblCpfTecnico" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="fEdtEmailTecnico" min="-2" pref="241" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnBuscarTecnico" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblDescricaoServico" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblServicoEfetuado" min="-2" pref="128" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="boxEscolhaServico" min="-2" pref="231" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblValor" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="edtValor" min="-2" pref="119" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="fEdtDataServico" min="-2" pref="166" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="lblServicos" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -91,21 +95,23 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblServicoEfetuado" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="boxEscolhaServico" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblValor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="edtValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fEdtDataServico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="lblSelecaoCliente" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCpfCliente" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnBuscarCliente" pref="41" max="32767" attributes="0"/>
-                          <Component id="fEdtCpfCliente" max="32767" attributes="0"/>
+                          <Component id="fEdtEmailCliente" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -113,8 +119,8 @@
               <Component id="jScrollPane2" min="-2" pref="66" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblSelecaoCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fEdtCpfTecnico" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="lblCpfTecnico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fEdtEmailTecnico" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="btnBuscarTecnico" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -161,7 +167,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblServicoEfetuado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;o a ser efetuado:"/>
       </Properties>
@@ -190,7 +196,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="grClientes">
+        <Component class="javax.swing.JTable" name="grdClientes">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="4"/>
@@ -203,14 +209,14 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="grClientesMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="grdClientesMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblSelecaoCliente">
+    <Component class="javax.swing.JLabel" name="lblCpfCliente">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o CPF do cliente:"/>
+        <Property name="text" type="java.lang.String" value="Digite o email do cliente:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -243,9 +249,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edtDescricaoServicoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblSelecaoCliente1">
+    <Component class="javax.swing.JLabel" name="lblCpfTecnico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o CPF do tecnico:"/>
+        <Property name="text" type="java.lang.String" value="Digite o email do tecnico:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDescricaoServico">
@@ -253,14 +259,14 @@
         <Property name="text" type="java.lang.String" value="Descricao do Servi&#xe7;o:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblValor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valor:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="edtValor">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtCpfCliente">
+    <Component class="javax.swing.JFormattedTextField" name="fEdtEmailCliente">
     </Component>
     <Component class="javax.swing.JButton" name="btnBuscarCliente">
       <Properties>
@@ -269,8 +275,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarClienteActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtCpfTecnico">
+    <Component class="javax.swing.JFormattedTextField" name="fEdtEmailTecnico">
     </Component>
     <Component class="javax.swing.JButton" name="btnBuscarTecnico">
       <Properties>
@@ -279,17 +288,20 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarTecnicoActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="panBotoes">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnConfirmar">
+        <Component class="javax.swing.JButton" name="btnSalvar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
+            <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEditar">
@@ -301,16 +313,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNovo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -346,6 +367,13 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="fEdtDataServico">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data:"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -16,6 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class TMCadTecnico extends AbstractTableModel {
 
     private List<Object> lista;
+    private Object tecnico;
     
     private final int COL_ID = 0;   
     private final int COL_SALARIO = 1;    
@@ -29,6 +30,10 @@ public class TMCadTecnico extends AbstractTableModel {
 
     public TMCadTecnico(List<Object> lstTecnicos) {        
         lista = lstTecnicos;        
+    }
+    
+    public TMCadTecnico(Object tecnico){
+        this.tecnico = tecnico;
     }
 
     @Override

@@ -16,6 +16,7 @@ import model.Cliente;
 public class TMCadCliente extends AbstractTableModel {
 
     private List<Object> lista;
+    private Object cliente;
     
     private final int COL_ID = 0;       
     private final int COL_NOME = 1;
@@ -28,6 +29,10 @@ public class TMCadCliente extends AbstractTableModel {
 
     public TMCadCliente(List<Object> lstClientes) {        
         lista = lstClientes;        
+    }
+    
+    public TMCadCliente(Object cliente){
+        this.cliente = cliente;
     }
 
     @Override
