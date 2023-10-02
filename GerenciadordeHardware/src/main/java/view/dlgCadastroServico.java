@@ -35,18 +35,45 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grdTecnicos = new javax.swing.JTable();
-        btnConfirmar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         boxEscolhaServico = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         grClientes = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        lblSelecaoCliente = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        grdTecnicos = new javax.swing.JTable();
         edtDescricaoServico = new javax.swing.JTextField();
+        lblSelecaoCliente1 = new javax.swing.JLabel();
+        lblDescricaoServico = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        edtValor = new javax.swing.JTextField();
+        fEdtCpfCliente = new javax.swing.JFormattedTextField();
+        btnBuscarCliente = new javax.swing.JButton();
+        fEdtCpfTecnico = new javax.swing.JFormattedTextField();
+        btnBuscarTecnico = new javax.swing.JButton();
+        panBotoes = new javax.swing.JPanel();
+        btnConfirmar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        grdServicos = new javax.swing.JTable();
+        lblServicos = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -65,33 +92,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
-
-        grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdTecnicos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdTecnicosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(grdTecnicos);
-
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Cancelar");
 
         jLabel1.setText("Serviço a ser efetuado:");
 
@@ -120,24 +120,88 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(grClientes);
 
-        edtDescricaoServico.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        lblSelecaoCliente.setText("Digite o CPF do cliente:");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(edtDescricaoServico)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(edtDescricaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
+        grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        grdTecnicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdTecnicosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(grdTecnicos);
+
+        edtDescricaoServico.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        edtDescricaoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtDescricaoServicoActionPerformed(evt);
+            }
+        });
+
+        lblSelecaoCliente1.setText("Digite o CPF do tecnico:");
+
+        lblDescricaoServico.setText("Descricao do Serviço:");
+
+        jLabel2.setText("Valor:");
+
+        btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loupe_78956.png"))); // NOI18N
+        btnBuscarCliente.setText("Buscar");
+
+        btnBuscarTecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loupe_78956.png"))); // NOI18N
+        btnBuscarTecnico.setText("Buscar");
+
+        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnConfirmar);
+
+        btnEditar.setText("Editar");
+        panBotoes.add(btnEditar);
+
+        btnExcluir.setText("Excluir");
+        panBotoes.add(btnExcluir);
+
+        btnNovo.setText("Novo");
+        panBotoes.add(btnNovo);
+
+        btnCancelar.setText("Cancelar");
+        panBotoes.add(btnCancelar);
+
+        grdServicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        grdServicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdServicosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(grdServicos);
+
+        lblServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblServicos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblServicos.setText("Serviços");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,24 +211,37 @@ public class dlgCadastroServico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(edtDescricaoServico, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fEdtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSelecaoCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fEdtCpfTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblDescricaoServico))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,21 +250,38 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(153, 153, 153)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblSelecaoCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                            .addComponent(fEdtCpfCliente))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSelecaoCliente1)
+                    .addComponent(fEdtCpfTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarTecnico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDescricaoServico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtDescricaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblServicos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(154, 154, 154)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(379, Short.MAX_VALUE)))
         );
 
         pack();
@@ -205,11 +299,20 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private void boxEscolhaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxEscolhaServicoActionPerformed
         // Pegando o gtipo de servico
         tipoServico = String.valueOf(boxEscolhaServico.getSelectedIndex());
+        setTipoServico();
     }//GEN-LAST:event_boxEscolhaServicoActionPerformed
 
     private void grClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grClientesMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_grClientesMouseClicked
+
+    private void edtDescricaoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtDescricaoServicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtDescricaoServicoActionPerformed
+
+    private void grdServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdServicosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_grdServicosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -245,19 +348,46 @@ public class dlgCadastroServico extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void setTipoServico(){
+        if(this.tipoServico.equals("0")){
+            this.tipoServico = "Consertar PC";
+        }else if(tipoServico.equals("1")){
+            this.tipoServico = "Instalar Rede";
+        }else{
+            this.tipoServico = "Manutenção Preventiva";
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxEscolhaServico;
+    private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JButton btnBuscarTecnico;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtDescricaoServico;
+    private javax.swing.JTextField edtValor;
+    private javax.swing.JFormattedTextField fEdtCpfCliente;
+    private javax.swing.JFormattedTextField fEdtCpfTecnico;
     private javax.swing.JTable grClientes;
+    private javax.swing.JTable grdServicos;
     private javax.swing.JTable grdTecnicos;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblDescricaoServico;
+    private javax.swing.JLabel lblSelecaoCliente;
+    private javax.swing.JLabel lblSelecaoCliente1;
+    private javax.swing.JLabel lblServicos;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panBotoes;
     // End of variables declaration//GEN-END:variables
 }
