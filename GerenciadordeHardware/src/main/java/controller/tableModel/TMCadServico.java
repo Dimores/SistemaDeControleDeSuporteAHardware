@@ -54,9 +54,9 @@ public class TMCadServico extends AbstractTableModel{
                 case COL_ID:
                     return aux.getIdServico();
                 case COL_TECNICO:
-                    return aux.getTecnico();
+                    return aux.getTecnicoResponsavel();
                 case COL_CLIENTE:
-                    return aux.getCliente();
+                    return aux.getClienteAtendido();
                 case COL_VALOR:
                     return aux.getValor();
                 case COL_DESCRICAO:

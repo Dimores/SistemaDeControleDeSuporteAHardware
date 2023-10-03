@@ -37,8 +37,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         idServicoEditando = -1;
         initComponents();
         this.habilitarCampos(false);
-        //servicoController.atualizarTabelaTecnico(grdClientes);
-        //servicoController.atualizarTabelaTecnico(grdTecnicos);
+        servicoController.atualizarTabelaCliente(grdClientes);
+        servicoController.atualizarTabelaTecnico(grdTecnicos);
         servicoController.atualizarTabela(grdServicos);
     }
 

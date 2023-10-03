@@ -62,6 +62,14 @@ public class ServicoController {
         grd.setModel(tmServico);
     }
     
+    // Metodo para mostrar todos os elemtos da tabela de cliente
+    public void atualizarTabelaCliente(JTable grd){
+        List<Object> lst = clienteRepositorio.findAll();
+
+        TMCadCliente tmCliente = new TMCadCliente(lst); 
+        grd.setModel(tmCliente);
+    }
+    
     // Tabela de cliente na tela de cadastro de servicos
     public void atualizarTabelaCliente(JTable grd, Cliente clientePesquisado){
         // Crie uma lista temporária para armazenar o cliente
@@ -76,6 +84,13 @@ public class ServicoController {
         grd.setModel(tmCliente);
     }
 
+    // Metodo para mostrar todos os elementos da tabela de tecnico
+    public void atualizarTabelaTecnico(JTable grd){
+        List<Object> lst = tecnicoRepositorio.findAll();
+
+        TMCadTecnico tmTecnico = new TMCadTecnico(lst); // Alterado de TMCadAluno para TMCadTecnico
+        grd.setModel(tmTecnico);
+    }
     
     public void atualizarTabelaTecnico(JTable grd, Tecnico tecnicoPesquisado){
         List<Object> tecnicoUnico = new ArrayList<>();
@@ -88,6 +103,8 @@ public class ServicoController {
         TMCadTecnico tmTecnico = new TMCadTecnico(tecnicoUnico); 
         grd.setModel(tmTecnico);
     }
+    
+
     
     
 

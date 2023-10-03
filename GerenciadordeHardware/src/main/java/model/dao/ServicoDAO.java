@@ -26,24 +26,21 @@ public class ServicoDAO implements IDao {
         Servico servico = (Servico) obj;
 
         sql = " INSERT INTO "
-                + " servico(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido) "
-                + " VALUES(?,?,?,?,?,?) ";
+                + " servico(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoServico) "
+                + " VALUES(?,?,?,?,?,?,?) ";
         try {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
 
             // Preencher cada ? com o campo adequado
-            statement.setString(1, servico.getTecnico().getNome());
-            statement.setString(2, servico.getCliente().getNome());
+            statement.setString(1, servico.getTecnicoResponsavel().getNome());
+            System.out.println(servico.getTecnicoResponsavel().getNome());
+            statement.setString(2, servico.getClienteAtendido().getNome());
             statement.setFloat(3, servico.getValor());
             statement.setString(4, servico.getDescricaoServico());
-
-            // Arrumar aqui pra String
-            // Converter o Calendar para java.sql.Date
-            //java.sql.Date dataServicoSql = new java.sql.Date(servico.getDataServico().getTimeInMillis());
-            //statement.setDate(5, dataServicoSql);
-
+            statement.setString(5, servico.getDataServico());
             statement.setBoolean(6, servico.isConcluido());
+            statement.setString(7, servico.getTipoServico());
 
             statement.execute();
             statement.close();
@@ -58,7 +55,7 @@ public class ServicoDAO implements IDao {
         Servico servico = (Servico) obj;
 
         sql = " UPDATE servico "
-                + " SET tecnicoResponsavel = ?, clienteAtendido = ?, valor = ?, descricaoServico = ?, dataServico = ?, concluido = ? "
+                + " SET tecnicoResponsavel = ?, clienteAtendido = ?, valor = ?, descricaoServico = ?, dataServico = ?, concluido = ?, tipoServico = ? "
                 + " WHERE idServico = ?";
         try {
             connection = Persistencia.getConnection();
@@ -69,13 +66,12 @@ public class ServicoDAO implements IDao {
             statement.setString(2, servico.getCliente().getNome());
             statement.setFloat(3, servico.getValor());
             statement.setString(4, servico.getDescricaoServico());
-
             statement.setString(5, servico.getDataServico());
-
             statement.setBoolean(6, servico.isConcluido());
+            statement.setString(7, servico.getTipoServico());
 
             // Preencher a condição do WHERE
-            statement.setString(7, servico.getIdServico());
+            statement.setString(8, servico.getIdServico());
 
             statement.execute();
             statement.close();
@@ -96,21 +92,17 @@ public class ServicoDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
 
-                // Converter o java.sql.Date para Calendar
-               // java.sql.Date sqlDate = resultset.getDate(6);
-                //Calendar dataServico = Calendar.getInstance();
-                //dataServico.setTimeInMillis(sqlDate.getTime());
-
                 Servico servico = new Servico(
                         resultset.getString(1),
                         null, // Tecnico nao e mais buscado
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
                         resultset.getString(5),
-                        // Arrumar aqui pra String
                         resultset.getString(6),
-                        //dataServico,
-                        resultset.getBoolean(7));
+                        resultset.getBoolean(7),
+                        resultset.getString(8));
+                
+   
 
                 list.add(servico);
             }
@@ -150,7 +142,8 @@ public class ServicoDAO implements IDao {
                         resultset.getFloat(4),
                         resultset.getString(5),
                         resultset.getString(6),
-                        resultset.getBoolean(7));
+                        resultset.getBoolean(7),
+                        resultset.getString(8));
 
             }
             statement.close();
@@ -193,7 +186,8 @@ public class ServicoDAO implements IDao {
                         resultset.getFloat(4),
                         resultset.getString(5),
                         resultset.getString(6),
-                        resultset.getBoolean(7));
+                        resultset.getBoolean(7),
+                        resultset.getString(8));
 
             }
             statement.close();

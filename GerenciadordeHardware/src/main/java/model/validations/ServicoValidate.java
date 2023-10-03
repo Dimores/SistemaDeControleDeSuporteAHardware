@@ -14,8 +14,8 @@ import model.Tecnico;
  */
 public class ServicoValidate {
     
-    public Servico validaCamposEntrada(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
-        Servico servico = new Servico();
+    public Servico validaCamposEntrada(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoServico){
+        Servico servico = new Servico( idServico,  tecnicoResponsavel,  clienteAtendido,  valor,  descricaoServico,  dataServico,  concluido,  tipoServico);
             
         return servico;
     }

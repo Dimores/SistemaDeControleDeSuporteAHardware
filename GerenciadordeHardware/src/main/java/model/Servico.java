@@ -28,8 +28,8 @@ public class Servico {
 
     public Servico() {
         this.idServico = "";
-        this.tecnicoResponsavel = null;
-        this.clienteAtendido = null;
+        this.tecnicoResponsavel = new Tecnico();
+        this.clienteAtendido = new Cliente();
         this.valor = 0.0f;
         this.descricaoServico = "";
         this.dataServico = "";
@@ -37,7 +37,7 @@ public class Servico {
         this.tipoServico = "";
     }
 
-    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido) {
+    public Servico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoServico) {
         this.idServico = idServico;
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
