@@ -66,9 +66,14 @@ public class ServicoController {
 
     
     public void atualizarTabelaTecnico(JTable grd, Tecnico tecnicoPesquisado){
+        List<Object> tecnicoUnico = new ArrayList<>();
+
         Tecnico tecnico = (Tecnico) tecnicoRepositorio.findByEmail(tecnicoPesquisado.getEmail());
-        
-        TMCadTecnico tmTecnico = new TMCadTecnico(tecnico); 
+        if (tecnico != null) 
+            tecnicoUnico.add(tecnico);
+
+        // Crie o modelo da tabela com a lista temporária
+        TMCadTecnico tmTecnico = new TMCadTecnico(tecnicoUnico); 
         grd.setModel(tmTecnico);
     }
     
