@@ -39,6 +39,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         this.habilitarCampos(false);
         //servicoController.atualizarTabelaTecnico(grdClientes);
         //servicoController.atualizarTabelaTecnico(grdTecnicos);
+        servicoController.atualizarTabela(grdServicos);
     }
 
     /**
@@ -79,7 +80,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         grdServicos = new javax.swing.JTable();
         lblServicos = new javax.swing.JLabel();
         fEdtDataServico = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -245,7 +246,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         lblServicos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblServicos.setText("Serviços");
 
-        jLabel1.setText("Data:");
+        lblData.setText("Data:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,7 +286,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
+                                .addComponent(lblData)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(fEdtDataServico, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -302,7 +303,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                     .addComponent(lblValor)
                     .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fEdtDataServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblData))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -328,8 +329,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblServicos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -505,6 +506,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 edtDescricaoServico.setEnabled(flag);
                 lblServicos.setEnabled(flag);
                 grdServicos.setEnabled(flag);
+                lblData.setEnabled(flag);
+                fEdtDataServico.setEnabled(flag);
                 
         }
         
@@ -513,6 +516,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 fEdtEmailCliente.setText("");
                 fEdtEmailTecnico.setText("");
                 edtDescricaoServico.setText("");
+                fEdtDataServico.setText("");
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -532,7 +536,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdServicos;
     private javax.swing.JTable grdTecnicos;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -540,6 +543,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCpfCliente;
     private javax.swing.JLabel lblCpfTecnico;
+    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDescricaoServico;
     private javax.swing.JLabel lblServicoEfetuado;
     private javax.swing.JLabel lblServicos;

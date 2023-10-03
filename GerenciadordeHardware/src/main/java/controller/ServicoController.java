@@ -4,6 +4,7 @@
  */
 package controller;
 import controller.tableModel.TMCadCliente;
+import controller.tableModel.TMCadServico;
 import controller.tableModel.TMCadTecnico;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import model.*;
 import model.dao.ClienteDAO;
 import model.dao.ServicoDAO;
 import model.dao.TecnicoDAO;
+import model.validations.ServicoValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -35,11 +37,17 @@ public class ServicoController {
     }
     
     public void cadastrarServico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
-
+        ServicoValidate valid = new ServicoValidate(); 
+        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico); 
+        servico.save(novoServico);
     }
     
     public void atualizarServico(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
-        
+        ServicoValidate valid = new ServicoValidate(); 
+        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico); 
+        novoServico.setIdServico(idServico);
+        servico.update(novoServico);
+
     }
     
     public void excluirServico(Servico s){
@@ -48,9 +56,13 @@ public class ServicoController {
     
     // Essa e a tabela de servicos
     public void atualizarTabela(JTable grd){
+        List<Object> lst = servico.findAll();
         
+        TMCadServico tmServico = new TMCadServico(lst);
+        grd.setModel(tmServico);
     }
     
+    // Tabela de cliente na tela de cadastro de servicos
     public void atualizarTabelaCliente(JTable grd, Cliente clientePesquisado){
         // Crie uma lista temporária para armazenar o cliente
         List<Object> clienteUnico = new ArrayList<>();

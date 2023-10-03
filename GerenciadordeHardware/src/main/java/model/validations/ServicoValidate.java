@@ -4,10 +4,20 @@
  */
 package model.validations;
 
+import model.Cliente;
+import model.Servico;
+import model.Tecnico;
+
 /**
  *
  * @author diegomorelo
  */
 public class ServicoValidate {
+    
+    public Servico validaCamposEntrada(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
+        Servico servico = new Servico();
+            
+        return servico;
+    }
     
 }
