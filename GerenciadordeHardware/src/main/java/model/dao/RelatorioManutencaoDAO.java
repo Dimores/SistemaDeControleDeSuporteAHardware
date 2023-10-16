@@ -33,16 +33,14 @@ public class RelatorioManutencaoDAO implements IDao {
             statement = connection.prepareStatement(sql);
 
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataRelatorioSql = new java.sql.Date(relatorioManutencao.getDataRelatorio().getTimeInMillis());
-            statement.setDate(1, dataRelatorioSql);
+            statement.setString(1, relatorioManutencao.getDataRelatorio());
 
             statement.setString(2, relatorioManutencao.getDescricao());
             statement.setString(3, relatorioManutencao.getEquipamentos());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioManutencao.getCliente().getId());
-            statement.setString(5, relatorioManutencao.getTecnico().getId());
+            statement.setString(4, relatorioManutencao.getNomeClienteRelacionado());
+            statement.setString(5, relatorioManutencao.getNomeTecnicoResponsavel());
 
             statement.execute();
             statement.close();
@@ -65,19 +63,17 @@ public class RelatorioManutencaoDAO implements IDao {
 
             // Preencher cada ? com o campo adequado
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataRelatorioSql = new java.sql.Date(relatorioManutencao.getDataRelatorio().getTimeInMillis());
-            statement.setDate(1, dataRelatorioSql);
+            statement.setString(1, relatorioManutencao.getDataRelatorio());
 
             statement.setString(2, relatorioManutencao.getDescricao());
             statement.setString(3, relatorioManutencao.getEquipamentos());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioManutencao.getCliente().getId());
-            statement.setString(5, relatorioManutencao.getTecnico().getId());
+            statement.setString(4, relatorioManutencao.getNomeClienteRelacionado());
+            statement.setString(5, relatorioManutencao.getNomeTecnicoResponsavel());
 
             // Preencher a condição do WHERE
-            statement.setString(6, relatorioManutencao.getIdRelatorio());
+            //statement.setString(6, relatorioManutencao.getIdRelatorio());
 
             statement.execute();
             statement.close();
@@ -98,14 +94,10 @@ public class RelatorioManutencaoDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
 
-                // Converter o java.sql.Date para Calendar
-                java.sql.Date sqlDate = resultset.getDate(2);
-                Calendar dataRelatorio = Calendar.getInstance();
-                dataRelatorio.setTimeInMillis(sqlDate.getTime());
 
                 RelatorioManutencao relatorioManutencao = new RelatorioManutencao(
-                        resultset.getString(1),
-                        dataRelatorio,
+                        resultset.getLong(1),
+                        resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
                         null, // Cliente não é mais buscado
@@ -132,20 +124,15 @@ public class RelatorioManutencaoDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, relatorioManutencao.getIdRelatorio());
+            //statement.setString(1, relatorioManutencao.getIdRelatorio());
 
             ResultSet resultset = statement.executeQuery();
-
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(2);
-            Calendar dataRelatorio = Calendar.getInstance();
-            dataRelatorio.setTimeInMillis(sqlDate.getTime());
 
             RelatorioManutencao r = null;
             while (resultset.next()) {
                 r = new RelatorioManutencao(
-                        resultset.getString(1),
-                        dataRelatorio,
+                        resultset.getLong(1),
+                        resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
                         null, // Cliente não é mais buscado
@@ -187,8 +174,8 @@ public class RelatorioManutencaoDAO implements IDao {
 
             while (resultset.next()) {
                 relatorioManutencao = new RelatorioManutencao(
-                        resultset.getString(1),
-                        dataRelatorio,
+                        resultset.getLong(1),
+                        resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
                         null, // Cliente não é mais buscado
@@ -220,7 +207,7 @@ public class RelatorioManutencaoDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             // Preencher a condição
-            statement.setString(1, relatorioManutencao.getIdRelatorio());
+            //statement.setString(1, relatorioManutencao.getIdRelatorio());
 
             statement.execute();
             statement.close();

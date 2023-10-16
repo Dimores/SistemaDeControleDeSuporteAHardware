@@ -4,6 +4,7 @@
  */
 package model;
 import java.util.Calendar;
+import javax.persistence.*;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
@@ -15,39 +16,52 @@ import lombok.*;
  * @author ruiz
  */
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Relatorio {
-    private String idRelatorio;
-    private Calendar dataRelatorio;
+
+
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idRelatorio;
+    private String dataRelatorio;
     private String descricao;
-    private Cliente clienteRelacionado;
-    private Tecnico tecnicoResponsavel;
+    private String nomeClienteRelacionado;
+    private String nomeTecnicoResponsavel;
 
     public Relatorio() {
-        this.idRelatorio = "";
-        this.dataRelatorio = Calendar.getInstance();
+        this.dataRelatorio = "";
         this.descricao = "";
-        this.clienteRelacionado = null;
-        this.tecnicoResponsavel = null;
+        this.nomeClienteRelacionado = "";
+        this.nomeTecnicoResponsavel = "";
     }
 
-    public Relatorio(String idRelatorio, Calendar dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
+    public Relatorio(Long idRelatorio, String dataRelatorio, String descricao, String clienteRelacionado, String tecnicoResponsavel) {
         this.idRelatorio = idRelatorio;
         this.dataRelatorio = dataRelatorio;
         this.descricao = descricao;
-        this.clienteRelacionado = clienteRelacionado;
-        this.tecnicoResponsavel = tecnicoResponsavel;
+        this.nomeClienteRelacionado = clienteRelacionado;
+        this.nomeTecnicoResponsavel = tecnicoResponsavel;
     }
-
+    
+    public Relatorio(String dataRelatorio, String descricao, String nomeClienteRelacionado, String nomeTecnicoResponsavel) {
+        this.dataRelatorio = dataRelatorio;
+        this.descricao = descricao;
+        this.nomeClienteRelacionado = nomeClienteRelacionado;
+        this.nomeTecnicoResponsavel = nomeTecnicoResponsavel;
+    }
+    
+    
 
 
     @Override
     public String toString() {
-        String clienteNome = (clienteRelacionado != null) ? clienteRelacionado.getNome() : "N/A";
-        String tecnicoNome = (tecnicoResponsavel != null) ? tecnicoResponsavel.getNome() : "N/A";
+        String clienteNome = (nomeClienteRelacionado != null) ? getNomeClienteRelacionado() : "N/A";
+        String tecnicoNome = (nomeTecnicoResponsavel != null) ? getNomeTecnicoResponsavel() : "N/A";
 
         return "ID do Relatório: " + idRelatorio + "\n" +
-                "Data do Relatório: " + dataRelatorio.getTime() + "\n" +
+                "Data do Relatório: " + dataRelatorio + "\n" +
                 "Descrição: " + descricao + "\n" +
                 "Cliente Relacionado: " + clienteNome + "\n" +
                 "Técnico Responsável: " + tecnicoNome + "\n";

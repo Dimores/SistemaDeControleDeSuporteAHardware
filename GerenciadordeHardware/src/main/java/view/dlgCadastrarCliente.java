@@ -63,9 +63,9 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         lblSenha = new javax.swing.JLabel();
         edtSenha = new javax.swing.JPasswordField();
         panBotoes = new javax.swing.JPanel();
+        btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -171,6 +171,14 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
 
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+        panBotoes.add(btnNovo);
+
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,14 +194,6 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
             }
         });
         panBotoes.add(btnExcluir);
-
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnNovo);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -270,18 +270,18 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
         try {
-                if (idClienteEditando > 0) {
-                    clienteController.atualizarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
-                } else {
-                    clienteController.cadastrarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
-                }
-                //Comando bastante importante
-                this.idClienteEditando = -1;
+            if (idClienteEditando > 0) {
+                clienteController.atualizarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+            } else {
+                clienteController.cadastrarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+            }
+            //Comando bastante importante
+            this.idClienteEditando = -1;
 
-                clienteController.atualizarTabela(grdClientes);
+            clienteController.atualizarTabela(grdClientes);
 
-                this.habilitarCampos(false);
-                this.limparCampos();
+            this.habilitarCampos(false);
+            this.limparCampos();
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());

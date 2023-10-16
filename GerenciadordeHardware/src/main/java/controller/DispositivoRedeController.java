@@ -4,8 +4,11 @@
  */
 package controller;
 
+import javax.swing.JTable;
 import model.*;
 import lombok.*;
+import model.dao.DispositivoRedeDAO;
+import model.validations.DispositivoRedeValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -16,6 +19,32 @@ import lombok.*;
  * @author ruiz
  */
 public class DispositivoRedeController {
+    private DispositivoRedeDAO repositorio;
+
+    public DispositivoRedeController() {
+        repositorio = new DispositivoRedeDAO();
+    }
+    
+    public void cadastrarDispositivoRede(){
+        DispositivoRedeValidate valid = new DispositivoRedeValidate(); 
+        DispositivoDeRede novoDispositivo = valid.validaCamposEntrada(); 
+        repositorio.save(novoDispositivo);
+
+    }
+    
+    public void atualizarDispositivoRede(){
+        
+    }
+    
+    public void excluirDispositivoRede(){
+        
+    }
+    
+    public void atualizarTabela(JTable grd){
+        
+    }
+    
+    
     
     
 }

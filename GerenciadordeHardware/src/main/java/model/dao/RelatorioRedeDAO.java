@@ -34,16 +34,14 @@ public class RelatorioRedeDAO implements IDao {
 
             // Preencher cada ? com o campo adequado
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataRelatorioSql = new java.sql.Date(relatorioRede.getDataRelatorio().getTimeInMillis());
-            statement.setDate(1, dataRelatorioSql);
+            statement.setString(1, relatorioRede.getDataRelatorio());
 
             statement.setString(2, relatorioRede.getDescricao());
             statement.setString(3, relatorioRede.getTipoRede());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioRede.getClienteRelacionado().getId());
-            statement.setString(5, relatorioRede.getTecnicoResponsavel().getId());
+            statement.setString(4, relatorioRede.getNomeClienteRelacionado());
+            statement.setString(5, relatorioRede.getNomeTecnicoResponsavel());
 
             statement.execute();
             statement.close();
@@ -66,19 +64,17 @@ public class RelatorioRedeDAO implements IDao {
 
             // Preencher cada ? com o campo adequado
 
-            // Converter o Calendar para java.sql.Date
-            java.sql.Date dataRelatorioSql = new java.sql.Date(relatorioRede.getDataRelatorio().getTimeInMillis());
-            statement.setDate(1, dataRelatorioSql);
+            statement.setString(1, relatorioRede.getDataRelatorio());
 
             statement.setString(2, relatorioRede.getDescricao());
             statement.setString(3, relatorioRede.getTipoRede());
 
             // Preencher com o ID do cliente e do técnico
-            statement.setString(4, relatorioRede.getClienteRelacionado().getId());
-            statement.setString(5, relatorioRede.getTecnicoResponsavel().getId());
+            statement.setString(4, relatorioRede.getNomeClienteRelacionado());
+            statement.setString(5, relatorioRede.getNomeTecnicoResponsavel());
 
             // Preencher a condição do WHERE
-            statement.setString(6, relatorioRede.getIdRelatorio());
+            //statement.setString(6, relatorioRede.getIdRelatorio());
 
             statement.execute();
             statement.close();
@@ -105,8 +101,8 @@ public class RelatorioRedeDAO implements IDao {
                 dataRelatorio.setTimeInMillis(sqlDate.getTime());
 
                 RelatorioRede relatorioRede = new RelatorioRede(
-                        resultset.getString(1),
-                        dataRelatorio,
+                        resultset.getLong(1),
+                        resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
                         null, // Cliente não é mais buscado
@@ -133,20 +129,16 @@ public class RelatorioRedeDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, relatorioRede.getIdRelatorio());
+            //statement.setString(1, relatorioRede.getIdRelatorio());
 
             ResultSet resultset = statement.executeQuery();
 
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(2);
-            Calendar dataRelatorio = Calendar.getInstance();
-            dataRelatorio.setTimeInMillis(sqlDate.getTime());
 
             RelatorioRede r = null;
             while (resultset.next()) {
                 r = new RelatorioRede(
-                        resultset.getString(1),
-                        dataRelatorio,
+                        resultset.getLong(1),
+                        resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
                         null, // Cliente não é mais buscado
@@ -216,7 +208,7 @@ public class RelatorioRedeDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             // Preencher a condição
-            statement.setString(1, relatorioRede.getIdRelatorio());
+            //statement.setString(1, relatorioRede.getIdRelatorio());
 
             statement.execute();
             statement.close();

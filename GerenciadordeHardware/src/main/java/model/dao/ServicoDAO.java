@@ -62,8 +62,8 @@ public class ServicoDAO implements IDao {
             statement = connection.prepareStatement(sql);
 
             // Preencher cada ? com o campo adequado
-            statement.setString(1, servico.getTecnico().getNome());
-            statement.setString(2, servico.getCliente().getNome());
+            statement.setString(1, servico.getTecnicoResponsavel().getNome());
+            statement.setString(2, servico.getClienteAtendido().getNome());
             statement.setFloat(3, servico.getValor());
             statement.setString(4, servico.getDescricaoServico());
             statement.setString(5, servico.getDataServico());

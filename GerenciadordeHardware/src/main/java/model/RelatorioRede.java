@@ -4,13 +4,16 @@
  */
 package model;
 import java.util.Calendar;
+import javax.persistence.Entity;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
+@AllArgsConstructor
 /**
  *
  * @author ruiz
  */
+@Entity
 public class RelatorioRede extends Relatorio {
     private String tipoRede;
 
@@ -19,8 +22,13 @@ public class RelatorioRede extends Relatorio {
         this.tipoRede = "";
     }
 
-    public RelatorioRede(String idRelatorio, Calendar dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
-        super(idRelatorio,dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
+    public RelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, String tipoRede, String nomeCliente, String nomeTecnico) {
+        super(idRelatorio,dataRelatorio, descricao, nomeCliente, nomeTecnico);
+        this.tipoRede = tipoRede;
+    }
+    
+    public RelatorioRede(String dataRelatorio, String descricao, String tipoRede, String nomeCliente, String nomeTecnico){
+        super(dataRelatorio, descricao, nomeCliente, nomeTecnico);
         this.tipoRede = tipoRede;
     }
 

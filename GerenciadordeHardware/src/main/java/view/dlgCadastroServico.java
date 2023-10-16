@@ -40,6 +40,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         servicoController.atualizarTabelaCliente(grdClientes);
         servicoController.atualizarTabelaTecnico(grdTecnicos);
         servicoController.atualizarTabela(grdServicos);
+        this.tipoServico = "Consertar PC";
     }
 
     /**

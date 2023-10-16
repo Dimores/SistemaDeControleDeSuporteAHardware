@@ -4,28 +4,26 @@
  */
 package model;
 import java.util.Calendar;
+import javax.persistence.Entity;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
-
 
 /**
  *
  * @author ruiz
  */
+@Entity
 public class RelatorioManutencao extends Relatorio {
     private String equipamentos;
-    private String idRelatorio;
-    private Tecnico tecnico;
-    private Cliente cliente;
 
     public RelatorioManutencao() {
         super();
         this.equipamentos = "";
     }
 
-    public RelatorioManutencao(String idRelatorio, Calendar dataRelatorio, String descricao, String equipamentos, Cliente cliente, Tecnico tecnico) {
-        super(idRelatorio, dataRelatorio, descricao, cliente, tecnico);
+    public RelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, String equipamentos, String nomeCliente, String nomeTecnico) {
+        super(idRelatorio, dataRelatorio, descricao, nomeCliente, nomeTecnico);
         this.equipamentos = equipamentos;
     }
 
