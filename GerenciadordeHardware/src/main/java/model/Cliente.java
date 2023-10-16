@@ -4,6 +4,10 @@
  */
 package model;
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.*;
 import model.interfaces.IUsuario;
 @Getter //constroi os metodos get
@@ -12,9 +16,11 @@ import model.interfaces.IUsuario;
  *
  * @author ruiz
  */
-
+@Entity
 public class Cliente extends Usuario implements IUsuario{
-    private String id;
+ 
+  
+    //private String id;
 
     public Cliente() {
         super();

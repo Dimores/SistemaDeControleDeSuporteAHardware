@@ -5,6 +5,10 @@
 package model;
 
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +26,11 @@ import model.interfaces.IUsuario;
  *
  * @author ruiz
  */
+@Entity
 public class Tecnico extends Usuario implements IUsuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private String id;
     private double salario;
 

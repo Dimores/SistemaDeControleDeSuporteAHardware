@@ -4,6 +4,12 @@
  */
 package model;
 import java.security.NoSuchAlgorithmException;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import lombok.*;
 import model.interfaces.IUsuario;
 import utils.Criptografia;
@@ -15,7 +21,12 @@ import utils.Criptografia;
  *
  * @author ruiz
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario implements IUsuario{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    String id;
     String nome;
     String CPF;
     String dataNasc;

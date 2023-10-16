@@ -6,9 +6,10 @@ package com.mycompany.gerenciadordehardware;
 
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import view.FrLogin;
-import view.dlgCadastrarPeca;
-import utils.Criptografia;
 
 /**
  *
@@ -17,8 +18,13 @@ import utils.Criptografia;
 public class GerenciadordeHardware {
 
     public static void main(String[] args) throws ParseException, NoSuchAlgorithmException {
+      
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("gerenciamentoHardware-jpa");
+        EntityManager entityManager = factory.createEntityManager();
         FrLogin home = new FrLogin();
-        home.setVisible(true);  
-        Criptografia crip = new Criptografia();
+        home.setVisible(true);
+        entityManager.close();
+        factory.close();
+
     }
 }
