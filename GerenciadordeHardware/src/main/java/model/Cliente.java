@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.*;
 import model.interfaces.IUsuario;
 @Getter //constroi os metodos get
@@ -17,11 +18,12 @@ import model.interfaces.IUsuario;
  * @author ruiz
  */
 @Entity
-public class Cliente extends Usuario implements IUsuario{
- 
-  
-    //private String id;
 
+public class Cliente extends Usuario implements IUsuario{
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //String Id;
+    
     public Cliente() {
         super();
         this.id = "";
