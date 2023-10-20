@@ -10,7 +10,9 @@ import lombok.*;
  */
 @Setter
 @Getter
+@AllArgsConstructor
 
+// Provavelmente remover essa classe
 public class Funcionario {
     private String matricula;
     private float salario;

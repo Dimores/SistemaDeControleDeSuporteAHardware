@@ -19,8 +19,6 @@ import lombok.*;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Relatorio {
-
-
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

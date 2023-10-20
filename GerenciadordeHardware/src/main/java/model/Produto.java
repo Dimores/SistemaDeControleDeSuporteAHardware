@@ -14,6 +14,7 @@ import lombok.*;
  * @author ruiz
  */
 
+
 public class Produto {
     private String codigo;
     private String nome;
@@ -22,11 +23,11 @@ public class Produto {
     private int estoque;
     private String categoria;
     private String dataFabricacao;
-    private String idProduto;
+    private Long idProduto;
 
 
 
-    public Produto(String idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
+    public Produto(Long idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;

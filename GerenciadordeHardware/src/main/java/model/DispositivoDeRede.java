@@ -14,7 +14,7 @@ import lombok.*;
  * @author ruiz
  */
 public class DispositivoDeRede extends Produto {
-    private String id;
+    private Long id;
     private String nome;
     private String enderecoIP;
     private String tipo;
@@ -23,7 +23,7 @@ public class DispositivoDeRede extends Produto {
     private double preco;
 
     public DispositivoDeRede() {
-        this.id = "";
+        this.id = 0L;
         this.nome = "";
         this.enderecoIP = "";
         this.tipo = "";
@@ -32,7 +32,7 @@ public class DispositivoDeRede extends Produto {
         this.preco = 0.0;
     }
 
-    public DispositivoDeRede(String id,String nome, String enderecoIP, String tipo, String fabricante, String modelo, double preco) {
+    public DispositivoDeRede(Long id,String nome, String enderecoIP, String tipo, String fabricante, String modelo, double preco) {
         this.id = id;
         this.nome = nome;
         this.enderecoIP = enderecoIP;

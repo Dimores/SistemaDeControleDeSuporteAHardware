@@ -22,7 +22,7 @@ import model.exceptions.PecaException;
  */
 public class dlgCadastrarPeca extends javax.swing.JDialog {
         PecaController pecaController;
-        int idPecaEditando;
+        Long idPecaEditando;
 
     /**
      * Creates new form dlgCadastroServico
@@ -30,7 +30,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     public dlgCadastrarPeca(java.awt.Dialog parent) {
         super(parent);
         pecaController = new PecaController();
-        idPecaEditando = -1;
+        idPecaEditando = -1L;
         initComponents();
         this.setModal(true);
         this.adicionarMascaranosCampos();
@@ -249,12 +249,12 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         // TODO add your handling code here:
             try {
             if (idPecaEditando > 0) {
-                pecaController.atualizarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             } else {
-                pecaController.cadastrarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             }
             //Comando bastante importante
-            this.idPecaEditando = -1;
+            this.idPecaEditando = -1L;
 
             pecaController.atualizarTabela(grdPecas);
 
@@ -285,13 +285,13 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             this.habilitarCampos(panCampos1, true);
             this.habilitarCampos(panCampos2, true);
             this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+            this.idPecaEditando = pecaEditando.getIdPeca();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.idPecaEditando = -1;
+        this.idPecaEditando = -1L;
         this.habilitarCampos(panCampos1, false);
         this.habilitarCampos(panCampos2, false);
     }//GEN-LAST:event_btnCancelarActionPerformed

@@ -14,7 +14,7 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-
+// Provavelmente remover essa classe
 public class InstalacaoRede extends Servico {
     private String tipoRede;
     private String enderecoRede;
@@ -25,7 +25,7 @@ public class InstalacaoRede extends Servico {
         this.enderecoRede = "";
     }
 
-    public InstalacaoRede(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+    public InstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                           String dataServico, Calendar dataConclusao, boolean concluido, String tipoRede, String enderecoRede) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Instalacao de Rede");
         this.tipoRede = tipoRede;

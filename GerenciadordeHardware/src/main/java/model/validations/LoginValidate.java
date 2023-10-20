@@ -38,11 +38,11 @@ public class LoginValidate {
     }
     
     public int  accessManager(Object obj){
-        if (obj instanceof Cliente){
+        if(obj instanceof Cliente){
             return 1;
         }if(obj instanceof Tecnico){
             return 2;
-        }if( obj instanceof Gerente){
+        }if(obj instanceof Gerente){
             return 3;
         }
         return 0;

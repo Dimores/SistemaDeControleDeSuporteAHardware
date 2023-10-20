@@ -19,14 +19,14 @@ import model.exceptions.TecnicoException;
  * @author ruiz
  */
 public class IntCadastrarTecnico extends javax.swing.JInternalFrame {
-        TecnicoController tecnicoController;
-    int idTecnicoEditando;
+    TecnicoController tecnicoController;
+    Long idTecnicoEditando;
     /**
      * Creates new form IntCadastrarTecnico
      */
     public IntCadastrarTecnico() {
         tecnicoController = new TecnicoController();
-        idTecnicoEditando = -1;
+        idTecnicoEditando = -1L;
         initComponents();
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
@@ -285,12 +285,12 @@ public class IntCadastrarTecnico extends javax.swing.JInternalFrame {
 
         try {
             if (idTecnicoEditando > 0) {
-                tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                //tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             } else {
-                tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                //tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             }
             //Comando bastante importante
-            this.idTecnicoEditando = -1;
+            this.idTecnicoEditando = -1L;
 
             tecnicoController.atualizarTabela(grdTecnicos);
 
@@ -299,15 +299,13 @@ public class IntCadastrarTecnico extends javax.swing.JInternalFrame {
         } catch (TecnicoException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idTecnicoEditando = -1;
+        this.idTecnicoEditando = -1L;
 
         this.limparCampos();
         this.habilitarCampos(false);
@@ -322,7 +320,7 @@ public class IntCadastrarTecnico extends javax.swing.JInternalFrame {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(tecnicoEditando);
-            this.idTecnicoEditando = Integer.parseInt(tecnicoEditando.getId());
+            this.idTecnicoEditando = tecnicoEditando.getId();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

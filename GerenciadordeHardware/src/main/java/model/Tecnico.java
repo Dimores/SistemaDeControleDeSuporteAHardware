@@ -23,11 +23,11 @@ import model.interfaces.IUsuario;
  * @author ruiz
  */
 public class Tecnico extends Usuario implements IUsuario {
-    private String id;
+    private Long id;
     private double salario;
 
     
-    public Tecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
+    public Tecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.id = id;
         this.salario = salario;
@@ -83,7 +83,7 @@ public class Tecnico extends Usuario implements IUsuario {
         this.senha = vetor[3];
         this.email = vetor[4];
         this.telefone = vetor[5];
-        this.id = vetor[6];
+        this.id = Long.parseLong(vetor[6]);
         this.salario = Double.parseDouble(vetor[7]);
     }
 }

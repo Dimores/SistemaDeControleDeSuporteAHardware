@@ -76,13 +76,9 @@
                               <Component id="lblValor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="edtValor" min="-2" pref="119" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblData" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fEdtDataServico" min="-2" pref="166" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="292" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -99,8 +95,6 @@
                   <Component id="boxEscolhaServico" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblValor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="edtValor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fEdtDataServico" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblData" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
@@ -367,13 +361,6 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="fEdtDataServico">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblData">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Data:"/>
       </Properties>
     </Component>
   </SubComponents>

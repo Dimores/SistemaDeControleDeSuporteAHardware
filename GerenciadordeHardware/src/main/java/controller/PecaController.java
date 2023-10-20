@@ -36,7 +36,7 @@ public class PecaController extends ProdutoController{
         
     }
     
-    public void cadastrarPeca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public void cadastrarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
         PecaValidate valid = new PecaValidate(); 
         Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
         if(repositorio.findByCodigo(codigo) == null){
@@ -47,7 +47,7 @@ public class PecaController extends ProdutoController{
         
     }
     
-    public void atualizarPeca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public void atualizarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
         PecaValidate valid = new PecaValidate(); 
         Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
         novaPeca.setIdPeca(idPeca); 

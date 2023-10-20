@@ -11,6 +11,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 
+// Provavelmente remover essa classe
 public class Pagamento implements IPagamento{
     private Double dinheiro;
 

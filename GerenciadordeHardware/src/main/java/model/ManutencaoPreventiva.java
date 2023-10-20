@@ -14,7 +14,7 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-
+// Provavelmente remover essa classe
 public class ManutencaoPreventiva extends Servico {
     private String equipamentos;
     private String descricaoManutencao;
@@ -25,7 +25,7 @@ public class ManutencaoPreventiva extends Servico {
         this.descricaoManutencao = "";
     }
 
-    public ManutencaoPreventiva(String idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+    public ManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                                 String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Manutencao Preventiva");
         this.equipamentos = equipamentos;

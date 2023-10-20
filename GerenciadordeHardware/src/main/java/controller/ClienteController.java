@@ -41,7 +41,7 @@ public class ClienteController extends UsuarioController{
         grdClientes.setModel(tmCliente);
     }
 
-    public void atualizarCliente(String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException {
+    public void atualizarCliente(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException {
         ClienteValidate valid = new ClienteValidate(); 
         this.crip = new Criptografia();
         Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone); 
@@ -59,7 +59,7 @@ public class ClienteController extends UsuarioController{
         repositorio.update(novoCliente);
     }
 
-    public void cadastrarCliente(String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception {
+    public void cadastrarCliente(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception {
         ClienteValidate valid = new ClienteValidate(); 
         this.crip = new Criptografia();
         Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone); 

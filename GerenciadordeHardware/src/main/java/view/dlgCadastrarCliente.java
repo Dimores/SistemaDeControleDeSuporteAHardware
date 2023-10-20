@@ -21,14 +21,14 @@ import model.exceptions.ClienteException;
  */
 public class dlgCadastrarCliente extends javax.swing.JDialog {
     ClienteController clienteController;
-    int idClienteEditando;
+    Long idClienteEditando;
 
     /**
      * Creates new form dlgCadastroServico
      */
     public dlgCadastrarCliente(java.awt.Dialog parent) {
         clienteController = new ClienteController();
-        idClienteEditando = -1;
+        idClienteEditando = -1L;
         initComponents();
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
@@ -271,12 +271,12 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         
         try {
             if (idClienteEditando > 0) {
-                clienteController.atualizarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             } else {
-                clienteController.cadastrarCliente(String.valueOf(idClienteEditando), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             }
             //Comando bastante importante
-            this.idClienteEditando = -1;
+            this.idClienteEditando = -1L;
 
             clienteController.atualizarTabela(grdClientes);
 
@@ -303,7 +303,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(clienteEditando);
-            this.idClienteEditando = Integer.parseInt(clienteEditando.getId());
+            this.idClienteEditando = clienteEditando.getId();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -341,7 +341,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idClienteEditando = -1;
+        this.idClienteEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed

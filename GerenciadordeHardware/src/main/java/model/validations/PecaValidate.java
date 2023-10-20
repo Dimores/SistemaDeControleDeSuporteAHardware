@@ -16,7 +16,7 @@ import model.exceptions.PecaException;
  */
 public class PecaValidate {
     
-    public Peca validaCamposEntrada(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public Peca validaCamposEntrada(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
         Peca peca = new Peca();
         
         // Dia/Mes/Ano

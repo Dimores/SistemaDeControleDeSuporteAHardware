@@ -14,14 +14,14 @@ import model.interfaces.IUsuario;
  */
 
 public class Cliente extends Usuario implements IUsuario{
-    private String id;
+    private Long id;
 
     public Cliente() {
         super();
-        this.id = "";
+        this.id = 0L;
     }
 
-    public Cliente(String idCliente, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
+    public Cliente(Long idCliente, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.id = idCliente;
     }
@@ -81,7 +81,7 @@ public void copiar(Cliente outro) {
         this.senha = vetor[3];
         this.email = vetor[4];
         this.telefone = vetor[5];
-        this.id = vetor[6];
+        this.id = Long.parseLong(vetor[6]);
     }
 
 }

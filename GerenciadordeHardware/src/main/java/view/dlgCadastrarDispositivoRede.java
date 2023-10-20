@@ -22,7 +22,7 @@ import model.exceptions.DispositivoRedeException;
  */
 public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     DispositivoRedeController dispositivoRedeController;
-    int idDispositivoEditando;
+    Long idDispositivoEditando;
     
 
     /**
@@ -32,7 +32,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         dispositivoRedeController = new DispositivoRedeController();
         initComponents();
         this.criarMascaraCampos();
-        idDispositivoEditando = -1;
+        idDispositivoEditando = -1L;
         this.habilitarCampos(false);
     }
 
@@ -230,12 +230,12 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(dispositivoRedeEditando);
-            this.idDispositivoEditando = Integer.parseInt(dispositivoRedeEditando.getId());
+            this.idDispositivoEditando = dispositivoRedeEditando.getId();
         }  
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        idDispositivoEditando = -1;
+        idDispositivoEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -249,7 +249,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
             }
             
             //Comando bastante importante
-            this.idDispositivoEditando = -1;
+            this.idDispositivoEditando = -1L;
 
             //idDispositivoEditando.atualizarTabela(grdDispositivosRede);
 

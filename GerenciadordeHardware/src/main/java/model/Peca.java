@@ -15,11 +15,11 @@ import lombok.*;
  */
 
 public class Peca extends Produto {
-    private String idPeca;
+    private Long idPeca;
     private String tipo;
 
 
-    public Peca(String idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo) {
+    public Peca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo) {
         super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
         this.idPeca = idPeca;
         this.tipo = tipo;

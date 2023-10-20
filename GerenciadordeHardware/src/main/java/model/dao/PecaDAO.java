@@ -74,7 +74,7 @@ public class PecaDAO implements IDao {
             statement.setString(8, peca.getTipo());
 
             // Preencher a condição do WHERE
-            statement.setString(9, peca.getIdPeca());
+            statement.setLong(9, peca.getIdPeca());
 
             statement.execute();
             statement.close();
@@ -95,7 +95,7 @@ public class PecaDAO implements IDao {
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
                 Peca peca = new Peca(
-                        resultset.getString(1), 
+                        resultset.getLong(1), 
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -124,7 +124,7 @@ public class PecaDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, peca.getIdPeca());
+            statement.setLong(1, peca.getIdPeca());
 
             ResultSet resultset = statement.executeQuery();
 
@@ -133,7 +133,7 @@ public class PecaDAO implements IDao {
             Peca p = null;
             while (resultset.next()) {
                 p = new Peca(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -176,7 +176,7 @@ public class PecaDAO implements IDao {
 
             while (resultset.next()) {
                 peca = new Peca(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -212,7 +212,7 @@ public class PecaDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             // Preencher a condição
-            statement.setString(1, peca.getIdPeca());
+            statement.setLong(1, peca.getIdPeca());
 
             statement.execute();
             statement.close();

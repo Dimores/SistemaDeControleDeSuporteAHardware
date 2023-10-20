@@ -78,7 +78,7 @@ public class TecnicoDAO implements IDao {
             statement.setString(7, tecnico.getTelefone());
 
             //preenche a condição do WHERE
-            statement.setString(8, tecnico.getId());
+            statement.setLong(8, tecnico.getId());
 
             statement.execute();
             statement.close();
@@ -102,7 +102,7 @@ public List<Object> findAll() {
 
 
             Tecnico tecnico = new Tecnico(
-                    resultset.getString(1),
+                    resultset.getLong(1),
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
@@ -132,7 +132,7 @@ public List<Object> findAll() {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, tecnico.getId());
+            statement.setLong(1, tecnico.getId());
 
             ResultSet resultset = statement.executeQuery();
             
@@ -141,7 +141,7 @@ public List<Object> findAll() {
             Tecnico t = null;
             while (resultset.next()) {
                 t = new Tecnico(
-                    resultset.getString(1),
+                    resultset.getLong(1),
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
@@ -182,7 +182,7 @@ public List<Object> findAll() {
 
             while (resultset.next()) {
                 tecnico = new Tecnico(
-                    resultset.getString(1),
+                    resultset.getLong(1),
                     resultset.getDouble(2),
                     resultset.getString(3),
                     resultset.getString(4),
@@ -217,7 +217,7 @@ public List<Object> findAll() {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             //preenche a condição
-            statement.setString(1, tecnico.getId());
+            statement.setLong(1, tecnico.getId());
 
             statement.execute();
             statement.close();

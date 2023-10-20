@@ -19,6 +19,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     dlgCadastrarCliente telaCliente;
     dlgCadastrarTecnico telaTecnico;
     dlgCadastrarPeca telaCadastroPeca;
+    dlgCadastrarRelatorioManutencao telaCadastroManutencao;
     /**
      * Creates new form FrMain
      */
@@ -28,6 +29,10 @@ public class dlgUsuario extends javax.swing.JDialog {
     
     }
     
+    public dlgUsuario(){
+        
+    }
+    
     public dlgUsuario(int code)  {
         initComponents();
         setModal(true);
@@ -35,10 +40,15 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaTecnico = new dlgCadastrarTecnico(this);
         telaCliente = new dlgCadastrarCliente(this);
         telaCadastroPeca = new dlgCadastrarPeca(this);
+        telaCadastroManutencao = new dlgCadastrarRelatorioManutencao(this);
     }
 
-    javax.swing.JLabel getLblUserName(){
+    public javax.swing.JLabel getLblUserName(){
         return this.lblUserName;
+    }
+    
+    public String getNomeUsuario(){
+        return lblUserName.getText();
     }
     
     public void habilitarCamposDeAcordoComPrevilegio(int code){
@@ -106,6 +116,11 @@ public class dlgUsuario extends javax.swing.JDialog {
 
         btnGerarRelatorioRede.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
+        btnGerarRelatorioRede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioRedeActionPerformed(evt);
+            }
+        });
 
         btnRegistrarPagamento.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnRegistrarPagamento.setText("Registrar pagamento");
@@ -280,6 +295,7 @@ public class dlgUsuario extends javax.swing.JDialog {
 
     private void btnGerarRelatorioManutencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioManutencaoActionPerformed
         // TODO add your handling code here:
+        telaCadastroManutencao.setVisible(true);
     }//GEN-LAST:event_btnGerarRelatorioManutencaoActionPerformed
 
     private void btnCadastrarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarServicoActionPerformed
@@ -301,6 +317,10 @@ public class dlgUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaCadastroPeca.setVisible(true);
     }//GEN-LAST:event_btnCadastrarPeçaActionPerformed
+
+    private void btnGerarRelatorioRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioRedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerarRelatorioRedeActionPerformed
 
     /*public void fecharTodasAsJanelas()  {
         telaCliente.habilitarCampos(false);

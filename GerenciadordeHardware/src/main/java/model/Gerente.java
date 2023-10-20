@@ -19,22 +19,22 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-
+// Provavelmente remover essa classe
 public class Gerente extends Usuario implements IUsuario {
-    private String id;
+    private Long id;
     private double salario;
     private String departamento;
 
     public Gerente() {
         super();
-        this.id = "";
+        this.id = 0L;
         this.salario = 0.0;
         this.departamento = "";
     }
 
-    public Gerente(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone, String departamento) {
+    public Gerente(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone, String departamento) {
         super(nome, CPF, dataNasc, senha, email, telefone);
-        this.id = id;
+        this.id = 0L;
         this.salario = salario;
         this.departamento = departamento;
     }
@@ -92,7 +92,7 @@ public class Gerente extends Usuario implements IUsuario {
         this.senha = vetor[3];
         this.email = vetor[4];
         this.telefone = vetor[5];
-        this.id = vetor[6];
+        this.id = Long.parseLong(vetor[6]);
         this.salario = Double.parseDouble(vetor[7]);
         this.departamento = vetor[8];
     }

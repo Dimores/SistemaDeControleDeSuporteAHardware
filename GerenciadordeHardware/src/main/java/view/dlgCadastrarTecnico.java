@@ -21,7 +21,7 @@ import model.exceptions.TecnicoException;
  */
 public class dlgCadastrarTecnico extends javax.swing.JDialog{
     TecnicoController tecnicoController;
-    int idTecnicoEditando;
+    Long idTecnicoEditando;
 
 
     /**
@@ -30,7 +30,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     public dlgCadastrarTecnico(java.awt.Dialog parent) {
         super(parent);
         tecnicoController = new TecnicoController();
-        idTecnicoEditando = -1;
+        idTecnicoEditando = -1L;
         initComponents();
         this.criarMascaraCadastros();
         this.habilitarCampos(false);
@@ -296,12 +296,12 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
 
         try {
             if (idTecnicoEditando > 0) {
-                tecnicoController.atualizarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                tecnicoController.atualizarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             } else {
-                tecnicoController.cadastrarTecnico(String.valueOf(idTecnicoEditando), Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                tecnicoController.cadastrarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             }
             //Comando bastante importante
-            this.idTecnicoEditando = -1;
+            this.idTecnicoEditando = -1L;
 
             tecnicoController.atualizarTabela(grdTecnicos);
 
@@ -326,7 +326,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(tecnicoEditando);
-            this.idTecnicoEditando = Integer.parseInt(tecnicoEditando.getId());
+            this.idTecnicoEditando = tecnicoEditando.getId();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -364,7 +364,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idTecnicoEditando = -1;
+        this.idTecnicoEditando = -1L;
 
         this.limparCampos();
         this.habilitarCampos(false);

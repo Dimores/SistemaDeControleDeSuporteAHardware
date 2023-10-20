@@ -71,7 +71,7 @@ public class ServicoDAO implements IDao {
             statement.setString(7, servico.getTipoServico());
 
             // Preencher a condição do WHERE
-            statement.setString(8, servico.getIdServico());
+            statement.setLong(8, servico.getIdServico());
 
             statement.execute();
             statement.close();
@@ -93,7 +93,7 @@ public class ServicoDAO implements IDao {
             while (resultset.next()) {
 
                 Servico servico = new Servico(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         null, // Tecnico nao e mais buscado
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
@@ -124,7 +124,7 @@ public class ServicoDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, servico.getIdServico());
+            statement.setLong(1, servico.getIdServico());
 
             ResultSet resultset = statement.executeQuery();
 
@@ -136,7 +136,7 @@ public class ServicoDAO implements IDao {
             Servico s = null;
             while (resultset.next()) {
                 s = new Servico(
-                         resultset.getString(1),
+                         resultset.getLong(1),
                         null, // Tecnico nao e mais buscado
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
@@ -180,7 +180,7 @@ public class ServicoDAO implements IDao {
 
             while (resultset.next()) {
                 servico = new Servico(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         null, // Tecnico nao e mais buscado
                         null,  // Cliebte nao e mais buscado
                         resultset.getFloat(4),
@@ -215,7 +215,7 @@ public class ServicoDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             // Preencher a condição
-            statement.setString(1, servico.getIdServico());
+            statement.setLong(1, servico.getIdServico());
 
             statement.execute();
             statement.close();

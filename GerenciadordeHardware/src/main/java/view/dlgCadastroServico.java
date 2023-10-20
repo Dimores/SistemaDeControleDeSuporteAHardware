@@ -12,6 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import model.Data;
 import model.Servico;
 import model.exceptions.ServicoException;
 
@@ -24,7 +26,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     Cliente clienteEscolhido;
     Tecnico tecnicoEscolhido;
     private String tipoServico;
-    int idServicoEditando;
+    Long idServicoEditando;
+    private String dataServico;
     
 
     /**
@@ -34,13 +37,15 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         servicoController = new ServicoController();
         clienteEscolhido = new Cliente();
         tecnicoEscolhido = new Tecnico();
-        idServicoEditando = -1;
+        idServicoEditando = -1L;
         initComponents();
         this.habilitarCampos(false);
         servicoController.atualizarTabelaCliente(grdClientes);
         servicoController.atualizarTabelaTecnico(grdTecnicos);
         servicoController.atualizarTabela(grdServicos);
         this.tipoServico = "Consertar PC";
+        this.dataServico = Data.pegaDataSistema();
+        
     }
 
     /**
@@ -80,8 +85,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         grdServicos = new javax.swing.JTable();
         lblServicos = new javax.swing.JLabel();
-        fEdtDataServico = new javax.swing.JFormattedTextField();
-        lblData = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -247,8 +250,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         lblServicos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblServicos.setText("Serviços");
 
-        lblData.setText("Data:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -285,12 +286,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblValor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fEdtDataServico, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 292, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -302,9 +299,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                     .addComponent(lblServicoEfetuado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor)
-                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fEdtDataServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblData))
+                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -346,14 +341,19 @@ public class dlgCadastroServico extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-                try {
+        tecnicoEscolhido = (Tecnico) this.getObjetoSelecionadoNaGrid(grdTecnicos);
+        clienteEscolhido = (Cliente) this.getObjetoSelecionadoNaGrid(grdClientes);
+        
+        
+        
+        try {
             if (idServicoEditando > 0) {
-                servicoController.atualizarServico(String.valueOf(idServicoEditando), tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), fEdtDataServico.getText(), false, this.tipoServico);
+                servicoController.atualizarServico(idServicoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), dataServico, false, this.tipoServico);
             } else {
-                servicoController.cadastrarServico(String.valueOf(idServicoEditando), tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), fEdtDataServico.getText(), false, this.tipoServico);
+                servicoController.cadastrarServico(idServicoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), dataServico, false, this.tipoServico);
             }
             //Comando bastante importante
-            this.idServicoEditando  = -1;
+            this.idServicoEditando  = -1L;
 
             servicoController.atualizarTabela(grdServicos);
 
@@ -398,19 +398,19 @@ public class dlgCadastroServico extends javax.swing.JFrame {
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        clienteEscolhido = servicoController.buscarCliente(fEdtEmailCliente.getText());
-        servicoController.atualizarTabelaCliente(grdClientes, clienteEscolhido);
+        //clienteEscolhido = servicoController.buscarCliente(fEdtEmailCliente.getText());
+        //servicoController.atualizarTabelaCliente(grdClientes, clienteEscolhido);
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void btnBuscarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTecnicoActionPerformed
         // TODO add your handling code here:
-        tecnicoEscolhido = servicoController.buscarTecnico(fEdtEmailTecnico.getText());
-        servicoController.atualizarTabelaTecnico(grdTecnicos, tecnicoEscolhido);
+        //tecnicoEscolhido = servicoController.buscarTecnico(fEdtEmailTecnico.getText());
+        //servicoController.atualizarTabelaTecnico(grdTecnicos, tecnicoEscolhido);
     }//GEN-LAST:event_btnBuscarTecnicoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        Servico servicoExcluido = (Servico) this.getObjetoSelecionadoNaGrid();
+        Servico servicoExcluido = (Servico) this.getObjetoSelecionadoNaGrid(grdServicos);
 
         if (servicoExcluido == null)
         JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -437,11 +437,11 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdServicos.getSelectedRow();
+    private Object getObjetoSelecionadoNaGrid(JTable grd) {
+        int rowCliked = grd.getSelectedRow();
         Object obj = null;
         if (rowCliked >= 0) {
-            obj = grdServicos.getModel().getValueAt(rowCliked, -1);
+            obj = grd.getModel().getValueAt(rowCliked, -1);
         }
         return obj;
     }
@@ -507,8 +507,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 edtDescricaoServico.setEnabled(flag);
                 lblServicos.setEnabled(flag);
                 grdServicos.setEnabled(flag);
-                lblData.setEnabled(flag);
-                fEdtDataServico.setEnabled(flag);
                 
         }
         
@@ -517,7 +515,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 fEdtEmailCliente.setText("");
                 fEdtEmailTecnico.setText("");
                 edtDescricaoServico.setText("");
-                fEdtDataServico.setText("");
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -531,7 +528,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtDescricaoServico;
     private javax.swing.JTextField edtValor;
-    private javax.swing.JFormattedTextField fEdtDataServico;
     private javax.swing.JFormattedTextField fEdtEmailCliente;
     private javax.swing.JFormattedTextField fEdtEmailTecnico;
     private javax.swing.JTable grdClientes;
@@ -544,7 +540,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCpfCliente;
     private javax.swing.JLabel lblCpfTecnico;
-    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDescricaoServico;
     private javax.swing.JLabel lblServicoEfetuado;
     private javax.swing.JLabel lblServicos;

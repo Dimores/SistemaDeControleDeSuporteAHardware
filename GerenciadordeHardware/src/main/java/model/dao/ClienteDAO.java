@@ -74,7 +74,7 @@ public class ClienteDAO implements IDao {
             statement.setString(6, cliente.getTelefone());
 
             //preenche a condição do WHERE
-            statement.setString(7, cliente.getId());
+            statement.setLong(7, cliente.getId());
 
             statement.execute();
             statement.close();
@@ -98,7 +98,7 @@ public class ClienteDAO implements IDao {
 
 
                 Cliente cliente = new Cliente(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -126,7 +126,7 @@ public class ClienteDAO implements IDao {
         try {
 
             statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, cliente.getId());
+            statement.setLong(1, cliente.getId());
 
             ResultSet resultset = statement.executeQuery();
 
@@ -135,7 +135,7 @@ public class ClienteDAO implements IDao {
             Cliente c = null;
             while (resultset.next()) {
                 c = new Cliente(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -174,7 +174,7 @@ public class ClienteDAO implements IDao {
 
             while (resultset.next()) {
                 cliente = new Cliente(
-                        resultset.getString(1),
+                        resultset.getLong(1),
                         resultset.getString(2),
                         resultset.getString(3),
                         resultset.getString(4),
@@ -207,7 +207,7 @@ public class ClienteDAO implements IDao {
             connection = Persistencia.getConnection();
             statement = connection.prepareStatement(sql);
             //preenche a condição
-            statement.setString(1, cliente.getId());
+            statement.setLong(1, cliente.getId());
 
             statement.execute();
             statement.close();

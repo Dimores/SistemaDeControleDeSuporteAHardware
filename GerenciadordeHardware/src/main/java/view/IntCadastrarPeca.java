@@ -25,7 +25,7 @@ import model.exceptions.PecaException;
 @Setter
 public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         PecaController pecaController;
-        int idPecaEditando;
+        Long idPecaEditando;
 
     /**
      * Creates new form IntCadastrarPeca
@@ -245,12 +245,12 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
             try {
             if (idPecaEditando > 0) {
-                pecaController.atualizarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             } else {
-                pecaController.cadastrarPeca(String.valueOf(idPecaEditando), edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
             }
             //Comando bastante importante
-            this.idPecaEditando = -1;
+            this.idPecaEditando = -1L;
 
             //pecaController.atualizarTabela();
 
@@ -277,7 +277,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
             this.habilitarCampos(panCampos1, false);
             this.habilitarCampos(panCampos2, false);
             this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+            this.idPecaEditando = pecaEditando.getIdPeca();
         }
     }//GEN-LAST:event_edtCodigoActionPerformed
 
@@ -338,7 +338,7 @@ public class IntCadastrarPeca extends javax.swing.JInternalFrame {
         this.habilitarCampos(panCampos1, true);
         this.habilitarCampos(panCampos2, true);
             this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = Integer.parseInt(pecaEditando.getIdPeca());
+            this.idPecaEditando = pecaEditando.getIdPeca();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

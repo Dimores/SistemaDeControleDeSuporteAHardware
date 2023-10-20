@@ -25,7 +25,7 @@ public class TecnicoController  extends UsuarioController{
         repositorio = new TecnicoDAO(); 
     }
 
-    public void cadastrarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception { 
+    public void cadastrarTecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception { 
         TecnicoValidate valid = new TecnicoValidate(); 
         this.crip = new Criptografia();
         Tecnico novoTecnico = valid.validaCamposEntrada(id, salario, nome, CPF, dataNasc, senha, email, telefone); 
@@ -37,7 +37,7 @@ public class TecnicoController  extends UsuarioController{
         }
     }
     
-    public void atualizarTecnico(String id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException { 
+    public void atualizarTecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException { 
         TecnicoValidate valid = new TecnicoValidate(); 
         this.crip = new Criptografia();
         Tecnico novoTecnico = valid.validaCamposEntrada(id, salario, nome, CPF, dataNasc, senha, email, telefone); 

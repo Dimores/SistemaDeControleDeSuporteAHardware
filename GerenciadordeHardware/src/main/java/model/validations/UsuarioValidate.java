@@ -18,7 +18,7 @@ public class UsuarioValidate {
     EmailValidate validaEmail;
     
 
-    public Usuario validaCamposEntrada(Usuario user, String id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
+    public Usuario validaCamposEntrada(Usuario user, Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
         
         validaCPF = new CPFValidate();
         validaSenha = new SenhaValidate();
