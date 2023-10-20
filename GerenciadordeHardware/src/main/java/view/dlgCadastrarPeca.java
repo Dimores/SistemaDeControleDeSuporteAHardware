@@ -292,8 +292,10 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.idPecaEditando = -1L;
+        this.limparCampos();
         this.habilitarCampos(panCampos1, false);
         this.habilitarCampos(panCampos2, false);
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

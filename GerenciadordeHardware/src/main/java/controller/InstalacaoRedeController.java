@@ -4,6 +4,7 @@
  */
 package controller;
 
+import javax.swing.JTable;
 import model.*;
 import lombok.*;
 @Getter //constroi os metodos get
@@ -17,4 +18,24 @@ import lombok.*;
  */
 public class InstalacaoRedeController extends ServicoController {
     
+    public void atualizarInstalacaoRede(){
+        
+    }
+    
+    public void cadastrarInstalacaoRede(){
+        
+    }
+    
+    public void buscarInstalacaoRede(){
+        
+    }
+    
+    @Override
+    public void atualizarTabela(JTable grd){
+        
+    }
+    
+    public void excluirInstalacaoRede(){
+        
+    }
 }

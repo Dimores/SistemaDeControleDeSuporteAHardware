@@ -18,17 +18,17 @@ import java.util.Calendar;
  */
 
 
-public class ConcertoComputador extends Servico {
+public class ConsertoComputador extends Servico {
     private String descricaoProblema;
     private ArrayList<Peca> pecasSubstituidas;
 
-    public ConcertoComputador() {
+    public ConsertoComputador() {
         super();
         this.descricaoProblema = "";
         this.pecasSubstituidas = null;
     }
 
-    public ConcertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+    public ConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                               String dataServico, boolean concluido, String descricaoProblema, ArrayList pecasSubstituidas) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Conserto de computador");
         this.descricaoProblema = descricaoProblema;

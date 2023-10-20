@@ -4,6 +4,7 @@
  */
 package controller;
 
+import javax.swing.JTable;
 import model.*;
 
 import lombok.*;
@@ -17,5 +18,26 @@ import lombok.*;
  * @author ruiz
  */
 public class ConsertoComputadorController extends ServicoController{
+    
+    public void atualizarConsertoComputador(){
+        
+    }
+    
+    public void cadastrarConsertoComputador(){
+        
+    }
+    
+    public void buscarConsertoComputador(){
+        
+    }
+    
+    @Override
+    public void atualizarTabela(JTable grd){
+        
+    }
+    
+    public void excluirConsertoComputador(){
+        
+    }
     
 }
