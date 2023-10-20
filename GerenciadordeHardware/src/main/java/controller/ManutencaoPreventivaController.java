@@ -4,6 +4,7 @@
  */
 package controller;
 
+import javax.swing.JTable;
 import model.*;
 import lombok.*;
 @Getter //constroi os metodos get
@@ -16,5 +17,23 @@ import lombok.*;
  * @author ruiz
  */
 public class ManutencaoPreventivaController extends ServicoController{
+    
+    
+    public void atualizarManutencaoPreventiva(){
+        
+    }
+    
+    public void cadastrarManutencaoPreventiva(){
+        
+    }
+    
+    @Override
+    public void atualizarTabela(JTable grd){
+        
+    }
+    
+    public void excluirManutencaoPreventiva(){
+        
+    }
     
 }

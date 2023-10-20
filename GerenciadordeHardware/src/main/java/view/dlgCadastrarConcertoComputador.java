@@ -5,21 +5,26 @@
 package view;
 
 import controller.ConsertoComputadorController;
+import controller.ServicoController;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author diego
  */
 public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
+    ServicoController servicoController;
     ConsertoComputadorController consertoController;
     
-
     /**
      * Creates new form dlgCadastrarConcertoComputador
      */
     public dlgCadastrarConcertoComputador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        servicoController = new ServicoController();
+        servicoController.atualizarTabelaCliente(grdClientes);
+        servicoController.atualizarTabelaTecnico(grdTecnicos);
         this.habilitarCampos(false);
         
         // Instanciando
@@ -57,8 +62,11 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        grdTecnicos1 = new javax.swing.JTable();
+        grdTecnicos = new javax.swing.JTable();
         lblComputadores = new javax.swing.JLabel();
+        panValor = new javax.swing.JPanel();
+        lblValor = new javax.swing.JLabel();
+        edtValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -153,6 +161,11 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lstPecasSubstituidas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPecasSubstituidasValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstPecasSubstituidas);
 
         javax.swing.GroupLayout panPecasSubstituidasLayout = new javax.swing.GroupLayout(panPecasSubstituidas);
@@ -163,18 +176,17 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblSelecaoPeca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3))
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         panPecasSubstituidasLayout.setVerticalGroup(
             panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
-                        .addComponent(lblSelecaoPeca)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSelecaoPeca))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -204,7 +216,7 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         btnConfirmar.setText("Confirmar");
         panBotoes.add(btnConfirmar);
 
-        grdTecnicos1.setModel(new javax.swing.table.DefaultTableModel(
+        grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -215,37 +227,58 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
 
             }
         ));
-        grdTecnicos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        grdTecnicos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdTecnicos1MouseClicked(evt);
+                grdTecnicosMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(grdTecnicos1);
+        jScrollPane4.setViewportView(grdTecnicos);
 
         lblComputadores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblComputadores.setText("Computadores");
+
+        lblValor.setText("Preço:");
+
+        javax.swing.GroupLayout panValorLayout = new javax.swing.GroupLayout(panValor);
+        panValor.setLayout(panValorLayout);
+        panValorLayout.setHorizontalGroup(
+            panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panValorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblValor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtValor))
+        );
+        panValorLayout.setVerticalGroup(
+            panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panValorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblComputadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(panProblema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4)
                     .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblComputadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(panProblema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4))))
+                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,6 +287,8 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSelecaoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,13 +300,13 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
                 .addComponent(panProblema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblComputadores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -297,9 +332,28 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         this.habilitarCampos(true );
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void grdTecnicos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdTecnicos1MouseClicked
+    private void grdTecnicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdTecnicosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_grdTecnicos1MouseClicked
+    }//GEN-LAST:event_grdTecnicosMouseClicked
+
+    private void lstPecasSubstituidasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPecasSubstituidasValueChanged
+        if (!evt.getValueIsAdjusting()) {
+        // Obtém os itens selecionados na lista
+        Object[] selectedItems = lstPecasSubstituidas.getSelectedValues();
+
+            // Verifica se há itens selecionados
+            if (selectedItems.length > 0) {
+                // Crie uma mensagem com os itens selecionados
+                StringBuilder message = new StringBuilder("Itens selecionados:\n");
+                for (Object item : selectedItems) {
+                    message.append(item.toString()).append("\n");
+                }
+
+                // Exibe a mensagem em um diálogo de informação
+                JOptionPane.showMessageDialog(this, message.toString(), "Itens Selecionados", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_lstPecasSubstituidasValueChanged
 
     public void habilitarCampos(boolean flag) {
         // Labels
@@ -308,14 +362,19 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         lblSelecaoTecnico.setEnabled(flag);
         lblSelecaoPeca.setEnabled(flag);
         lblComputadores.setEnabled(flag);
+        lblValor.setEnabled(flag);
         
         // Grids
-        grdComputadores.setEnabled(flag);
         grdClientes.setEnabled(flag);
+        grdClientes.setVisible(flag);
+        grdTecnicos.setEnabled(flag);
+        grdTecnicos.setVisible(flag);
         grdComputadores.setEnabled(flag);
+        grdComputadores.setVisible(flag);
         
         // Text Fields
         edtDescricaoProblema.setEnabled(flag);
+        edtValor.setEnabled(flag);
         
         // List
         lstPecasSubstituidas.setEnabled(flag);        
@@ -354,6 +413,7 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 dlgCadastrarConcertoComputador dialog = new dlgCadastrarConcertoComputador(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -374,9 +434,10 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtDescricaoProblema;
+    private javax.swing.JTextField edtValor;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdComputadores;
-    private javax.swing.JTable grdTecnicos1;
+    private javax.swing.JTable grdTecnicos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -387,10 +448,12 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
     private javax.swing.JLabel lblSelecaoPeca;
     private javax.swing.JLabel lblSelecaoTecnico;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblValor;
     private javax.swing.JList<String> lstPecasSubstituidas;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panPecasSubstituidas;
     private javax.swing.JPanel panProblema;
     private javax.swing.JPanel panTitulo;
+    private javax.swing.JPanel panValor;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,19 +4,35 @@
  */
 package view;
 
+import controller.ManutencaoPreventivaController;
+import controller.ServicoController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import model.exceptions.ServicoException;
+
 /**
  *
  * @author diego
  */
 public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
-
+    ServicoController servicoController;
+    ManutencaoPreventivaController manutencaoPreventivaController;
+    private Long idManutencaoEditando;
     /**
      * Creates new form dlgCadastrarManutencaoPreventiva
      */
     public dlgCadastrarManutencaoPreventiva(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        manutencaoPreventivaController = new ManutencaoPreventivaController();
+        servicoController = new ServicoController();
+        servicoController.atualizarTabelaCliente(grdClientes);
+        servicoController.atualizarTabelaTecnico(grdTecnicos);
         this.habilitarCampos(false);
+        
+        idManutencaoEditando = -1L;
     }
 
     /**
@@ -50,6 +66,9 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         grdManutencoes = new javax.swing.JTable();
         lblManutencoes = new javax.swing.JLabel();
+        panPreco = new javax.swing.JPanel();
+        lblPreco = new javax.swing.JLabel();
+        edtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -172,6 +191,11 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         panBotoes.add(btnCancelar);
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
         panBotoes.add(btnConfirmar);
 
         grdManutencoes.setModel(new javax.swing.table.DefaultTableModel(
@@ -195,26 +219,46 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         lblManutencoes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblManutencoes.setText("Manutenções:");
 
+        lblPreco.setText("Preço:");
+
+        javax.swing.GroupLayout panPrecoLayout = new javax.swing.GroupLayout(panPreco);
+        panPreco.setLayout(panPrecoLayout);
+        panPrecoLayout.setHorizontalGroup(
+            panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPrecoLayout.createSequentialGroup()
+                .addComponent(lblPreco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtPreco))
+        );
+        panPrecoLayout.setVerticalGroup(
+            panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPrecoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(panCamposManutencao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(panCamposManutencao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3)
-                            .addComponent(lblManutencoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3)
+                    .addComponent(lblManutencoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -223,6 +267,8 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSelecaoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,9 +282,9 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                 .addComponent(lblManutencoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -267,6 +313,30 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (idManutencaoEditando > 0) {
+                manutencaoPreventivaController.atualizarManutencaoPreventiva();
+            } else {
+                manutencaoPreventivaController.cadastrarManutencaoPreventiva();
+            }
+            //Comando bastante importante
+            this.idManutencaoEditando = -1L;
+
+            manutencaoPreventivaController.atualizarTabela(grdManutencoes);
+
+            this.habilitarCampos(false);
+            this.limparCampos();
+        } catch (ServicoException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
     public void habilitarCampos(boolean flag){
         // Labels
         lblDescricao.setEnabled(flag);
@@ -274,16 +344,37 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         lblManutencoes.setEnabled(flag);
         lblSelecaoCliente.setEnabled(flag);
         lblSelecaoTecnico.setEnabled(flag);
+        lblPreco.setEnabled(flag);
         
         // Grids
         grdClientes.setEnabled(flag);
+        grdClientes.setVisible(flag);
         grdManutencoes.setEnabled(flag);
+        grdManutencoes.setVisible(flag);
         grdTecnicos.setEnabled(flag);
+        grdTecnicos.setVisible(flag);
         
         // Text Fields
         edtDescricao.setEnabled(flag);
+        edtPreco.setEnabled(flag);
         edtEquipamentos.setEnabled(flag);
     }
+    
+    private void limparCampos(){
+        edtPreco.setText("");
+        edtEquipamentos.setText("");
+        edtDescricao.setText("");
+    }
+    
+    private Object getObjetoSelecionadoNaGrid(JTable grd) {
+        int rowCliked = grd.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grd.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -336,6 +427,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtDescricao;
     private javax.swing.JTextField edtEquipamentos;
+    private javax.swing.JTextField edtPreco;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdManutencoes;
     private javax.swing.JTable grdTecnicos;
@@ -345,11 +437,13 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEquipamentos;
     private javax.swing.JLabel lblManutencoes;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblSelecaoCliente;
     private javax.swing.JLabel lblSelecaoTecnico;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panCamposManutencao;
+    private javax.swing.JPanel panPreco;
     private javax.swing.JPanel panTitulo;
     // End of variables declaration//GEN-END:variables
 }

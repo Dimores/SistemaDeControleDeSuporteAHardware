@@ -4,19 +4,37 @@
  */
 package view;
 
+import controller.InstalacaoRedeController;
+import controller.ServicoController;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import model.exceptions.ServicoException;
+
 /**
  *
  * @author diego
  */
 public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
-
+    ServicoController servicoController;
+    InstalacaoRedeController instalacaoRedeController;
+    private Long idRedeEditando;
     /**
      * Creates new form dlgCadastrarInstalacaoRede
      */
     public dlgCadastrarInstalacaoRede(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        instalacaoRedeController = new InstalacaoRedeController();
+        servicoController = new ServicoController();
+        servicoController.atualizarTabelaCliente(grdClientes);
+        servicoController.atualizarTabelaTecnico(grdTecnicos);
+
         this.habilitarCampos(false);
+        
+        idRedeEditando = -1L;
     }
 
     /**
@@ -50,6 +68,9 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         grdRedes = new javax.swing.JTable();
         lblRedes = new javax.swing.JLabel();
+        panPreco = new javax.swing.JPanel();
+        lblPreco = new javax.swing.JLabel();
+        edtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -144,7 +165,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                 .addGroup(panInformacoesRedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEnderecoRede)
                     .addComponent(edtEnderecoRede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -172,6 +193,11 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         panBotoes.add(btnCancelar);
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
         panBotoes.add(btnConfirmar);
 
         grdRedes.setModel(new javax.swing.table.DefaultTableModel(
@@ -195,6 +221,27 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         lblRedes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRedes.setText("Redes");
 
+        lblPreco.setText("Preço:");
+
+        javax.swing.GroupLayout panPrecoLayout = new javax.swing.GroupLayout(panPreco);
+        panPreco.setLayout(panPrecoLayout);
+        panPrecoLayout.setHorizontalGroup(
+            panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPrecoLayout.createSequentialGroup()
+                .addComponent(lblPreco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtPreco))
+        );
+        panPrecoLayout.setVerticalGroup(
+            panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPrecoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,7 +261,8 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane3)
-                            .addComponent(lblRedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblRedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -222,6 +270,8 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSelecaoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,7 +288,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -267,6 +317,29 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // Confirmar
+        try {
+            if (idRedeEditando > 0) {
+                instalacaoRedeController.atualizarInstalacaoRede();
+            } else {
+                instalacaoRedeController.cadastrarInstalacaoRede();
+            }
+            //Comando bastante importante
+            this.idRedeEditando = -1L;
+
+            instalacaoRedeController.atualizarTabela(grdRedes);
+
+            this.habilitarCampos(false);
+            this.limparCampos();
+        } catch (ServicoException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
     
     public void habilitarCampos(boolean flag){
         // Labels
@@ -275,15 +348,20 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         lblTipoRede.setEnabled(flag);
         lblEnderecoRede.setEnabled(flag);
         lblRedes.setEnabled(flag);
+        lblPreco.setEnabled(flag);
         
         // Grids
         grdClientes.setEnabled(flag);
+        grdClientes.setVisible(flag);
         grdTecnicos.setEnabled(flag);
+        grdTecnicos.setVisible(flag);
         grdRedes.setEnabled(flag);
+        grdRedes.setVisible(flag);
         
         // Text Fields
         edtEnderecoRede.setEnabled(flag);
         edtTipoRede.setEnabled(flag);
+        edtPreco.setEnabled(flag);
     }
     /**
      * @param args the command line arguments
@@ -314,6 +392,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 dlgCadastrarInstalacaoRede dialog = new dlgCadastrarInstalacaoRede(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -326,6 +405,21 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
             }
         });
     }
+    
+    private void limparCampos(){
+        edtPreco.setText("");
+        edtTipoRede.setText("");
+        edtEnderecoRede.setText("");
+    }
+    
+    private Object getObjetoSelecionadoNaGrid(JTable grd) {
+        int rowCliked = grd.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grd.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -334,6 +428,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JTextField edtEnderecoRede;
+    private javax.swing.JTextField edtPreco;
     private javax.swing.JTextField edtTipoRede;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdRedes;
@@ -342,6 +437,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblEnderecoRede;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblRedes;
     private javax.swing.JLabel lblSelecaoCliente;
     private javax.swing.JLabel lblSelecaoTecnico;
@@ -349,6 +445,8 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panInformacoesRede;
+    private javax.swing.JPanel panPreco;
     private javax.swing.JPanel panTitulo;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -23,11 +23,14 @@ import model.exceptions.ServicoException;
  */
 public class dlgCadastroServico extends javax.swing.JFrame {
     ServicoController servicoController;
-    Cliente clienteEscolhido;
-    Tecnico tecnicoEscolhido;
+    //Cliente clienteEscolhido;
+    //Tecnico tecnicoEscolhido;
     private String tipoServico;
     Long idServicoEditando;
     private String dataServico;
+    dlgCadastrarInstalacaoRede dlgInstalacaoRede;
+    dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
+    dlgCadastrarConcertoComputador dlgConsertoComputador;
     
 
     /**
@@ -35,17 +38,16 @@ public class dlgCadastroServico extends javax.swing.JFrame {
      */
     public dlgCadastroServico() {
         servicoController = new ServicoController();
-        clienteEscolhido = new Cliente();
-        tecnicoEscolhido = new Tecnico();
+        //clienteEscolhido = new Cliente();
+        //tecnicoEscolhido = new Tecnico();
         idServicoEditando = -1L;
         initComponents();
         this.habilitarCampos(false);
-        servicoController.atualizarTabelaCliente(grdClientes);
-        servicoController.atualizarTabelaTecnico(grdTecnicos);
-        servicoController.atualizarTabela(grdServicos);
+        //servicoController.atualizarTabelaCliente(grdClientes);;
+        //servicoController.atualizarTabelaTecnico(grdTecnicos);
+        //servicoController.atualizarTabela(grdServicos);
         this.tipoServico = "Consertar PC";
         this.dataServico = Data.pegaDataSistema();
-        
     }
 
     /**
@@ -58,33 +60,12 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        panTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        lblServicoEfetuado = new javax.swing.JLabel();
-        boxEscolhaServico = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdClientes = new javax.swing.JTable();
-        lblCpfCliente = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grdTecnicos = new javax.swing.JTable();
-        edtDescricaoServico = new javax.swing.JTextField();
-        lblCpfTecnico = new javax.swing.JLabel();
-        lblDescricaoServico = new javax.swing.JLabel();
-        lblValor = new javax.swing.JLabel();
-        edtValor = new javax.swing.JTextField();
-        fEdtEmailCliente = new javax.swing.JFormattedTextField();
-        btnBuscarCliente = new javax.swing.JButton();
-        fEdtEmailTecnico = new javax.swing.JFormattedTextField();
-        btnBuscarTecnico = new javax.swing.JButton();
-        panBotoes = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        grdServicos = new javax.swing.JTable();
-        lblServicos = new javax.swing.JLabel();
+        panMenu = new javax.swing.JPanel();
+        btnConsertoComputador = new javax.swing.JButton();
+        btnInstalacaoRede = new javax.swing.JButton();
+        btnManutencaoPreventiva = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -104,338 +85,102 @@ public class dlgCadastroServico extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Cadastrar serviço");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panTituloLayout = new javax.swing.GroupLayout(panTitulo);
+        panTitulo.setLayout(panTituloLayout);
+        panTituloLayout.setHorizontalGroup(
+            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panTituloLayout.setVerticalGroup(
+            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        lblServicoEfetuado.setText("Serviço a ser efetuado:");
-
-        boxEscolhaServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Consertar PC", "Instalar rede", "Manutenção preventiva" }));
-        boxEscolhaServico.addActionListener(new java.awt.event.ActionListener() {
+        btnConsertoComputador.setText("Conserto de Computador");
+        btnConsertoComputador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxEscolhaServicoActionPerformed(evt);
+                btnConsertoComputadorActionPerformed(evt);
             }
         });
 
-        grdClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdClientesMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(grdClientes);
-
-        lblCpfCliente.setText("Digite o email do cliente:");
-
-        grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdTecnicos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdTecnicosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(grdTecnicos);
-
-        edtDescricaoServico.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        edtDescricaoServico.addActionListener(new java.awt.event.ActionListener() {
+        btnInstalacaoRede.setText("Instalação de Rede");
+        btnInstalacaoRede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtDescricaoServicoActionPerformed(evt);
+                btnInstalacaoRedeActionPerformed(evt);
             }
         });
 
-        lblCpfTecnico.setText("Digite o email do tecnico:");
-
-        lblDescricaoServico.setText("Descricao do Serviço:");
-
-        lblValor.setText("Valor:");
-
-        btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loupe_78956.png"))); // NOI18N
-        btnBuscarCliente.setText("Buscar");
-        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnManutencaoPreventiva.setText("Manutenção Preventiva");
+        btnManutencaoPreventiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarClienteActionPerformed(evt);
+                btnManutencaoPreventivaActionPerformed(evt);
             }
         });
 
-        btnBuscarTecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loupe_78956.png"))); // NOI18N
-        btnBuscarTecnico.setText("Buscar");
-        btnBuscarTecnico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarTecnicoActionPerformed(evt);
-            }
-        });
-
-        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
-
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnSalvar);
-
-        btnEditar.setText("Editar");
-        panBotoes.add(btnEditar);
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnExcluir);
-
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnNovo);
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnCancelar);
-
-        grdServicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdServicos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdServicosMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(grdServicos);
-
-        lblServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblServicos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblServicos.setText("Serviços");
+        javax.swing.GroupLayout panMenuLayout = new javax.swing.GroupLayout(panMenu);
+        panMenu.setLayout(panMenuLayout);
+        panMenuLayout.setHorizontalGroup(
+            panMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConsertoComputador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInstalacaoRede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManutencaoPreventiva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panMenuLayout.setVerticalGroup(
+            panMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnConsertoComputador, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnInstalacaoRede, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnManutencaoPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addComponent(edtDescricaoServico, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
-                    .addComponent(lblServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fEdtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCpfTecnico)
-                                .addGap(11, 11, 11)
-                                .addComponent(fEdtEmailTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblDescricaoServico)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblServicoEfetuado, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblValor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 292, Short.MAX_VALUE)))
+                .addComponent(panMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblServicoEfetuado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxEscolhaServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblValor)
-                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(lblCpfCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                            .addComponent(fEdtEmailCliente))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCpfTecnico)
-                    .addComponent(fEdtEmailTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarTecnico))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDescricaoServico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtDescricaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblServicos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(panMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void grdTecnicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdTecnicosMouseClicked
+    private void btnConsertoComputadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsertoComputadorActionPerformed
+        // Abrir a tela de conserta de computador
+        this.dlgConsertoComputador = new dlgCadastrarConcertoComputador(this, true);
+        dlgConsertoComputador.setVisible(true);       
+    }//GEN-LAST:event_btnConsertoComputadorActionPerformed
 
-    }//GEN-LAST:event_grdTecnicosMouseClicked
+    private void btnInstalacaoRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstalacaoRedeActionPerformed
+        // Abrir a tela de instalação de rede
+        this.dlgInstalacaoRede = new dlgCadastrarInstalacaoRede(this, true);
+        dlgInstalacaoRede.setVisible(true);
+    }//GEN-LAST:event_btnInstalacaoRedeActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
-        tecnicoEscolhido = (Tecnico) this.getObjetoSelecionadoNaGrid(grdTecnicos);
-        clienteEscolhido = (Cliente) this.getObjetoSelecionadoNaGrid(grdClientes);
-        
-        
-        
-        try {
-            if (idServicoEditando > 0) {
-                servicoController.atualizarServico(idServicoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), dataServico, false, this.tipoServico);
-            } else {
-                servicoController.cadastrarServico(idServicoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoServico.getText(), dataServico, false, this.tipoServico);
-            }
-            //Comando bastante importante
-            this.idServicoEditando  = -1L;
-
-            servicoController.atualizarTabela(grdServicos);
-
-            this.habilitarCampos(false);
-            this.limparCampos();
-        } catch (ServicoException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void boxEscolhaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxEscolhaServicoActionPerformed
-        // Pegando o gtipo de servico
-        tipoServico = String.valueOf(boxEscolhaServico.getSelectedIndex());
-        setTipoServico();
-    }//GEN-LAST:event_boxEscolhaServicoActionPerformed
-
-    private void grdClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdClientesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grdClientesMouseClicked
-
-    private void edtDescricaoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtDescricaoServicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtDescricaoServicoActionPerformed
-
-    private void grdServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdServicosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grdServicosMouseClicked
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
-        this.habilitarCampos(true);
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        this.limparCampos();
-        this.habilitarCampos(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
-        // TODO add your handling code here:
-        //clienteEscolhido = servicoController.buscarCliente(fEdtEmailCliente.getText());
-        //servicoController.atualizarTabelaCliente(grdClientes, clienteEscolhido);
-    }//GEN-LAST:event_btnBuscarClienteActionPerformed
-
-    private void btnBuscarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTecnicoActionPerformed
-        // TODO add your handling code here:
-        //tecnicoEscolhido = servicoController.buscarTecnico(fEdtEmailTecnico.getText());
-        //servicoController.atualizarTabelaTecnico(grdTecnicos, tecnicoEscolhido);
-    }//GEN-LAST:event_btnBuscarTecnicoActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-        Servico servicoExcluido = (Servico) this.getObjetoSelecionadoNaGrid(grdServicos);
-
-        if (servicoExcluido == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-
-            int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Tecnico  \n("
-                + servicoExcluido.getTipoServico() + ", "
-                + servicoExcluido.getDescricaoServico() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.OK_OPTION) {
-
-                try {
-                    servicoController.excluirServico(servicoExcluido);
-
-                    servicoController.atualizarTabela(grdServicos);
-                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                } catch (ServicoException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage());
-                }
-            }
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    private void btnManutencaoPreventivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManutencaoPreventivaActionPerformed
+       // Abrir a tela de manutenção preventiva
+       this.dlgManutencaoPreventiva = new dlgCadastrarManutencaoPreventiva(this, true);
+       dlgManutencaoPreventiva.setVisible(true);     
+    }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 
     private Object getObjetoSelecionadoNaGrid(JTable grd) {
         int rowCliked = grd.getSelectedRow();
@@ -491,7 +236,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     }
     
         public void habilitarCampos(boolean flag) {
-                lblServicoEfetuado.setEnabled(flag);
+                /*lblServicoEfetuado.setEnabled(flag);
                 boxEscolhaServico.setEnabled(flag);
                 lblValor.setEnabled(flag);
                 edtValor.setEnabled(flag);
@@ -506,45 +251,24 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 lblDescricaoServico.setEnabled(flag);
                 edtDescricaoServico.setEnabled(flag);
                 lblServicos.setEnabled(flag);
-                grdServicos.setEnabled(flag);
+                grdServicos.setEnabled(flag);*/
                 
         }
         
         public void limparCampos(){
-                edtValor.setText("");
+                /*edtValor.setText("");
                 fEdtEmailCliente.setText("");
                 fEdtEmailTecnico.setText("");
-                edtDescricaoServico.setText("");
+                edtDescricaoServico.setText("");*/
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxEscolhaServico;
-    private javax.swing.JButton btnBuscarCliente;
-    private javax.swing.JButton btnBuscarTecnico;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField edtDescricaoServico;
-    private javax.swing.JTextField edtValor;
-    private javax.swing.JFormattedTextField fEdtEmailCliente;
-    private javax.swing.JFormattedTextField fEdtEmailTecnico;
-    private javax.swing.JTable grdClientes;
-    private javax.swing.JTable grdServicos;
-    private javax.swing.JTable grdTecnicos;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnConsertoComputador;
+    private javax.swing.JButton btnInstalacaoRede;
+    private javax.swing.JButton btnManutencaoPreventiva;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblCpfCliente;
-    private javax.swing.JLabel lblCpfTecnico;
-    private javax.swing.JLabel lblDescricaoServico;
-    private javax.swing.JLabel lblServicoEfetuado;
-    private javax.swing.JLabel lblServicos;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblValor;
-    private javax.swing.JPanel panBotoes;
+    private javax.swing.JPanel panMenu;
+    private javax.swing.JPanel panTitulo;
     // End of variables declaration//GEN-END:variables
 }
