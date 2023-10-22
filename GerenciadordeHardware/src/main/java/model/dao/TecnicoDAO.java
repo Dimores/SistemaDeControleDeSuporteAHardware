@@ -1,5 +1,6 @@
 package model.dao;
 
+import factory.DatabaseJPA;
 import factory.Persistencia;
 import model.*;
 import java.util.ArrayList;
@@ -9,223 +10,95 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.interfaces.*;
 
 public class TecnicoDAO implements IDao {
+private EntityManager entityManager;
+    private Query qry;
+    private String jpql;
+    
 
-    protected Connection connection;
-    private PreparedStatement statement;
-    private String sql;
-
-
-    public TecnicoDAO() {
-        this.sql = "";
-    }
 
     @Override
     public void save(Object obj) {
-        Tecnico tecnico = (Tecnico) obj;
-
-        sql = " INSERT INTO "
-                + " tecnico(salario,  nome, CPF, dataNasc, senha, email, telefone) "
-                + " VALUES(?,?,?,?,?,?,?) ";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-
-            //preencher cada ? com o campo adequado
-
-            statement.setDouble(1, tecnico.getSalario());
-            statement.setString(2, tecnico.getNome());
-            statement.setString(3, tecnico.getCPF());
-
-            statement.setString(4, tecnico.getDataNasc());
-
-
-            statement.setString(5, tecnico.getSenha());
-            statement.setString(6, tecnico.getEmail());
-            statement.setString(7, tecnico.getTelefone());
-            
-            statement.execute();
-            statement.close();
-        } catch (SQLException u) {
-            System.out.println("Erro ao salvar");
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
+        
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(obj);
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+      
     }
-
+    
     public void update(Object obj) {
-        Tecnico tecnico = (Tecnico) obj;
-
-        sql = " UPDATE tecnico "
-                + " SET salario = ?,  nome = ?, CPF = ?, dataNasc = ?, senha = ?, email = ?, telefone = ? "
-                + " WHERE id = ?";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-
-            //preencher cada ? com o campo adequado
-            statement.setDouble(1, tecnico.getSalario());
-            statement.setString(2, tecnico.getNome());
-            statement.setString(3, tecnico.getCPF());
-
-            statement.setString(4, tecnico.getDataNasc());
-
-            statement.setString(5, tecnico.getSenha());
-            statement.setString(6, tecnico.getEmail());
-            statement.setString(7, tecnico.getTelefone());
-
-            //preenche a condição do WHERE
-            statement.setString(8, tecnico.getId());
-
-            statement.execute();
-            statement.close();
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.merge(obj);
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
     }
 
-@Override
-public List<Object> findAll() {
-    List<Object> list = new ArrayList<>();
-
-    sql = "SELECT * FROM tecnico ORDER BY upper(nome)";
-    try {
-        statement = Persistencia.getConnection().prepareStatement(sql);
-        ResultSet resultset = statement.executeQuery();
-        while (resultset.next()) {
-            
-
-
-            Tecnico tecnico = new Tecnico(
-                    resultset.getString(1),
-                    resultset.getDouble(2),
-                    resultset.getString(3),
-                    resultset.getString(4),
-                    resultset.getString(5),
-                    resultset.getString(6),
-                    resultset.getString(7),
-                    resultset.getString(8));
-
-            list.add(tecnico);
-        }
-        statement.close();
-    } catch (SQLException ex) {
-        throw new RuntimeException(ex);
-    } finally {
-        Persistencia.closeConnection();
+    @Override
+    public List<Object> findAll() {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT c " + "FROM Usuario c WHERE tipo = TECNICO";
+        qry = this.entityManager.createQuery(jpql);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        return (List<Object>) lst;
     }
-
-    return list;
-}
-
 
     @Override
     public Object find(Object obj) {
-        Tecnico tecnico = (Tecnico) obj;
-
-        sql = " SELECT * FROM tecnico WHERE id = ? ";
-        try {
-
-            statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, tecnico.getId());
-
-            ResultSet resultset = statement.executeQuery();
-            
-
-
-            Tecnico t = null;
-            while (resultset.next()) {
-                t = new Tecnico(
-                    resultset.getString(1),
-                    resultset.getDouble(2),
-                    resultset.getString(3),
-                    resultset.getString(4),
-                    resultset.getString(5),
-                    resultset.getString(6),
-                    resultset.getString(7),
-                    resultset.getString(8));
-
-            }
-            statement.close();
-            return t;
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
-
+        Tecnico procurado = (Tecnico) obj;
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        procurado = this.entityManager.find(Tecnico.class ,procurado.getId());
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return procurado;   
     }
 
     /**
-     * Procura um tenico pelo email, que é o identificador único
+     * Procura um cliente pelo email, que é o identificador único
      *
      * @param email
-     * @return Referencia para o tenico na lstTecnico
+     * @return Referencia para o cliente na lstCliente
      */
     public Object findByEmail(String email) {
-        sql = " Select * FROM tecnico as t WHERE t.email = ? ";
-
-        Tecnico tecnico = null;
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-            //preenche a condição
-            statement.setString(1, email);
-
-            ResultSet resultset = statement.executeQuery();
-            
-
-            while (resultset.next()) {
-                tecnico = new Tecnico(
-                    resultset.getString(1),
-                    resultset.getDouble(2),
-                    resultset.getString(3),
-                    resultset.getString(4),
-                    resultset.getString(5),
-                    resultset.getString(6),
-                    resultset.getString(7),
-                    resultset.getString(8));
-
-            }
-            statement.close();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            Persistencia.closeConnection();
-        }
-        return tecnico;
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT c " + " FROM Usuario c " + " WHERE  c.email like :email";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("email", email);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        if(lst.isEmpty()){
+            return null;
+        }return (Tecnico) lst.get(0);
+       
     }
 
     /**
-     * Recebe um Aluno como parametro, procura o Aluno pela Matricula Se
-     * encontrar remove ele da lstAlunos.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
+     * encontrar, remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-    @Override
-    public boolean delete(Object obj) {
-        Tecnico tecnico = (Tecnico) obj;
 
-        sql = " DELETE FROM tecnico WHERE id = ? ";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-            //preenche a condição
-            statement.setString(1, tecnico.getId());
-
-            statement.execute();
-            statement.close();
-            return true;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            Persistencia.closeConnection();
-        }
-    }
+@Override
+public boolean delete(Object obj) {
+    this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+    this.entityManager.getTransaction().begin();
+    jpql = " DELETE FROM Usuario WHERE id = :id";
+    Tecnico tecnico = (Tecnico) obj;
+    qry = this.entityManager.createQuery(jpql);
+    qry.setParameter("id", tecnico.getId());
+    qry.executeUpdate();
+    this.entityManager.getTransaction().commit();
+    this.entityManager.close();
+    return true;
+}
 }

@@ -67,7 +67,7 @@ public class ProdutoDAO implements IDao{
      * @param codigo
      * @return Referencia para o cliente na lstCliente
      */
-    public Object findByBarCode(String codigo) {
+    public Object findByCodigo(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT c " + " FROM Produto c " + " WHERE  c.codigo like :codigo";
         qry = this.entityManager.createQuery(jpql);

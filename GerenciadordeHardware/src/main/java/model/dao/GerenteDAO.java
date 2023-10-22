@@ -44,7 +44,7 @@ public class GerenteDAO implements IDao {
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u " + "FROM Usuario u ";
+        jpql = " SELECT u " + "FROM Usuario u WHERE tipo =: GERENTE";
         qry = this.entityManager.createQuery(jpql);
         List lst = qry.getResultList();
         this.entityManager.close();
@@ -89,17 +89,17 @@ public class GerenteDAO implements IDao {
      * @return
      */
 
-@Override
-public boolean delete(Object obj) {
-    this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-    this.entityManager.getTransaction().begin();
-    jpql = " DELETE FROM Usuario WHERE email = :email";
-    Gerente g = (Gerente) obj;
-    qry = this.entityManager.createQuery(jpql);
-    qry.setParameter("email", g.getEmail());
-    qry.executeUpdate();
-    this.entityManager.getTransaction().commit();
-    this.entityManager.close();
-    return true;
-}
+    @Override
+    public boolean delete(Object obj) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        jpql = " DELETE FROM Usuario WHERE id = :id";
+        Gerente g = (Gerente) obj;
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("email", g.getId());
+        qry.executeUpdate();
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return true;
+    }
 }

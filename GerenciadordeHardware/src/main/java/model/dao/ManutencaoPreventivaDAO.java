@@ -3,19 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.dao;
-
 import factory.DatabaseJPA;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.ConcertoComputador;
+import model.*;
 import model.interfaces.IDao;
-
 /**
  *
  * @author ruiz
  */
-public class ConcertoComputadorDAO implements IDao{
+public class ManutencaoPreventivaDAO  implements IDao{
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
@@ -44,7 +42,7 @@ public class ConcertoComputadorDAO implements IDao{
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u " + "FROM ConcertoComputador u ";
+        jpql = " SELECT u " + "FROM Servico u WHERE tipo = :MANUTENCAOPREVENTIVA";
         qry = this.entityManager.createQuery(jpql);
         List lst = qry.getResultList();
         this.entityManager.close();
@@ -53,10 +51,10 @@ public class ConcertoComputadorDAO implements IDao{
 
     @Override
     public Object find(Object obj) {
-        ConcertoComputador Procurado = (ConcertoComputador) obj;
+        ManutencaoPreventiva Procurado = (ManutencaoPreventiva) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        ConcertoComputador c = this.entityManager.find(ConcertoComputador.class ,Procurado.getIdServico());
+        ManutencaoPreventiva c = this.entityManager.find(ManutencaoPreventiva.class ,Procurado.getIdServico());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
         return c;   
@@ -93,10 +91,10 @@ public class ConcertoComputadorDAO implements IDao{
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        jpql = " DELETE FROM DispositivosDeRede WHERE idServico = :idServico";
-        ConcertoComputador p = (ConcertoComputador) obj;
+        jpql = " DELETE FROM Servico WHERE idServico = :idServico";
+        ManutencaoPreventiva p = (ManutencaoPreventiva) obj;
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("codigo", p.getIdServico());
+        qry.setParameter("idServico", p.getIdServico());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         this.entityManager.close();

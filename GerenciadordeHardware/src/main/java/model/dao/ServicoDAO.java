@@ -1,5 +1,6 @@
 package model.dao;
 
+import factory.DatabaseJPA;
 import factory.Persistencia;
 import model.*;
 import java.util.ArrayList;
@@ -9,227 +10,78 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.interfaces.IDao;
 
 public class ServicoDAO implements IDao {
 
-    protected Connection connection;
-    private PreparedStatement statement;
-    private String sql;
-
-    public ServicoDAO() {
-        this.sql = "";
-    }
-
+    private EntityManager entityManager;
+    private Query qry;
+    private String jpql;
+    
     @Override
     public void save(Object obj) {
-        Servico servico = (Servico) obj;
-
-        sql = " INSERT INTO "
-                + " servico(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido) "
-                + " VALUES(?,?,?,?,?,?) ";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-
-            // Preencher cada ? com o campo adequado
-            statement.setString(1, servico.getTecnico().getNome());
-            statement.setString(2, servico.getCliente().getNome());
-            statement.setFloat(3, servico.getValor());
-            statement.setString(4, servico.getDescricaoServico());
-
-            // Arrumar aqui pra String
-            // Converter o Calendar para java.sql.Date
-            //java.sql.Date dataServicoSql = new java.sql.Date(servico.getDataServico().getTimeInMillis());
-            //statement.setDate(5, dataServicoSql);
-
-            statement.setBoolean(6, servico.isConcluido());
-
-            statement.execute();
-            statement.close();
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
+        
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(obj);
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+      
     }
-
+    
+    @Override
     public void update(Object obj) {
-        Servico servico = (Servico) obj;
-
-        sql = " UPDATE servico "
-                + " SET tecnicoResponsavel = ?, clienteAtendido = ?, valor = ?, descricaoServico = ?, dataServico = ?, concluido = ? "
-                + " WHERE idServico = ?";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-
-            // Preencher cada ? com o campo adequado
-            statement.setString(1, servico.getTecnico().getNome());
-            statement.setString(2, servico.getCliente().getNome());
-            statement.setFloat(3, servico.getValor());
-            statement.setString(4, servico.getDescricaoServico());
-
-            statement.setString(5, servico.getDataServico());
-
-            statement.setBoolean(6, servico.isConcluido());
-
-            // Preencher a condição do WHERE
-            statement.setString(7, servico.getIdServico());
-
-            statement.execute();
-            statement.close();
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        this.entityManager.merge(obj);
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
     }
 
     @Override
     public List<Object> findAll() {
-        List<Object> list = new ArrayList<>();
-
-        sql = "SELECT * FROM servico ORDER BY upper(descricaoServico)";
-        try {
-            statement = Persistencia.getConnection().prepareStatement(sql);
-            ResultSet resultset = statement.executeQuery();
-            while (resultset.next()) {
-
-                // Converter o java.sql.Date para Calendar
-               // java.sql.Date sqlDate = resultset.getDate(6);
-                //Calendar dataServico = Calendar.getInstance();
-                //dataServico.setTimeInMillis(sqlDate.getTime());
-
-                Servico servico = new Servico(
-                        resultset.getString(1),
-                        null, // Tecnico nao e mais buscado
-                        null,  // Cliebte nao e mais buscado
-                        resultset.getFloat(4),
-                        resultset.getString(5),
-                        // Arrumar aqui pra String
-                        resultset.getString(6),
-                        //dataServico,
-                        resultset.getBoolean(7));
-
-                list.add(servico);
-            }
-            statement.close();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            Persistencia.closeConnection();
-        }
-
-        return list;
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Servico u";
+        qry = this.entityManager.createQuery(jpql);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        return (List<Object>) lst;
     }
 
     @Override
     public Object find(Object obj) {
-        Servico servico = (Servico) obj;
-
-        sql = " SELECT * FROM servico WHERE idServico = ? ";
-        try {
-
-            statement = Persistencia.getConnection().prepareStatement(sql);
-            statement.setString(1, servico.getIdServico());
-
-            ResultSet resultset = statement.executeQuery();
-
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(6);
-            Calendar dataServico = Calendar.getInstance();
-            dataServico.setTimeInMillis(sqlDate.getTime());
-
-            Servico s = null;
-            while (resultset.next()) {
-                s = new Servico(
-                         resultset.getString(1),
-                        null, // Tecnico nao e mais buscado
-                        null,  // Cliebte nao e mais buscado
-                        resultset.getFloat(4),
-                        resultset.getString(5),
-                        resultset.getString(6),
-                        resultset.getBoolean(7));
-
-            }
-            statement.close();
-            return s;
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        } finally {
-            Persistencia.closeConnection();
-        }
-
+        Servico Procurado = (Servico) obj;
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        Servico c = this.entityManager.find(Servico.class ,Procurado.getIdServico());
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return c;   
     }
 
-    /**
-     * Procura um serviço pelo código, que é o identificador único
-     *
-     * @return Referência para o serviço na lista de serviços
-     */
-    public Object findByValor(float valor) {
-        sql = " Select * FROM servico as s WHERE s.valor = ? ";
-
-        Servico servico = null;
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-            // Preencher a condição
-            statement.setFloat(1, valor);
-
-            ResultSet resultset = statement.executeQuery();
-
-            // Converter o java.sql.Date para Calendar
-            java.sql.Date sqlDate = resultset.getDate(6);
-            Calendar dataServico = Calendar.getInstance();
-            dataServico.setTimeInMillis(sqlDate.getTime());
-
-            while (resultset.next()) {
-                servico = new Servico(
-                        resultset.getString(1),
-                        null, // Tecnico nao e mais buscado
-                        null,  // Cliebte nao e mais buscado
-                        resultset.getFloat(4),
-                        resultset.getString(5),
-                        resultset.getString(6),
-                        resultset.getBoolean(7));
-
-            }
-            statement.close();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            Persistencia.closeConnection();
-        }
-        return servico;
-    }
+  
 
     /**
-     * Recebe um serviço como parâmetro, procura o serviço pelo código. Se encontrar,
-     * remove ele da lista de serviços.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
+     * encontrar, remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
+
     @Override
     public boolean delete(Object obj) {
-        Servico servico = (Servico) obj;
-
-        sql = " DELETE FROM servico WHERE idServico = ? ";
-        try {
-            connection = Persistencia.getConnection();
-            statement = connection.prepareStatement(sql);
-            // Preencher a condição
-            statement.setString(1, servico.getIdServico());
-
-            statement.execute();
-            statement.close();
-            return true;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            Persistencia.closeConnection();
-        }
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        jpql = " DELETE FROM Servico WHERE id = :id";
+        Servico p = (Servico) obj;
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id", p.getIdServico());
+        qry.executeUpdate();
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return true;
     }
 }

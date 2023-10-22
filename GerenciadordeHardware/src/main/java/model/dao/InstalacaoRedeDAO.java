@@ -1,29 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model.dao;
-
 import factory.DatabaseJPA;
-import factory.Persistencia;
-import model.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import model.*;
 import model.interfaces.IDao;
-
-
-public class ClienteDAO implements IDao {
-    
+/**
+ *
+ * @author ruiz
+ */
+public class InstalacaoRedeDAO  implements IDao{
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
     
-    public ClienteDAO() {
     
-    }
-
     @Override
     public void save(Object obj) {
         
@@ -35,6 +30,7 @@ public class ClienteDAO implements IDao {
       
     }
     
+    @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
@@ -46,7 +42,7 @@ public class ClienteDAO implements IDao {
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + "FROM Usuario c WHERE tipo = :CLIENTE";
+        jpql = " SELECT u " + "FROM Servico u WHERE tipo = :INSTALACAOREDE";
         qry = this.entityManager.createQuery(jpql);
         List lst = qry.getResultList();
         this.entityManager.close();
@@ -55,33 +51,33 @@ public class ClienteDAO implements IDao {
 
     @Override
     public Object find(Object obj) {
-        Cliente clienteProcurado = (Cliente) obj;
+        InstalacaoRede Procurado = (InstalacaoRede) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        Cliente cliente = this.entityManager.find(Cliente.class ,clienteProcurado.getId());
+        InstalacaoRede c = this.entityManager.find(InstalacaoRede.class ,Procurado.getIdServico());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return cliente;   
+        return c;   
     }
 
     /**
-     * Procura um cliente pelo email, que é o identificador único
+     * Procura produtos por codigodebarras, que é o identificador único
      *
-     * @param email
+     * @param codigo
      * @return Referencia para o cliente na lstCliente
      */
-    public Object findByEmail(String email) {
+    /*public Object findByBarCode(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM Usuario c " + " WHERE  c.email like :email";
+        jpql = " SELECT c " + " FROM ConcertoComputador c " + " WHERE  c.codigo like :codigo";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("email", email);
+        qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
         this.entityManager.close();
         if(lst.isEmpty()){
             return null;
-        }return (Cliente) lst.get(0);
+        }return (DispositivoDeRede) lst.get(0);
        
-    }
+    }*/
 
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
@@ -91,18 +87,17 @@ public class ClienteDAO implements IDao {
      * @return
      */
 
-@Override
-public boolean delete(Object obj) {
-    this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-    this.entityManager.getTransaction().begin();
-    jpql = " DELETE FROM Usuario WHERE id = :id";
-    Cliente cliente = (Cliente) obj;
-    qry = this.entityManager.createQuery(jpql);
-    qry.setParameter("email", cliente.getId());
-    qry.executeUpdate();
-    this.entityManager.getTransaction().commit();
-    this.entityManager.close();
-    return true;
-}
-
+    @Override
+    public boolean delete(Object obj) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        jpql = " DELETE FROM Servico WHERE idServico = :idServico";
+        InstalacaoRede p = (InstalacaoRede) obj;
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("idServico", p.getIdServico());
+        qry.executeUpdate();
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return true;
+    }
 }

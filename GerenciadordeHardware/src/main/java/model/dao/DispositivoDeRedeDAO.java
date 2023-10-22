@@ -43,7 +43,7 @@ public class DispositivoDeRedeDAO implements IDao{
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u " + "FROM DispositivoDeRede u ";
+        jpql = " SELECT u " + "FROM Produto u WHERE tipo = :DISPOSITIVODEREDE";
         qry = this.entityManager.createQuery(jpql);
         List lst = qry.getResultList();
         this.entityManager.close();
@@ -67,9 +67,9 @@ public class DispositivoDeRedeDAO implements IDao{
      * @param codigo
      * @return Referencia para o cliente na lstCliente
      */
-    public Object findByBarCode(String codigo) {
+    public Object findByCodigo(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM DispositivoDeRede c " + " WHERE  c.codigo like :codigo";
+        jpql = " SELECT c " + " FROM Produto c " + " WHERE  c.codigo like :codigo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
@@ -92,10 +92,10 @@ public class DispositivoDeRedeDAO implements IDao{
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        jpql = " DELETE FROM DispositivosDeRede WHERE codigo = :codigo";
+        jpql = " DELETE FROM Produto WHERE id = :id";
         DispositivoDeRede p = (DispositivoDeRede) obj;
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("codigo", p.getCodigo());
+        qry.setParameter("id", p.getIdProduto());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
