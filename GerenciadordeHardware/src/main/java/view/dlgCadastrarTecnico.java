@@ -374,7 +374,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_fEdtDataNascActionPerformed
 
-private Object getObjetoSelecionadoNaGrid() {
+    private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdTecnicos.getSelectedRow();
         Object obj = null;
         if (rowCliked >= 0) {
@@ -384,11 +384,11 @@ private Object getObjetoSelecionadoNaGrid() {
     }
     
     
-        public void habilitarCampos(boolean flag) {
-            for (int i = 0; i < panFormulario.getComponents().length; i++) {
-                panFormulario.getComponent(i).setEnabled(flag);
-            }
+    public void habilitarCampos(boolean flag) {
+        for (int i = 0; i < panFormulario.getComponents().length; i++) {
+            panFormulario.getComponent(i).setEnabled(flag);
         }
+    }
         
         public void limparCampos() {
             edtNome.setText("");
@@ -399,7 +399,7 @@ private Object getObjetoSelecionadoNaGrid() {
             fEdtTelefone.setText("");
     }
         
-        public void preencherFormulario(Tecnico t) {
+    public void preencherFormulario(Tecnico t) {
             edtNome.setText(t.getNome());
             fEdtCpf.setText(t.getCPF());
             fEdtDataNasc.setText(t.getDataNasc());

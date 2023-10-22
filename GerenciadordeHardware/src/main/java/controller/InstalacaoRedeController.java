@@ -4,9 +4,11 @@
  */
 package controller;
 
+import java.util.Calendar;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
+import model.exceptions.InstalacaoRedeException;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -17,13 +19,31 @@ import lombok.*;
  * @author ruiz
  */
 public class InstalacaoRedeController extends ServicoController {
+    //InstalacaoRedeDAO repositorio;
     
-    public void atualizarInstalacaoRede(){
+    public InstalacaoRedeController() {
+        //repositorio = new InstalacaoRedeDAO();
+    }
+    
+    public void atualizarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede){
+        
+        //InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
+        /*InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
+        //novaInstalacaoRede.setIdServico(idServico); 
+        
+        //repositorio.update(novaInstalacaoRede);
         
     }
     
-    public void cadastrarInstalacaoRede(){
+    public void cadastrarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede){
+        //InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
+        /*InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
         
+        //repositorio.save(novaInstalacaoRede);
     }
     
     public void buscarInstalacaoRede(){
@@ -35,7 +55,11 @@ public class InstalacaoRedeController extends ServicoController {
         
     }
     
-    public void excluirInstalacaoRede(){
-        
+    public void excluirInstalacaoRede(InstalacaoRede instalacaoRede){
+        if(instalacaoRede != null){
+            //repositorio.save(instalacaoRede);
+        }else{
+            throw new InstalacaoRedeException("Error - Instalacao de Rede inexistente."); // Alterado de AlunoException para TecnicoException
+        }
     }
 }

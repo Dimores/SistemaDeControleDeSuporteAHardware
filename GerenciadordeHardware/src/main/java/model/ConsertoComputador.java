@@ -15,23 +15,20 @@ import java.util.Calendar;
 /**
  *
  * @author ruiz
+ * @author diego
  */
 
-
 public class ConsertoComputador extends Servico {
-    private String descricaoProblema;
     private ArrayList<Peca> pecasSubstituidas;
 
     public ConsertoComputador() {
         super();
-        this.descricaoProblema = "";
         this.pecasSubstituidas = null;
     }
 
     public ConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                               String dataServico, boolean concluido, String descricaoProblema, ArrayList pecasSubstituidas) {
         super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Conserto de computador");
-        this.descricaoProblema = descricaoProblema;
         this.pecasSubstituidas = pecasSubstituidas;
     }
 
@@ -45,7 +42,7 @@ public class ConsertoComputador extends Servico {
         }
 
         String txt = super.toString() +
-                "Descrição do Problema: " + this.descricaoProblema + "\n" +
+                "Descrição do Problema: " + super.getDescricaoServico() + "\n" +
                 "Peças Substituídas: " + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "Nenhuma") + "\n";
         return txt;
     }
@@ -62,14 +59,14 @@ public class ConsertoComputador extends Servico {
             pecas.append(peca.getNome()).append(", ");
         }
 
-        return super.atributoToCSV() + this.descricaoProblema + ";" + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "") + "\n";
+        return super.atributoToCSV() + super.getDescricaoServico() + ";" + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "") + "\n";
     }
 
     @Override
     public void CSVToAtributo(String csv, Tecnico tecnico, Cliente cliente) {
         super.CSVToAtributo(csv, tecnico, cliente);
         String[] vetor = csv.split(";");
-        this.descricaoProblema = vetor[8]; // Suponha que a descrição do problema seja o nono elemento no CSV
+        //this.descricaoProblema = vetor[8]; // Suponha que a descrição do problema seja o nono elemento no CSV
 
         // Suponha que o décimo elemento no CSV seja uma lista de peças separadas por vírgula
         String pecasCSV = vetor[9];

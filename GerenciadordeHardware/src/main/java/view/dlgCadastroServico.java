@@ -30,7 +30,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     private String dataServico;
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
     dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
-    dlgCadastrarConcertoComputador dlgConsertoComputador;
+    dlgCadastrarConsertoComputador dlgConsertoComputador;
     
 
     /**
@@ -166,7 +166,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
 
     private void btnConsertoComputadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsertoComputadorActionPerformed
         // Abrir a tela de conserta de computador
-        this.dlgConsertoComputador = new dlgCadastrarConcertoComputador(this, true);
+        this.dlgConsertoComputador = new dlgCadastrarConsertoComputador(this, true);
         dlgConsertoComputador.setVisible(true);       
     }//GEN-LAST:event_btnConsertoComputadorActionPerformed
 

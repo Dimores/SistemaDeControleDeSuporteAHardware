@@ -5,21 +5,41 @@
 package view;
 
 import controller.ConsertoComputadorController;
+import controller.PecaController;
 import controller.ServicoController;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import model.Cliente;
+import model.ConsertoComputador;
+import model.Data;
+import model.Peca;
+import model.Tecnico;
+import model.exceptions.ServicoException;
 
 /**
  *
  * @author diego
  */
-public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
+public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     ServicoController servicoController;
     ConsertoComputadorController consertoController;
+    PecaController pecaController;
+    private ArrayList<String> pecasSubstituidas;
+    private Long idConsertoComputadorEditando;
+    private String data;
+    List<Peca> pecasSelecionadas;
+
     
     /**
      * Creates new form dlgCadastrarConcertoComputador
+     * @param parent
+     * @param modal
      */
-    public dlgCadastrarConcertoComputador(java.awt.Frame parent, boolean modal) {
+    public dlgCadastrarConsertoComputador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();
@@ -27,8 +47,17 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         servicoController.atualizarTabelaTecnico(grdTecnicos);
         this.habilitarCampos(false);
         
-        // Instanciando
         consertoController = new ConsertoComputadorController();
+        
+        pecaController = new PecaController();
+        pecaController.atualizarTabela(grdPecas);
+        
+        pecasSubstituidas = new ArrayList<String>();
+        
+        idConsertoComputadorEditando = -1L;
+        data = Data.pegaDataSistema();
+        
+        
     }
 
     /**
@@ -53,8 +82,8 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         edtDescricaoProblema = new javax.swing.JTextField();
         panPecasSubstituidas = new javax.swing.JPanel();
         lblSelecaoPeca = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstPecasSubstituidas = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        grdPecas = new javax.swing.JTable();
         panBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -156,17 +185,23 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
 
         lblSelecaoPeca.setText("Selecione 0 ou muitas peças substituídas:");
 
-        lstPecasSubstituidas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Placa-mãe", "Processador", "Memória RAM", "HD", "SSD", "Fonte de alimentação", "Placa de vídeo", "Placas de som", "Placa de rede", "Cooler", "Ventoinhas", "Gabinete", "Placa de expansão", "Cabos", "Bateria(notebook)", "Monitor", "Teclado", "Mouse", "Webcam", "Microfone" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        lstPecasSubstituidas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstPecasSubstituidasValueChanged(evt);
+        grdPecas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        grdPecas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdPecasMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(lstPecasSubstituidas);
+        jScrollPane5.setViewportView(grdPecas);
 
         javax.swing.GroupLayout panPecasSubstituidasLayout = new javax.swing.GroupLayout(panPecasSubstituidas);
         panPecasSubstituidas.setLayout(panPecasSubstituidasLayout);
@@ -175,18 +210,23 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
             .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblSelecaoPeca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3)
-                .addContainerGap())
+                .addContainerGap(566, Short.MAX_VALUE))
+            .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPecasSubstituidasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)))
         );
         panPecasSubstituidasLayout.setVerticalGroup(
             panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSelecaoPeca))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(lblSelecaoPeca)
+                .addContainerGap(148, Short.MAX_VALUE))
+            .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(32, Short.MAX_VALUE)))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -200,9 +240,19 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         panBotoes.add(btnNovo);
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         panBotoes.add(btnEditar);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         panBotoes.add(btnExcluir);
 
         btnCancelar.setText("Cancelar");
@@ -214,6 +264,11 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         panBotoes.add(btnCancelar);
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
         panBotoes.add(btnConfirmar);
 
         grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
@@ -336,24 +391,87 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_grdTecnicosMouseClicked
 
-    private void lstPecasSubstituidasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPecasSubstituidasValueChanged
-        if (!evt.getValueIsAdjusting()) {
-        // Obtém os itens selecionados na lista
-        Object[] selectedItems = lstPecasSubstituidas.getSelectedValues();
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        Tecnico tecnicoEscolhido = (Tecnico) getObjetoSelecionadoNaGrid(grdTecnicos);
+        Cliente clienteEscolhido = (Cliente) getObjetoSelecionadoNaGrid(grdClientes);
+        
+        try {
+            if (idConsertoComputadorEditando > 0) {
+                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, (ArrayList) pecasSelecionadas);
+            } else {
+                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, (ArrayList) pecasSelecionadas);
+            }
+            //Comando bastante importante
+            this.idConsertoComputadorEditando = -1L;
 
-            // Verifica se há itens selecionados
-            if (selectedItems.length > 0) {
-                // Crie uma mensagem com os itens selecionados
-                StringBuilder message = new StringBuilder("Itens selecionados:\n");
-                for (Object item : selectedItems) {
-                    message.append(item.toString()).append("\n");
+            consertoController.atualizarTabela(grdComputadores);
+
+            this.habilitarCampos(false);
+            this.limparCampos();
+        } catch (ServicoException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        ConsertoComputador consertoComputadorEditando = (ConsertoComputador) this.getObjetoSelecionadoNaGrid(grdComputadores);
+        
+        if(consertoComputadorEditando == null){
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        }else{
+            this.limparCampos();
+            this.habilitarCampos(true);
+            this.preencherFormulario(consertoComputadorEditando);
+            this.idConsertoComputadorEditando = consertoComputadorEditando.getIdServico();         
+        }  
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        ConsertoComputador consertoComputadorExcluido = (ConsertoComputador) this.getObjetoSelecionadoNaGrid(grdComputadores);
+
+        if (consertoComputadorExcluido == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir o Tecnico  \n("
+                + consertoComputadorExcluido.getIdServico()+ ", "
+                + consertoComputadorExcluido.getValor()+ ") ?",
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+
+                try {
+                    consertoController.excluirConsertoComputador(consertoComputadorExcluido);
+
+                    consertoController.atualizarTabela(grdComputadores);
+                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                } catch (ServicoException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-
-                // Exibe a mensagem em um diálogo de informação
-                JOptionPane.showMessageDialog(this, message.toString(), "Itens Selecionados", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-    }//GEN-LAST:event_lstPecasSubstituidasValueChanged
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
+        // TODO add your handling code here:
+        pecasSelecionadas = getObjetosSelecionadosNaGrid();
+
+        if (!pecasSelecionadas.isEmpty()) {
+            System.out.println("Peças Selecionadas:");
+            for (Peca peca : pecasSelecionadas) {
+                System.out.println(peca.getNome());
+            }
+        } else {
+            System.out.println("Nenhuma peça selecionada.");
+        }
+    }//GEN-LAST:event_grdPecasMouseClicked
 
     public void habilitarCampos(boolean flag) {
         // Labels
@@ -377,13 +495,41 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
         edtValor.setEnabled(flag);
         
         // List
-        lstPecasSubstituidas.setEnabled(flag);        
+        //lstPecasSubstituidas.setEnabled(flag);        
     }
     
     private void limparCampos() {
         // Limpa os Edts
         edtDescricaoProblema.setText("");
+        edtValor.setText("");
     }
+    
+    private Object getObjetoSelecionadoNaGrid(JTable grd) {
+        int rowCliked = grd.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grd.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    private List<Peca> getObjetosSelecionadosNaGrid() {
+        int[] selectedRows = grdPecas.getSelectedRows();
+        List<Peca> objetosSelecionados = new ArrayList<>();
+
+        for (int row : selectedRows) {
+            Object obj = grdPecas.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
+            if (obj != null) {
+                objetosSelecionados.add((Peca)(obj));
+            }
+        }
+
+        return objetosSelecionados;
+    }
+
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -401,21 +547,22 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConcertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConcertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConcertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConcertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                dlgCadastrarConcertoComputador dialog = new dlgCadastrarConcertoComputador(new javax.swing.JFrame(), true);
+                dlgCadastrarConsertoComputador dialog = new dlgCadastrarConsertoComputador(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -437,11 +584,12 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
     private javax.swing.JTextField edtValor;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdComputadores;
+    private javax.swing.JTable grdPecas;
     private javax.swing.JTable grdTecnicos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblComputadores;
     private javax.swing.JLabel lblDescreverProblema;
     private javax.swing.JLabel lblSelecaoCliente;
@@ -449,11 +597,14 @@ public class dlgCadastrarConcertoComputador extends javax.swing.JDialog {
     private javax.swing.JLabel lblSelecaoTecnico;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
-    private javax.swing.JList<String> lstPecasSubstituidas;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panPecasSubstituidas;
     private javax.swing.JPanel panProblema;
     private javax.swing.JPanel panTitulo;
     private javax.swing.JPanel panValor;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherFormulario(ConsertoComputador instalacaoRedeEditando) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
