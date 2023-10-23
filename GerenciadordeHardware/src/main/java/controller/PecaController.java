@@ -36,9 +36,9 @@ public class PecaController extends ProdutoController{
         
     }
     
-    public void cadastrarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public void cadastrarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
         PecaValidate valid = new PecaValidate(); 
-        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
+        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao); 
         if(repositorio.findByCodigo(codigo) == null){
             repositorio.save(novaPeca);
         }else{
@@ -47,10 +47,10 @@ public class PecaController extends ProdutoController{
         
     }
     
-    public void atualizarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public void atualizarPeca(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
         PecaValidate valid = new PecaValidate(); 
-        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao,  tipo); 
-        novaPeca.setIdPeca(idPeca); 
+        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao); 
+        novaPeca.setId(idPeca); 
         
         repositorio.update(novaPeca);
     }

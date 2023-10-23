@@ -6,7 +6,11 @@ import model.Peca;
 
 public class TMCadPeca extends AbstractTableModel {
 
+
+
     private List<Object> lista;
+    private Object peca;
+    
 
     private final int COL_ID = 0;
     private final int COL_CODIGO = 1;
@@ -18,6 +22,10 @@ public class TMCadPeca extends AbstractTableModel {
     private final int COL_DATA_FABRICACAO = 7;
     private final int COL_TIPO = 8;
 
+    public TMCadPeca(Object peca) {
+        this.peca = peca;
+    }
+    
     public TMCadPeca(List<Object> lstPecas) {
         lista = lstPecas;
     }
@@ -46,7 +54,7 @@ public class TMCadPeca extends AbstractTableModel {
                     return aux;
                 case COL_ID:
                     //System.out.println("Id = " + aux.getIdPeca());
-                    return aux.getIdPeca();
+                    return aux.getId();
 
                 case COL_CODIGO:
                     return aux.getCodigo();
@@ -63,7 +71,7 @@ public class TMCadPeca extends AbstractTableModel {
                 case COL_DATA_FABRICACAO:
                     return aux.getDataFabricacao();
                 case COL_TIPO:
-                    return aux.getTipo();
+                    return "tipo";
                 default:
                     break;
             }

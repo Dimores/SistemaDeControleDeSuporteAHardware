@@ -7,7 +7,7 @@ package controller;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
-import model.dao.DispositivoRedeDAO;
+import model.dao.DispositivoDeRedeDAO;
 import model.validations.DispositivoRedeValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
@@ -19,10 +19,10 @@ import model.validations.DispositivoRedeValidate;
  * @author ruiz
  */
 public class DispositivoRedeController {
-    private DispositivoRedeDAO repositorio;
+    private DispositivoDeRedeDAO repositorio;
 
     public DispositivoRedeController() {
-        repositorio = new DispositivoRedeDAO();
+        repositorio = new DispositivoDeRedeDAO();
     }
     
     public void cadastrarDispositivoRede(){

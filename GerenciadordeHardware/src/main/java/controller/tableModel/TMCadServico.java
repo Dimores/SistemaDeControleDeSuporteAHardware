@@ -24,7 +24,6 @@ public class TMCadServico extends AbstractTableModel{
     private final int COL_DESCRICAO = 4;
     private final int COL_DATA = 5;
     private final int COL_CONCLUIDO = 6;
-    private final int COL_TIPO = 7;
     
     public TMCadServico(List<Object> lstServicos){
         lista = lstServicos;
@@ -52,7 +51,7 @@ public class TMCadServico extends AbstractTableModel{
                 case -1:
                     return aux;
                 case COL_ID:
-                    return aux.getIdServico();
+                    return aux.getId();
                 case COL_TECNICO:
                     return aux.getTecnicoResponsavel();
                 case COL_CLIENTE:
@@ -65,8 +64,6 @@ public class TMCadServico extends AbstractTableModel{
                     return aux.getDataServico();
                 case COL_CONCLUIDO:
                     return aux.isConcluido();
-                case COL_TIPO:
-                    return aux.getTipoServico();
                 default:
                     break;
             }
@@ -99,8 +96,6 @@ public class TMCadServico extends AbstractTableModel{
                 return "Data";
             case COL_CONCLUIDO:
                 return "Concluido?";
-            case COL_TIPO:
-                return "Tipo";
             default:
                 break;
         }

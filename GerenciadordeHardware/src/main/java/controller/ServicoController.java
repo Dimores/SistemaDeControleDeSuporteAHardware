@@ -36,16 +36,16 @@ public class ServicoController {
         
     }
     
-    public void cadastrarServico(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
+    public void cadastrarServico(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido){
         ServicoValidate valid = new ServicoValidate(); 
-        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico); 
+        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido); 
         servico.save(novoServico);
     }
     
-    public void atualizarServico(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoSevico){
+    public void atualizarServico(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido){
         ServicoValidate valid = new ServicoValidate(); 
-        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico); 
-        novoServico.setIdServico(idServico);
+        Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido); 
+        novoServico.setId(idServico);
         servico.update(novoServico);
 
     }

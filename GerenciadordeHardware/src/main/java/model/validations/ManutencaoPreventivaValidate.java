@@ -19,10 +19,18 @@ public class ManutencaoPreventivaValidate {
     }
     
     public ManutencaoPreventiva validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao){
+                            String dataServico, boolean concluido, String equipamentos){
         ManutencaoPreventiva manutencaoPreventiva = new ManutencaoPreventiva();
         
         // Validar aqui
+        manutencaoPreventiva.setTecnicoResponsavel(tecnicoResponsavel);
+        manutencaoPreventiva.setClienteAtendido(clienteAtendido);
+        manutencaoPreventiva.setValor(valor);
+        manutencaoPreventiva.setDescricaoServico(descricaoServico);
+        manutencaoPreventiva.setDataServico(dataServico);
+        manutencaoPreventiva.setConcluido(concluido);
+        manutencaoPreventiva.setEquipamentos(equipamentos);
+        
         
         return manutencaoPreventiva;
     }

@@ -8,7 +8,9 @@ import java.util.Calendar;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
+import model.dao.InstalacaoRedeDAO;
 import model.exceptions.InstalacaoRedeException;
+import model.validations.InstalacaoRedeValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -19,31 +21,33 @@ import model.exceptions.InstalacaoRedeException;
  * @author ruiz
  */
 public class InstalacaoRedeController extends ServicoController {
-    //InstalacaoRedeDAO repositorio;
+    InstalacaoRedeDAO repositorio;
     
     public InstalacaoRedeController() {
-        //repositorio = new InstalacaoRedeDAO();
+        repositorio = new InstalacaoRedeDAO();
     }
     
     public void atualizarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede){
+                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
         
-        //InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
-        /*InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
-        //novaInstalacaoRede.setIdServico(idServico); 
+        InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
+        InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
+                                                dataServico, concluido, tipoRede, enderecoRede); 
+        novaInstalacaoRede.setId(idServico); 
         
-        //repositorio.update(novaInstalacaoRede);
+        repositorio.update(novaInstalacaoRede);
         
     }
     
     public void cadastrarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede){
-        //InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
-        /*InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
+                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
         
-        //repositorio.save(novaInstalacaoRede);
+        InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
+        InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
+                                                dataServico, concluido, tipoRede, enderecoRede); 
+        novaInstalacaoRede.setId(idServico); 
+        
+        repositorio.save(novaInstalacaoRede);
     }
     
     public void buscarInstalacaoRede(){
@@ -57,7 +61,7 @@ public class InstalacaoRedeController extends ServicoController {
     
     public void excluirInstalacaoRede(InstalacaoRede instalacaoRede){
         if(instalacaoRede != null){
-            //repositorio.save(instalacaoRede);
+            repositorio.delete(instalacaoRede);
         }else{
             throw new InstalacaoRedeException("Error - Instalacao de Rede inexistente."); // Alterado de AlunoException para TecnicoException
         }

@@ -4,18 +4,35 @@
  */
 package model;
 import java.util.Calendar;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
-@NoArgsConstructor
 
 /**
  *
  * @author ruiz
  */
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 public class Produto {
+    @Id    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; 
     private String codigo;
     private String nome;
     private String descricao;
@@ -23,22 +40,22 @@ public class Produto {
     private int estoque;
     private String categoria;
     private String dataFabricacao;
-    private Long idProduto;
-
-
-
-    public Produto(Long idProduto, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.estoque = estoque;
-        this.categoria = categoria;
-        this.dataFabricacao = dataFabricacao;
-        this.idProduto = idProduto;
+    
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Peca> pecas;
+    
+    public Produto(){
+        this.codigo = "";
+        this.nome = "";
+        this.descricao = "";
+        this.preco = 0.0;
+        this.estoque = 0;
+        this.categoria = "";
+        this.dataFabricacao = "";
     }
     
-   public Produto( String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
+    
+   public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;

@@ -7,6 +7,11 @@ import java.awt.List;
 import java.util.ArrayList;
 import lombok.*;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -17,19 +22,23 @@ import java.util.Calendar;
  * @author ruiz
  * @author diego
  */
-
+@Entity
+@DiscriminatorValue("CONSERTOCOMPUTADOR")
 public class ConsertoComputador extends Servico {
-    private ArrayList<Peca> pecasSubstituidas;
+    private Long id;
+    private String pecasSubstituidas;
+    
 
     public ConsertoComputador() {
         super();
-        this.pecasSubstituidas = null;
+        this.pecasSubstituidas = "";
     }
 
-    public ConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                              String dataServico, boolean concluido, String descricaoProblema, ArrayList pecasSubstituidas) {
-        super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Conserto de computador");
+    public ConsertoComputador(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                              String dataServico, boolean concluido, String pecasSubstituidas) {
+        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.pecasSubstituidas = pecasSubstituidas;
+        this.id = id;
     }
 
 
@@ -37,9 +46,7 @@ public class ConsertoComputador extends Servico {
     @Override
     public String toString() {
         StringBuilder pecas = new StringBuilder();
-        for (Peca peca : pecasSubstituidas) {
-            pecas.append(peca.getNome()).append(", ");
-        }
+
 
         String txt = super.toString() +
                 "Descrição do Problema: " + super.getDescricaoServico() + "\n" +
@@ -55,9 +62,7 @@ public class ConsertoComputador extends Servico {
     @Override
     public String atributoToCSV() {
         StringBuilder pecas = new StringBuilder();
-        for (Peca peca : pecasSubstituidas) {
-            pecas.append(peca.getNome()).append(", ");
-        }
+
 
         return super.atributoToCSV() + super.getDescricaoServico() + ";" + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "") + "\n";
     }
@@ -71,13 +76,8 @@ public class ConsertoComputador extends Servico {
         // Suponha que o décimo elemento no CSV seja uma lista de peças separadas por vírgula
         String pecasCSV = vetor[9];
         String[] pecasArray = pecasCSV.split(",");
-        this.pecasSubstituidas = new ArrayList<Peca>();
 
-        for (String pecaNome : pecasArray) {
-            Peca peca = new Peca();
-            peca.setNome(pecaNome.trim());
-            this.pecasSubstituidas.add(peca);
-        }
+
     }
 }
 

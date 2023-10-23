@@ -4,6 +4,14 @@
  */
 package model;
 import java.util.Calendar;
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.*;
 import model.interfaces.IUsuario;
 @Getter //constroi os metodos get
@@ -13,17 +21,26 @@ import model.interfaces.IUsuario;
  * @author ruiz
  */
 
+@Entity
+@DiscriminatorValue("CLIENTE")
 public class Cliente extends Usuario implements IUsuario{
+    
     private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "usuario_id") // Nome da coluna que faz a ligação com a tabela de usuário
+    private Usuario usuario;
+    
+    @OneToMany(mappedBy = "clienteAtendido")
+    private List<Servico> servicosAtendidos;
 
     public Cliente() {
         super();
-        this.id = 0L;
     }
 
-    public Cliente(Long idCliente, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
+    public Cliente(String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
-        this.id = idCliente;
+        this.id = id;
     }
 
 
@@ -81,7 +98,7 @@ public void copiar(Cliente outro) {
         this.senha = vetor[3];
         this.email = vetor[4];
         this.telefone = vetor[5];
-        this.id = Long.parseLong(vetor[6]);
+        this.id = Long.valueOf(vetor[6]);
     }
 
 }

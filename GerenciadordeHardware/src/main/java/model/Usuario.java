@@ -4,6 +4,17 @@
  */
 package model;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.*;
 import model.interfaces.IUsuario;
 import utils.Criptografia;
@@ -15,13 +26,24 @@ import utils.Criptografia;
  *
  * @author ruiz
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 public class Usuario implements IUsuario{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     String nome;
     String CPF;
     String dataNasc;
     String senha;
     String email;
     String telefone;
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Cliente> clientes;
+    
+
 
     public Usuario() {
         this.nome = "";

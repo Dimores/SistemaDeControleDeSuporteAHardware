@@ -5,6 +5,11 @@
 package model;
 import lombok.*;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
  
@@ -14,10 +19,16 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-// Provavelmente remover essa classe
+@Entity
+@DiscriminatorValue("INSTALACAOREDE")
 public class InstalacaoRede extends Servico {
+    private Long id;
     private String tipoRede;
     private String enderecoRede;
+    
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
+    private Servico servico;
 
     public InstalacaoRede() {
         super();
@@ -25,11 +36,12 @@ public class InstalacaoRede extends Servico {
         this.enderecoRede = "";
     }
 
-    public InstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede) {
-        super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Instalacao de Rede");
+    public InstalacaoRede(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                          String dataServico,boolean concluido, String tipoRede, String enderecoRede) {
+        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.tipoRede = tipoRede;
         this.enderecoRede = enderecoRede;
+        this.id = id;
     }
     @Override
     public String toString() {

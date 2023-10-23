@@ -22,12 +22,8 @@ import model.exceptions.ServicoException;
  * @author diego
  */
 public class dlgCadastroServico extends javax.swing.JFrame {
-    ServicoController servicoController;
     //Cliente clienteEscolhido;
     //Tecnico tecnicoEscolhido;
-    private String tipoServico;
-    Long idServicoEditando;
-    private String dataServico;
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
     dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
     dlgCadastrarConsertoComputador dlgConsertoComputador;
@@ -37,17 +33,13 @@ public class dlgCadastroServico extends javax.swing.JFrame {
      * Creates new form dlgCadastroServico
      */
     public dlgCadastroServico() {
-        servicoController = new ServicoController();
         //clienteEscolhido = new Cliente();
         //tecnicoEscolhido = new Tecnico();
-        idServicoEditando = -1L;
         initComponents();
         this.habilitarCampos(false);
         //servicoController.atualizarTabelaCliente(grdClientes);;
         //servicoController.atualizarTabelaTecnico(grdTecnicos);
         //servicoController.atualizarTabela(grdServicos);
-        this.tipoServico = "Consertar PC";
-        this.dataServico = Data.pegaDataSistema();
     }
 
     /**
@@ -182,14 +174,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
        dlgManutencaoPreventiva.setVisible(true);     
     }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 
-    private Object getObjetoSelecionadoNaGrid(JTable grd) {
-        int rowCliked = grd.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grd.getModel().getValueAt(rowCliked, -1);
-        }
-        return obj;
-    }
     /**
      * @param args the command line arguments
      */
@@ -223,16 +207,6 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 new dlgCadastroServico().setVisible(true);
             }
         });
-    }
-    
-    private void setTipoServico(){
-        if(this.tipoServico.equals("0")){
-            this.tipoServico = "Consertar PC";
-        }else if(tipoServico.equals("1")){
-            this.tipoServico = "Instalar Rede";
-        }else{
-            this.tipoServico = "Manutenção Preventiva";
-        }
     }
     
         public void habilitarCampos(boolean flag) {

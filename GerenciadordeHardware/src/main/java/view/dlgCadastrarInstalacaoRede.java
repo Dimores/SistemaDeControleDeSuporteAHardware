@@ -70,8 +70,6 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtEnderecoRede = new javax.swing.JTextField();
         lblDescricao = new javax.swing.JLabel();
         edtDescricao = new javax.swing.JTextField();
-        lblDataConclusao = new javax.swing.JLabel();
-        fEdtDataConclusao = new javax.swing.JFormattedTextField();
         panBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -153,8 +151,6 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
         lblDescricao.setText("Descrição:");
 
-        lblDataConclusao.setText("Data de conclusão:");
-
         javax.swing.GroupLayout panInformacoesRedeLayout = new javax.swing.GroupLayout(panInformacoesRede);
         panInformacoesRede.setLayout(panInformacoesRedeLayout);
         panInformacoesRedeLayout.setHorizontalGroup(
@@ -173,11 +169,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                     .addGroup(panInformacoesRedeLayout.createSequentialGroup()
                         .addComponent(lblDescricao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtDescricao))
-                    .addGroup(panInformacoesRedeLayout.createSequentialGroup()
-                        .addComponent(lblDataConclusao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fEdtDataConclusao))))
+                        .addComponent(edtDescricao))))
         );
         panInformacoesRedeLayout.setVerticalGroup(
             panInformacoesRedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,11 +186,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                 .addGroup(panInformacoesRedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescricao)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panInformacoesRedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataConclusao)
-                    .addComponent(fEdtDataConclusao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -368,9 +356,9 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         
         try {
             if (idRedeEditando > 0) {
-                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), dataInstalacaoRede, fEdtDataConclusao.getText(), false, edtTipoRede.getText(), edtEnderecoRede.getText());
+                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), dataInstalacaoRede, false, edtTipoRede.getText(), edtEnderecoRede.getText());
             } else {
-                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), dataInstalacaoRede, fEdtDataConclusao.getText(), false, edtTipoRede.getText(), edtEnderecoRede.getText());
+                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), dataInstalacaoRede, false, edtTipoRede.getText(), edtEnderecoRede.getText());
             }
             //Comando bastante importante
             this.idRedeEditando = -1L;
@@ -397,7 +385,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(instalacaoRedeEditando);
-            this.idRedeEditando = instalacaoRedeEditando.getIdServico();         
+            this.idRedeEditando = instalacaoRedeEditando.getId();         
         }  
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -410,7 +398,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         else {
             int response = JOptionPane.showConfirmDialog(null,
                 "Deseja exlcuir o Tecnico  \n("
-                + instalacaoRedeExcluida.getIdServico()+ ", "
+                + instalacaoRedeExcluida.getId()+ ", "
                 + instalacaoRedeExcluida.getEnderecoRede() + ") ?",
                 "Confirmar exclusão",
                 JOptionPane.OK_CANCEL_OPTION,
@@ -520,14 +508,12 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private javax.swing.JTextField edtEnderecoRede;
     private javax.swing.JTextField edtPreco;
     private javax.swing.JTextField edtTipoRede;
-    private javax.swing.JFormattedTextField fEdtDataConclusao;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdRedes;
     private javax.swing.JTable grdTecnicos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblDataConclusao;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEnderecoRede;
     private javax.swing.JLabel lblPreco;

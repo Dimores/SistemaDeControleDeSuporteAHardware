@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
@@ -13,11 +16,12 @@ import lombok.*;
  *
  * @author ruiz
  */
+@Entity
+@DiscriminatorValue("DISPOSITIVODEREDE")
 public class DispositivoDeRede extends Produto {
     private Long id;
     private String nome;
     private String enderecoIP;
-    private String tipo;
     private String fabricante;
     private String modelo;
     private double preco;
@@ -26,7 +30,6 @@ public class DispositivoDeRede extends Produto {
         this.id = 0L;
         this.nome = "";
         this.enderecoIP = "";
-        this.tipo = "";
         this.fabricante = "";
         this.modelo = "";
         this.preco = 0.0;
@@ -36,7 +39,6 @@ public class DispositivoDeRede extends Produto {
         this.id = id;
         this.nome = nome;
         this.enderecoIP = enderecoIP;
-        this.tipo = tipo;
         this.fabricante = fabricante;
         this.modelo = modelo;
         this.preco = preco;
@@ -46,7 +48,6 @@ public class DispositivoDeRede extends Produto {
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
                 + "Endereço IP: " + this.enderecoIP + "\n"
-                + "Tipo: " + this.tipo + "\n"
                 + "Fabricante: " + this.fabricante + "\n"
                 + "Modelo: " + this.modelo + "\n";
         return txt;
@@ -55,7 +56,6 @@ public class DispositivoDeRede extends Produto {
     public void copiar(DispositivoDeRede outro) {
         this.nome = outro.getNome();
         this.enderecoIP = outro.getEnderecoIP();
-        this.tipo = outro.getTipo();
         this.fabricante = outro.getFabricante();
         this.modelo = outro.getModelo();
     }
@@ -67,7 +67,6 @@ public class DispositivoDeRede extends Produto {
     public String atributoToCSV() {
         return this.nome + ";" +
                 this.enderecoIP + ";" +
-                this.tipo + ";" +
                 this.fabricante + ";" +
                 this.modelo + "\n";
     }
@@ -76,9 +75,8 @@ public class DispositivoDeRede extends Produto {
         String[] vetor = csv.split(";");
         this.nome = vetor[0];
         this.enderecoIP = vetor[1];
-        this.tipo = vetor[2];
-        this.fabricante = vetor[3];
-        this.modelo = vetor[4];
+        this.fabricante = vetor[2];
+        this.modelo = vetor[3];
     }
 }
 

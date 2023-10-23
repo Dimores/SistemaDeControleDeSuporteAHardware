@@ -457,6 +457,7 @@ private Object getObjetoSelecionadoNaGrid() {
             edtNome.setText(c.getNome());
             fEdtCpf.setText(c.getCPF());
             fEdtDataNasc.setText(c.getDataNasc());
+            edtSenha.setText(c.getSenha());
             fEdtEmail.setText(c.getEmail());
             fEdtTelefone.setText(c.getTelefone());
     }

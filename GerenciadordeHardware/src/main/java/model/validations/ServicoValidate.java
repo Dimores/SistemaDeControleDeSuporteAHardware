@@ -17,7 +17,7 @@ import model.exceptions.ServicoException;
  */
 public class ServicoValidate {
     
-    public Servico validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoServico){
+    public Servico validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido){
         Servico servico = new Servico();
         
         // Verificando se o técnico é nulo
@@ -69,11 +69,6 @@ public class ServicoValidate {
         // Setando a data correta
         servico.setDataServico(dataServico);
         
-        // Verificando se o tipo de servico esta em branco
-        if(tipoServico.isBlank()){
-            throw new ServicoException("Error - Campo vazio - 'tipo de servico'");
-        }
-        servico.setTipoServico(tipoServico);
         
         return servico;
     }

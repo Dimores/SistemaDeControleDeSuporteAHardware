@@ -5,6 +5,11 @@
 package model;
 import lombok.*;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set 
@@ -14,10 +19,17 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-// Provavelmente remover essa classe
+@Entity
+@DiscriminatorValue("MANUTENCAOPREVENTIVA")
 public class ManutencaoPreventiva extends Servico {
+
+    private Long id;
     private String equipamentos;
     private String descricaoManutencao;
+    
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
+    private Servico servico;
 
     public ManutencaoPreventiva() {
         super();
@@ -25,11 +37,12 @@ public class ManutencaoPreventiva extends Servico {
         this.descricaoManutencao = "";
     }
 
-    public ManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao) {
-        super(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, "Manutencao Preventiva");
+    public ManutencaoPreventiva(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
+                                String dataServico, boolean concluido, String equipamentos, String descricaoManutencao) {
+        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.equipamentos = equipamentos;
         this.descricaoManutencao = descricaoManutencao;
+        this.id = id;
     }
 
     @Override

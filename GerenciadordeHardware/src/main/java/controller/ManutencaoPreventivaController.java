@@ -7,7 +7,10 @@ package controller;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
+import java.lang.Long;
+import model.dao.ManutencaoPreventivaDAO;
 import model.exceptions.ManutencaoPreventivaException;
+import model.validations.ManutencaoPreventivaValidate;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -18,22 +21,22 @@ import model.exceptions.ManutencaoPreventivaException;
  * @author ruiz
  */
 public class ManutencaoPreventivaController extends ServicoController{
-    //ManutencaoPreventivaDAO repositorio;
+    ManutencaoPreventivaDAO repositorio;
     
     public ManutencaoPreventivaController() {
-        //repositorio = new ManutencaoPreventivaDAO();
+        repositorio = new ManutencaoPreventivaDAO();
     }
 
     
     public void atualizarManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
                             String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao){
         
-        //ManutencaoPreventivaValidate valid = new ManutencaoRedeValidate(); 
-        /*ManutencaoPreventivaValidate novaManutencaoPreventiva = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
-        //novaManutencaoPreventiva.setIdServico(idServico); 
+        ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
+        ManutencaoPreventiva novaManutencaoPreventiva = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
+                                                dataServico, concluido, equipamentos); 
+        novaManutencaoPreventiva.setId(idServico); 
         
-        //repositorio.update(novaManutencaoPreventiva);
+        repositorio.update(novaManutencaoPreventiva);
         
     }
     
@@ -41,11 +44,12 @@ public class ManutencaoPreventivaController extends ServicoController{
                             String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao){
         
         
-        //ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
-        /*ManutencaoPreventivaValidate novaManutencaoPreventiva = valid.validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede); */
+        ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
+        ManutencaoPreventiva novaManutencaoPreventiva = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
+                                                dataServico, concluido, equipamentos); 
+        novaManutencaoPreventiva.setId(idServico); 
         
-        //repositorio.save(novaManutencaoPreventiva);
+        repositorio.save(novaManutencaoPreventiva);
         
     }
     
@@ -56,7 +60,7 @@ public class ManutencaoPreventivaController extends ServicoController{
     
     public void excluirManutencaoPreventiva(ManutencaoPreventiva manutencaoPreventiva){
         if(manutencaoPreventiva != null){
-            //repositorio.save(manutencaoPreventiva);
+            repositorio.delete(manutencaoPreventiva);
         }else{
             throw new ManutencaoPreventivaException("Error - Manutencao preventiva inexistente.");
         }

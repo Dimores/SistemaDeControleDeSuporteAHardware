@@ -4,6 +4,7 @@
  */
 package model;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import lombok.*;
 @Getter //constroi os metodos get
@@ -14,6 +15,7 @@ import lombok.*;
  * @author ruiz
  */
 @Entity
+@DiscriminatorValue("RELATORIOMANUTENCAO")
 public class RelatorioManutencao extends Relatorio {
     private String equipamentos;
 

@@ -16,7 +16,7 @@ import model.exceptions.PecaException;
  */
 public class PecaValidate {
     
-    public Peca validaCamposEntrada(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo){
+    public Peca validaCamposEntrada(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
         Peca peca = new Peca();
         
         // Dia/Mes/Ano
@@ -58,10 +58,7 @@ public class PecaValidate {
         if(!(verificaDia(dia) && verificaMes(mes) && verificaAno(ano)))
             throw new PecaException("Error - Campo invalido - 'dataFabricacao'");   
         peca.setDataFabricacao(dataFabricacao);
-                
-        if(tipo.isEmpty())
-            throw new PecaException("Error - Campo vazio - 'tipo'");        
-        peca.setTipo(tipo);
+               
         
         
         return peca;

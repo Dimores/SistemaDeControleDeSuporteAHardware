@@ -8,6 +8,9 @@ import lombok.*;
 import model.interfaces.IUsuario;
 
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 
 
@@ -19,7 +22,9 @@ import java.util.Calendar;
  * @author ruiz
  */
 
-// Provavelmente remover essa classe
+
+@Entity
+@DiscriminatorValue("GERENTE")
 public class Gerente extends Usuario implements IUsuario {
     private Long id;
     private double salario;

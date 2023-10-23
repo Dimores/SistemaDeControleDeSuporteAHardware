@@ -386,7 +386,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(manutencaoPreventivaEditando);
-            this.idManutencaoEditando = manutencaoPreventivaEditando.getIdServico();         
+            this.idManutencaoEditando = manutencaoPreventivaEditando.getId();         
         }  
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -399,7 +399,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         else {
             int response = JOptionPane.showConfirmDialog(null,
                 "Deseja exlcuir o Tecnico  \n("
-                + manutencaoPreventivaExcluida.getIdServico()+ ", "
+                + manutencaoPreventivaExcluida.getId()+ ", "
                 + manutencaoPreventivaExcluida.getDescricaoManutencao() + ") ?",
                 "Confirmar exclusão",
                 JOptionPane.OK_CANCEL_OPTION,

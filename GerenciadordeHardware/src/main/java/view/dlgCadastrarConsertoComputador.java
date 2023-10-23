@@ -32,6 +32,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     private Long idConsertoComputadorEditando;
     private String data;
     List<Peca> pecasSelecionadas;
+    private String lstPecasFormatada;
 
     
     /**
@@ -43,6 +44,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();
+        idConsertoComputadorEditando = -1L;
         servicoController.atualizarTabelaCliente(grdClientes);
         servicoController.atualizarTabelaTecnico(grdTecnicos);
         this.habilitarCampos(false);
@@ -54,8 +56,10 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         
         pecasSubstituidas = new ArrayList<String>();
         
-        idConsertoComputadorEditando = -1L;
+
         data = Data.pegaDataSistema();
+        
+        consertoController.atualizarTabela(grdComputadores);
         
         
     }
@@ -378,6 +382,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        this.idConsertoComputadorEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -396,11 +401,12 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         Tecnico tecnicoEscolhido = (Tecnico) getObjetoSelecionadoNaGrid(grdTecnicos);
         Cliente clienteEscolhido = (Cliente) getObjetoSelecionadoNaGrid(grdClientes);
         
+        
         try {
             if (idConsertoComputadorEditando > 0) {
-                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, (ArrayList) pecasSelecionadas);
+                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, lstPecasFormatada);
             } else {
-                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, (ArrayList) pecasSelecionadas);
+                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, lstPecasFormatada);
             }
             //Comando bastante importante
             this.idConsertoComputadorEditando = -1L;
@@ -427,7 +433,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(consertoComputadorEditando);
-            this.idConsertoComputadorEditando = consertoComputadorEditando.getIdServico();         
+            this.idConsertoComputadorEditando = consertoComputadorEditando.getId();         
         }  
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -440,7 +446,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         else {
             int response = JOptionPane.showConfirmDialog(null,
                 "Deseja exlcuir o Tecnico  \n("
-                + consertoComputadorExcluido.getIdServico()+ ", "
+                + consertoComputadorExcluido.getId()+ ", "
                 + consertoComputadorExcluido.getValor()+ ") ?",
                 "Confirmar exclusão",
                 JOptionPane.OK_CANCEL_OPTION,
@@ -462,15 +468,19 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
         // TODO add your handling code here:
         pecasSelecionadas = getObjetosSelecionadosNaGrid();
+        
+
 
         if (!pecasSelecionadas.isEmpty()) {
             System.out.println("Peças Selecionadas:");
             for (Peca peca : pecasSelecionadas) {
                 System.out.println(peca.getNome());
+                pecasSubstituidas.add(peca.getId().toString() + ";");
             }
         } else {
             System.out.println("Nenhuma peça selecionada.");
         }
+        atualizarListaPecasFormatada();
     }//GEN-LAST:event_grdPecasMouseClicked
 
     public void habilitarCampos(boolean flag) {
@@ -485,6 +495,8 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         // Grids
         grdClientes.setEnabled(flag);
         grdClientes.setVisible(flag);
+        grdPecas.setEnabled(flag);
+        grdPecas.setVisible(flag);
         grdTecnicos.setEnabled(flag);
         grdTecnicos.setVisible(flag);
         grdComputadores.setEnabled(flag);
@@ -521,6 +533,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             Object obj = grdPecas.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
             if (obj != null) {
                 objetosSelecionados.add((Peca)(obj));
+                
             }
         }
 
@@ -528,7 +541,16 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     }
 
 
+    private void atualizarListaPecasFormatada() {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        for (String peca : pecasSubstituidas) {
+            stringBuilder.append(peca);
+        }
+
+        // Defina a variável lstPecasFormatada com a string resultante
+        lstPecasFormatada = stringBuilder.toString();
+    }
 
     /**
      * @param args the command line arguments

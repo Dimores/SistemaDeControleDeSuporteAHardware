@@ -4,6 +4,17 @@
  */
 package model;
 import java.util.Calendar;
+import java.util.List;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.*;
 
 @Getter //constroi os metodos get
@@ -13,45 +24,49 @@ import lombok.*;
  *
  * @author ruiz
  */
-
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 public class Servico {
-    private Long idServico;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")  // Nome da coluna que faz referência ao tecnico na tabela Servico
     private Tecnico tecnicoResponsavel;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")  // Nome da coluna que faz referência ao cliente na tabela Servico
     private Cliente clienteAtendido;
     private float valor;
     private String descricaoServico;
     private String dataServico;
     private boolean concluido;
-    private String tipoServico;
+    
+
 
     public Servico() {
-        this.idServico = 0L;
         this.tecnicoResponsavel = new Tecnico();
         this.clienteAtendido = new Cliente();
         this.valor = 0.0f;
         this.descricaoServico = "";
         this.dataServico = "";
         this.concluido = false;
-        this.tipoServico = "";
     }
 
-    public Servico(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, String tipoServico) {
-        this.idServico = idServico;
+    public Servico(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido) {
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
         this.valor = valor;
         this.descricaoServico = descricaoServico;
         this.dataServico = dataServico;
         this.concluido = concluido;
-        this.tipoServico = tipoServico;
     }
 
     @Override
     public String toString() {
-        String txt = "ID do Serviço: " + this.idServico + "\n"
+        String txt = "ID do Serviço: " + this.id + "\n"
                 + "Técnico Responsável: " + this.tecnicoResponsavel.getNome() + "\n"
                 + "Cliente Atendido: " + this.clienteAtendido.getNome() + "\n"
-                + "Tipo de Servico: " + this.tipoServico + "\n"
                 + "Valor: " + this.valor + "\n"
                 + "Descrição do Serviço: " + this.descricaoServico + "\n"
                 + "Data do Serviço: " + this.dataServico + "\n"
@@ -60,13 +75,12 @@ public class Servico {
     }
 
     public void copiar(Servico outro) {
-        this.idServico = outro.getIdServico();
+        this.id = outro.getId();
         this.tecnicoResponsavel = outro.getTecnicoResponsavel();
         this.clienteAtendido = outro.getClienteAtendido();
         this.valor = outro.getValor();
         this.descricaoServico = outro.getDescricaoServico();
         this.dataServico = outro.getDataServico();
-        this.tipoServico = outro.getTipoServico();
         this.concluido = outro.isConcluido();
     }
 
@@ -75,7 +89,7 @@ public class Servico {
     }
 
     public String atributoToCSV() {
-        return this.idServico + ";" +
+        return this.id + ";" +
                 this.tecnicoResponsavel.getId() + ";" +
                 this.clienteAtendido.getId() + ";" +
                 this.valor + ";" +
@@ -86,7 +100,7 @@ public class Servico {
 
     public void CSVToAtributo(String csv, Tecnico tecnico, Cliente cliente) {
         String[] vetor = csv.split(";");
-        this.idServico = (Long.parseLong(vetor[0]));
+        this.id = (Long.parseLong(vetor[0]));
         this.tecnicoResponsavel = tecnico;
         this.clienteAtendido = cliente;
         this.valor = Float.parseFloat(vetor[3]);

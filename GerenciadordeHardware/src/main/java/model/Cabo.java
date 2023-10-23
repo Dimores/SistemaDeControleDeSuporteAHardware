@@ -4,6 +4,9 @@
  */
 package model;
 import java.awt.Color;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.*;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set 
@@ -12,13 +15,16 @@ import lombok.*;
  *
  * @author ruiz
  */
-
+@Entity
+@DiscriminatorValue("CABO")
 public class Cabo extends Peca {
+    
+    private Long idCabo;
     private int comprimento;
     private Color cor;
     private int bitola;
     private String tipoDeCabo;
-    private Long idCabo;
+
 
     public Cabo() {
         super();
@@ -28,8 +34,8 @@ public class Cabo extends Peca {
         this.tipoDeCabo = "";
     }
 
-    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, String tipo, int comprimento, Color cor, int bitola, String tipoDeCabo) {
-        super(id, codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, tipo);
+    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo) {
+        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
         this.comprimento = comprimento;
         this.cor = cor;
         this.bitola = bitola;

@@ -313,7 +313,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtFabricante.setText(dr.getFabricante());
         edtModelo.setText(dr.getModelo());
         edtPreco.setText(String.valueOf(dr.getPreco()));
-        edtTipo.setText(dr.getTipo());
         fEdtIP.setText(dr.getEnderecoIP());
     }
     

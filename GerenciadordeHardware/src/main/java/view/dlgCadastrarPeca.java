@@ -249,9 +249,9 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         // TODO add your handling code here:
             try {
             if (idPecaEditando > 0) {
-                pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
             } else {
-                pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), edtTipo.getText());
+                pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
             }
             //Comando bastante importante
             this.idPecaEditando = -1L;
@@ -279,13 +279,13 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
 
         if (pecaEditando == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.habilitarCampos(panCampos1, true);
             this.habilitarCampos(panCampos2, true);
             this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = pecaEditando.getIdPeca();
+            this.idPecaEditando = pecaEditando.getId();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -345,7 +345,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtCategoria.setText(peca.getCategoria());
         edtCodigo.setText(peca.getCodigo());
         edtEstoque.setText(String.valueOf(peca.getEstoque()));
-        edtTipo.setText(peca.getTipo());
         edtPreco.setText(String.valueOf(peca.getPreco()));
         edtDescricao.setText(peca.getDescricao());
         fEdtDataFabricacao.setText(peca.getDataFabricacao());
@@ -375,7 +374,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             MaskFormatter dataFabric = new MaskFormatter("##/##/####");
             dataFabric.install(fEdtDataFabricacao);
         } catch (ParseException ex) {
-            Logger.getLogger(IntCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(IntCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

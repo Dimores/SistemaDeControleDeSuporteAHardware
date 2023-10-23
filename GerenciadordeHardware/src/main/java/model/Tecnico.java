@@ -5,6 +5,10 @@
 package model;
 
 import java.util.Calendar;
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +26,14 @@ import model.interfaces.IUsuario;
  *
  * @author ruiz
  */
+@Entity
+@DiscriminatorValue("TECNICO")
 public class Tecnico extends Usuario implements IUsuario {
     private Long id;
     private double salario;
+    
+    @OneToMany(mappedBy = "tecnicoResponsavel")
+    private List<Servico> servicosAtendidos;
 
     
     public Tecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {

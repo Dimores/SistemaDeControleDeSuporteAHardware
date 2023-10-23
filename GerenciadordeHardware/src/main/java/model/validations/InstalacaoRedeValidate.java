@@ -16,11 +16,19 @@ public class InstalacaoRedeValidate {
     
     
     public InstalacaoRede validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, String dataConclusao, boolean concluido, String tipoRede, String enderecoRede){
+                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
         
         InstalacaoRede instalacaoRede = new InstalacaoRede();
         
         // Validação aqui
+        instalacaoRede.setTecnicoResponsavel(tecnicoResponsavel);
+        instalacaoRede.setClienteAtendido(clienteAtendido);
+        instalacaoRede.setValor(valor);
+        instalacaoRede.setDescricaoServico(descricaoServico);
+        instalacaoRede.setDataServico(dataServico);
+        instalacaoRede.setConcluido(concluido);
+        instalacaoRede.setTipoRede(tipoRede);
+        instalacaoRede.setEnderecoRede(enderecoRede);
         
         return instalacaoRede;
     }

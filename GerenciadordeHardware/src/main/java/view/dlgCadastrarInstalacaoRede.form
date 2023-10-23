@@ -186,11 +186,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="edtDescricao" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblDataConclusao" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="fEdtDataConclusao" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -213,12 +208,7 @@
                       <Component id="lblDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="edtDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDataConclusao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fEdtDataConclusao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -244,13 +234,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtDescricao">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblDataConclusao">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Data de conclus&#xe3;o:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="fEdtDataConclusao">
         </Component>
       </SubComponents>
     </Container>
