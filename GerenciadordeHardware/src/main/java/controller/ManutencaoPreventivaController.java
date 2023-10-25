@@ -4,10 +4,12 @@
  */
 package controller;
 
+import controller.tableModel.TMManutencaoPreventiva;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
 import java.lang.Long;
+import java.util.List;
 import model.dao.ManutencaoPreventivaDAO;
 import model.exceptions.ManutencaoPreventivaException;
 import model.validations.ManutencaoPreventivaValidate;
@@ -29,7 +31,7 @@ public class ManutencaoPreventivaController extends ServicoController{
 
     
     public void atualizarManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao){
+                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao){
         
         ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
         ManutencaoPreventiva novaManutencaoPreventiva = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
@@ -41,7 +43,7 @@ public class ManutencaoPreventivaController extends ServicoController{
     }
     
     public void cadastrarManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, String dataConclusao, boolean concluido, String equipamentos, String descricaoManutencao){
+                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao){
         
         
         ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
@@ -55,7 +57,10 @@ public class ManutencaoPreventivaController extends ServicoController{
     
     @Override
     public void atualizarTabela(JTable grd){
-        
+        List<Object> lst = repositorio.findAll();
+
+        TMManutencaoPreventiva tmManutencaoPreventiva = new TMManutencaoPreventiva(lst); 
+        grd.setModel(tmManutencaoPreventiva);
     }
     
     public void excluirManutencaoPreventiva(ManutencaoPreventiva manutencaoPreventiva){

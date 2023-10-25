@@ -7,30 +7,31 @@ package controller.tableModel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.ConsertoComputador;
+import model.InstalacaoRede;
 
 /**
  *
  * @author diego
  */
-public class TMConsertoComputador extends AbstractTableModel {
+public class TMInstalacaoRede extends AbstractTableModel {
 
     private List<Object> lista;
-    private Object consertoComputador;
+    private Object instalacaoRede;
     
-    //private final int COL_ID = 0;       
-    private final int COL_CONCLUIDO = 0;
-    private final int COL_DATA_SERVICO = 1;
-    private final int COL_DESCRICAO_SERVICO = 2;
-    private final int COL_VALOR = 3;
-    private final int COL_PECASSUBSTITUIDAS = 4;
+    private final int COL_ID = 0;       
+    private final int COL_CONCLUIDO = 1;
+    private final int COL_DATA_SERVICO = 2;
+    private final int COL_DESCRICAO_SERVICO = 3;
+    private final int COL_VALOR = 4;
+    private final int COL_TIPO_REDE = 5;
+    private final int COL_ENDERECO_REDE = 6;
 
-    public TMConsertoComputador(List<Object> lstConsertoComputador) {        
-        lista = lstConsertoComputador;        
+    public TMInstalacaoRede(List<Object> lstInstalacaoRede) {        
+        lista = lstInstalacaoRede;        
     }
     
-    public TMConsertoComputador(Object consertoComputador){
-        this.consertoComputador = consertoComputador;
+    public TMInstalacaoRede(Object instalacaoRede){
+        this.instalacaoRede = instalacaoRede;
     }
 
     @Override
@@ -40,22 +41,23 @@ public class TMConsertoComputador extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 7;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {               
-        ConsertoComputador aux = new ConsertoComputador();
+        InstalacaoRede aux = new InstalacaoRede();
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (ConsertoComputador) lista.get(rowIndex);
+            aux = (InstalacaoRede) lista.get(rowIndex);
 
             //verifica qual valor deve ser retornado
             switch (columnIndex) {
                 case -1:
                     return aux;
-
+                case COL_ID:
+                    return aux.getId();
                 case COL_CONCLUIDO:
                     return aux.isConcluido();
                 case COL_DATA_SERVICO:
@@ -64,8 +66,10 @@ public class TMConsertoComputador extends AbstractTableModel {
                     return aux.getDescricaoServico();
                 case COL_VALOR:
                     return aux.getValor();
-                case COL_PECASSUBSTITUIDAS:
-                    return aux.getPecasSubstituidas();              
+                case COL_TIPO_REDE:
+                    return aux.getTipoRede();
+                case COL_ENDERECO_REDE:
+                    return aux.getEnderecoRede();
                 default: 
                     break;
             }
@@ -82,16 +86,20 @@ public class TMConsertoComputador extends AbstractTableModel {
     public String getColumnName(int column) {
         
         switch (column) {
+            case COL_ID:
+                return "ID";
             case COL_CONCLUIDO:
-                return "Concluido"; 
+                return "Concluido?"; 
             case COL_DATA_SERVICO:
                 return "Data";
             case COL_DESCRICAO_SERVICO:
                 return "Descricao";
             case COL_VALOR:
                 return "Valor";
-            case COL_PECASSUBSTITUIDAS:
-                return "Pecas";
+            case COL_TIPO_REDE:
+                return "TipoRede";
+            case COL_ENDERECO_REDE:
+                return "Endereco";
             default:
                 break;
         }

@@ -18,13 +18,13 @@ public class TMCadCliente extends AbstractTableModel {
     private List<Object> lista;
     private Object cliente;
     
-    private final int COL_ID = 0;       
-    private final int COL_NOME = 1;
-    private final int COL_CPF = 2;
-    private final int COL_DATA_NASC = 3;
-    private final int COL_SENHA = 4;
-    private final int COL_EMAIL = 5;
-    private final int COL_TELEFONE = 6;
+    //private final int COL_ID = 0;       
+    private final int COL_NOME = 0;
+    private final int COL_CPF = 1;
+    private final int COL_DATA_NASC = 2;
+    //private final int COL_SENHA = 4;
+    private final int COL_EMAIL = 3;
+    private final int COL_TELEFONE = 4;
     
 
     public TMCadCliente(List<Object> lstClientes) {        
@@ -42,7 +42,7 @@ public class TMCadCliente extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 5;
     }
 
     @Override
@@ -57,16 +57,12 @@ public class TMCadCliente extends AbstractTableModel {
             switch (columnIndex) {
                 case -1:
                     return aux;
-                case COL_ID:
-                    return aux.getId();
                 case COL_NOME:
                     return aux.getNome();
                 case COL_CPF:
                     return aux.getCPF();
                 case COL_DATA_NASC:
                     return aux.getDataNasc();
-                case COL_SENHA:
-                    return aux.getSenha();
                 case COL_EMAIL:
                     return aux.getEmail();
                 case COL_TELEFONE:
@@ -88,16 +84,12 @@ public class TMCadCliente extends AbstractTableModel {
     public String getColumnName(int column) {
         
         switch (column) {
-            case COL_ID:
-                return "ID";
             case COL_NOME:
                 return "Nome"; 
             case COL_CPF:
                 return "CPF";
             case COL_DATA_NASC:
                 return "Data de Nascimento";
-            case COL_SENHA:
-                return "Senha";
             case COL_EMAIL:
                 return "Email";
             case COL_TELEFONE:

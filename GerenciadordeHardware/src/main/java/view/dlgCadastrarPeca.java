@@ -70,8 +70,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         panCampos2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         edtCategoria = new javax.swing.JTextField();
-        lblTipo = new javax.swing.JLabel();
-        edtTipo = new javax.swing.JTextField();
         lblDataFabricacao = new javax.swing.JLabel();
         fEdtDataFabricacao = new javax.swing.JFormattedTextField();
         lblDescricao = new javax.swing.JLabel();
@@ -177,10 +175,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         jLabel1.setText("Categoria:");
         panCampos2.add(jLabel1);
         panCampos2.add(edtCategoria);
-
-        lblTipo.setText("Tipo:");
-        panCampos2.add(lblTipo);
-        panCampos2.add(edtTipo);
 
         lblDataFabricacao.setText("DataFabric");
         panCampos2.add(lblDataFabricacao);
@@ -364,7 +358,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtEstoque.setText("");
         edtNome.setText("");
         edtPreco.setText("");
-        edtTipo.setText("");
         edtDescricao.setText("");
         fEdtDataFabricacao.setText("");
     }
@@ -378,42 +371,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         }
 
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new dlgCadastrarPeca().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -427,7 +385,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     private javax.swing.JTextField edtEstoque;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtPreco;
-    private javax.swing.JTextField edtTipo;
     private javax.swing.JFormattedTextField fEdtDataFabricacao;
     private javax.swing.JTable grdPecas;
     private javax.swing.JLabel jLabel1;
@@ -438,7 +395,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     private javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPreco;
-    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panCampos1;

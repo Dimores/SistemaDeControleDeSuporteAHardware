@@ -21,7 +21,7 @@ import model.exceptions.ServicoException;
  *
  * @author diego
  */
-public class dlgCadastroServico extends javax.swing.JFrame {
+public class dlgCadastroServico extends javax.swing.JDialog {
     //Cliente clienteEscolhido;
     //Tecnico tecnicoEscolhido;
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
@@ -32,7 +32,8 @@ public class dlgCadastroServico extends javax.swing.JFrame {
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastroServico() {
+    public dlgCadastroServico(java.awt.Dialog parent) {
+        super(parent);
         //clienteEscolhido = new Cliente();
         //tecnicoEscolhido = new Tecnico();
         initComponents();
@@ -70,7 +71,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -174,40 +175,7 @@ public class dlgCadastroServico extends javax.swing.JFrame {
        dlgManutencaoPreventiva.setVisible(true);     
     }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new dlgCadastroServico().setVisible(true);
-            }
-        });
-    }
     
         public void habilitarCampos(boolean flag) {
                 /*lblServicoEfetuado.setEnabled(flag);
@@ -235,7 +203,38 @@ public class dlgCadastroServico extends javax.swing.JFrame {
                 fEdtEmailTecnico.setText("");
                 edtDescricaoServico.setText("");*/
         }
+        
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(dlgCadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                //new dlgCadastroServico().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsertoComputador;
     private javax.swing.JButton btnInstalacaoRede;

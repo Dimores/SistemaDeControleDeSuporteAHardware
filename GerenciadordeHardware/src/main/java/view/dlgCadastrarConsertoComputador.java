@@ -28,11 +28,9 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     ServicoController servicoController;
     ConsertoComputadorController consertoController;
     PecaController pecaController;
-    private ArrayList<String> pecasSubstituidas;
     private Long idConsertoComputadorEditando;
     private String data;
     List<Peca> pecasSelecionadas;
-    private String lstPecasFormatada;
 
     
     /**
@@ -40,7 +38,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public dlgCadastrarConsertoComputador(java.awt.Frame parent, boolean modal) {
+    public dlgCadastrarConsertoComputador(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();
@@ -53,8 +51,6 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         
         pecaController = new PecaController();
         pecaController.atualizarTabela(grdPecas);
-        
-        pecasSubstituidas = new ArrayList<String>();
         
 
         data = Data.pegaDataSistema();
@@ -404,16 +400,14 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         
         try {
             if (idConsertoComputadorEditando > 0) {
-                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, lstPecasFormatada);
+                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, pecasSelecionadas);
             } else {
-                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, lstPecasFormatada);
+                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, pecasSelecionadas);
             }
             //Comando bastante importante
             this.idConsertoComputadorEditando = -1L;
 
             consertoController.atualizarTabela(grdComputadores);
-
-            this.habilitarCampos(false);
             this.limparCampos();
         } catch (ServicoException e) {
             System.err.println(e.getMessage());
@@ -475,12 +469,10 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             System.out.println("Peças Selecionadas:");
             for (Peca peca : pecasSelecionadas) {
                 System.out.println(peca.getNome());
-                pecasSubstituidas.add(peca.getId().toString() + ";");
             }
         } else {
             System.out.println("Nenhuma peça selecionada.");
         }
-        atualizarListaPecasFormatada();
     }//GEN-LAST:event_grdPecasMouseClicked
 
     public void habilitarCampos(boolean flag) {
@@ -539,62 +531,42 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
         return objetosSelecionados;
     }
+    
+    private void preencherFormulario(ConsertoComputador consertoComputadorEditando) {
+        // Preencha os campos com os dados do consertoComputadorEditando
+        edtValor.setText(String.valueOf(consertoComputadorEditando.getValor()));
+        edtDescricaoProblema.setText(consertoComputadorEditando.getDescricaoServico());
 
+        // Obtenha o técnico associado ao ConsertoComputador
+        Tecnico tecnicoEscolhido = consertoComputadorEditando.getTecnicoResponsavel();
 
-    private void atualizarListaPecasFormatada() {
-        StringBuilder stringBuilder = new StringBuilder();
+        // Obtenha o cliente associado ao ConsertoComputador
+        Cliente clienteEscolhido = consertoComputadorEditando.getClienteAtendido();
 
-        for (String peca : pecasSubstituidas) {
-            stringBuilder.append(peca);
-        }
-
-        // Defina a variável lstPecasFormatada com a string resultante
-        lstPecasFormatada = stringBuilder.toString();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+        // Se o técnico não for nulo, selecione-o na grade de técnicos (grdTecnicos)
+        if (tecnicoEscolhido != null) {
+            for (int i = 0; i < grdTecnicos.getRowCount(); i++) {
+                Tecnico tecnicoNaGrade = (Tecnico) grdTecnicos.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
+                if (tecnicoNaGrade != null && tecnicoNaGrade.getId() == tecnicoEscolhido.getId()) {
+                    grdTecnicos.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao técnico
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarConsertoComputador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                dlgCadastrarConsertoComputador dialog = new dlgCadastrarConsertoComputador(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+        // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
+        if (clienteEscolhido != null) {
+            for (int i = 0; i < grdClientes.getRowCount(); i++) {
+                Cliente clienteNaGrade = (Cliente) grdClientes.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
+                if (clienteNaGrade != null && clienteNaGrade.getId() == clienteEscolhido.getId()) {
+                    grdClientes.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao cliente
+                    break;
+                }
             }
-        });
+        }
     }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -626,7 +598,5 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     private javax.swing.JPanel panValor;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherFormulario(ConsertoComputador instalacaoRedeEditando) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 }

@@ -195,13 +195,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="edtCategoria">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTipo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tipo:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="edtTipo">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblDataFabricacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="DataFabric"/>

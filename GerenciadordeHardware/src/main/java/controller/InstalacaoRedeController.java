@@ -4,7 +4,9 @@
  */
 package controller;
 
+import controller.tableModel.TMInstalacaoRede;
 import java.util.Calendar;
+import java.util.List;
 import javax.swing.JTable;
 import model.*;
 import lombok.*;
@@ -56,7 +58,10 @@ public class InstalacaoRedeController extends ServicoController {
     
     @Override
     public void atualizarTabela(JTable grd){
-        
+        List<Object> lst = repositorio.findAll();
+
+        TMInstalacaoRede tmInstalacaoRede = new TMInstalacaoRede(lst); // Alterado de TMCadAluno para TMCadTecnico
+        grd.setModel(tmInstalacaoRede);
     }
     
     public void excluirInstalacaoRede(InstalacaoRede instalacaoRede){

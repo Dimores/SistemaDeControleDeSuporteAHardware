@@ -42,7 +42,7 @@ public class ManutencaoPreventivaDAO  implements IDao{
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u " + "FROM Servico u WHERE tipo = :tipo";
+        jpql = " SELECT u " + "FROM ManutencaoPreventiva u WHERE tipo = :tipo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("tipo", "MANUTENCAOPREVENTIVA");
         List lst = qry.getResultList();
@@ -92,10 +92,10 @@ public class ManutencaoPreventivaDAO  implements IDao{
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        jpql = " DELETE FROM Servico WHERE idServico = :idServico";
+        jpql = " DELETE FROM ManutencaoPreventiva WHERE id = :id";
         ManutencaoPreventiva p = (ManutencaoPreventiva) obj;
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("idServico", p.getId());
+        qry.setParameter("id", p.getId());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         this.entityManager.close();

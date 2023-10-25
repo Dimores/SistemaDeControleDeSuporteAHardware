@@ -12,15 +12,15 @@ public class TMCadPeca extends AbstractTableModel {
     private Object peca;
     
 
-    private final int COL_ID = 0;
+    //private final int COL_ID = 0;
+    private final int COL_NOME = 0;
     private final int COL_CODIGO = 1;
-    private final int COL_NOME = 2;
-    private final int COL_DESCRICAO = 3;
-    private final int COL_PRECO = 4;
-    private final int COL_ESTOQUE = 5;
-    private final int COL_CATEGORIA = 6;
-    private final int COL_DATA_FABRICACAO = 7;
-    private final int COL_TIPO = 8;
+    private final int COL_DESCRICAO = 2;
+    private final int COL_PRECO = 3;
+    private final int COL_ESTOQUE = 4;
+    private final int COL_CATEGORIA = 5;
+    private final int COL_DATA_FABRICACAO = 6;
+    //private final int COL_TIPO = 8;
 
     public TMCadPeca(Object peca) {
         this.peca = peca;
@@ -37,7 +37,7 @@ public class TMCadPeca extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9; // Número de colunas
+        return 7; // Número de colunas
     }
 
     @Override
@@ -52,10 +52,6 @@ public class TMCadPeca extends AbstractTableModel {
             switch (columnIndex) {
                 case -1:
                     return aux;
-                case COL_ID:
-                    //System.out.println("Id = " + aux.getIdPeca());
-                    return aux.getId();
-
                 case COL_CODIGO:
                     return aux.getCodigo();
                 case COL_NOME:
@@ -70,8 +66,6 @@ public class TMCadPeca extends AbstractTableModel {
                     return aux.getCategoria();
                 case COL_DATA_FABRICACAO:
                     return aux.getDataFabricacao();
-                case COL_TIPO:
-                    return "tipo";
                 default:
                     break;
             }
@@ -88,8 +82,7 @@ public class TMCadPeca extends AbstractTableModel {
     public String getColumnName(int column) {
 
         switch (column) {
-            case COL_ID:
-                return "ID";
+
             case COL_CODIGO:
                 return "Código";
             case COL_NOME:
@@ -104,8 +97,7 @@ public class TMCadPeca extends AbstractTableModel {
                 return "Categoria";
             case COL_DATA_FABRICACAO:
                 return "Data de Fabricação";
-            case COL_TIPO:
-                return "Tipo";
+
             default:
                 break;
         }

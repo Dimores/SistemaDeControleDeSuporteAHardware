@@ -30,7 +30,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public dlgCadastrarManutencaoPreventiva(java.awt.Frame parent, boolean modal) {
+    public dlgCadastrarManutencaoPreventiva(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         manutencaoPreventivaController = new ManutencaoPreventivaController();
@@ -41,6 +41,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         
         idManutencaoEditando = -1L;
         data = Data.pegaDataSistema();
+        manutencaoPreventivaController.atualizarTabela(grdManutencoes);
     }
 
     /**
@@ -65,8 +66,6 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         edtEquipamentos = new javax.swing.JTextField();
         lblDescricao = new javax.swing.JLabel();
         edtDescricao = new javax.swing.JTextField();
-        lblDataConclusao = new javax.swing.JLabel();
-        fEdtDataConclusao = new javax.swing.JFormattedTextField();
         panBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -146,8 +145,6 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
 
         lblDescricao.setText("Descrição:");
 
-        lblDataConclusao.setText("Data de conclusão:");
-
         javax.swing.GroupLayout panCamposManutencaoLayout = new javax.swing.GroupLayout(panCamposManutencao);
         panCamposManutencao.setLayout(panCamposManutencaoLayout);
         panCamposManutencaoLayout.setHorizontalGroup(
@@ -162,11 +159,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                     .addGroup(panCamposManutencaoLayout.createSequentialGroup()
                         .addComponent(lblEquipamentos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtEquipamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE))
-                    .addGroup(panCamposManutencaoLayout.createSequentialGroup()
-                        .addComponent(lblDataConclusao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fEdtDataConclusao))))
+                        .addComponent(edtEquipamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE))))
         );
         panCamposManutencaoLayout.setVerticalGroup(
             panCamposManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,11 +172,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                 .addGroup(panCamposManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescricao)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panCamposManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataConclusao)
-                    .addComponent(fEdtDataConclusao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -283,10 +272,8 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                     .addComponent(lblManutencoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 523, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +281,8 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                             .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -356,16 +344,15 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         Cliente clienteEscolhido = (Cliente) getObjetoSelecionadoNaGrid(grdClientes);
         try {
             if (idManutencaoEditando > 0) {
-                manutencaoPreventivaController.atualizarManutencaoPreventiva(idManutencaoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, fEdtDataConclusao.getText(), false, edtEquipamentos.getText(), edtDescricao.getText());
+                manutencaoPreventivaController.atualizarManutencaoPreventiva(idManutencaoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, false, edtEquipamentos.getText(), edtDescricao.getText());
             } else {
-                manutencaoPreventivaController.cadastrarManutencaoPreventiva(idManutencaoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, fEdtDataConclusao.getText(), false, edtEquipamentos.getText(), edtDescricao.getText());
+                manutencaoPreventivaController.cadastrarManutencaoPreventiva(idManutencaoEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, false, edtEquipamentos.getText(), edtDescricao.getText());
             }
             //Comando bastante importante
             this.idManutencaoEditando = -1L;
 
             manutencaoPreventivaController.atualizarTabela(grdManutencoes);
 
-            this.habilitarCampos(false);
             this.limparCampos();
         } catch (ServicoException e) {
             System.err.println(e.getMessage());
@@ -400,7 +387,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                 "Deseja exlcuir o Tecnico  \n("
                 + manutencaoPreventivaExcluida.getId()+ ", "
-                + manutencaoPreventivaExcluida.getDescricaoManutencao() + ") ?",
+                + manutencaoPreventivaExcluida.getValor() + ") ?",
                 "Confirmar exclusão",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
@@ -461,47 +448,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarManutencaoPreventiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarManutencaoPreventiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarManutencaoPreventiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarManutencaoPreventiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                dlgCadastrarManutencaoPreventiva dialog = new dlgCadastrarManutencaoPreventiva(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     
     
 
@@ -514,14 +461,12 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     private javax.swing.JTextField edtDescricao;
     private javax.swing.JTextField edtEquipamentos;
     private javax.swing.JTextField edtPreco;
-    private javax.swing.JFormattedTextField fEdtDataConclusao;
     private javax.swing.JTable grdClientes;
     private javax.swing.JTable grdManutencoes;
     private javax.swing.JTable grdTecnicos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblDataConclusao;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEquipamentos;
     private javax.swing.JLabel lblManutencoes;

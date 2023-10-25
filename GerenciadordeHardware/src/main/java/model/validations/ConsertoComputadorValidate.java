@@ -5,6 +5,7 @@
 package model.validations;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 import model.ConsertoComputador;
 import model.Tecnico;
@@ -16,7 +17,7 @@ import model.exceptions.ConsertoComputadorException;
  */
 public class ConsertoComputadorValidate {
     public ConsertoComputador validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                    String dataServico, boolean concluido, String pecasSubstituidas) {
+                                                    String dataServico, boolean concluido, List pecasSubstituidas) {
         // Valide os campos
         if (tecnicoResponsavel == null) {
             throw new ConsertoComputadorException("Técnico responsável não pode ser nulo.");
@@ -24,7 +25,7 @@ public class ConsertoComputadorValidate {
         if (clienteAtendido == null) {
             throw new ConsertoComputadorException("Cliente atendido não pode ser nulo.");
         }
-        if (valor <= 0) {
+        if (valor < 0) {
             throw new ConsertoComputadorException("O valor deve ser maior que zero.");
         }
         if (descricaoServico == null || descricaoServico.isEmpty()) {

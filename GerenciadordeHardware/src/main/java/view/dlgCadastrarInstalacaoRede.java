@@ -32,7 +32,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public dlgCadastrarInstalacaoRede(java.awt.Frame parent, boolean modal) {
+    public dlgCadastrarInstalacaoRede(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         instalacaoRedeController = new InstalacaoRedeController();
@@ -44,6 +44,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         
         idRedeEditando = -1L;
         dataInstalacaoRede = Data.pegaDataSistema();
+        instalacaoRedeController.atualizarTabela(grdRedes);
     }
 
     /**
@@ -426,6 +427,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         lblEnderecoRede.setEnabled(flag);
         lblRedes.setEnabled(flag);
         lblPreco.setEnabled(flag);
+        lblDescricao.setEnabled(flag);
         
         // Grids
         grdClientes.setEnabled(flag);
@@ -439,50 +441,9 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtEnderecoRede.setEnabled(flag);
         edtTipoRede.setEnabled(flag);
         edtPreco.setEnabled(flag);
+        edtDescricao.setEnabled(flag);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarInstalacaoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarInstalacaoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarInstalacaoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarInstalacaoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                dlgCadastrarInstalacaoRede dialog = new dlgCadastrarInstalacaoRede(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-    
     private void limparCampos(){
         edtPreco.setText("");
         edtTipoRede.setText("");
@@ -528,8 +489,39 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private javax.swing.JPanel panTitulo;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherFormulario(InstalacaoRede InstalacaoRedeEditando) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void preencherFormulario(InstalacaoRede instalacaoRedeEditando) {
+        edtPreco.setText(String.valueOf(instalacaoRedeEditando.getValor()));
+        edtTipoRede.setText(instalacaoRedeEditando.getTipoRede());
+        edtEnderecoRede.setText(instalacaoRedeEditando.getEnderecoRede());
+        edtDescricao.setText(instalacaoRedeEditando.getDescricaoServico());
+        
+        // Obtenha o técnico associado à InstalacaoRede
+        Tecnico tecnicoEscolhido = instalacaoRedeEditando.getTecnicoResponsavel();
+
+        // Obtenha o cliente associado à InstalacaoRede
+        Cliente clienteEscolhido = instalacaoRedeEditando.getClienteAtendido();
+
+        // Se o técnico não for nulo, selecione-o na grade de técnicos (grdTecnicos)
+        if (tecnicoEscolhido != null) {
+            for (int i = 0; i < grdTecnicos.getRowCount(); i++) {
+                Tecnico tecnicoNaGrade = (Tecnico) grdTecnicos.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
+                if (tecnicoNaGrade != null && tecnicoNaGrade.getId() == tecnicoEscolhido.getId()) {
+                    grdTecnicos.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao técnico
+                    break;
+                }
+            }
+        }
+
+        // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
+        if (clienteEscolhido != null) {
+            for (int i = 0; i < grdClientes.getRowCount(); i++) {
+                Cliente clienteNaGrade = (Cliente) grdClientes.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
+                if (clienteNaGrade != null && clienteNaGrade.getId() == clienteEscolhido.getId()) {
+                    grdClientes.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao cliente
+                    break;
+                }
+            }
+        }
     }
 
 }

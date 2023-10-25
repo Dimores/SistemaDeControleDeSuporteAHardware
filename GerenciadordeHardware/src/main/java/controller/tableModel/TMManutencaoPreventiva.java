@@ -8,29 +8,30 @@ package controller.tableModel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.ConsertoComputador;
+import model.ManutencaoPreventiva;
 
 /**
  *
  * @author diego
  */
-public class TMConsertoComputador extends AbstractTableModel {
+public class TMManutencaoPreventiva extends AbstractTableModel {
 
     private List<Object> lista;
-    private Object consertoComputador;
+    private Object manutencaoPreventiva;
     
     //private final int COL_ID = 0;       
     private final int COL_CONCLUIDO = 0;
     private final int COL_DATA_SERVICO = 1;
     private final int COL_DESCRICAO_SERVICO = 2;
     private final int COL_VALOR = 3;
-    private final int COL_PECASSUBSTITUIDAS = 4;
+    private final int COL_EQUIPAMENTOS = 4;
 
-    public TMConsertoComputador(List<Object> lstConsertoComputador) {        
-        lista = lstConsertoComputador;        
+    public TMManutencaoPreventiva(List<Object> lstManutencaoPreventiva) {        
+        lista = lstManutencaoPreventiva;        
     }
     
-    public TMConsertoComputador(Object consertoComputador){
-        this.consertoComputador = consertoComputador;
+    public TMManutencaoPreventiva(Object manutencaoPreventiva){
+        this.manutencaoPreventiva = manutencaoPreventiva;
     }
 
     @Override
@@ -45,11 +46,11 @@ public class TMConsertoComputador extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {               
-        ConsertoComputador aux = new ConsertoComputador();
+        ManutencaoPreventiva aux = new ManutencaoPreventiva();
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (ConsertoComputador) lista.get(rowIndex);
+            aux = (ManutencaoPreventiva) lista.get(rowIndex);
 
             //verifica qual valor deve ser retornado
             switch (columnIndex) {
@@ -64,8 +65,8 @@ public class TMConsertoComputador extends AbstractTableModel {
                     return aux.getDescricaoServico();
                 case COL_VALOR:
                     return aux.getValor();
-                case COL_PECASSUBSTITUIDAS:
-                    return aux.getPecasSubstituidas();              
+                case COL_EQUIPAMENTOS:
+                    return aux.getEquipamentos();              
                 default: 
                     break;
             }
@@ -90,8 +91,8 @@ public class TMConsertoComputador extends AbstractTableModel {
                 return "Descricao";
             case COL_VALOR:
                 return "Valor";
-            case COL_PECASSUBSTITUIDAS:
-                return "Pecas";
+            case COL_EQUIPAMENTOS:
+                return "Equipamentos";
             default:
                 break;
         }

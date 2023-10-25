@@ -22,13 +22,8 @@ import javax.persistence.ManyToOne;
 @Entity
 @DiscriminatorValue("INSTALACAOREDE")
 public class InstalacaoRede extends Servico {
-    private Long id;
     private String tipoRede;
     private String enderecoRede;
-    
-    @ManyToOne
-    @JoinColumn(name = "servico_id")
-    private Servico servico;
 
     public InstalacaoRede() {
         super();
@@ -41,7 +36,6 @@ public class InstalacaoRede extends Servico {
         super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
         this.tipoRede = tipoRede;
         this.enderecoRede = enderecoRede;
-        this.id = id;
     }
     @Override
     public String toString() {

@@ -5,9 +5,11 @@
  */
 package controller.tableModel;
 
+import java.awt.Color;
 import model.Tecnico;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
 
 /**
  *
@@ -18,14 +20,15 @@ public class TMCadTecnico extends AbstractTableModel {
     private List<Object> lista;
     private Object tecnico;
     
-    private final int COL_ID = 0;   
+    
+    //private final int COL_ID = 0;   
+    private final int COL_NOME = 0;
     private final int COL_SALARIO = 1;    
-    private final int COL_NOME = 2;
-    private final int COL_CPF = 3;
-    private final int COL_DATA_NASC = 4;
-    private final int COL_SENHA = 5;
-    private final int COL_EMAIL = 6;
-    private final int COL_TELEFONE = 7;
+    private final int COL_CPF = 2;
+    private final int COL_DATA_NASC = 3;
+    //private final int COL_SENHA = 5;
+    private final int COL_EMAIL = 4;
+    private final int COL_TELEFONE = 5;
     
 
     public TMCadTecnico(List<Object> lstTecnicos) {        
@@ -43,7 +46,7 @@ public class TMCadTecnico extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 6;
     }
 
     @Override
@@ -58,8 +61,6 @@ public class TMCadTecnico extends AbstractTableModel {
             switch (columnIndex) {
                 case -1:
                     return aux;
-                case COL_ID:
-                    return aux.getId();
 
                 case COL_SALARIO:
                     return aux.getSalario();
@@ -69,8 +70,6 @@ public class TMCadTecnico extends AbstractTableModel {
                     return aux.getCPF();
                 case COL_DATA_NASC:
                     return aux.getDataNasc();
-                case COL_SENHA:
-                    return aux.getSenha();
                 case COL_EMAIL:
                     return aux.getEmail();
                 case COL_TELEFONE:
@@ -92,8 +91,6 @@ public class TMCadTecnico extends AbstractTableModel {
     public String getColumnName(int column) {
         
         switch (column) {
-            case COL_ID:
-                return "ID";
             case COL_SALARIO:
                 return "Salário";
             case COL_NOME:
@@ -102,8 +99,6 @@ public class TMCadTecnico extends AbstractTableModel {
                 return "CPF";
             case COL_DATA_NASC:
                 return "Data de Nascimento";
-            case COL_SENHA:
-                return "Senha";
             case COL_EMAIL:
                 return "Email";
             case COL_TELEFONE:

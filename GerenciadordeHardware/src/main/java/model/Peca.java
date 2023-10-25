@@ -5,6 +5,7 @@
 package model;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,9 +25,9 @@ public class Peca extends Produto implements Serializable {
     
     private Long id;
     
-    @ManyToOne
-    @JoinColumn(name = "produto_id") // Especifica o nome da coluna de chave estrangeira
-    private Produto produto;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "conserto_id") // Especifica o nome da coluna de chave estrangeira
+    private ConsertoComputador conserto;
     
     public Peca(){
         super();

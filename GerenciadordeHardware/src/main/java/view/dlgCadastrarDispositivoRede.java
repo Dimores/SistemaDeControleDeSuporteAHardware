@@ -62,8 +62,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtPreco = new javax.swing.JTextField();
         lblIP = new javax.swing.JLabel();
         fEdtIP = new javax.swing.JFormattedTextField();
-        lblTipo = new javax.swing.JLabel();
-        edtTipo = new javax.swing.JTextField();
         panCampos2 = new javax.swing.JPanel();
         lblFabricante = new javax.swing.JLabel();
         edtFabricante = new javax.swing.JTextField();
@@ -161,10 +159,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         lblIP.setText("IP:");
         panCampos1.add(lblIP);
         panCampos1.add(fEdtIP);
-
-        lblTipo.setText("Tipo:");
-        panCampos1.add(lblTipo);
-        panCampos1.add(edtTipo);
 
         panCampos2.setLayout(new javax.swing.BoxLayout(panCampos2, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -304,7 +298,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtFabricante.setText("");
         edtModelo.setText("");
         edtPreco.setText("");
-        edtTipo.setText("");
         fEdtIP.setText("");
     }
     
@@ -333,43 +326,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         }
         return obj;
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new dlgCadastrarDispositivoRede().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -381,7 +338,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     private javax.swing.JTextField edtModelo;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtPreco;
-    private javax.swing.JTextField edtTipo;
     private javax.swing.JFormattedTextField fEdtIP;
     private javax.swing.JTable grdDispositivosRede;
     private javax.swing.JPanel jPanel8;
@@ -391,7 +347,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPreco;
-    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitulo5;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panCampos1;

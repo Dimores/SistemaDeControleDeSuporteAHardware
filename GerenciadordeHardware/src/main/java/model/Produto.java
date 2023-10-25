@@ -41,8 +41,6 @@ public class Produto {
     private String categoria;
     private String dataFabricacao;
     
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Peca> pecas;
     
     public Produto(){
         this.codigo = "";

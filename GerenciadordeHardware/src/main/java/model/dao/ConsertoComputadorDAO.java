@@ -46,7 +46,7 @@ public class ConsertoComputadorDAO implements IDao{
     @Override
     public List<Object> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u " + "FROM Servico u WHERE tipo = :tipo";
+        jpql = " SELECT u " + "FROM ConsertoComputador u WHERE tipo = :tipo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("tipo", "CONSERTOCOMPUTADOR");
         List lst = qry.getResultList();
@@ -103,10 +103,10 @@ public class ConsertoComputadorDAO implements IDao{
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        jpql = " DELETE FROM Servico WHERE idServico = :idServico";
+        jpql = " DELETE FROM ConsertoComputador WHERE id = :id";
         ConsertoComputador p = (ConsertoComputador) obj;
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("idServico", p.getId());
+        qry.setParameter("id", p.getId());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
