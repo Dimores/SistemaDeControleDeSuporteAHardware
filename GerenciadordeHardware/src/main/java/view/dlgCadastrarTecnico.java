@@ -35,14 +35,12 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         tecnicoController = new TecnicoController();
         idTecnicoEditando = -1L;
         initComponents();
-        this.criarMascaraCadastros();
-        this.habilitarCampos(false, panFormulario);
-        this.habilitarCampos(false, panFormulario2);
-        this.habilitarCampos(false, panPreencher);
-        this.limparCampos();
         this.setModal(true);
+        this.criarMascaraCadastros();
+        
+        //this.habilitarCampos(false , panPreencher);
         tecnicoController.atualizarTabela(grdTecnicos);
-        setDefaultCloseOperation(dlgCadastrarTecnico.DISPOSE_ON_CLOSE);
+        
     }
 
     /**
@@ -54,117 +52,30 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panFormulario = new javax.swing.JPanel();
-        lblNome = new javax.swing.JLabel();
-        edtNome = new javax.swing.JTextField();
-        lblCpf = new javax.swing.JLabel();
-        fEdtCpf = new javax.swing.JFormattedTextField();
-        lblDataNasc = new javax.swing.JLabel();
-        fEdtDataNasc = new javax.swing.JFormattedTextField();
-        lblSalario = new javax.swing.JLabel();
-        fEdtSalario = new javax.swing.JFormattedTextField();
         panBotoes = new javax.swing.JPanel();
-        btnExcluir = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnConfirmar = new javax.swing.JButton();
-        panFormulario2 = new javax.swing.JPanel();
-        lblEmail = new javax.swing.JLabel();
-        fEdtEmail = new javax.swing.JFormattedTextField();
-        lblTelefone = new javax.swing.JLabel();
-        fEdtTelefone = new javax.swing.JFormattedTextField();
-        lblSenha = new javax.swing.JLabel();
-        edtSenha = new javax.swing.JPasswordField();
         panFundo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         panPreencher = new javax.swing.JPanel();
-        textField4 = new view.graphicElements.TextField();
-        edtEmail = new view.graphicElements.TextField();
-        edtCpf = new view.graphicElements.FormattedTextField();
-        edtDataNasc = new view.graphicElements.FormattedTextField();
-        edtSalario = new view.graphicElements.FormattedTextField();
-        edtTelefone = new view.graphicElements.FormattedTextField();
+        edtNome = new view.graphicElements.TextField();
+        fEdtEmail = new view.graphicElements.TextField();
+        fEdtCpf = new view.graphicElements.FormattedTextField();
+        fEdtDataNasc = new view.graphicElements.FormattedTextField();
+        fEdtSalario = new view.graphicElements.FormattedTextField();
+        fEdtTelefone = new view.graphicElements.FormattedTextField();
+        edtSenha = new view.graphicElements.PasswordField();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
-        formatacaoBotao4 = new view.graphicElements.BotaoVermelho();
-        formatacaoBotao5 = new view.graphicElements.BotaoVermelho();
-        formatacaoBotao6 = new view.graphicElements.BotaoVermelho();
+        btnExcluir = new view.graphicElements.BotaoVermelho();
+        btnCancelar = new view.graphicElements.BotaoVermelho();
+        btnConfirmar = new view.graphicElements.BotaoVermelho();
         btnNovo = new view.graphicElements.BotaoVermelho();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        a = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdTecnicos = new view.graphicElements.TableDark();
 
         setResizable(false);
 
-        panFormulario.setLayout(new javax.swing.BoxLayout(panFormulario, javax.swing.BoxLayout.LINE_AXIS));
-
-        lblNome.setText("Nome:");
-        panFormulario.add(lblNome);
-        panFormulario.add(edtNome);
-
-        lblCpf.setText("CPF:");
-        panFormulario.add(lblCpf);
-        panFormulario.add(fEdtCpf);
-
-        lblDataNasc.setText("Nasc:");
-        panFormulario.add(lblDataNasc);
-
-        fEdtDataNasc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEdtDataNascActionPerformed(evt);
-            }
-        });
-        panFormulario.add(fEdtDataNasc);
-
-        lblSalario.setText("Salario:");
-        panFormulario.add(lblSalario);
-        panFormulario.add(fEdtSalario);
-
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnExcluir);
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnCancelar);
-
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnConfirmar);
-
-        panFormulario2.setLayout(new javax.swing.BoxLayout(panFormulario2, javax.swing.BoxLayout.LINE_AXIS));
-
-        lblEmail.setText("Email:");
-        panFormulario2.add(lblEmail);
-
-        fEdtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEdtEmailActionPerformed(evt);
-            }
-        });
-        panFormulario2.add(fEdtEmail);
-
-        lblTelefone.setText("Telefone:");
-        panFormulario2.add(lblTelefone);
-        panFormulario2.add(fEdtTelefone);
-
-        lblSenha.setText("Senha:");
-        panFormulario2.add(lblSenha);
-        panFormulario2.add(edtSenha);
+        getContentPane().add(panBotoes, java.awt.BorderLayout.CENTER);
 
         panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
@@ -176,45 +87,51 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
-        textField4.setBackground(new java.awt.Color(20, 20, 20));
-        textField4.setForeground(new java.awt.Color(251, 251, 251));
-        textField4.setLabelText("Nome");
-        textField4.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        textField4.setLineColor(new java.awt.Color(229, 9, 20));
-        textField4.addActionListener(new java.awt.event.ActionListener() {
+        edtNome.setBackground(new java.awt.Color(20, 20, 20));
+        edtNome.setForeground(new java.awt.Color(251, 251, 251));
+        edtNome.setLabelText("Nome");
+        edtNome.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtNome.setLineColor(new java.awt.Color(229, 9, 20));
+        edtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField4ActionPerformed(evt);
+                edtNomeActionPerformed(evt);
             }
         });
 
-        edtEmail.setBackground(new java.awt.Color(20, 20, 20));
-        edtEmail.setLabelText("Email");
-        edtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtEmail.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtEmail.setLabelText("Email");
+        fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
 
-        edtCpf.setBackground(new java.awt.Color(20, 20, 20));
-        edtCpf.setForeground(new java.awt.Color(251, 251, 251));
-        edtCpf.setLabelText("CPF");
-        edtCpf.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtCpf.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtCpf.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtCpf.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtCpf.setLabelText("CPF");
+        fEdtCpf.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtCpf.setLineColor(new java.awt.Color(229, 9, 20));
 
-        edtDataNasc.setBackground(new java.awt.Color(20, 20, 20));
-        edtDataNasc.setForeground(new java.awt.Color(251, 251, 251));
-        edtDataNasc.setLabelText("Data de Nascimento");
-        edtDataNasc.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtDataNasc.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtDataNasc.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtDataNasc.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtDataNasc.setLabelText("Data de Nascimento");
+        fEdtDataNasc.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtDataNasc.setLineColor(new java.awt.Color(229, 9, 20));
 
-        edtSalario.setBackground(new java.awt.Color(20, 20, 20));
-        edtSalario.setForeground(new java.awt.Color(251, 251, 251));
-        edtSalario.setLabelText("Salário");
-        edtSalario.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtSalario.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtSalario.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtSalario.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtSalario.setLabelText("Salário");
+        fEdtSalario.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtSalario.setLineColor(new java.awt.Color(229, 9, 20));
 
-        edtTelefone.setBackground(new java.awt.Color(20, 20, 20));
-        edtTelefone.setForeground(new java.awt.Color(251, 251, 251));
-        edtTelefone.setLabelText("Telefone");
-        edtTelefone.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtTelefone.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtTelefone.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtTelefone.setLabelText("Telefone");
+        fEdtTelefone.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
+
+        edtSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtSenha.setLabelText("Senha");
+        edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtSenha.setLineColor(new java.awt.Color(229, 9, 20));
+        edtSenha.setName(""); // NOI18N
 
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
@@ -223,32 +140,35 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(edtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fEdtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fEdtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fEdtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fEdtCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panPreencherLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(222, 222, 222))
         );
         panPreencherLayout.setVerticalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
-                .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fEdtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fEdtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fEdtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addComponent(fEdtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         panTodosBotoes.setOpaque(false);
@@ -265,36 +185,41 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
             }
         });
 
-        formatacaoBotao4.setBackground(new java.awt.Color(51, 51, 51));
-        formatacaoBotao4.setForeground(new java.awt.Color(251, 251, 251));
-        formatacaoBotao4.setText("Excluir");
-        formatacaoBotao4.setBorderPainted(false);
-        formatacaoBotao4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        formatacaoBotao4.setRadius(40);
-        formatacaoBotao4.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 51));
+        btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExcluir.setRadius(40);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formatacaoBotao4ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        formatacaoBotao5.setBackground(new java.awt.Color(51, 51, 51));
-        formatacaoBotao5.setForeground(new java.awt.Color(251, 251, 251));
-        formatacaoBotao5.setText("Cancelar");
-        formatacaoBotao5.setBorderPainted(false);
-        formatacaoBotao5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        formatacaoBotao5.setRadius(40);
-        formatacaoBotao5.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setRadius(40);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formatacaoBotao5ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        formatacaoBotao6.setBackground(new java.awt.Color(51, 51, 51));
-        formatacaoBotao6.setForeground(new java.awt.Color(251, 251, 251));
-        formatacaoBotao6.setText("Confirmar");
-        formatacaoBotao6.setBorderPainted(false);
-        formatacaoBotao6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        formatacaoBotao6.setRadius(40);
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmar.setRadius(40);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setBackground(new java.awt.Color(51, 51, 51));
         btnNovo.setForeground(new java.awt.Color(251, 251, 251));
@@ -319,12 +244,12 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formatacaoBotao4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formatacaoBotao5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panTodosBotoesLayout.createSequentialGroup()
                         .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formatacaoBotao6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -336,31 +261,13 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(formatacaoBotao4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(formatacaoBotao5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(formatacaoBotao6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
-
-        a.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        a.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(a);
 
         grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -384,16 +291,13 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                 .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panFundoLayout.createSequentialGroup()
                 .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFundoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2))
                     .addGroup(panFundoLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(218, 218, 218)))
                 .addContainerGap())
@@ -408,78 +312,22 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                     .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
-                    .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panFormulario2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(panFundo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(panFormulario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(panFundo, java.awt.BorderLayout.PAGE_START);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void aMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aMouseClicked
-        
-    }//GEN-LAST:event_aMouseClicked
-
-    private void fEdtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtEmailActionPerformed
+    private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fEdtEmailActionPerformed
-
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
-        try {
-            if (idTecnicoEditando > 0) {
-                tecnicoController.atualizarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
-            } else {
-                tecnicoController.cadastrarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
-            }
-            //Comando bastante importante
-            this.idTecnicoEditando = -1L;
-
-            tecnicoController.atualizarTabela(a);
-
-            this.habilitarCampos(false, panFormulario);
-            this.habilitarCampos(false, panFormulario2);
-            recuperadorSenha = edtSenha.getText();
-            this.limparCampos();
-        } catch (TecnicoException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+    }//GEN-LAST:event_edtNomeActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
         Tecnico tecnicoExcluido = (Tecnico) this.getObjetoSelecionadoNaGrid();
 
         if (tecnicoExcluido == null)
@@ -498,7 +346,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                 try {
                     tecnicoController.excluirTecnico(tecnicoExcluido);
 
-                    tecnicoController.atualizarTabela(a);
+                    tecnicoController.atualizarTabela(grdTecnicos);
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
                 } catch (TecnicoException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -508,28 +356,11 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
         this.idTecnicoEditando = -1L;
-
+        this.habilitarCampos(false, panPreencher);
         this.limparCampos();
-        this.habilitarCampos(false,panFormulario);
-        this.habilitarCampos(false, panFormulario2);
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void fEdtDataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtDataNascActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fEdtDataNascActionPerformed
-
-    private void textField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField4ActionPerformed
-
-    private void formatacaoBotao4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatacaoBotao4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formatacaoBotao4ActionPerformed
-
-    private void formatacaoBotao5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatacaoBotao5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formatacaoBotao5ActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
@@ -550,11 +381,36 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (idTecnicoEditando > 0) {
+                tecnicoController.atualizarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+            } else {
+                tecnicoController.cadastrarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+            }
+            //Comando bastante importante
+            this.idTecnicoEditando = -1L;
+
+            tecnicoController.atualizarTabela(grdTecnicos);
+
+            this.habilitarCampos(false, panPreencher);
+            this.limparCampos();
+        } catch (TecnicoException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
     private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = a.getSelectedRow();
+        int rowCliked = grdTecnicos.getSelectedRow();
         Object obj = null;
         if (rowCliked >= 0) {
-            obj = a.getModel().getValueAt(rowCliked, -1);
+            obj = grdTecnicos.getModel().getValueAt(rowCliked, -1);
         }
         return obj;
     }
@@ -590,45 +446,25 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable a;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
+    private view.graphicElements.BotaoVermelho btnCancelar;
+    private view.graphicElements.BotaoVermelho btnConfirmar;
     private view.graphicElements.BotaoVermelho btnEditar;
-    private javax.swing.JButton btnExcluir;
+    private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnNovo;
-    private view.graphicElements.FormattedTextField edtCpf;
-    private view.graphicElements.FormattedTextField edtDataNasc;
-    private view.graphicElements.TextField edtEmail;
-    private javax.swing.JTextField edtNome;
-    private view.graphicElements.FormattedTextField edtSalario;
-    private javax.swing.JPasswordField edtSenha;
-    private view.graphicElements.FormattedTextField edtTelefone;
-    private javax.swing.JFormattedTextField fEdtCpf;
-    private javax.swing.JFormattedTextField fEdtDataNasc;
-    private javax.swing.JFormattedTextField fEdtEmail;
-    private javax.swing.JFormattedTextField fEdtSalario;
-    private javax.swing.JFormattedTextField fEdtTelefone;
-    private view.graphicElements.BotaoVermelho formatacaoBotao4;
-    private view.graphicElements.BotaoVermelho formatacaoBotao5;
-    private view.graphicElements.BotaoVermelho formatacaoBotao6;
+    private view.graphicElements.TextField edtNome;
+    private view.graphicElements.PasswordField edtSenha;
+    private view.graphicElements.FormattedTextField fEdtCpf;
+    private view.graphicElements.FormattedTextField fEdtDataNasc;
+    private view.graphicElements.TextField fEdtEmail;
+    private view.graphicElements.FormattedTextField fEdtSalario;
+    private view.graphicElements.FormattedTextField fEdtTelefone;
     private view.graphicElements.TableDark grdTecnicos;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblDataNasc;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblSalario;
-    private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
-    private javax.swing.JPanel panFormulario;
-    private javax.swing.JPanel panFormulario2;
     private javax.swing.JPanel panFundo;
     private javax.swing.JPanel panPreencher;
     private javax.swing.JPanel panTodosBotoes;
-    private view.graphicElements.TextField textField4;
     // End of variables declaration//GEN-END:variables
 
     private void criarMascaraCadastros() {
@@ -636,7 +472,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
             MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
             telefoneMask.install(fEdtTelefone);
             MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
-            cpfMask.install(edtCpf);
+            cpfMask.install(fEdtCpf);
             MaskFormatter dataNascMask = new MaskFormatter("##/##/####");
             dataNascMask.install(fEdtDataNasc);
             MaskFormatter salarioMask = new MaskFormatter("####.##");
