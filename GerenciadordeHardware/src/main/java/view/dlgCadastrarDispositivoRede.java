@@ -20,7 +20,7 @@ import model.exceptions.DispositivoRedeException;
  *
  * @author diego
  */
-public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
+public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
     DispositivoRedeController dispositivoRedeController;
     Long idDispositivoEditando;
     
@@ -28,12 +28,14 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastrarDispositivoRede() {
+    public dlgCadastrarDispositivoRede(java.awt.Dialog parent) {
         dispositivoRedeController = new DispositivoRedeController();
         initComponents();
         this.criarMascaraCampos();
         idDispositivoEditando = -1L;
+        this.setModal(true);
         this.habilitarCampos(false);
+        dispositivoRedeController.atualizarTabela(grdDispositivosRede);
     }
 
     /**
@@ -59,7 +61,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
         lblPreco = new javax.swing.JLabel();
-        edtPreco = new javax.swing.JTextField();
+        fEdtPreco = new javax.swing.JFormattedTextField();
         lblIP = new javax.swing.JLabel();
         fEdtIP = new javax.swing.JFormattedTextField();
         panCampos2 = new javax.swing.JPanel();
@@ -67,8 +69,17 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtFabricante = new javax.swing.JTextField();
         lblModelo = new javax.swing.JLabel();
         edtModelo = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        edtCodigo = new javax.swing.JTextField();
+        lblDescricao = new javax.swing.JLabel();
+        edtDescricao = new javax.swing.JTextField();
+        lblEstoque = new javax.swing.JLabel();
+        edtEstoque = new javax.swing.JTextField();
+        lblCategoria = new javax.swing.JLabel();
+        edtCategoria = new javax.swing.JTextField();
+        lblDataFabricacao = new javax.swing.JLabel();
+        fEdtDataFabricacao = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         lblTitulo5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -154,7 +165,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
 
         lblPreco.setText("Preço:");
         panCampos1.add(lblPreco);
-        panCampos1.add(edtPreco);
+        panCampos1.add(fEdtPreco);
 
         lblIP.setText("IP:");
         panCampos1.add(lblIP);
@@ -170,6 +181,26 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         panCampos2.add(lblModelo);
         panCampos2.add(edtModelo);
 
+        lblCodigo.setText("Codigo:");
+        panCampos2.add(lblCodigo);
+        panCampos2.add(edtCodigo);
+
+        lblDescricao.setText("Descricao");
+        panCampos2.add(lblDescricao);
+        panCampos2.add(edtDescricao);
+
+        lblEstoque.setText("Estoque:");
+        panCampos2.add(lblEstoque);
+        panCampos2.add(edtEstoque);
+
+        lblCategoria.setText("Categoria");
+        panCampos2.add(lblCategoria);
+        panCampos2.add(edtCategoria);
+
+        lblDataFabricacao.setText("Data Fabric");
+        panCampos2.add(lblDataFabricacao);
+        panCampos2.add(fEdtDataFabricacao);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,7 +210,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panCampos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -199,7 +230,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,15 +268,15 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         try {
             if (idDispositivoEditando > 0) {
-                dispositivoRedeController.atualizarDispositivoRede();
+                dispositivoRedeController.atualizarDispositivoRede(idDispositivoEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(fEdtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), fEdtIP.getText(), edtFabricante.getText(), edtModelo.getText());
             } else {
-                dispositivoRedeController.cadastrarDispositivoRede();            
+                dispositivoRedeController.cadastrarDispositivoRede(idDispositivoEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(fEdtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), fEdtIP.getText(), edtFabricante.getText(), edtModelo.getText());          
             }
             
             //Comando bastante importante
             this.idDispositivoEditando = -1L;
 
-            //idDispositivoEditando.atualizarTabela(grdDispositivosRede);
+            dispositivoRedeController.atualizarTabela(grdDispositivosRede);
 
             this.habilitarCampos(false);
             this.limparCampos();
@@ -273,7 +304,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
                     JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
-                    dispositivoRedeController.excluirDispositivoRede();
+                    dispositivoRedeController.excluirDispositivoRede(dispositivoRedeExcluido);
 
                     dispositivoRedeController.atualizarTabela(grdDispositivosRede);
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
@@ -297,7 +328,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtNome.setText("");
         edtFabricante.setText("");
         edtModelo.setText("");
-        edtPreco.setText("");
+        fEdtPreco.setText("");
         fEdtIP.setText("");
     }
     
@@ -305,14 +336,18 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
         edtNome.setText(dr.getNome());
         edtFabricante.setText(dr.getFabricante());
         edtModelo.setText(dr.getModelo());
-        edtPreco.setText(String.valueOf(dr.getPreco()));
+        fEdtPreco.setText(String.valueOf(dr.getPreco()));
         fEdtIP.setText(dr.getEnderecoIP());
     }
     
     private void criarMascaraCampos(){
         try {
-            MaskFormatter ipMask = new MaskFormatter("###.###.#.###");
+            MaskFormatter ipMask = new MaskFormatter("###.###.##.#");
             ipMask.install(fEdtIP);
+            MaskFormatter datFabricacaoMask = new MaskFormatter("##/##/####");
+            datFabricacaoMask.install(fEdtDataFabricacao);
+            MaskFormatter precoMask = new MaskFormatter("####.##");
+            precoMask.install(fEdtPreco);
         } catch (ParseException ex) {
             Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -334,14 +369,24 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JTextField edtCategoria;
+    private javax.swing.JTextField edtCodigo;
+    private javax.swing.JTextField edtDescricao;
+    private javax.swing.JTextField edtEstoque;
     private javax.swing.JTextField edtFabricante;
     private javax.swing.JTextField edtModelo;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtPreco;
+    private javax.swing.JFormattedTextField fEdtDataFabricacao;
     private javax.swing.JFormattedTextField fEdtIP;
+    private javax.swing.JFormattedTextField fEdtPreco;
     private javax.swing.JTable grdDispositivosRede;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblDataFabricacao;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblFabricante;
     private javax.swing.JLabel lblIP;
     private javax.swing.JLabel lblModelo;

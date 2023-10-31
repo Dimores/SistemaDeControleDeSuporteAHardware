@@ -19,34 +19,32 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("DISPOSITIVODEREDE")
 public class DispositivoDeRede extends Produto {
+    
+    
     private Long id;
-    private String nome;
     private String enderecoIP;
     private String fabricante;
     private String modelo;
-    private double preco;
 
     public DispositivoDeRede() {
         this.id = 0L;
-        this.nome = "";
         this.enderecoIP = "";
         this.fabricante = "";
         this.modelo = "";
-        this.preco = 0.0;
     }
 
-    public DispositivoDeRede(Long id,String nome, String enderecoIP, String tipo, String fabricante, String modelo, double preco) {
+    public DispositivoDeRede(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, 
+                                            String enderecoIP, String fabricante, String modelo) { // Atributos de dispositivo de rede
+        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
         this.id = id;
-        this.nome = nome;
         this.enderecoIP = enderecoIP;
         this.fabricante = fabricante;
         this.modelo = modelo;
-        this.preco = preco;
     }
 
     @Override
     public String toString() {
-        String txt = "Nome: " + this.nome + "\n"
+        String txt = "Nome: " + this.getNome() + "\n"
                 + "Endereço IP: " + this.enderecoIP + "\n"
                 + "Fabricante: " + this.fabricante + "\n"
                 + "Modelo: " + this.modelo + "\n";
@@ -54,7 +52,7 @@ public class DispositivoDeRede extends Produto {
     }
 
     public void copiar(DispositivoDeRede outro) {
-        this.nome = outro.getNome();
+        this.setNome(outro.getNome());
         this.enderecoIP = outro.getEnderecoIP();
         this.fabricante = outro.getFabricante();
         this.modelo = outro.getModelo();
@@ -65,7 +63,7 @@ public class DispositivoDeRede extends Produto {
     }
 
     public String atributoToCSV() {
-        return this.nome + ";" +
+        return this.getNome() + ";" +
                 this.enderecoIP + ";" +
                 this.fabricante + ";" +
                 this.modelo + "\n";
@@ -73,7 +71,7 @@ public class DispositivoDeRede extends Produto {
 
     public void CSVToAtributo(String csv) {
         String[] vetor = csv.split(";");
-        this.nome = vetor[0];
+        this.setNome(vetor[0]);
         this.enderecoIP = vetor[1];
         this.fabricante = vetor[2];
         this.modelo = vetor[3];

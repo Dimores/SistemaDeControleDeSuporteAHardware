@@ -17,14 +17,13 @@ public class TMInstalacaoRede extends AbstractTableModel {
 
     private List<Object> lista;
     private Object instalacaoRede;
-    
-    private final int COL_ID = 0;       
-    private final int COL_CONCLUIDO = 1;
-    private final int COL_DATA_SERVICO = 2;
-    private final int COL_DESCRICAO_SERVICO = 3;
-    private final int COL_VALOR = 4;
-    private final int COL_TIPO_REDE = 5;
-    private final int COL_ENDERECO_REDE = 6;
+      
+    private final int COL_CONCLUIDO = 0;
+    private final int COL_DATA_SERVICO = 1;
+    private final int COL_DESCRICAO_SERVICO = 2;
+    private final int COL_VALOR = 3;
+    private final int COL_TIPO_REDE = 4;
+    private final int COL_ENDERECO_REDE = 5;
 
     public TMInstalacaoRede(List<Object> lstInstalacaoRede) {        
         lista = lstInstalacaoRede;        
@@ -41,7 +40,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 6;
     }
 
     @Override
@@ -56,8 +55,6 @@ public class TMInstalacaoRede extends AbstractTableModel {
             switch (columnIndex) {
                 case -1:
                     return aux;
-                case COL_ID:
-                    return aux.getId();
                 case COL_CONCLUIDO:
                     return aux.isConcluido();
                 case COL_DATA_SERVICO:
@@ -86,8 +83,6 @@ public class TMInstalacaoRede extends AbstractTableModel {
     public String getColumnName(int column) {
         
         switch (column) {
-            case COL_ID:
-                return "ID";
             case COL_CONCLUIDO:
                 return "Concluido?"; 
             case COL_DATA_SERVICO:

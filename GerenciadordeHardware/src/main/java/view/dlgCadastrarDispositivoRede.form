@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -29,7 +28,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
                   <Component id="panCampos2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" alignment="1" pref="819" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="978" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="panBotoes" min="-2" pref="424" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -53,7 +52,7 @@
               <Component id="jScrollPane1" min="-2" pref="278" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="panBotoes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -169,7 +168,7 @@
             <Property name="text" type="java.lang.String" value="Pre&#xe7;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="edtPreco">
+        <Component class="javax.swing.JFormattedTextField" name="fEdtPreco">
         </Component>
         <Component class="javax.swing.JLabel" name="lblIP">
           <Properties>
@@ -197,6 +196,41 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtModelo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCodigo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Codigo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtCodigo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDescricao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Descricao"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtDescricao">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEstoque">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estoque:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtEstoque">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCategoria">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Categoria"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtCategoria">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDataFabricacao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Data Fabric"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="fEdtDataFabricacao">
         </Component>
       </SubComponents>
     </Container>

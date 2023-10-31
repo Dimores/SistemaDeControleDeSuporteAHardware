@@ -24,8 +24,6 @@ import model.exceptions.TecnicoException;
 public class dlgCadastrarTecnico extends javax.swing.JDialog{
     TecnicoController tecnicoController;
     Long idTecnicoEditando;
-    private String recuperadorSenha;
-
 
     /**
      * Creates new form dlgCadastroServico
@@ -99,6 +97,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         });
 
         fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtEmail.setForeground(new java.awt.Color(251, 251, 251));
         fEdtEmail.setLabelText("Email");
         fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
@@ -128,6 +127,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         fEdtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
 
         edtSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtSenha.setForeground(new java.awt.Color(251, 251, 251));
         edtSenha.setLabelText("Senha");
         edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtSenha.setLineColor(new java.awt.Color(229, 9, 20));
@@ -287,9 +287,6 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         panFundoLayout.setHorizontalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFundoLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panFundoLayout.createSequentialGroup()
                 .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -297,10 +294,13 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
                     .addGroup(panFundoLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(218, 218, 218)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panFundoLayout.setVerticalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,7 +434,6 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     public void preencherFormulario(Tecnico t) {
             edtNome.setText(t.getNome());
             fEdtCpf.setText(t.getCPF());
-            edtSenha.setText(recuperadorSenha);
             fEdtDataNasc.setText(t.getDataNasc());
             fEdtEmail.setText(t.getEmail());
             fEdtSalario.setText(String.valueOf(t.getSalario()));

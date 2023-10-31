@@ -25,7 +25,7 @@ public class DispositivoDeRedeDAO implements IDao{
         
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        this.entityManager.persist(obj);
+        this.entityManager.merge(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
       

@@ -46,7 +46,6 @@ public class ClienteController extends UsuarioController{
         this.crip = new Criptografia();
         Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone); 
         novoCliente.setId(id);
-        System.out.println("Senha: "+ senha );
         
         try {
             

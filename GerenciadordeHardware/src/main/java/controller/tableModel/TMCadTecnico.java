@@ -8,6 +8,7 @@ package controller.tableModel;
 import java.awt.Color;
 import model.Tecnico;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
 
@@ -29,6 +30,7 @@ public class TMCadTecnico extends AbstractTableModel {
     //private final int COL_SENHA = 5;
     private final int COL_EMAIL = 4;
     private final int COL_TELEFONE = 5;
+    //private final int COL_EXCLUIR = 6;
     
 
     public TMCadTecnico(List<Object> lstTecnicos) {        
@@ -74,6 +76,8 @@ public class TMCadTecnico extends AbstractTableModel {
                     return aux.getEmail();
                 case COL_TELEFONE:
                     return aux.getTelefone();
+                //case COL_EXCLUIR:
+                    //return new ImageIcon(getClass().getResource("/images/remove.png"));
                
                 default: 
                     break;
@@ -113,10 +117,11 @@ public class TMCadTecnico extends AbstractTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex) {
-//        if(columnIndex == COL_MATRICULA)
-//            return Boolean.class;
-        
-        return String.class;
+        // Aqui você pode definir o tipo de dados das colunas, por exemplo, Double.class para COL_PRECO
+        return String.class; // Neste exemplo, todas as colunas são tratadas como Strings
     }
-
 }
+    
+    
+
+

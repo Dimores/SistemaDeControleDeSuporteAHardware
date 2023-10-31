@@ -41,17 +41,18 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="lblLoginIcone" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="panOpcoes" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="660" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="lblLoginIcone" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="797" max="32767" attributes="0"/>
               <Component id="panUser" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panOpcoes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <Component id="botaoVermelho1" min="-2" pref="255" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,8 +66,17 @@
                       <Component id="lblLoginIcone" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="panOpcoes" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="panOpcoes" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                      <Component id="botaoVermelho1" min="-2" pref="103" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,7 +100,7 @@
                       <Component id="btnCadastrarTecnico" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnCadastrarCliente" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnSocilitarServico" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnCadastrarDispositivoDeRede" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnCadastrarServico" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnCadastrarPeça" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnRegistrarPagamento" alignment="1" max="32767" attributes="0"/>
@@ -118,7 +128,7 @@
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Component id="btnCadastrarServico" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="btnCadastrarDispositivoDeRede" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Component id="btnSocilitarServico" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -191,13 +201,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarServicoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnCadastrarDispositivoDeRede">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cadastrar dispositivo de rede"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarDispositivoDeRedeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSocilitarServico">
           <Properties>
@@ -259,6 +272,12 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/user_85923.png"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="view.graphicElements.BotaoVermelho" name="botaoVermelho1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrar"/>
+        <Property name="radius" type="int" value="50"/>
       </Properties>
     </Component>
   </SubComponents>

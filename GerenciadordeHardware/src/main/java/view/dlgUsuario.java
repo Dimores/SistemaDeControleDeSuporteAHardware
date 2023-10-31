@@ -20,6 +20,8 @@ public class dlgUsuario extends javax.swing.JDialog {
     dlgCadastrarTecnico telaTecnico;
     dlgCadastrarPeca telaCadastroPeca;
     dlgCadastrarRelatorioManutencao telaCadastroManutencao;
+    dlgCadastroServico telaServico;
+    dlgCadastrarDispositivoRede telaDispositivoRede;
     /**
      * Creates new form FrMain
      */
@@ -41,6 +43,8 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaCliente = new dlgCadastrarCliente(this);
         telaCadastroPeca = new dlgCadastrarPeca(this);
         telaCadastroManutencao = new dlgCadastrarRelatorioManutencao(this);
+        telaServico = new dlgCadastroServico(this);
+        telaDispositivoRede = new dlgCadastrarDispositivoRede(this);
     }
 
     public javax.swing.JLabel getLblUserName(){
@@ -94,13 +98,14 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnGerarRelatorioManutencao = new javax.swing.JButton();
         btnCadastrarPeça = new javax.swing.JButton();
         btnCadastrarServico = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCadastrarDispositivoDeRede = new javax.swing.JButton();
         btnSocilitarServico = new javax.swing.JButton();
         btnCadastrarTecnico = new javax.swing.JButton();
         btnCadastrarCliente = new javax.swing.JButton();
         panUser = new javax.swing.JPanel();
         lblUserName = new javax.swing.JLabel();
         lblLoginIcone = new javax.swing.JLabel();
+        botaoVermelho1 = new view.graphicElements.BotaoVermelho();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -148,8 +153,13 @@ public class dlgUsuario extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
-        jButton1.setText("Cadastrar dispositivo de rede");
+        btnCadastrarDispositivoDeRede.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        btnCadastrarDispositivoDeRede.setText("Cadastrar dispositivo de rede");
+        btnCadastrarDispositivoDeRede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarDispositivoDeRedeActionPerformed(evt);
+            }
+        });
 
         btnSocilitarServico.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         btnSocilitarServico.setText("Socilitar serviço");
@@ -179,7 +189,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                     .addComponent(btnCadastrarTecnico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSocilitarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrarDispositivoDeRede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarPeça, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRegistrarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,7 +214,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 .addGap(5, 5, 5)
                 .addComponent(btnCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCadastrarDispositivoDeRede, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(btnSocilitarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
@@ -230,6 +240,9 @@ public class dlgUsuario extends javax.swing.JDialog {
 
         lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
 
+        botaoVermelho1.setText("Entrar");
+        botaoVermelho1.setRadius(50);
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -243,15 +256,17 @@ public class dlgUsuario extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblLoginIcone)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblUserName))
-                    .addComponent(panOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblLoginIcone)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblUserName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 797, Short.MAX_VALUE)
                 .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(botaoVermelho1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,8 +276,14 @@ public class dlgUsuario extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblUserName)
                         .addComponent(lblLoginIcone)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(botaoVermelho1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -276,6 +297,7 @@ public class dlgUsuario extends javax.swing.JDialog {
 
     private void btnCadastrarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarServicoActionPerformed
         // TODO add your handling code here:
+        telaServico.setVisible(true);
     }//GEN-LAST:event_btnCadastrarServicoActionPerformed
 
     private void btnCadastrarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTecnicoActionPerformed
@@ -297,6 +319,11 @@ public class dlgUsuario extends javax.swing.JDialog {
     private void btnGerarRelatorioRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioRedeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioRedeActionPerformed
+
+    private void btnCadastrarDispositivoDeRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarDispositivoDeRedeActionPerformed
+        // TODO add your handling code here:
+        telaDispositivoRede.setVisible(true);
+    }//GEN-LAST:event_btnCadastrarDispositivoDeRedeActionPerformed
 
     /*public void fecharTodasAsJanelas()  {
         telaCliente.habilitarCampos(false);
@@ -342,7 +369,9 @@ public class dlgUsuario extends javax.swing.JDialog {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.graphicElements.BotaoVermelho botaoVermelho1;
     private javax.swing.JButton btnCadastrarCliente;
+    private javax.swing.JButton btnCadastrarDispositivoDeRede;
     private javax.swing.JButton btnCadastrarPeça;
     private javax.swing.JButton btnCadastrarServico;
     private javax.swing.JButton btnCadastrarTecnico;
@@ -351,7 +380,6 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistrarPagamento;
     private javax.swing.JButton btnSocilitarServico;
     private javax.swing.JButton btnSocilitarSuporte;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

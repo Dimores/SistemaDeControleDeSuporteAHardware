@@ -84,6 +84,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         lblSelecaoPeca = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         grdPecas = new javax.swing.JTable();
+        chkConcluido = new view.graphicElements.JCheckBoxCustom();
         panBotoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -203,14 +204,19 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         });
         jScrollPane5.setViewportView(grdPecas);
 
+        chkConcluido.setBackground(new java.awt.Color(20, 20, 20));
+        chkConcluido.setText("Concluido");
+
         javax.swing.GroupLayout panPecasSubstituidasLayout = new javax.swing.GroupLayout(panPecasSubstituidas);
         panPecasSubstituidas.setLayout(panPecasSubstituidasLayout);
         panPecasSubstituidasLayout.setHorizontalGroup(
             panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblSelecaoPeca)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSelecaoPeca)
+                    .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPecasSubstituidasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -221,12 +227,13 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblSelecaoPeca)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
                     .addGap(35, 35, 35)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(32, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
@@ -330,10 +337,10 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
                     .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(panValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -355,7 +362,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
                 .addComponent(panProblema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(29, 29, 29)
                 .addComponent(lblComputadores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -400,9 +407,9 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         
         try {
             if (idConsertoComputadorEditando > 0) {
-                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, pecasSelecionadas);
+                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
             } else {
-                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, false, pecasSelecionadas);
+                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
             }
             //Comando bastante importante
             this.idConsertoComputadorEditando = -1L;
@@ -564,6 +571,8 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
                 }
             }
         }
+        
+        chkConcluido.setSelected(consertoComputadorEditando.isConcluido());
     }
 
 
@@ -574,6 +583,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private view.graphicElements.JCheckBoxCustom chkConcluido;
     private javax.swing.JTextField edtDescricaoProblema;
     private javax.swing.JTextField edtValor;
     private javax.swing.JTable grdClientes;
