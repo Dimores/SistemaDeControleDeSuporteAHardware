@@ -26,29 +26,35 @@ public class Relatorio {
     private Long idRelatorio;
     private String dataRelatorio;
     private String descricao;
-    private String nomeClienteRelacionado;
-    private String nomeTecnicoResponsavel;
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")  // Nome da coluna que faz referência ao cliente na tabela Relatorio
+    private Cliente cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")  // Nome da coluna que faz referência ao cliente na tabela Relatorio
+    private Tecnico tecnico;
 
     public Relatorio() {
         this.dataRelatorio = "";
         this.descricao = "";
-        this.nomeClienteRelacionado = "";
-        this.nomeTecnicoResponsavel = "";
+        this.cliente = new Cliente();
+        this.tecnico = new Tecnico();
     }
 
-    public Relatorio(Long idRelatorio, String dataRelatorio, String descricao, String clienteRelacionado, String tecnicoResponsavel) {
+    public Relatorio(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
         this.idRelatorio = idRelatorio;
         this.dataRelatorio = dataRelatorio;
         this.descricao = descricao;
-        this.nomeClienteRelacionado = clienteRelacionado;
-        this.nomeTecnicoResponsavel = tecnicoResponsavel;
+        this.cliente = clienteRelacionado;
+        this.tecnico = tecnicoResponsavel;
     }
     
-    public Relatorio(String dataRelatorio, String descricao, String nomeClienteRelacionado, String nomeTecnicoResponsavel) {
+    public Relatorio(String dataRelatorio, String descricao, Cliente nomeClienteRelacionado, Tecnico nomeTecnicoResponsavel) {
         this.dataRelatorio = dataRelatorio;
         this.descricao = descricao;
-        this.nomeClienteRelacionado = nomeClienteRelacionado;
-        this.nomeTecnicoResponsavel = nomeTecnicoResponsavel;
+        this.cliente = nomeClienteRelacionado;
+        this.tecnico = nomeTecnicoResponsavel;
     }
     
     
@@ -56,14 +62,12 @@ public class Relatorio {
 
     @Override
     public String toString() {
-        String clienteNome = (nomeClienteRelacionado != null) ? getNomeClienteRelacionado() : "N/A";
-        String tecnicoNome = (nomeTecnicoResponsavel != null) ? getNomeTecnicoResponsavel() : "N/A";
+        //String clienteNome = (clienteRelacionado != null) ? getNomeClienteRelacionado() : "N/A";
+        //String tecnicoNome = (tecnicoResponsavel != null) ? getNomeTecnicoResponsavel() : "N/A";
 
         return "ID do Relatório: " + idRelatorio + "\n" +
                 "Data do Relatório: " + dataRelatorio + "\n" +
-                "Descrição: " + descricao + "\n" +
-                "Cliente Relacionado: " + clienteNome + "\n" +
-                "Técnico Responsável: " + tecnicoNome + "\n";
+                "Descrição: " + descricao;
     }
 }
 

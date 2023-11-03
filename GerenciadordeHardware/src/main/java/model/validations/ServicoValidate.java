@@ -64,8 +64,7 @@ public class ServicoValidate {
         // Verificando se o ano é inválido(tolerância de 100 anos)
         if(ano <= 1923){
             throw new ServicoException("Error - Data inválida - 'ano'");
-        }
-        
+        }        
         // Setando a data correta
         servico.setDataServico(dataServico);
         

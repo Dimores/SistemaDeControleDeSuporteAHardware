@@ -50,7 +50,6 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panBotoes = new javax.swing.JPanel();
         panFundo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         panPreencher = new javax.swing.JPanel();
@@ -72,11 +71,9 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
 
         setResizable(false);
 
-        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
-        getContentPane().add(panBotoes, java.awt.BorderLayout.CENTER);
-
         panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
+        lblTitulo.setBackground(new java.awt.Color(20, 20, 20));
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(251, 251, 251));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -460,7 +457,6 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
     private view.graphicElements.TableDark grdTecnicos;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panFundo;
     private javax.swing.JPanel panPreencher;
     private javax.swing.JPanel panTodosBotoes;

@@ -24,13 +24,13 @@ public class RelatorioRede extends Relatorio {
         this.tipoRede = "";
     }
 
-    public RelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, String tipoRede, String nomeCliente, String nomeTecnico) {
-        super(idRelatorio,dataRelatorio, descricao, nomeCliente, nomeTecnico);
+    public RelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
+        super(idRelatorio,dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.tipoRede = tipoRede;
     }
     
-    public RelatorioRede(String dataRelatorio, String descricao, String tipoRede, String nomeCliente, String nomeTecnico){
-        super(dataRelatorio, descricao, nomeCliente, nomeTecnico);
+    public RelatorioRede(String dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel){
+        super(dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.tipoRede = tipoRede;
     }
 

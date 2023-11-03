@@ -84,5 +84,9 @@ public class ClienteController extends UsuarioController{
             throw new ClienteException("Error - Cliente inexistente."); 
         }
     }
+
+    public Cliente buscarCliente(String email) {
+        return (Cliente) this.repositorio.findByEmail(email);   
+    }
     
 }

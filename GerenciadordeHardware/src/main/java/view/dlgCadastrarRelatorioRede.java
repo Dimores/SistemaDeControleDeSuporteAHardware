@@ -3,22 +3,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import controller.RelatorioRedeController;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Data;
+import model.RelatorioRede;
+import model.Tecnico;
+import model.exceptions.RelatorioRedeException;
 /**
  *
  * @author diego
  */
-public class dlgCadastrarRelatorioRede extends javax.swing.JFrame {
+public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     private String dataRelatorio;
+    Long idRelatorioRedeEditando;
+    
+    dlgSelecaoCliente telaSelecaoCliente;
+    dlgSelecaoTecnico telaSelecaoTecnico;
+    
+    Cliente clienteSelecionado;
+    Tecnico tecnicoSelecionado;
+    
+    RelatorioRedeController relatorioRedeController;
     /**
      * Creates new form dlgCadastrarRelatorioRede
      */
-    public dlgCadastrarRelatorioRede() {
+    public dlgCadastrarRelatorioRede(java.awt.Dialog parent) {
+        super(parent);
         initComponents();
-        dataRelatorio = Data.pegaDataSistema();        
+        this.setModal(true);
+                
+        dataRelatorio = Data.pegaDataSistema();     
+        
+        relatorioRedeController = new RelatorioRedeController();
+        
+        clienteSelecionado = new Cliente();
+        tecnicoSelecionado = new Tecnico();
+        
+        idRelatorioRedeEditando = -1L;
+        
+        telaSelecaoCliente = new dlgSelecaoCliente(this, true);
+        telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
 
+        relatorioRedeController.atualizarTabela(grdRelatoriosRede);
     }
 
     /**
@@ -30,110 +61,433 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panTitulo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        panBotoes = new javax.swing.JPanel();
-        btnNovo = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnConfirmar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdRelatorios = new javax.swing.JTable();
-        panCampos = new javax.swing.JPanel();
+        panFundo = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        panPreencher = new javax.swing.JPanel();
+        edtTipoRede = new view.graphicElements.TextField();
+        edtDescricao = new view.graphicElements.TextField();
+        edtCliente = new view.graphicElements.TextField();
+        edtTecnico = new view.graphicElements.TextField();
+        panTodosBotoes = new javax.swing.JPanel();
+        btnEditar = new view.graphicElements.BotaoVermelho();
+        btnExcluir = new view.graphicElements.BotaoVermelho();
+        btnCancelar = new view.graphicElements.BotaoVermelho();
+        btnConfirmar = new view.graphicElements.BotaoVermelho();
+        btnNovo = new view.graphicElements.BotaoVermelho();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        grdRelatoriosRede = new view.graphicElements.TableDark();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastrar Relatório de Rede");
+        lblTitulo1.setBackground(new java.awt.Color(20, 20, 20));
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 44)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(251, 251, 251));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Cadastrar Relatório de Rede");
 
-        javax.swing.GroupLayout panTituloLayout = new javax.swing.GroupLayout(panTitulo);
-        panTitulo.setLayout(panTituloLayout);
-        panTituloLayout.setHorizontalGroup(
-            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
+        panPreencher.setOpaque(false);
+
+        edtTipoRede.setBackground(new java.awt.Color(20, 20, 20));
+        edtTipoRede.setForeground(new java.awt.Color(251, 251, 251));
+        edtTipoRede.setLabelText("Tipo de Rede");
+        edtTipoRede.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtTipoRede.setLineColor(new java.awt.Color(229, 9, 20));
+        edtTipoRede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtTipoRedeActionPerformed(evt);
+            }
+        });
+
+        edtDescricao.setBackground(new java.awt.Color(20, 20, 20));
+        edtDescricao.setForeground(new java.awt.Color(251, 251, 251));
+        edtDescricao.setLabelText("Descrição");
+        edtDescricao.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtDescricao.setLineColor(new java.awt.Color(229, 9, 20));
+
+        edtCliente.setEditable(false);
+        edtCliente.setBackground(new java.awt.Color(20, 20, 20));
+        edtCliente.setForeground(new java.awt.Color(251, 251, 251));
+        edtCliente.setText("Clique aqui para adicionar um Cliente.");
+        edtCliente.setLabelText("Cliente");
+        edtCliente.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtCliente.setLineColor(new java.awt.Color(229, 9, 20));
+        edtCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                edtClienteFocusGained(evt);
+            }
+        });
+        edtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                edtClienteMousePressed(evt);
+            }
+        });
+        edtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtClienteActionPerformed(evt);
+            }
+        });
+
+        edtTecnico.setEditable(false);
+        edtTecnico.setBackground(new java.awt.Color(20, 20, 20));
+        edtTecnico.setForeground(new java.awt.Color(251, 251, 251));
+        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtTecnico.setLabelText("Técnico");
+        edtTecnico.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtTecnico.setLineColor(new java.awt.Color(229, 9, 20));
+        edtTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtTecnicoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
+        panPreencher.setLayout(panPreencherLayout);
+        panPreencherLayout.setHorizontalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(edtTipoRede, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
+            .addGroup(panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panTituloLayout.setVerticalGroup(
-            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        panPreencherLayout.setVerticalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addComponent(edtTipoRede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
+        panTodosBotoes.setOpaque(false);
 
-        btnNovo.setText("Novo");
-        panBotoes.add(btnNovo);
+        btnEditar.setBackground(new java.awt.Color(51, 51, 51));
+        btnEditar.setForeground(new java.awt.Color(251, 251, 251));
+        btnEditar.setText("Editar");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEditar.setRadius(40);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 51));
+        btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExcluir.setRadius(40);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
-        panBotoes.add(btnCancelar);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setRadius(40);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
         btnConfirmar.setText("Confirmar");
-        panBotoes.add(btnConfirmar);
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmar.setRadius(40);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
-        grdRelatorios.setModel(new javax.swing.table.DefaultTableModel(
+        btnNovo.setBackground(new java.awt.Color(51, 51, 51));
+        btnNovo.setForeground(new java.awt.Color(251, 251, 251));
+        btnNovo.setText("Novo");
+        btnNovo.setBorderPainted(false);
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnNovo.setRadius(40);
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panTodosBotoesLayout = new javax.swing.GroupLayout(panTodosBotoes);
+        panTodosBotoes.setLayout(panTodosBotoesLayout);
+        panTodosBotoesLayout.setHorizontalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                        .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panTodosBotoesLayout.setVerticalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        grdRelatoriosRede.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(grdRelatorios);
+        jScrollPane3.setViewportView(grdRelatoriosRede);
 
-        javax.swing.GroupLayout panCamposLayout = new javax.swing.GroupLayout(panCampos);
-        panCampos.setLayout(panCamposLayout);
-        panCamposLayout.setHorizontalGroup(
-            panCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panCamposLayout.setVerticalGroup(
-            panCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
+        panFundo.setLayout(panFundoLayout);
+        panFundoLayout.setHorizontalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(panCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        panFundoLayout.setVerticalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
+
+        getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void edtTipoRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTipoRedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtTipoRedeActionPerformed
 
+    private void edtClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtClienteFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtClienteFocusGained
 
+    private void edtClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMousePressed
+        // TODO add your handling code here:
+        telaSelecaoCliente.setVisible(true);
+
+        if(telaSelecaoCliente.getClienteEscolhido() != null){
+            edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
+            clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
+        }
+    }//GEN-LAST:event_edtClienteMousePressed
+
+    private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
+        // TODO add your handling code here:
+        // Aqui
+    }//GEN-LAST:event_edtClienteActionPerformed
+
+    private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
+        // TODO add your handling code here:
+        telaSelecaoTecnico.setVisible(true);
+
+        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
+            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
+            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+        }
+    }//GEN-LAST:event_edtTecnicoMouseClicked
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        RelatorioRede relatorioRedeEditando = (RelatorioRede) this.getObjetoSelecionadoNaGrid();
+
+        if(relatorioRedeEditando == null){
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        }else{
+            this.limparCampos();
+            this.habilitarCampos(true);
+            this.preencherFormulario(relatorioRedeEditando);
+            this.idRelatorioRedeEditando = relatorioRedeEditando.getIdRelatorio();
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        RelatorioRede relatorioRedeExcluido = (RelatorioRede) this.getObjetoSelecionadoNaGrid();
+
+        if (relatorioRedeExcluido == null)
+        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir o Relatorio de Rede  \n("
+                + relatorioRedeExcluido.getIdRelatorio()+ ", "
+                + relatorioRedeExcluido.getDescricao()+ ") ?",
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+
+                try {
+                    relatorioRedeController.excluirRelatorioRede(relatorioRedeExcluido);
+
+                    relatorioRedeController.atualizarTabela(grdRelatoriosRede);
+                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                } catch (RelatorioRedeException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        idRelatorioRedeEditando = -1L;
+        this.limparCampos();
+        this.habilitarCampos(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (idRelatorioRedeEditando > 0) {
+                relatorioRedeController.atualizarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtTipoRede.getText());
+            } else {
+                relatorioRedeController.cadastrarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtTipoRede.getText());
+            }
+            //Comando bastante importante
+            this.idRelatorioRedeEditando = -1L;
+
+            relatorioRedeController.atualizarTabela(grdRelatoriosRede);
+
+            this.habilitarCampos(false);
+            this.limparCampos();
+        } catch (RelatorioRedeException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarRelatorioRede.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        this.limparCampos();
+        this.habilitarCampos(true);
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdRelatoriosRede.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdRelatoriosRede.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+
+    private void limparCampos() {
+        // Limpa os Edts
+        edtDescricao.setText("");
+        edtTipoRede.setText("");
+        edtCliente.setText("Clique aqui para adicionar um Cliente.");
+        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+    }
+    
+    public void habilitarCampos(boolean flag) {
+        for (int i = 0; i < panPreencher.getComponents().length; i++) {
+            panPreencher.getComponent(i).setVisible(flag);
+        }    
+    }
+    
+    public void preencherFormulario(RelatorioRede relatorioRede) {
+        edtTipoRede.setText(relatorioRede.getTipoRede());
+        edtDescricao.setText(relatorioRede.getDescricao());
+        
+        // Obtenha o técnico associado ao ConsertoComputador
+        tecnicoSelecionado = relatorioRede.getTecnico();
+
+        // Obtenha o cliente associado ao ConsertoComputador
+        clienteSelecionado = relatorioRede.getCliente();
+        
+        if (tecnicoSelecionado != null) {
+            edtTecnico.setText(tecnicoSelecionado.getNome() + ".");
+        }
+
+        // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
+        if (clienteSelecionado != null) {
+            edtCliente.setText(clienteSelecionado.getNome() + ".");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JTable grdRelatorios;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel panBotoes;
-    private javax.swing.JPanel panCampos;
-    private javax.swing.JPanel panTitulo;
+    private view.graphicElements.BotaoVermelho btnCancelar;
+    private view.graphicElements.BotaoVermelho btnConfirmar;
+    private view.graphicElements.BotaoVermelho btnEditar;
+    private view.graphicElements.BotaoVermelho btnExcluir;
+    private view.graphicElements.BotaoVermelho btnNovo;
+    private view.graphicElements.TextField edtCliente;
+    private view.graphicElements.TextField edtDescricao;
+    private view.graphicElements.TextField edtTecnico;
+    private view.graphicElements.TextField edtTipoRede;
+    private view.graphicElements.TableDark grdRelatoriosRede;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JPanel panFundo;
+    private javax.swing.JPanel panPreencher;
+    private javax.swing.JPanel panTodosBotoes;
     // End of variables declaration//GEN-END:variables
 }

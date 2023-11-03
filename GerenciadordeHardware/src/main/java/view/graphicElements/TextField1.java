@@ -23,7 +23,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 
 
-public class TextField extends JTextField {
+public class TextField1 extends JTextField {
 
     public String getLabelText() {
         return labelText;
@@ -62,8 +62,7 @@ public class TextField extends JTextField {
 
 
 
-    public TextField() {
-        setOpaque(false); // Set the component as non-opaque
+    public TextField1() {
         setBorder(new EmptyBorder(20, 3, 10, 3));
         setSelectionColor(new Color(76, 204, 255));
 

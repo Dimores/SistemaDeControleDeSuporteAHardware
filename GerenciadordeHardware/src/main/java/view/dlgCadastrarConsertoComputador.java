@@ -31,7 +31,16 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     private Long idConsertoComputadorEditando;
     private String data;
     List<Peca> pecasSelecionadas;
+    
+    dlgSelecaoCliente telaSelecaoCliente;
+    dlgSelecaoTecnico telaSelecaoTecnico;
+    dlgSelecaoPeca telaSelecaoPeca;
+    
+    Cliente clienteSelecionado;
+    Tecnico tecnicoSelecionado;
 
+    // O preço do conserto vai ser sempre 100 + o preço das Peças.
+    private float preco = 100;
     
     /**
      * Creates new form dlgCadastrarConcertoComputador
@@ -43,21 +52,24 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         initComponents();
         servicoController = new ServicoController();
         idConsertoComputadorEditando = -1L;
-        servicoController.atualizarTabelaCliente(grdClientes);
-        servicoController.atualizarTabelaTecnico(grdTecnicos);
-        this.habilitarCampos(false);
         
         consertoController = new ConsertoComputadorController();
         
-        pecaController = new PecaController();
-        pecaController.atualizarTabela(grdPecas);
-        
+        pecasSelecionadas = new ArrayList();
 
         data = Data.pegaDataSistema();
         
         consertoController.atualizarTabela(grdComputadores);
         
+        clienteSelecionado = new Cliente();
+        tecnicoSelecionado = new Tecnico();
         
+        telaSelecaoCliente = new dlgSelecaoCliente(this, true);
+        telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
+        telaSelecaoPeca = new dlgSelecaoPeca(this, true);
+        
+        // Setando o preco inicial
+        edtValor.setText(String.valueOf(preco));
     }
 
     /**
@@ -69,360 +81,297 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panTitulo = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
-        lblSelecaoCliente = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdClientes = new javax.swing.JTable();
-        lblSelecaoTecnico = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grdComputadores = new javax.swing.JTable();
-        panProblema = new javax.swing.JPanel();
-        lblDescreverProblema = new javax.swing.JLabel();
-        edtDescricaoProblema = new javax.swing.JTextField();
-        panPecasSubstituidas = new javax.swing.JPanel();
-        lblSelecaoPeca = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        grdPecas = new javax.swing.JTable();
+        panFundo = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        panPreencher = new javax.swing.JPanel();
+        edtValor = new view.graphicElements.TextField();
+        edtDescricaoProblema = new view.graphicElements.TextField();
+        edtCliente = new view.graphicElements.TextField();
+        edtPeca = new view.graphicElements.TextField();
         chkConcluido = new view.graphicElements.JCheckBoxCustom();
-        panBotoes = new javax.swing.JPanel();
-        btnNovo = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnConfirmar = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        grdTecnicos = new javax.swing.JTable();
-        lblComputadores = new javax.swing.JLabel();
-        panValor = new javax.swing.JPanel();
-        lblValor = new javax.swing.JLabel();
-        edtValor = new javax.swing.JTextField();
+        edtTecnico = new view.graphicElements.TextField();
+        panTodosBotoes = new javax.swing.JPanel();
+        btnEditar = new view.graphicElements.BotaoVermelho();
+        btnExcluir = new view.graphicElements.BotaoVermelho();
+        btnCancelar = new view.graphicElements.BotaoVermelho();
+        btnConfirmar = new view.graphicElements.BotaoVermelho();
+        btnNovo = new view.graphicElements.BotaoVermelho();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        grdComputadores = new view.graphicElements.TableDark();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblTitulo.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Cadastrar Conserto Computador");
+        panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
-        javax.swing.GroupLayout panTituloLayout = new javax.swing.GroupLayout(panTitulo);
-        panTitulo.setLayout(panTituloLayout);
-        panTituloLayout.setHorizontalGroup(
-            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panTituloLayout.setVerticalGroup(
-            panTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lblTitulo1.setBackground(new java.awt.Color(20, 20, 20));
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 44)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(251, 251, 251));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Cadastrar Conserto de Computador");
 
-        lblSelecaoCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSelecaoCliente.setText("Selecione o Cliente");
+        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
+        panPreencher.setOpaque(false);
 
-        grdClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdClientesMouseClicked(evt);
+        edtValor.setEditable(false);
+        edtValor.setBackground(new java.awt.Color(20, 20, 20));
+        edtValor.setForeground(new java.awt.Color(251, 251, 251));
+        edtValor.setLabelText("Preço");
+        edtValor.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtValor.setLineColor(new java.awt.Color(229, 9, 20));
+        edtValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtValorActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(grdClientes);
 
-        lblSelecaoTecnico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSelecaoTecnico.setText("Selecione o Técnico");
+        edtDescricaoProblema.setBackground(new java.awt.Color(20, 20, 20));
+        edtDescricaoProblema.setForeground(new java.awt.Color(251, 251, 251));
+        edtDescricaoProblema.setLabelText("Descrição");
+        edtDescricaoProblema.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtDescricaoProblema.setLineColor(new java.awt.Color(229, 9, 20));
 
-        grdComputadores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdComputadores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdComputadoresMouseClicked(evt);
+        edtCliente.setEditable(false);
+        edtCliente.setBackground(new java.awt.Color(20, 20, 20));
+        edtCliente.setForeground(new java.awt.Color(251, 251, 251));
+        edtCliente.setText("Clique aqui para adicionar um Cliente.");
+        edtCliente.setLabelText("Cliente");
+        edtCliente.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtCliente.setLineColor(new java.awt.Color(229, 9, 20));
+        edtCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                edtClienteFocusGained(evt);
             }
         });
-        jScrollPane1.setViewportView(grdComputadores);
-
-        lblDescreverProblema.setText("Descreva o problema:");
-
-        edtDescricaoProblema.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        javax.swing.GroupLayout panProblemaLayout = new javax.swing.GroupLayout(panProblema);
-        panProblema.setLayout(panProblemaLayout);
-        panProblemaLayout.setHorizontalGroup(
-            panProblemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panProblemaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblDescreverProblema)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtDescricaoProblema, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
-        );
-        panProblemaLayout.setVerticalGroup(
-            panProblemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panProblemaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panProblemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(edtDescricaoProblema, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(lblDescreverProblema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        lblSelecaoPeca.setText("Selecione 0 ou muitas peças substituídas:");
-
-        grdPecas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdPecas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdPecasMouseClicked(evt);
+        edtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                edtClienteMousePressed(evt);
             }
         });
-        jScrollPane5.setViewportView(grdPecas);
+        edtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtClienteActionPerformed(evt);
+            }
+        });
 
-        chkConcluido.setBackground(new java.awt.Color(20, 20, 20));
+        edtPeca.setEditable(false);
+        edtPeca.setBackground(new java.awt.Color(20, 20, 20));
+        edtPeca.setForeground(new java.awt.Color(251, 251, 251));
+        edtPeca.setText("Clique aqui para adicionar uma ou mais Peça(s).");
+        edtPeca.setLabelText("Peça(s)");
+        edtPeca.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtPeca.setLineColor(new java.awt.Color(229, 9, 20));
+        edtPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtPecaMouseClicked(evt);
+            }
+        });
+
+        chkConcluido.setBackground(new java.awt.Color(251, 251, 251));
+        chkConcluido.setForeground(new java.awt.Color(251, 251, 251));
         chkConcluido.setText("Concluido");
 
-        javax.swing.GroupLayout panPecasSubstituidasLayout = new javax.swing.GroupLayout(panPecasSubstituidas);
-        panPecasSubstituidas.setLayout(panPecasSubstituidasLayout);
-        panPecasSubstituidasLayout.setHorizontalGroup(
-            panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSelecaoPeca)
-                    .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPecasSubstituidasLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)))
-        );
-        panPecasSubstituidasLayout.setVerticalGroup(
-            panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSelecaoPeca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-                .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panPecasSubstituidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panPecasSubstituidasLayout.createSequentialGroup()
-                    .addGap(35, 35, 35)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-
-        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
-
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+        edtTecnico.setEditable(false);
+        edtTecnico.setBackground(new java.awt.Color(20, 20, 20));
+        edtTecnico.setForeground(new java.awt.Color(251, 251, 251));
+        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtTecnico.setLabelText("Técnico");
+        edtTecnico.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtTecnico.setLineColor(new java.awt.Color(229, 9, 20));
+        edtTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtTecnicoMouseClicked(evt);
             }
         });
-        panBotoes.add(btnNovo);
 
+        javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
+        panPreencher.setLayout(panPreencherLayout);
+        panPreencherLayout.setHorizontalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
+            .addGroup(panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtDescricaoProblema, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panPreencherLayout.setVerticalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtDescricaoProblema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        panTodosBotoes.setOpaque(false);
+
+        btnEditar.setBackground(new java.awt.Color(51, 51, 51));
+        btnEditar.setForeground(new java.awt.Color(251, 251, 251));
         btnEditar.setText("Editar");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEditar.setRadius(40);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
-        panBotoes.add(btnEditar);
 
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 51));
+        btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
         btnExcluir.setText("Excluir");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExcluir.setRadius(40);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
             }
         });
-        panBotoes.add(btnExcluir);
 
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setRadius(40);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        panBotoes.add(btnCancelar);
 
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmar.setRadius(40);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        panBotoes.add(btnConfirmar);
 
-        grdTecnicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        grdTecnicos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdTecnicosMouseClicked(evt);
+        btnNovo.setBackground(new java.awt.Color(51, 51, 51));
+        btnNovo.setForeground(new java.awt.Color(251, 251, 251));
+        btnNovo.setText("Novo");
+        btnNovo.setBorderPainted(false);
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnNovo.setRadius(40);
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
             }
         });
-        jScrollPane4.setViewportView(grdTecnicos);
 
-        lblComputadores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblComputadores.setText("Computadores");
-
-        lblValor.setText("Preço:");
-
-        javax.swing.GroupLayout panValorLayout = new javax.swing.GroupLayout(panValor);
-        panValor.setLayout(panValorLayout);
-        panValorLayout.setHorizontalGroup(
-            panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panValorLayout.createSequentialGroup()
+        javax.swing.GroupLayout panTodosBotoesLayout = new javax.swing.GroupLayout(panTodosBotoes);
+        panTodosBotoes.setLayout(panTodosBotoesLayout);
+        panTodosBotoesLayout.setHorizontalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblValor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtValor))
-        );
-        panValorLayout.setVerticalGroup(
-            panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panValorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblComputadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSelecaoTecnico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(panProblema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4)
-                    .addComponent(lblSelecaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                        .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        panTodosBotoesLayout.setVerticalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblSelecaoCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSelecaoTecnico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panProblema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panPecasSubstituidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(lblComputadores)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        grdComputadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(grdComputadores);
+
+        javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
+        panFundo.setLayout(panFundoLayout);
+        panFundoLayout.setHorizontalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(161, 161, 161)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panFundoLayout.setVerticalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void grdClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdClientesMouseClicked
+    private void edtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_grdClientesMouseClicked
-
-    private void grdComputadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdComputadoresMouseClicked
-
-    }//GEN-LAST:event_grdComputadoresMouseClicked
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        this.idConsertoComputadorEditando = -1L;
-        this.limparCampos();
-        this.habilitarCampos(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
-        this.habilitarCampos(true );
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void grdTecnicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdTecnicosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grdTecnicosMouseClicked
-
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
-        Tecnico tecnicoEscolhido = (Tecnico) getObjetoSelecionadoNaGrid(grdTecnicos);
-        Cliente clienteEscolhido = (Cliente) getObjetoSelecionadoNaGrid(grdClientes);
-        
-        
-        try {
-            if (idConsertoComputadorEditando > 0) {
-                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
-            } else {
-                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoEscolhido, clienteEscolhido, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
-            }
-            //Comando bastante importante
-            this.idConsertoComputadorEditando = -1L;
-
-            consertoController.atualizarTabela(grdComputadores);
-            this.limparCampos();
-        } catch (ServicoException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+    }//GEN-LAST:event_edtValorActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
@@ -436,6 +385,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             this.preencherFormulario(consertoComputadorEditando);
             this.idConsertoComputadorEditando = consertoComputadorEditando.getId();         
         }  
+  
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -464,55 +414,128 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
                 }
             }
         }
+ 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        pecasSelecionadas = getObjetosSelecionadosNaGrid();
-        
+        this.idConsertoComputadorEditando = -1L;
+        this.limparCampos();
+        this.habilitarCampos(false);
 
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-        if (!pecasSelecionadas.isEmpty()) {
-            System.out.println("Peças Selecionadas:");
-            for (Peca peca : pecasSelecionadas) {
-                System.out.println(peca.getNome());
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (idConsertoComputadorEditando > 0) {
+                consertoController.atualizarConsertoComputador(idConsertoComputadorEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
+            } else {
+                consertoController.cadastrarConsertoComputador(idConsertoComputadorEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtValor.getText()), edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), pecasSelecionadas);
             }
-        } else {
-            System.out.println("Nenhuma peça selecionada.");
+            //Comando bastante importante
+            this.idConsertoComputadorEditando = -1L;
+
+            this.limparCampos();
+            this.habilitarCampos(false);
+            consertoController.atualizarTabela(grdComputadores);
+            this.limparCampos();
+        } catch (ServicoException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_grdPecasMouseClicked
+
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        this.habilitarCampos(true );
+        
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
+        // TODO add your handling code here:
+        // Aqui
+
+    }//GEN-LAST:event_edtClienteActionPerformed
+
+    private void edtClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMousePressed
+        // TODO add your handling code here:
+        telaSelecaoCliente.setVisible(true);
+        
+        if(telaSelecaoCliente.getClienteEscolhido() != null){
+            edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
+            clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
+        }
+        
+    }//GEN-LAST:event_edtClienteMousePressed
+
+    private void edtClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtClienteFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_edtClienteFocusGained
+
+    private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
+        // TODO add your handling code here:
+        telaSelecaoTecnico.setVisible(true);
+        
+        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
+            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
+            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+        }
+        
+    }//GEN-LAST:event_edtTecnicoMouseClicked
+
+    private void edtPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtPecaMouseClicked
+        // TODO add your handling code here:
+        telaSelecaoPeca.setVisible(true);
+        
+        pecasSelecionadas = telaSelecaoPeca.getPecasSelecionadas();
+        
+        if(!pecasSelecionadas.isEmpty()){
+            StringBuilder builder = new StringBuilder();
+            int totalPecas = pecasSelecionadas.size();
+            
+            int i = 0;
+            
+            // Setando o nome das peças e atualizando o preco total
+            for(Peca peca : telaSelecaoPeca.getPecasSelecionadas()){
+                builder.append(peca.getNome());
+                if (i < totalPecas - 1) {
+                    builder.append(", "); // Adicione uma vírgula e espaço para todas as peças, exceto a última
+                } else {
+                    builder.append("."); // Adicione um ponto final para a última peça
+                }
+
+                i++;
+                preco += peca.getPreco();
+            }
+            
+            
+            edtPeca.setText(builder.toString());
+            
+            
+            // Mostrando o preço final na tela
+            edtValor.setText(String.valueOf(preco));
+        }
+    }//GEN-LAST:event_edtPecaMouseClicked
 
     public void habilitarCampos(boolean flag) {
-        // Labels
-        lblDescreverProblema.setEnabled(flag);
-        lblSelecaoCliente.setEnabled(flag);
-        lblSelecaoTecnico.setEnabled(flag);
-        lblSelecaoPeca.setEnabled(flag);
-        lblComputadores.setEnabled(flag);
-        lblValor.setEnabled(flag);
-        
-        // Grids
-        grdClientes.setEnabled(flag);
-        grdClientes.setVisible(flag);
-        grdPecas.setEnabled(flag);
-        grdPecas.setVisible(flag);
-        grdTecnicos.setEnabled(flag);
-        grdTecnicos.setVisible(flag);
-        grdComputadores.setEnabled(flag);
-        grdComputadores.setVisible(flag);
-        
-        // Text Fields
-        edtDescricaoProblema.setEnabled(flag);
-        edtValor.setEnabled(flag);
-        
-        // List
-        //lstPecasSubstituidas.setEnabled(flag);        
+        for (int i = 0; i < panPreencher.getComponents().length; i++) {
+            panPreencher.getComponent(i).setVisible(flag);
+        }    
     }
     
     private void limparCampos() {
         // Limpa os Edts
         edtDescricaoProblema.setText("");
-        edtValor.setText("");
+        edtValor.setText(String.valueOf(preco));
+        edtCliente.setText("Clique aqui para adicionar um Cliente.");
+        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtPeca.setText("Clique aqui para adicionar uma ou mais Peça(s).");
+        chkConcluido.setSelected(false);
     }
     
     private Object getObjetoSelecionadoNaGrid(JTable grd) {
@@ -524,20 +547,6 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         return obj;
     }
     
-    private List<Peca> getObjetosSelecionadosNaGrid() {
-        int[] selectedRows = grdPecas.getSelectedRows();
-        List<Peca> objetosSelecionados = new ArrayList<>();
-
-        for (int row : selectedRows) {
-            Object obj = grdPecas.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
-            if (obj != null) {
-                objetosSelecionados.add((Peca)(obj));
-                
-            }
-        }
-
-        return objetosSelecionados;
-    }
     
     private void preencherFormulario(ConsertoComputador consertoComputadorEditando) {
         // Preencha os campos com os dados do consertoComputadorEditando
@@ -545,67 +554,68 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         edtDescricaoProblema.setText(consertoComputadorEditando.getDescricaoServico());
 
         // Obtenha o técnico associado ao ConsertoComputador
-        Tecnico tecnicoEscolhido = consertoComputadorEditando.getTecnicoResponsavel();
+        tecnicoSelecionado = consertoComputadorEditando.getTecnicoResponsavel();
 
         // Obtenha o cliente associado ao ConsertoComputador
-        Cliente clienteEscolhido = consertoComputadorEditando.getClienteAtendido();
+        clienteSelecionado = consertoComputadorEditando.getClienteAtendido();
+        
+        pecasSelecionadas = consertoComputadorEditando.getPecasSubstituidas();
+        System.out.println(pecasSelecionadas);
 
         // Se o técnico não for nulo, selecione-o na grade de técnicos (grdTecnicos)
-        if (tecnicoEscolhido != null) {
-            for (int i = 0; i < grdTecnicos.getRowCount(); i++) {
-                Tecnico tecnicoNaGrade = (Tecnico) grdTecnicos.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
-                if (tecnicoNaGrade != null && tecnicoNaGrade.getId() == tecnicoEscolhido.getId()) {
-                    grdTecnicos.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao técnico
-                    break;
-                }
-            }
+
+        if (tecnicoSelecionado != null) {
+            edtTecnico.setText(tecnicoSelecionado.getNome() + ".");
         }
 
         // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
-        if (clienteEscolhido != null) {
-            for (int i = 0; i < grdClientes.getRowCount(); i++) {
-                Cliente clienteNaGrade = (Cliente) grdClientes.getValueAt(i, -1); // Substitua o índice da coluna de acordo com sua necessidade
-                if (clienteNaGrade != null && clienteNaGrade.getId() == clienteEscolhido.getId()) {
-                    grdClientes.setRowSelectionInterval(i, i); // Seleciona a linha correspondente ao cliente
-                    break;
-                }
-            }
+        if (clienteSelecionado != null) {
+            edtCliente.setText(clienteSelecionado.getNome() + ".");
         }
         
+        if(!pecasSelecionadas.isEmpty()){
+            StringBuilder builder = new StringBuilder();
+            int totalPecas = pecasSelecionadas.size();
+            
+            int i = 0;
+            
+            // Setando o nome das peças e atualizando o preco total
+            for(Peca peca : pecasSelecionadas){
+                builder.append(peca.getNome());
+                if (i < totalPecas - 1) {
+                    builder.append(", "); // Adicione uma vírgula e espaço para todas as peças, exceto a última
+                } else {
+                    builder.append("."); // Adicione um ponto final para a última peça
+                }
+
+                i++;
+            }
+            edtPeca.setText(builder.toString());
+        }
+       
         chkConcluido.setSelected(consertoComputadorEditando.isConcluido());
     }
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnNovo;
+    private view.graphicElements.BotaoVermelho btnCancelar;
+    private view.graphicElements.BotaoVermelho btnConfirmar;
+    private view.graphicElements.BotaoVermelho btnEditar;
+    private view.graphicElements.BotaoVermelho btnExcluir;
+    private view.graphicElements.BotaoVermelho btnNovo;
     private view.graphicElements.JCheckBoxCustom chkConcluido;
-    private javax.swing.JTextField edtDescricaoProblema;
-    private javax.swing.JTextField edtValor;
-    private javax.swing.JTable grdClientes;
-    private javax.swing.JTable grdComputadores;
-    private javax.swing.JTable grdPecas;
-    private javax.swing.JTable grdTecnicos;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblComputadores;
-    private javax.swing.JLabel lblDescreverProblema;
-    private javax.swing.JLabel lblSelecaoCliente;
-    private javax.swing.JLabel lblSelecaoPeca;
-    private javax.swing.JLabel lblSelecaoTecnico;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblValor;
-    private javax.swing.JPanel panBotoes;
-    private javax.swing.JPanel panPecasSubstituidas;
-    private javax.swing.JPanel panProblema;
-    private javax.swing.JPanel panTitulo;
-    private javax.swing.JPanel panValor;
+    private view.graphicElements.TextField edtCliente;
+    private view.graphicElements.TextField edtDescricaoProblema;
+    private view.graphicElements.TextField edtPeca;
+    private view.graphicElements.TextField edtTecnico;
+    private view.graphicElements.TextField edtValor;
+    private view.graphicElements.TableDark grdComputadores;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JPanel panFundo;
+    private javax.swing.JPanel panPreencher;
+    private javax.swing.JPanel panTodosBotoes;
     // End of variables declaration//GEN-END:variables
 
 

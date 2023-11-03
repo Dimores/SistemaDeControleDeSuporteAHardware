@@ -24,8 +24,8 @@ public class RelatorioManutencao extends Relatorio {
         this.equipamentos = "";
     }
 
-    public RelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, String equipamentos, String nomeCliente, String nomeTecnico) {
-        super(idRelatorio, dataRelatorio, descricao, nomeCliente, nomeTecnico);
+    public RelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, String equipamentos, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
+        super(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.equipamentos = equipamentos;
     }
 

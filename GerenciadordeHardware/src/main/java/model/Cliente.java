@@ -33,6 +33,9 @@ public class Cliente extends Usuario implements IUsuario{
     
     @OneToMany(mappedBy = "clienteAtendido")
     private List<Servico> servicosAtendidos;
+    
+    @OneToMany(mappedBy = "cliente")
+    private List<Relatorio> relatoriosCliente;
 
     public Cliente() {
         super();

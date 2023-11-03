@@ -39,135 +39,132 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        edtEmail = new javax.swing.JTextField();
-        lblSenha1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        btnConfirmar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        lblConfirmarSenha = new javax.swing.JLabel();
-        lblSenha = new javax.swing.JLabel();
-        lblLoginIcone = new javax.swing.JLabel();
-        edtSenha = new javax.swing.JPasswordField();
-        edtConfirmarSenha = new javax.swing.JPasswordField();
+        panFundo = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        panPreencher = new javax.swing.JPanel();
+        edtEmail = new view.graphicElements.TextField();
+        edtSenha = new view.graphicElements.PasswordField2();
+        edtConfirmarSenha = new view.graphicElements.PasswordField2();
+        btnCancelar = new view.graphicElements.BotaoVermelho();
+        btnConfirmar = new view.graphicElements.BotaoVermelho();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        edtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtEmailActionPerformed(evt);
-            }
-        });
+        panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
-        lblSenha1.setText("Seu Email:");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(251, 251, 251));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Atualizar Senha");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(lblSenha1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha1)
-                    .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panPreencher.setOpaque(false);
+
+        edtEmail.setBackground(new java.awt.Color(20, 20, 20));
+        edtEmail.setForeground(new java.awt.Color(251, 251, 251));
+        edtEmail.setLabelText("Email");
+        edtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtEmail.setLineColor(new java.awt.Color(229, 9, 20));
+
+        edtSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtSenha.setForeground(new java.awt.Color(251, 251, 251));
+        edtSenha.setLabelText("Nova Senha");
+        edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtSenha.setLineColor(new java.awt.Color(229, 9, 20));
+        edtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
+        edtSenha.setShowAndHide(true);
+
+        edtConfirmarSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtConfirmarSenha.setForeground(new java.awt.Color(251, 251, 251));
+        edtConfirmarSenha.setLabelText("Confirmar Senha");
+        edtConfirmarSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtConfirmarSenha.setLineColor(new java.awt.Color(229, 9, 20));
+        edtConfirmarSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
+        edtConfirmarSenha.setShowAndHide(true);
+
+        javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
+        panPreencher.setLayout(panPreencherLayout);
+        panPreencherLayout.setHorizontalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
                 .addContainerGap())
         );
+        panPreencherLayout.setVerticalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
 
-        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 36)); // NOI18N
-        jLabel1.setText("Atualizar Senha");
-
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
-            }
-        });
-
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setRadius(40);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
 
-        lblConfirmarSenha.setText("Confirmar Senha:");
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmar.setRadius(40);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
-        lblSenha.setText("Nova Senha:");
-
-        lblLoginIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_85923.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 125, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblLoginIcone)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1)
-                                .addGap(147, 147, 147))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblConfirmarSenha)
-                                .addGap(183, 183, 183)
-                                .addComponent(edtConfirmarSenha))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSenha)
-                                .addGap(211, 211, 211)
-                                .addComponent(edtSenha)))
-                        .addContainerGap())))
+        javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
+        panFundo.setLayout(panFundoLayout);
+        panFundoLayout.setHorizontalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblLoginIcone)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panFundoLayout.setVerticalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblConfirmarSenha)
-                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
         UsuarioController userControll =  new UsuarioController(); 
         SenhaValidate validaSenha = new SenhaValidate();
         if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
@@ -178,30 +175,24 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
                     Logger.getLogger(dlgSenhaUpdate.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }        // TODO add your handling code here:
+        } 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-    this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void edtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_edtEmailActionPerformed
+        this.dispose(); 
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JPasswordField edtConfirmarSenha;
-    private javax.swing.JTextField edtEmail;
-    private javax.swing.JPasswordField edtSenha;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblConfirmarSenha;
-    private javax.swing.JLabel lblLoginIcone;
-    private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblSenha1;
+    private view.graphicElements.BotaoVermelho btnCancelar;
+    private view.graphicElements.BotaoVermelho btnConfirmar;
+    private view.graphicElements.PasswordField2 edtConfirmarSenha;
+    private view.graphicElements.TextField edtEmail;
+    private view.graphicElements.PasswordField2 edtSenha;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panFundo;
+    private javax.swing.JPanel panPreencher;
     // End of variables declaration//GEN-END:variables
 }

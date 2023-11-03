@@ -34,6 +34,9 @@ public class Tecnico extends Usuario implements IUsuario {
     
     @OneToMany(mappedBy = "tecnicoResponsavel")
     private List<Servico> servicosAtendidos;
+    
+    @OneToMany(mappedBy = "tecnico")
+    private List<Relatorio> relatoriosCliente;
 
     
     public Tecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {

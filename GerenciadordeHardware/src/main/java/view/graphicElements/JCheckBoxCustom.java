@@ -16,11 +16,21 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import javax.swing.JCheckBox;
 import javax.swing.plaf.basic.BasicCheckBoxUI;
+import lombok.Getter;
+import lombok.Setter;
 
 public class JCheckBoxCustom extends JCheckBox {
 
     private final int border = 4;
-    private final Color customColor = new Color(229,9,20);
+
+    public Color getCustomColor() {
+        return customColor;
+    }
+
+    public void setCustomColor(Color customColor) {
+        this.customColor = customColor;
+    }
+    private Color customColor = new Color(229,9,20);
 
     public JCheckBoxCustom() {
         setCursor(new Cursor(Cursor.HAND_CURSOR));

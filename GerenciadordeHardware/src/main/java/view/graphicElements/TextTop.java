@@ -21,11 +21,12 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-
-
-public class TextField extends JTextField {
-
-    public String getLabelText() {
+/**
+ *
+ * @author diego
+ */
+public class TextTop extends JTextField {
+        public String getLabelText() {
         return labelText;
     }
 
@@ -62,8 +63,7 @@ public class TextField extends JTextField {
 
 
 
-    public TextField() {
-        setOpaque(false); // Set the component as non-opaque
+    public TextTop() {
         setBorder(new EmptyBorder(20, 3, 10, 3));
         setSelectionColor(new Color(76, 204, 255));
 
@@ -182,4 +182,5 @@ private void createHintText(Graphics2D g2) {
         }
         super.setText(string);
     }
+    
 }
