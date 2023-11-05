@@ -11,22 +11,28 @@ import java.util.logging.Logger;
 import javax.swing.text.MaskFormatter;
 import model.Usuario;
 import model.validations.SenhaValidate;
+import utils.Criptografia;
+import utils.Email;
 
 /**
  *
  * @author ruiz
  */
 public class dlgSenhaUpdate extends javax.swing.JDialog {
+    private String verificador;
     /**
      * Creates new form dlgSenhaUpdate
      */
     public dlgSenhaUpdate() {
+        verificador = Criptografia.generateRandomCode();
         setModal(true);
         initComponents();
+       
     }
     
     public dlgSenhaUpdate(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        verificador = Criptografia.generateRandomCode();
         initComponents();
     }
 
@@ -45,6 +51,8 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         edtEmail = new view.graphicElements.TextField();
         edtSenha = new view.graphicElements.PasswordField2();
         edtConfirmarSenha = new view.graphicElements.PasswordField2();
+        btnEnviarCodigo = new view.graphicElements.BotaoVermelho();
+        edtCodigo = new view.graphicElements.TextField();
         btnCancelar = new view.graphicElements.BotaoVermelho();
         btnConfirmar = new view.graphicElements.BotaoVermelho();
 
@@ -81,28 +89,53 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         edtConfirmarSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
         edtConfirmarSenha.setShowAndHide(true);
 
+        btnEnviarCodigo.setBackground(new java.awt.Color(51, 51, 51));
+        btnEnviarCodigo.setForeground(new java.awt.Color(251, 251, 251));
+        btnEnviarCodigo.setText("Enviar Código");
+        btnEnviarCodigo.setBorderPainted(false);
+        btnEnviarCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEnviarCodigo.setRadius(40);
+        btnEnviarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarCodigoActionPerformed(evt);
+            }
+        });
+
+        edtCodigo.setBackground(new java.awt.Color(20, 20, 20));
+        edtCodigo.setForeground(new java.awt.Color(251, 251, 251));
+        edtCodigo.setLabelText("Digite o código");
+        edtCodigo.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtCodigo.setLineColor(new java.awt.Color(229, 9, 20));
+
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
         panPreencherLayout.setHorizontalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPreencherLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(edtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                     .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
+                    .addComponent(edtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEnviarCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panPreencherLayout.setVerticalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPreencherLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEnviarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
@@ -135,26 +168,26 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panFundoLayout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(89, 89, 89))
+                .addGap(85, 85, 85))
         );
         panFundoLayout.setVerticalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFundoLayout.createSequentialGroup()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panPreencher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
@@ -167,6 +200,10 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         // TODO add your handling code here:
         UsuarioController userControll =  new UsuarioController(); 
         SenhaValidate validaSenha = new SenhaValidate();
+        if(!verificador.equals(edtCodigo.getText())){
+            System.out.println("era pra prar"); 
+            return;
+        }
         if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
             if(validaSenha.validar(edtSenha.getText())){
                 try {
@@ -183,11 +220,21 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         this.dispose(); 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
+        // TODO add your handling code here:
+       UsuarioController userControll =  new UsuarioController(); 
+       Usuario usr = (Usuario) userControll.buscarUsuario(edtEmail.getText());
+     
+       Email email = new Email(usr.getNome(), edtEmail.getText(),"Código de Recupercao da CyberNinja" ,verificador, "EmailRecuperacaoSenha.html");
+    }//GEN-LAST:event_btnEnviarCodigoActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCancelar;
     private view.graphicElements.BotaoVermelho btnConfirmar;
+    private view.graphicElements.BotaoVermelho btnEnviarCodigo;
+    private view.graphicElements.TextField edtCodigo;
     private view.graphicElements.PasswordField2 edtConfirmarSenha;
     private view.graphicElements.TextField edtEmail;
     private view.graphicElements.PasswordField2 edtSenha;

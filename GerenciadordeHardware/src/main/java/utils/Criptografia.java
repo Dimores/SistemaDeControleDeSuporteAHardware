@@ -6,6 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
+import java.util.Random;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
@@ -63,4 +64,26 @@ public class Criptografia implements ICriptografia {
         byte[] textoDescriptografado = cipher.doFinal(textoBytes);
         return new String(textoDescriptografado);
     }
+    
+    public static String generateRandomCode() {
+        // Defina os caracteres permitidos para o código
+        String allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        
+        // Crie um objeto Random para gerar números aleatórios
+        Random random = new Random();
+        
+        // Crie uma string vazia para armazenar o código gerado
+        StringBuilder code = new StringBuilder(4); // 4 caracteres
+        
+        // Gere 4 caracteres aleatórios
+        for (int i = 0; i < 4; i++) {
+            int randomIndex = random.nextInt(allowedCharacters.length());
+            char randomChar = allowedCharacters.charAt(randomIndex);
+            code.append(randomChar);
+        }
+        
+        return code.toString();
+    }
+    
+    
 }

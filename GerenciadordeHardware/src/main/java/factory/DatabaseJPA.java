@@ -28,7 +28,7 @@ public class DatabaseJPA {
      * uma instancia do objeto Database
      */
     private DatabaseJPA() {
-        factory = Persistence.createEntityManagerFactory("exemplo-jpa");        
+        factory = Persistence.createEntityManagerFactory("dbHardware-jpa");        
     }
     
     public EntityManager getEntityManager() {        

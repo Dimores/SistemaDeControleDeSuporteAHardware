@@ -62,6 +62,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     
     public void habilitarCamposDeAcordoComPrevilegio(int code){
         switch (code){
+            // Cliente
             case 1:
                    btnCadastrarTecnico.setVisible(false);
                    btnSocilitarServico.setVisible(false);
@@ -69,6 +70,9 @@ public class dlgUsuario extends javax.swing.JDialog {
                    btnSocilitarSuporte.setVisible(false);
                    btnCadastrarServico.setVisible(false);
                    btnSocilitarSuporte.setVisible(false);
+                   btnCadastrarCliente.setVisible(false);
+                   btnCadastrarPeca.setVisible(false);
+                   //System.out.println(code);
             break;
                 
             case 2: 
@@ -77,11 +81,13 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnCadastrarTecnico.setVisible(false);
                 btnSocilitarServico.setVisible(false);
                 btnSocilitarServico.setVisible(false);
+                //System.out.println(code);
             break;
             case 3:
                 btnGerarRelatorioRede.setVisible(false);
                 btnSocilitarSuporte.setVisible(false);
                 btnSocilitarServico.setVisible(false);
+                //System.out.println(code);
             break;
             default: break;
         }

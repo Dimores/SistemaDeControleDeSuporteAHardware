@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
 import model.exceptions.ClienteException;
+import utils.Email;
+import utils.NtpTimeClient;
+import utils.PublicIP;
 
 /**
  *
@@ -369,9 +372,12 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idClienteEditando > 0) {
-                clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Alteções no seu cadastro", NtpTimeClient.dataAtualToString() + " em " + PublicIP.getPublicIpAdress(), "EmailAlteracaoCadastro.html");
+                clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+               
             } else {
-                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Mensagem de boas vindas da CyberNinja Support", "Seja Bem-Vindo!", "EmailBoasVindas.html");
             }
             //Comando bastante importante
             this.idClienteEditando = -1L;

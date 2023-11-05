@@ -22,11 +22,13 @@ import utils.Criptografia;
 public class FrLogin extends javax.swing.JFrame {
     dlgUsuario telaUsuario;
     dlgSenhaUpdate senhaupdate;
+    dlgAutoCadastroCliente telaCadastroCliente;
     /**
      * Creates new form FrLogin
      */
     public FrLogin() throws ParseException {
         initComponents();
+        telaCadastroCliente = new dlgAutoCadastroCliente(this, true);
     }
     
 
@@ -43,8 +45,10 @@ public class FrLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnLogar = new view.graphicElements.BotaoVermelho();
         btnResetPassword = new view.graphicElements.BotaoVermelho();
-        fEdtEmail = new view.graphicElements.FormattedTextField();
         edtSenha = new view.graphicElements.PasswordField2();
+        fEdtEmail = new view.graphicElements.FormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblCriarConta = new javax.swing.JLabel();
         lblIcon = new javax.swing.JLabel();
 
         setResizable(false);
@@ -80,14 +84,6 @@ public class FrLogin extends javax.swing.JFrame {
             }
         });
 
-        fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
-        fEdtEmail.setForeground(new java.awt.Color(251, 251, 251));
-        fEdtEmail.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        fEdtEmail.setLabelText("Email");
-        fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
-        fEdtEmail.setOpaque(false);
-
         edtSenha.setBackground(new java.awt.Color(20, 20, 20));
         edtSenha.setForeground(new java.awt.Color(251, 251, 251));
         edtSenha.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -98,20 +94,43 @@ public class FrLogin extends javax.swing.JFrame {
         edtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
         edtSenha.setShowAndHide(true);
 
+        fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtEmail.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtEmail.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        fEdtEmail.setLabelText("Email");
+        fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtEmail.setOpaque(false);
+
+        jLabel1.setText("Ainda não tem conta?");
+
+        lblCriarConta.setForeground(new java.awt.Color(102, 102, 255));
+        lblCriarConta.setText("Clique AQUI");
+        lblCriarConta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblCriarContaMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(btnResetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(291, 291, 291))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(btnResetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(217, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLogar, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                    .addComponent(fEdtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                        .addComponent(fEdtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,11 +140,15 @@ public class FrLogin extends javax.swing.JFrame {
                 .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnResetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblCriarConta))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -135,9 +158,9 @@ public class FrLogin extends javax.swing.JFrame {
         gradientPanel1.setLayout(gradientPanel1Layout);
         gradientPanel1Layout.setHorizontalGroup(
             gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(lblIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(225, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -148,7 +171,7 @@ public class FrLogin extends javax.swing.JFrame {
                 .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,6 +235,13 @@ public class FrLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_edtSenhaActionPerformed
 
+    private void lblCriarContaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCriarContaMousePressed
+        // TODO add your handling code here:
+
+        telaCadastroCliente.setVisible(true);
+        
+    }//GEN-LAST:event_lblCriarContaMousePressed
+
 
 
 
@@ -221,7 +251,9 @@ public class FrLogin extends javax.swing.JFrame {
     private view.graphicElements.PasswordField2 edtSenha;
     private view.graphicElements.FormattedTextField fEdtEmail;
     private view.graphicElements.GradientPanel gradientPanel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCriarConta;
     private javax.swing.JLabel lblIcon;
     // End of variables declaration//GEN-END:variables
 

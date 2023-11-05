@@ -37,16 +37,14 @@ public class UsuarioController {
         }
     }
 
-    public List<Object> buscarUsuario(String text) {
-        List usuario = new ArrayList();
+    public Object buscarUsuario(String text) {
         repositorioTecnico = new TecnicoDAO();
         repositorioCliente = new ClienteDAO();
-        if(repositorioTecnico.findByEmail(text) != null){
-            usuario.add(repositorioTecnico.findByEmail(text));
-        }
-        if(repositorioCliente.findByEmail(text) != null){
-            usuario.add(repositorioCliente.findByEmail(text));
-        }
+        Object usuario;
+        usuario = repositorioTecnico.findByEmail(text);
+        if(usuario == null){
+            usuario = repositorioCliente.findByEmail(text);
+        }  
         return usuario;
     }
     
