@@ -61,7 +61,19 @@ public class ServicoDAO implements IDao {
         return c;   
     }
 
-  
+
+    public Object findByCliente(Object obj) {
+        // Relatorio de rede
+        
+        return 0;
+    }
+    
+    
+    public Object findByTecnico(Object obj) {
+        // Relatório de manutenção
+        
+        return 0;
+    }
 
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
