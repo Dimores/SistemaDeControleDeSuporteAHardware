@@ -45,176 +45,207 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panFormulario = new javax.swing.JPanel();
-        lblEmail = new javax.swing.JLabel();
-        lblNome = new javax.swing.JLabel();
-        edtNome = new javax.swing.JTextField();
-        fEdtEmail = new javax.swing.JFormattedTextField();
-        lblTelefone = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JLabel();
-        fEdtCpf = new javax.swing.JFormattedTextField();
-        lblDataNasc = new javax.swing.JLabel();
-        fEdtDataNasc = new javax.swing.JFormattedTextField();
-        fEdtTelefone = new javax.swing.JFormattedTextField();
-        lblSenha = new javax.swing.JLabel();
-        edtSenha = new javax.swing.JPasswordField();
-        edtConfirmarSenha = new javax.swing.JPasswordField();
-        lblConfirmarSenha = new javax.swing.JLabel();
-        panBotoes = new javax.swing.JPanel();
-        btnConfirmar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        panFundo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        panPreencher = new javax.swing.JPanel();
+        edtNome = new view.graphicElements.TextField();
+        fEdtEmail = new view.graphicElements.TextField();
+        fEdtCpf = new view.graphicElements.FormattedTextField();
+        fEdtDataNasc = new view.graphicElements.FormattedTextField();
+        fEdtTelefone = new view.graphicElements.FormattedTextField();
+        edtSenha = new view.graphicElements.PasswordField();
+        edtConfirmarSenha = new view.graphicElements.PasswordField();
+        panTodosBotoes = new javax.swing.JPanel();
+        btnCancelar = new view.graphicElements.BotaoVermelho();
+        btnConfirmar = new view.graphicElements.BotaoVermelho();
+        panBotoes = new javax.swing.JPanel();
 
         setResizable(false);
 
-        lblEmail.setText("Email:");
+        panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
-        lblNome.setText("Nome:");
+        lblTitulo.setBackground(new java.awt.Color(20, 20, 20));
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(251, 251, 251));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Cadastre-se");
 
-        fEdtEmail.addActionListener(new java.awt.event.ActionListener() {
+        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
+        panPreencher.setOpaque(false);
+
+        edtNome.setBackground(new java.awt.Color(20, 20, 20));
+        edtNome.setForeground(new java.awt.Color(251, 251, 251));
+        edtNome.setLabelText("Nome");
+        edtNome.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtNome.setLineColor(new java.awt.Color(229, 9, 20));
+        edtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEdtEmailActionPerformed(evt);
+                edtNomeActionPerformed(evt);
             }
         });
 
-        lblTelefone.setText("Telefone:");
+        fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtEmail.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtEmail.setLabelText("Email");
+        fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
 
-        lblCpf.setText("CPF:");
+        fEdtCpf.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtCpf.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtCpf.setLabelText("CPF");
+        fEdtCpf.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtCpf.setLineColor(new java.awt.Color(229, 9, 20));
 
-        lblDataNasc.setText("Nasc:");
+        fEdtDataNasc.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtDataNasc.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtDataNasc.setLabelText("Data de Nascimento");
+        fEdtDataNasc.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtDataNasc.setLineColor(new java.awt.Color(229, 9, 20));
 
-        fEdtDataNasc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEdtDataNascActionPerformed(evt);
-            }
-        });
+        fEdtTelefone.setBackground(new java.awt.Color(20, 20, 20));
+        fEdtTelefone.setForeground(new java.awt.Color(251, 251, 251));
+        fEdtTelefone.setLabelText("Telefone");
+        fEdtTelefone.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        fEdtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
 
-        lblSenha.setText("Senha:");
+        edtSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtSenha.setForeground(new java.awt.Color(251, 251, 251));
+        edtSenha.setLabelText("Senha");
+        edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtSenha.setLineColor(new java.awt.Color(229, 9, 20));
+        edtSenha.setName(""); // NOI18N
 
-        edtSenha.setToolTipText("Digite a senha caralho");
+        edtConfirmarSenha.setBackground(new java.awt.Color(20, 20, 20));
+        edtConfirmarSenha.setForeground(new java.awt.Color(251, 251, 251));
+        edtConfirmarSenha.setLabelText("Confirmar senha");
+        edtConfirmarSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtConfirmarSenha.setLineColor(new java.awt.Color(229, 9, 20));
+        edtConfirmarSenha.setName(""); // NOI18N
 
-        lblConfirmarSenha.setText("Confirmar Senha:");
-
-        javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
-        panFormulario.setLayout(panFormularioLayout);
-        panFormularioLayout.setHorizontalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblConfirmarSenha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtConfirmarSenha))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCpf)
-                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fEdtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(fEdtTelefone)
-                            .addComponent(fEdtCpf)
-                            .addComponent(fEdtDataNasc)
-                            .addComponent(edtNome))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+        javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
+        panPreencher.setLayout(panPreencherLayout);
+        panPreencherLayout.setHorizontalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panPreencherLayout.createSequentialGroup()
+                        .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                        .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fEdtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fEdtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fEdtCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panPreencherLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(222, 222, 222))))
         );
-        panFormularioLayout.setVerticalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panPreencherLayout.setVerticalGroup(
+            panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fEdtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(fEdtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fEdtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(fEdtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTelefone)
-                    .addComponent(fEdtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(fEdtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConfirmarSenha)
-                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(106, 106, 106))
+                .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
+        panTodosBotoes.setOpaque(false);
 
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
-            }
-        });
-        panBotoes.add(btnConfirmar);
-
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setRadius(40);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        panBotoes.add(btnCancelar);
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Cadastre-se");
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConfirmar.setRadius(40);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panTodosBotoesLayout = new javax.swing.GroupLayout(panTodosBotoes);
+        panTodosBotoes.setLayout(panTodosBotoesLayout);
+        panTodosBotoesLayout.setHorizontalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+        panTodosBotoesLayout.setVerticalGroup(
+            panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodosBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
+        panFundo.setLayout(panFundoLayout);
+        panFundoLayout.setHorizontalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap(131, Short.MAX_VALUE)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(125, 125, 125))
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panFundoLayout.setVerticalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panFundo, java.awt.BorderLayout.PAGE_START);
+
+        panBotoes.setLayout(new javax.swing.BoxLayout(panBotoes, javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().add(panBotoes, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
-        try {
+        // TODO add your handling code here:
+         try {
             if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
                 clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
                 Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Mensagem de boas vindas da CyberNinja Support", "Seja Bem-Vindo!", "EmailBoasVindas.html");
@@ -229,45 +260,37 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception ex) {
             Logger.getLogger(dlgAutoCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }        // TODO add your handling code here:        // TODO add your handling code here:
+        } 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void fEdtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fEdtEmailActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
         this.idClienteEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void fEdtDataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEdtDataNascActionPerformed
+    private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fEdtDataNascActionPerformed
+    }//GEN-LAST:event_edtNomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JPasswordField edtConfirmarSenha;
-    private javax.swing.JTextField edtNome;
-    private javax.swing.JPasswordField edtSenha;
-    private javax.swing.JFormattedTextField fEdtCpf;
-    private javax.swing.JFormattedTextField fEdtDataNasc;
-    private javax.swing.JFormattedTextField fEdtEmail;
-    private javax.swing.JFormattedTextField fEdtTelefone;
-    private javax.swing.JLabel lblConfirmarSenha;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblDataNasc;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblTelefone;
+    private view.graphicElements.BotaoVermelho btnCancelar;
+    private view.graphicElements.BotaoVermelho btnConfirmar;
+    private view.graphicElements.PasswordField edtConfirmarSenha;
+    private view.graphicElements.TextField edtNome;
+    private view.graphicElements.PasswordField edtSenha;
+    private view.graphicElements.FormattedTextField fEdtCpf;
+    private view.graphicElements.FormattedTextField fEdtDataNasc;
+    private view.graphicElements.TextField fEdtEmail;
+    private view.graphicElements.FormattedTextField fEdtTelefone;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
-    private javax.swing.JPanel panFormulario;
+    private javax.swing.JPanel panFundo;
+    private javax.swing.JPanel panPreencher;
+    private javax.swing.JPanel panTodosBotoes;
     // End of variables declaration//GEN-END:variables
 
     private void criarMascaraCadastros() {
@@ -286,8 +309,8 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
 
     
     public void habilitarCampos(boolean flag) {
-            for (int i = 0; i < panFormulario.getComponents().length; i++) {
-                panFormulario.getComponent(i).setEnabled(flag);
+            for (int i = 0; i < panPreencher.getComponents().length; i++) {
+                panPreencher.getComponent(i).setVisible(flag);
             }
         }
         

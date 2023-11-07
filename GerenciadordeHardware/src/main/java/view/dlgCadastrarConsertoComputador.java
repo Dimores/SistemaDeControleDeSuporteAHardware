@@ -422,6 +422,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         this.idConsertoComputadorEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
+        edtValor.setText(String.valueOf(100.0));
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 

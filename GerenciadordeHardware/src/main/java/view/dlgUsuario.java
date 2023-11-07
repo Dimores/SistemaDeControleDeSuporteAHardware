@@ -133,6 +133,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarServico.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarServico.setText("Cadastrar Serviço");
         btnCadastrarServico.setBorderPainted(false);
+        btnCadastrarServico.setFocusPainted(false);
         btnCadastrarServico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarServico.setRadius(40);
         btnCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +146,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarPeca.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarPeca.setText("Cadastrar Peça");
         btnCadastrarPeca.setBorderPainted(false);
+        btnCadastrarPeca.setFocusPainted(false);
         btnCadastrarPeca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarPeca.setRadius(40);
         btnCadastrarPeca.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +159,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarTecnico.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarTecnico.setText("Cadastrar Técnico");
         btnCadastrarTecnico.setBorderPainted(false);
+        btnCadastrarTecnico.setFocusPainted(false);
         btnCadastrarTecnico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarTecnico.setRadius(40);
         btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +172,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnSocilitarSuporte.setForeground(new java.awt.Color(251, 251, 251));
         btnSocilitarSuporte.setText("Socilitar Suporte");
         btnSocilitarSuporte.setBorderPainted(false);
+        btnSocilitarSuporte.setFocusPainted(false);
         btnSocilitarSuporte.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSocilitarSuporte.setRadius(40);
         btnSocilitarSuporte.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +185,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnGerarRelatorioRede.setForeground(new java.awt.Color(251, 251, 251));
         btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
         btnGerarRelatorioRede.setBorderPainted(false);
+        btnGerarRelatorioRede.setFocusPainted(false);
         btnGerarRelatorioRede.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGerarRelatorioRede.setRadius(40);
         btnGerarRelatorioRede.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +198,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnSocilitarServico.setForeground(new java.awt.Color(251, 251, 251));
         btnSocilitarServico.setText("Socilitar Serviço");
         btnSocilitarServico.setBorderPainted(false);
+        btnSocilitarServico.setFocusPainted(false);
         btnSocilitarServico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSocilitarServico.setRadius(40);
         btnSocilitarServico.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +211,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarDispositivoDeRede.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarDispositivoDeRede.setText("Cadastrar Dispositivo de Rede");
         btnCadastrarDispositivoDeRede.setBorderPainted(false);
+        btnCadastrarDispositivoDeRede.setFocusPainted(false);
         btnCadastrarDispositivoDeRede.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarDispositivoDeRede.setRadius(40);
         btnCadastrarDispositivoDeRede.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +224,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarCliente.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarCliente.setText("Cadastrar Cliente");
         btnCadastrarCliente.setBorderPainted(false);
+        btnCadastrarCliente.setFocusPainted(false);
         btnCadastrarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarCliente.setRadius(40);
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +237,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnGerarRelatorioManutencao.setForeground(new java.awt.Color(251, 251, 251));
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.setBorderPainted(false);
+        btnGerarRelatorioManutencao.setFocusPainted(false);
         btnGerarRelatorioManutencao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGerarRelatorioManutencao.setRadius(40);
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
@@ -241,6 +250,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnRegistrarPagamento.setForeground(new java.awt.Color(251, 251, 251));
         btnRegistrarPagamento.setText("Registrar Pagamento");
         btnRegistrarPagamento.setBorderPainted(false);
+        btnRegistrarPagamento.setFocusPainted(false);
         btnRegistrarPagamento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrarPagamento.setRadius(40);
         btnRegistrarPagamento.addActionListener(new java.awt.event.ActionListener() {
