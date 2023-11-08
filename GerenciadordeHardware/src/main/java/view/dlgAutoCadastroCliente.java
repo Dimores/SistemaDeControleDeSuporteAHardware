@@ -331,3 +331,4 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
             fEdtTelefone.setText(c.getTelefone());
     }
 }
+

@@ -62,6 +62,13 @@ public class ServicoController {
         grd.setModel(tmServico);
     }
     
+    public void atualizarTabela(JTable grd, Long idCliente){
+        List<Object> lst = servico.findAllByCliente(idCliente);
+        
+        TMCadServico tmServico = new TMCadServico(lst);
+        grd.setModel(tmServico);
+    }
+    
     // Metodo para mostrar todos os elemtos da tabela de cliente
     public void atualizarTabelaCliente(JTable grd){
         List<Object> lst = clienteRepositorio.findAll();
