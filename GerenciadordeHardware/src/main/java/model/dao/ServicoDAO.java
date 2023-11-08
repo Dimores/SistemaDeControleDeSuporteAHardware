@@ -62,10 +62,14 @@ public class ServicoDAO implements IDao {
     }
 
 
-    public Object findByCliente(Object obj) {
-        // Relatorio de rede
-        
-        return 0;
+    public List<Object> findAllByCliente(Long id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Servico u Where cliente_id = :id";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id",id);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        return (List<Object>) lst;
     }
     
     

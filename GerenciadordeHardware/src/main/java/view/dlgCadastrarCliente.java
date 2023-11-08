@@ -80,7 +80,6 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Cadastrar cliente");
 
-        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
         edtNome.setBackground(new java.awt.Color(20, 20, 20));
@@ -120,6 +119,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
 
         edtSenha.setBackground(new java.awt.Color(20, 20, 20));
         edtSenha.setForeground(new java.awt.Color(251, 251, 251));
+        edtSenha.setToolTipText("bla bla bla");
         edtSenha.setLabelText("Senha");
         edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtSenha.setLineColor(new java.awt.Color(229, 9, 20));

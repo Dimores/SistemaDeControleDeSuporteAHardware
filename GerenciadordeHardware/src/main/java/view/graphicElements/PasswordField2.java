@@ -154,8 +154,8 @@ public class PasswordField2 extends JPasswordField {
         // ...
 
         // Carregamento das imagens
-        String imagePathHide = "GerenciadordeHardware\\src\\main\\java\\view\\graphicElements\\eye_hide.png";
-        String imagePathEye = "GerenciadordeHardware\\src\\main\\java\\view\\graphicElements\\eye.png";
+        String imagePathHide = "GerenciadordeHardware\\src\\main\\resources\\images\\eye_hide.png";
+        String imagePathEye = "GerenciadordeHardware\\src\\main\\resources\\images\\eye.png";
 
         if (getClass().getClassLoader().getResource(imagePathHide) != null) {
             eye_hide = new ImageIcon(getClass().getClassLoader().getResource(imagePathHide)).getImage();

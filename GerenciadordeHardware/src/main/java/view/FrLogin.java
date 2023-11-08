@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.Usuario;
 import utils.Criptografia;
+import utils.SessionManager;
 
 /**
  *
@@ -90,9 +91,13 @@ public class FrLogin extends javax.swing.JFrame {
         edtSenha.setLabelText("Senha");
         edtSenha.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtSenha.setLineColor(new java.awt.Color(229, 9, 20));
-        edtSenha.setOpaque(false);
         edtSenha.setSelectionColor(new java.awt.Color(0, 0, 0));
         edtSenha.setShowAndHide(true);
+        edtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtSenhaActionPerformed(evt);
+            }
+        });
 
         fEdtEmail.setBackground(new java.awt.Color(20, 20, 20));
         fEdtEmail.setForeground(new java.awt.Color(251, 251, 251));
@@ -100,8 +105,13 @@ public class FrLogin extends javax.swing.JFrame {
         fEdtEmail.setLabelText("Email");
         fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
-        fEdtEmail.setOpaque(false);
+        fEdtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fEdtEmailActionPerformed(evt);
+            }
+        });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ainda não tem conta?");
 
         lblCriarConta.setForeground(new java.awt.Color(102, 102, 255));
@@ -116,22 +126,23 @@ public class FrLogin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
-                .addComponent(btnResetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(291, 291, 291))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                        .addComponent(fEdtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                                .addComponent(fEdtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(btnResetPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,6 +215,8 @@ public class FrLogin extends javax.swing.JFrame {
                Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
                Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
                if(crip.decrypt(usuario.getSenha()).equals(edtSenha.getText())){
+                   SessionManager.idUsuarioLogado = usuario.getId();
+                   System.out.println(SessionManager.idUsuarioLogado +" " + usuario.getId());
                    this.setVisible(false);
                    telaUsuario = new dlgUsuario(loginController.accessManager(obj));
                    telaUsuario.getLblUserName().setText(usuario.getNome());

@@ -17,11 +17,11 @@ public class TMCadServico extends AbstractTableModel{
     private List<Object> lista;
     
 //idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico
-    private final int COL_ID = 0;   
-    private final int COL_TECNICO = 1;    
-    private final int COL_CLIENTE = 2;
-    private final int COL_VALOR = 3;
-    private final int COL_DESCRICAO = 4;
+    private final int COL_TECNICO = 0;    
+    private final int COL_CLIENTE = 1;
+    private final int COL_VALOR = 2;
+    private final int COL_DESCRICAO = 3;
+    private final int COL_TIPO = 4;
     private final int COL_DATA = 5;
     private final int COL_CONCLUIDO = 6;
     
@@ -36,7 +36,7 @@ public class TMCadServico extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 8; // Número de colunas
+        return 7; // Número de colunas
     }
 
     @Override
@@ -50,12 +50,10 @@ public class TMCadServico extends AbstractTableModel{
             switch (columnIndex) {
                 case -1:
                     return aux;
-                case COL_ID:
-                    return aux.getId();
                 case COL_TECNICO:
-                    return aux.getTecnicoResponsavel();
+                    return aux.getTecnicoResponsavel().getNome();
                 case COL_CLIENTE:
-                    return aux.getClienteAtendido();
+                    return aux.getClienteAtendido().getNome();
                 case COL_VALOR:
                     return aux.getValor();
                 case COL_DESCRICAO:
@@ -64,6 +62,8 @@ public class TMCadServico extends AbstractTableModel{
                     return aux.getDataServico();
                 case COL_CONCLUIDO:
                     return aux.isConcluido();
+                case COL_TIPO:
+                    return aux.getClass().toString().replaceAll("class model.", "");
                 default:
                     break;
             }
@@ -82,8 +82,6 @@ public class TMCadServico extends AbstractTableModel{
     public String getColumnName(int column) {
 
         switch (column) {
-            case COL_ID:
-                return "ID";
             case COL_TECNICO:
                 return "Técnico";
             case COL_CLIENTE:
@@ -96,6 +94,8 @@ public class TMCadServico extends AbstractTableModel{
                 return "Data";
             case COL_CONCLUIDO:
                 return "Concluido?";
+            case COL_TIPO:
+                return "Tipo";
             default:
                 break;
         }
