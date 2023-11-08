@@ -41,7 +41,7 @@ public class TextField extends JTextField {
         this.lineColor = lineColor;
     }
     
-        // Add getter and setter for label text color
+    // Add getter and setter for label text color
     public Color getLabelTextColor() {
         return labelTextColor;
     }
