@@ -31,11 +31,14 @@ public class ManutencaoPreventivaController extends ServicoController{
 
     
     public void atualizarManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao){
+                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao, boolean isPago){
         
         ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
         ManutencaoPreventiva novaManutencaoPreventiva = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                 dataServico, concluido, equipamentos); 
+        
+        novaManutencaoPreventiva.setPago(isPago);
+        
         novaManutencaoPreventiva.setId(idServico); 
         
         repositorio.update(novaManutencaoPreventiva);
@@ -43,12 +46,13 @@ public class ManutencaoPreventivaController extends ServicoController{
     }
     
     public void cadastrarManutencaoPreventiva(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao){
+                            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao, boolean isPago){
         
         
         ManutencaoPreventivaValidate valid = new ManutencaoPreventivaValidate(); 
         ManutencaoPreventiva novaManutencaoPreventiva = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                 dataServico, concluido, equipamentos); 
+        novaManutencaoPreventiva.setPago(isPago);
         novaManutencaoPreventiva.setId(idServico); 
         
         repositorio.save(novaManutencaoPreventiva);

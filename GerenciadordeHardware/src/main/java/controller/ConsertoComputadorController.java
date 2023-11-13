@@ -6,7 +6,9 @@ package controller;
 
 import controller.tableModel.TMConsertoComputador;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JTable;
 import model.*;
 
@@ -31,11 +33,14 @@ public class ConsertoComputadorController extends ServicoController{
     }
     
     public void atualizarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                        String dataServico, boolean concluido, List pecasSubstituidas){
+                                                        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago){
         
         ConsertoComputadorValidate valid = new ConsertoComputadorValidate(); 
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                         dataServico, concluido, pecasSubstituidas); 
+        novoConsertoComputador.setPago(isPago);
+        
+        
         novoConsertoComputador.setId(idServico); 
         
         repositorio.update(novoConsertoComputador);
@@ -44,10 +49,12 @@ public class ConsertoComputadorController extends ServicoController{
     }
     
     public void cadastrarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                        String dataServico, boolean concluido, List pecasSubstituidas){
+                                                        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago){
         ConsertoComputadorValidate valid = new ConsertoComputadorValidate(); 
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                         dataServico, concluido, pecasSubstituidas); 
+        
+        novoConsertoComputador.setPago(isPago);
         novoConsertoComputador.setId(idServico); 
         repositorio.save(novoConsertoComputador);
     }

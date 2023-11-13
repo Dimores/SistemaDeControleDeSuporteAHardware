@@ -64,6 +64,17 @@ public class ClienteDAO implements IDao {
         this.entityManager.close();
         return cliente;   
     }
+    
+   
+    public Object findbyId(Long id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Usuario u Where id = :id";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id",id);
+        Object lst = qry.getSingleResult();
+        this.entityManager.close();
+        return lst; 
+    }
 
     /**
      * Procura um cliente pelo email, que é o identificador único
@@ -86,9 +97,11 @@ public class ClienteDAO implements IDao {
         // Verifica o tipo de usuário com base na instância do primeiro elemento da lista
         if (lst.get(0) instanceof Tecnico) {
             return (Tecnico) lst.get(0);
-        } else {
+        } else if(lst.get(0) instanceof Cliente){
             // Trate o caso em que o email não corresponde a um técnico (pode ser um cliente)
             return (Cliente) lst.get(0);
+        }else{
+            return (Gerente) lst.get(0);
         }
     }
 

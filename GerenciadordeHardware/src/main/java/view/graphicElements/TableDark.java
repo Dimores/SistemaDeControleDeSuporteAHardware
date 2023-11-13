@@ -10,7 +10,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
+import static javax.management.Query.value;
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -112,6 +114,7 @@ public class TableDark extends JTable {
                 setHorizontalAlignment(JLabel.LEFT);
             }
             return com;
+            
         }
     }
 }

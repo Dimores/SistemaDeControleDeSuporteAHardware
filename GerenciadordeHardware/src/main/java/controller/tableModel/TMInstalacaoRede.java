@@ -24,6 +24,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
     private final int COL_VALOR = 3;
     private final int COL_TIPO_REDE = 4;
     private final int COL_ENDERECO_REDE = 5;
+    private final int COL_PAGO = 6;
 
     public TMInstalacaoRede(List<Object> lstInstalacaoRede) {        
         lista = lstInstalacaoRede;        
@@ -40,7 +41,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -67,6 +68,8 @@ public class TMInstalacaoRede extends AbstractTableModel {
                     return aux.getTipoRede();
                 case COL_ENDERECO_REDE:
                     return aux.getEnderecoRede();
+                case COL_PAGO:
+                    return aux.isPago();
                 default: 
                     break;
             }
@@ -95,6 +98,8 @@ public class TMInstalacaoRede extends AbstractTableModel {
                 return "TipoRede";
             case COL_ENDERECO_REDE:
                 return "Endereco";
+            case COL_PAGO:
+                return "Pago";
             default:
                 break;
         }

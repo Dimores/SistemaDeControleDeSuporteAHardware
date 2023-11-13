@@ -8,6 +8,7 @@ import controller.ClienteController;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.exceptions.ClienteException;
+import utils.SessionManager;
 
 /**
  *

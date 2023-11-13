@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.Cliente;
-import model.Data;
+import utils.Data;
 import model.ManutencaoPreventiva;
 import model.Tecnico;
 import model.exceptions.ServicoException;
@@ -77,6 +77,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         chkConcluido = new view.graphicElements.JCheckBoxCustom();
         edtTecnico = new view.graphicElements.TextField();
         edtEquipamentos = new view.graphicElements.TextField();
+        chkPago = new view.graphicElements.JCheckBoxCustom();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
@@ -163,6 +164,10 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         edtEquipamentos.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtEquipamentos.setLineColor(new java.awt.Color(229, 9, 20));
 
+        chkPago.setBackground(new java.awt.Color(251, 251, 251));
+        chkPago.setForeground(new java.awt.Color(251, 251, 251));
+        chkPago.setText("Pago");
+
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
         panPreencherLayout.setHorizontalGroup(
@@ -176,7 +181,10 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                 .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                    .addComponent(chkConcluido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panPreencherLayout.createSequentialGroup()
+                        .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(edtTecnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtEquipamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -194,7 +202,9 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -433,9 +443,16 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idManutencaoEditando > 0) {
-                manutencaoPreventivaController.atualizarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, chkConcluido.isSelected(), edtEquipamentos.getText(), edtDescricao.getText());
+                manutencaoPreventivaController.atualizarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado,
+                        clienteSelecionado, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(),
+                        data, chkConcluido.isSelected(), edtEquipamentos.getText(), 
+                        edtDescricao.getText(), chkPago.isSelected());
             } else {
-                manutencaoPreventivaController.cadastrarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(), data, chkConcluido.isSelected(), edtEquipamentos.getText(), edtDescricao.getText());
+                manutencaoPreventivaController.cadastrarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado,
+                        clienteSelecionado, Float.parseFloat(edtPreco.getText()), 
+                        edtDescricao.getText(), data, chkConcluido.isSelected(), 
+                        edtEquipamentos.getText(), 
+                        edtDescricao.getText(), chkPago.isSelected());
             }
             //Comando bastante importante
             this.idManutencaoEditando = -1L;
@@ -471,6 +488,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         edtCliente.setText("Clique aqui para adicionar um Cliente.");
         edtTecnico.setText("Clique aqui para adicionar um Ténico.");
         chkConcluido.setSelected(false);
+        chkPago.setSelected(false);
     }
     
     private Object getObjetoSelecionadoNaGrid(JTable grd) {
@@ -505,6 +523,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
 
         
         chkConcluido.setSelected(manutencaoPreventivaEditando.isConcluido());
+        chkPago.setSelected(manutencaoPreventivaEditando.isPago());
         
     }
     
@@ -516,6 +535,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnNovo;
     private view.graphicElements.JCheckBoxCustom chkConcluido;
+    private view.graphicElements.JCheckBoxCustom chkPago;
     private view.graphicElements.TextField edtCliente;
     private view.graphicElements.TextField edtDescricao;
     private view.graphicElements.TextField edtEquipamentos;

@@ -13,8 +13,8 @@ import java.util.Scanner;
  * @author ruiz
  */
 public class Email {
-    String emailRemetente = "ruizsilva15@gmail.com";
-    String senhaEmailRemetente = "zjee rmtq qkwn ertw ";
+    String emailRemetente = "cyberninja087@gmail.com";
+    String senhaEmailRemetente = "jkhi trmb acak aqgl";
    
      public Email(String nome, String emailUsuario, String subject, String msg, String tipoEmail) {
          Thread emailThread = new Thread(() ->{

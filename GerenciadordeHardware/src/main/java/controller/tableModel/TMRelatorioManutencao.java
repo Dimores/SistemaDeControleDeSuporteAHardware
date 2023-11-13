@@ -21,11 +21,13 @@ public class TMRelatorioManutencao extends AbstractTableModel {
         this.lista = listaRelatoriosManutencao;
     }
 
-    private final int COL_DATA = 0;
-    private final int COL_DESCRICAO = 1;    
-    private final int COL_EQUIPAMENTOS = 2;
-    private final int COL_NOME_CLIENTE = 3;  
-    private final int COL_NOME_TECNICO = 4;  
+    private final int COL_CONCLUIDO = 0;
+    private final int COL_DATA = 1;
+    private final int COL_DESCRICAO = 2;    
+    private final int COL_EQUIPAMENTOS = 3;
+    private final int COL_NOME_CLIENTE = 4;  
+    private final int COL_NOME_TECNICO = 5;  
+    private final int COL_PAGO = 6;
     
     @Override
     public int getRowCount() {
@@ -34,7 +36,7 @@ public class TMRelatorioManutencao extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 7;
     }
 
     @Override
@@ -58,7 +60,9 @@ public class TMRelatorioManutencao extends AbstractTableModel {
                 case COL_NOME_CLIENTE:
                     return aux.getCliente().getNome();
                 case COL_NOME_TECNICO:
-                    return aux.getTecnico().getNome();           
+                    return aux.getTecnico().getNome();
+                case COL_PAGO:
+                    
                 default: 
                     break;
             }

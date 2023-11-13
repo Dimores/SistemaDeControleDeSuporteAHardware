@@ -5,6 +5,11 @@
 package view;
 
 import controller.FeedBackController;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.FeedBack;
 import model.Servico;
 import utils.NtpTimeClient;
 import utils.SessionManager;
@@ -17,6 +22,9 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
     FeedBackController feedBackController;
     dlgSelecaoServico telaSelecaoServico;
     Servico servicoSelecionado;
+    FeedBack feedBack;
+    private Long idFeedbackEditando;
+    //feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.idUsuarioLogado);
     /**
      * Creates new form dlgTelaFeedBack
      */
@@ -24,9 +32,12 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         feedBackController = new FeedBackController();
-        System.out.print(SessionManager.idUsuarioLogado);
         telaSelecaoServico = new dlgSelecaoServico(this, modal);
-        feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.idUsuarioLogado);
+        feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+        feedBack = new FeedBack();
+        servicoSelecionado = new Servico();
+        idFeedbackEditando = -1L;
+        //feedBackController.salvar(panStars.getStar(), " ", NtpTimeClient.dataAtualToString(), null, SessionManager.idUsuarioLogado);
     }
 
     /**
@@ -41,16 +52,15 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         panFundo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         panPreencher = new javax.swing.JPanel();
-        edtServicos = new view.graphicElements.TextField();
+        edtServico = new view.graphicElements.TextField();
         textAreaScroll1 = new view.graphicElements.TextAreaScroll();
         txtComentario = new view.graphicElements.TextArea();
         jLabel1 = new javax.swing.JLabel();
-        starRating1 = new view.graphicElements.StarRating();
+        panStars = new view.graphicElements.StarRating();
         panTodosBotoes = new javax.swing.JPanel();
-        btnEditar1 = new view.graphicElements.BotaoVermelho();
-        btnExcluir1 = new view.graphicElements.BotaoVermelho();
+        btnEditar = new view.graphicElements.BotaoVermelho();
+        btnExcluir = new view.graphicElements.BotaoVermelho();
         btnSalvar = new view.graphicElements.BotaoVermelho();
-        btnHistorico = new view.graphicElements.BotaoVermelho();
         jScrollPane3 = new javax.swing.JScrollPane();
         grdFeedBacks = new view.graphicElements.TableDark();
 
@@ -67,24 +77,27 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
 
         panPreencher.setOpaque(false);
 
-        edtServicos.setEditable(false);
-        edtServicos.setBackground(new java.awt.Color(20, 20, 20));
-        edtServicos.setForeground(new java.awt.Color(251, 251, 251));
-        edtServicos.setText("Clique aqui pra buscar um serviço.");
-        edtServicos.setLabelText("Servico");
-        edtServicos.setLabelTextColor(new java.awt.Color(251, 251, 251));
-        edtServicos.setLineColor(new java.awt.Color(229, 9, 20));
-        edtServicos.addMouseListener(new java.awt.event.MouseAdapter() {
+        edtServico.setEditable(false);
+        edtServico.setBackground(new java.awt.Color(20, 20, 20));
+        edtServico.setForeground(new java.awt.Color(251, 251, 251));
+        edtServico.setText("Clique aqui pra buscar um serviço.");
+        edtServico.setLabelText("Servico");
+        edtServico.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtServico.setLineColor(new java.awt.Color(229, 9, 20));
+        edtServico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                edtServicosMouseExited(evt);
+                edtServicoMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                edtServicoMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                edtServicosMouseReleased(evt);
+                edtServicoMouseReleased(evt);
             }
         });
-        edtServicos.addActionListener(new java.awt.event.ActionListener() {
+        edtServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtServicosActionPerformed(evt);
+                edtServicoActionPerformed(evt);
             }
         });
 
@@ -106,9 +119,9 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Avalie nosso Serviço!");
 
-        starRating1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+        panStars.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
             public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                starRating1VetoableChange(evt);
+                panStarsVetoableChange(evt);
             }
         });
 
@@ -119,8 +132,8 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
             .addGroup(panPreencherLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(starRating1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panStars, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(67, Short.MAX_VALUE))
@@ -129,39 +142,39 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(edtServicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edtServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(starRating1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(panStars, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         panTodosBotoes.setOpaque(false);
 
-        btnEditar1.setBackground(new java.awt.Color(51, 51, 51));
-        btnEditar1.setForeground(new java.awt.Color(251, 251, 251));
-        btnEditar1.setText("Editar");
-        btnEditar1.setBorderPainted(false);
-        btnEditar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnEditar1.setRadius(40);
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(51, 51, 51));
+        btnEditar.setForeground(new java.awt.Color(251, 251, 251));
+        btnEditar.setText("Editar");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEditar.setRadius(40);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        btnExcluir1.setBackground(new java.awt.Color(51, 51, 51));
-        btnExcluir1.setForeground(new java.awt.Color(251, 251, 251));
-        btnExcluir1.setText("Excluir");
-        btnExcluir1.setBorderPainted(false);
-        btnExcluir1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnExcluir1.setRadius(40);
-        btnExcluir1.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 51));
+        btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExcluir.setRadius(40);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluir1ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -177,45 +190,27 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
             }
         });
 
-        btnHistorico.setBackground(new java.awt.Color(51, 51, 51));
-        btnHistorico.setForeground(new java.awt.Color(251, 251, 251));
-        btnHistorico.setText("Histórico de Comentarios");
-        btnHistorico.setBorderPainted(false);
-        btnHistorico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHistorico.setRadius(40);
-        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoricoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panTodosBotoesLayout = new javax.swing.GroupLayout(panTodosBotoes);
         panTodosBotoes.setLayout(panTodosBotoesLayout);
         panTodosBotoesLayout.setHorizontalGroup(
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 236, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51))
         );
         panTodosBotoesLayout.setVerticalGroup(
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTodosBotoesLayout.createSequentialGroup()
-                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         grdFeedBacks.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,7 +238,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                         .addContainerGap())
                     .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 39, Short.MAX_VALUE)
                         .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,63 +263,139 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edtServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtServicosActionPerformed
+    private void edtServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtServicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_edtServicosActionPerformed
+    }//GEN-LAST:event_edtServicoActionPerformed
 
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        feedBack = (FeedBack) this.getObjetoSelecionadoNaGrid();
+        
+        
+        if (feedBack == null)
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            this.limparCampos();
+            this.preencherFormulario(feedBack);
+            this.idFeedbackEditando = feedBack.getId();
+            System.out.print("id do maluco: " + idFeedbackEditando);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    }//GEN-LAST:event_btnEditar1ActionPerformed
-
-    private void btnExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir1ActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+        FeedBack feedBackExcluido = (FeedBack) this.getObjetoSelecionadoNaGrid();
+        
 
-    }//GEN-LAST:event_btnExcluir1ActionPerformed
+        if (feedBackExcluido == null)
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+
+            int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir o Feedback  \n("
+                + feedBackExcluido.getComentário(),
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+
+                try {
+                    feedBackController.excluir(feedBackExcluido);
+
+                    feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                } catch (RuntimeException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            }
+        }
+        feedBackController.excluir(feedBack);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        feedBackController.salvar(0, txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.idUsuarioLogado);
+        try {
+            if (idFeedbackEditando > 0) {
+               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.getId());
+
+            } else {
+
+               feedBackController.salvar(panStars.getStar(), txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.getId());
+            }
+            //Comando bastante importante
+            this.idFeedbackEditando = -1L;
+
+            feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+            this.limparCampos();
+            
+        } catch (RuntimeException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(dlgTelaFeedBack.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+    private void edtServicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicoMouseExited
         // TODO add your handling code here:
-        feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.idUsuarioLogado);
-    }//GEN-LAST:event_btnHistoricoActionPerformed
+    }//GEN-LAST:event_edtServicoMouseExited
 
-    private void edtServicosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicosMouseExited
+    private void edtServicoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicoMouseReleased
+
+    }//GEN-LAST:event_edtServicoMouseReleased
+
+    private void panStarsVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_panStarsVetoableChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_edtServicosMouseExited
+    }//GEN-LAST:event_panStarsVetoableChange
 
-    private void edtServicosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicosMouseReleased
-       telaSelecaoServico.setVisible(true);
-       servicoSelecionado = telaSelecaoServico.getObjetosSelecionadosNaGrid().get(0);
-    }//GEN-LAST:event_edtServicosMouseReleased
-
-    private void starRating1VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_starRating1VetoableChange
+    private void edtServicoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicoMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_starRating1VetoableChange
+        telaSelecaoServico.setVisible(true);
+       
+        if(telaSelecaoServico.getServicoSelecionado() != null){
+            edtServico.setText(telaSelecaoServico.getServicoSelecionado().getDescricaoServico());
+            servicoSelecionado = telaSelecaoServico.getServicoSelecionado();
+        }
+    }//GEN-LAST:event_edtServicoMousePressed
 
     /**
      * @param args the command line arguments
      */
-
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdFeedBacks.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdFeedBacks.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.graphicElements.BotaoVermelho btnEditar1;
-    private view.graphicElements.BotaoVermelho btnExcluir1;
-    private view.graphicElements.BotaoVermelho btnHistorico;
+    private view.graphicElements.BotaoVermelho btnEditar;
+    private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnSalvar;
-    private view.graphicElements.TextField edtServicos;
+    private view.graphicElements.TextField edtServico;
     private view.graphicElements.TableDark grdFeedBacks;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panFundo;
     private javax.swing.JPanel panPreencher;
+    private view.graphicElements.StarRating panStars;
     private javax.swing.JPanel panTodosBotoes;
-    private view.graphicElements.StarRating starRating1;
     private view.graphicElements.TextAreaScroll textAreaScroll1;
     private view.graphicElements.TextArea txtComentario;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        edtServico.setText("");
+        txtComentario.setText("");
+        panStars.setStar(0);
+    }
+
+    private void preencherFormulario(FeedBack feedBackEditando) {
+        edtServico.setText(feedBackEditando.getServico().getDescricaoServico());
+        txtComentario.setText(feedBackEditando.getComentário());
+        panStars.setStar(feedBackEditando.getNotaServico());
+    }
 }

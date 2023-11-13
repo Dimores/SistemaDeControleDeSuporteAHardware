@@ -30,11 +30,12 @@ public class InstalacaoRedeController extends ServicoController {
     }
     
     public void atualizarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
+                          String dataServico, boolean concluido, String tipoRede, String enderecoRede, boolean isPago){
         
         InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
         InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                 dataServico, concluido, tipoRede, enderecoRede); 
+        novaInstalacaoRede.setPago(isPago);
         novaInstalacaoRede.setId(idServico); 
         
         repositorio.update(novaInstalacaoRede);
@@ -42,11 +43,12 @@ public class InstalacaoRedeController extends ServicoController {
     }
     
     public void cadastrarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
+                          String dataServico, boolean concluido, String tipoRede, String enderecoRede, boolean isPago){
         
         InstalacaoRedeValidate valid = new InstalacaoRedeValidate(); 
         InstalacaoRede novaInstalacaoRede = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                                                 dataServico, concluido, tipoRede, enderecoRede); 
+        novaInstalacaoRede.setPago(isPago);
         novaInstalacaoRede.setId(idServico); 
         
         repositorio.save(novaInstalacaoRede);

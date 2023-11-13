@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
-import model.Data;
+import utils.Data;
 import model.InstalacaoRede;
 import model.ManutencaoPreventiva;
 import model.Tecnico;
@@ -83,6 +83,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtTecnico = new view.graphicElements.TextField();
         edtTipoRede = new view.graphicElements.TextField();
         edtEnderecoRede = new view.graphicElements.FormattedTextField();
+        chkPago = new view.graphicElements.JCheckBoxCustom();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
@@ -175,6 +176,10 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtEnderecoRede.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtEnderecoRede.setLineColor(new java.awt.Color(229, 9, 20));
 
+        chkPago.setBackground(new java.awt.Color(251, 251, 251));
+        chkPago.setForeground(new java.awt.Color(251, 251, 251));
+        chkPago.setText("Pago");
+
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
         panPreencherLayout.setHorizontalGroup(
@@ -189,7 +194,10 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                     .addComponent(edtEnderecoRede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkConcluido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panPreencherLayout.createSequentialGroup()
+                        .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(edtTecnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtTipoRede, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -209,7 +217,9 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtEnderecoRede, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -452,9 +462,15 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         // TODO add your handling code here:
          try {
             if (idRedeEditando > 0) {
-                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtValor.getText()), edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), edtTipoRede.getText(), edtEnderecoRede.getText());
+                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoSelecionado, 
+                        clienteSelecionado, Float.parseFloat(edtValor.getText()), 
+                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), 
+                        edtTipoRede.getText(), edtEnderecoRede.getText(), chkPago.isSelected());
             } else {
-                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoSelecionado, clienteSelecionado, Float.parseFloat(edtValor.getText()), edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), edtTipoRede.getText(), edtEnderecoRede.getText());
+                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoSelecionado, 
+                        clienteSelecionado, Float.parseFloat(edtValor.getText()), 
+                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), 
+                        edtTipoRede.getText(), edtEnderecoRede.getText(), chkPago.isSelected());
             }
             //Comando bastante importante
             this.idRedeEditando = -1L;
@@ -492,6 +508,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtTipoRede.setText("");
         edtEnderecoRede.setText("");
         chkConcluido.setSelected(false);
+        chkPago.setSelected(false);
         
     }
     
@@ -511,6 +528,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnNovo;
     private view.graphicElements.JCheckBoxCustom chkConcluido;
+    private view.graphicElements.JCheckBoxCustom chkPago;
     private view.graphicElements.TextField edtCliente;
     private view.graphicElements.TextField edtDescricao;
     private view.graphicElements.FormattedTextField edtEnderecoRede;
@@ -548,6 +566,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         }
         
         chkConcluido.setSelected(instalacaoRedeEditando.isConcluido());
+        chkPago.setSelected(instalacaoRedeEditando.isPago());
     }
     
     private void criarMascaraCampos() {

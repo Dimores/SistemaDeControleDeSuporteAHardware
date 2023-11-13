@@ -28,9 +28,7 @@ public class FeedBackController {
         feedBackDao = new FeedBackDAO();
     }
     
-   public void atualizarTabelaServico(JTable grd, Long idCliente){
-        servicoController.atualizarTabela(grd, idCliente);
-    }
+
    public void atualizarTabelaHistórico(JTable grd, Long idCliente){
         List<Object> lst = feedBackDao.findAllByClient(idCliente);
         TMCadFeedBack tmFeedBack = new TMCadFeedBack(lst);
@@ -52,7 +50,15 @@ public class FeedBackController {
        feedBackDao.save(feedback);
    }
    
-   public void atualizar(FeedBack feedback){
+   public void atualizar(Long id,int nota, String comentario, String data, Servico servico, Long client_id){
+       FeedBack feedback;
+       feedback = new FeedBack();
+       feedback.setServico(servico);
+       feedback.setId(id);
+       feedback.setComentário(comentario);
+       feedback.setNotaServico(nota);
+       feedback.setDataFeedBack(data);
+       feedback.setClientID(client_id);
        feedBackDao.update(feedback);
    }
    

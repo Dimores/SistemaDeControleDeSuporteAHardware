@@ -28,7 +28,7 @@ import utils.PublicIP;
  *
  * @author diego
  */
-public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
+public class dlgCadastrarConsertoComputador1 extends javax.swing.JDialog {
     ServicoController servicoController;
     ConsertoComputadorController consertoController;
     PecaController pecaController;
@@ -51,7 +51,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public dlgCadastrarConsertoComputador(java.awt.Dialog parent, boolean modal) {
+    public dlgCadastrarConsertoComputador1(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();

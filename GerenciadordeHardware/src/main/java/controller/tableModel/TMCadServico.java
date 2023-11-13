@@ -24,6 +24,7 @@ public class TMCadServico extends AbstractTableModel{
     private final int COL_TIPO = 4;
     private final int COL_DATA = 5;
     private final int COL_CONCLUIDO = 6;
+    private final int COL_PAGO = 7;
     
     public TMCadServico(List<Object> lstServicos){
         lista = lstServicos;
@@ -36,7 +37,7 @@ public class TMCadServico extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 7; // Número de colunas
+        return 8; // Número de colunas
     }
 
     @Override
@@ -64,6 +65,8 @@ public class TMCadServico extends AbstractTableModel{
                     return aux.isConcluido();
                 case COL_TIPO:
                     return aux.getClass().toString().replaceAll("class model.", "");
+                case COL_PAGO:
+                    return aux.isPago();
                 default:
                     break;
             }
@@ -96,6 +99,8 @@ public class TMCadServico extends AbstractTableModel{
                 return "Concluido?";
             case COL_TIPO:
                 return "Tipo";
+            case COL_PAGO:
+                return "Pago";
             default:
                 break;
         }

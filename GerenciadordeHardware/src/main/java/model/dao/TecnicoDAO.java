@@ -83,9 +83,11 @@ private EntityManager entityManager;
         // Verifica o tipo de usuário com base na instância do primeiro elemento da lista
         if (lst.get(0) instanceof Tecnico) {
             return (Tecnico) lst.get(0);
-        } else {
+        } else if(lst.get(0) instanceof Cliente){
             // Trate o caso em que o email não corresponde a um técnico (pode ser um cliente)
             return (Cliente) lst.get(0);
+        }else{
+            return (Gerente) lst.get(0);
         }
     }
 

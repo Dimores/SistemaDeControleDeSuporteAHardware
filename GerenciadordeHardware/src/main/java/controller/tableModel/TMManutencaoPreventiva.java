@@ -25,6 +25,7 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
     private final int COL_DESCRICAO_SERVICO = 2;
     private final int COL_VALOR = 3;
     private final int COL_EQUIPAMENTOS = 4;
+    private final int COL_PAGO = 5;
 
     public TMManutencaoPreventiva(List<Object> lstManutencaoPreventiva) {        
         lista = lstManutencaoPreventiva;        
@@ -41,7 +42,7 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -66,7 +67,9 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
                 case COL_VALOR:
                     return aux.getValor();
                 case COL_EQUIPAMENTOS:
-                    return aux.getEquipamentos();              
+                    return aux.getEquipamentos();   
+                case COL_PAGO:
+                    return aux.isPago();
                 default: 
                     break;
             }
@@ -93,6 +96,8 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
                 return "Valor";
             case COL_EQUIPAMENTOS:
                 return "Equipamentos";
+            case COL_PAGO:
+                return "Pago";
             default:
                 break;
         }

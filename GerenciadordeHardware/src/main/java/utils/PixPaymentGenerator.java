@@ -28,7 +28,7 @@ public class PixPaymentGenerator {
     private static String urlBase;
     private static String urlPix;
 
-    public static void generateQRCode(String chavePix, double valor, String outputPath) throws Exception {
+    private static void generateQRCode(String chavePix, double valor, String outputPath) throws Exception {
         // Construir a URL do Pix com os parâmetros necessários
         String urlPix = buildPixUrl(chavePix, valor);
 
@@ -48,25 +48,25 @@ public class PixPaymentGenerator {
     private static String buildPixUrl(String chavePix, double valor) throws Exception {
         // Construir a URL do Pix com os parâmetros necessários
         urlBase = "www.google.com";
-        urlPix = urlBase +
+        /*urlPix = urlBase +
                 "?chave=" + URLEncoder.encode(chavePix, "UTF-8") +
                 "&solicitacao=" +
                 "&txid=" +
-                "&valor=" + valor;
+                "&valor=" + valor;*/
+        urlPix = "00020126330014BR.GOV.BCB.PIX0111130454816395204000053039865802BR5921Ruiz da Silva Pereira6009SAO PAULO61080540900062250521k66KuxWKsxrV0y91dzowc63047E7F";
 
         return urlPix;
     }
 
-    private static void displayQRCode(JPanel panel, String imagePath) {
+    private static void displayQRCode(JLabel label, String imagePath) {
         // Adicionar o QR Code ao JPanel
         ImageIcon icon = new ImageIcon(imagePath);
-        JLabel label = new JLabel(icon);
-        panel.add(label);
+        label.setIcon(icon);
     }
 
-    public static void generatePagamentoPix(String chave, double valor, JPanel panel) throws Exception {
+    public static void generatePagamentoPix(String chave, double valor, JLabel label) throws Exception {
         String outputPath = System.getProperty("user.home") + File.separator + "qrcode.png";
         generateQRCode(chave, valor, outputPath);
-        displayQRCode(panel, outputPath);
+        displayQRCode(label, outputPath);
     }
 }

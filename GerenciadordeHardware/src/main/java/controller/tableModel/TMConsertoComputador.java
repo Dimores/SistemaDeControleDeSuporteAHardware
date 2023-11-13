@@ -5,9 +5,14 @@
  */
 package controller.tableModel;
 
+import java.awt.Component;
 import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import model.ConsertoComputador;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -24,6 +29,7 @@ public class TMConsertoComputador extends AbstractTableModel {
     private final int COL_DESCRICAO_SERVICO = 2;
     private final int COL_VALOR = 3;
     private final int COL_PECASSUBSTITUIDAS = 4;
+    private final int COL_PAGO = 5;
 
     public TMConsertoComputador(List<Object> lstConsertoComputador) {        
         lista = lstConsertoComputador;        
@@ -40,7 +46,7 @@ public class TMConsertoComputador extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -65,7 +71,9 @@ public class TMConsertoComputador extends AbstractTableModel {
                 case COL_VALOR:
                     return aux.getValor();
                 case COL_PECASSUBSTITUIDAS:
-                    return aux.getPecasSubstituidas();              
+                    return aux.getPecasSubstituidas();
+                case COL_PAGO:
+                    return aux.isPago();
                 default: 
                     break;
             }
@@ -92,19 +100,20 @@ public class TMConsertoComputador extends AbstractTableModel {
                 return "Valor";
             case COL_PECASSUBSTITUIDAS:
                 return "Pecas";
+            case COL_PAGO:
+                return "Pago";
             default:
                 break;
         }
 
         return "";
     }
+    
 
-    @Override
-    public Class getColumnClass(int columnIndex) {
-//        if(columnIndex == COL_MATRICULA)
-//            return Boolean.class;
-        
-        return String.class;
-    }
+
 
 }
+
+
+
+

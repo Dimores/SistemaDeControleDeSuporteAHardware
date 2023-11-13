@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import com.mysql.cj.Session;
 import controller.tableModel.TMRelatorioManutencao;
 import controller.tableModel.TMRelatorioRede;
 import java.util.List;
@@ -12,6 +13,7 @@ import model.*;
 import model.dao.RelatorioRedeDAO;
 import model.exceptions.RelatorioRedeException;
 import model.validations.RelatorioRedeValidate;
+import utils.SessionManager;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
@@ -45,7 +47,7 @@ public class RelatorioRedeController {
     }
     
     public void atualizarTabela(JTable grd){
-        List<Object> lst = repositorio.findAll();
+        List<Object> lst = repositorio.findByCliente(SessionManager.getId());
 
         TMRelatorioRede tmRelatorioRede = new TMRelatorioRede(lst);
         grd.setModel(tmRelatorioRede);

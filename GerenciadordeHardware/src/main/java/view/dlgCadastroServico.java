@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import model.Data;
+import utils.Data;
 import model.Servico;
 import model.exceptions.ServicoException;
 

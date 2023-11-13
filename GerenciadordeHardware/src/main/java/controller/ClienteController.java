@@ -40,6 +40,12 @@ public class ClienteController extends UsuarioController{
         TMCadCliente tmCliente = new TMCadCliente(lst); 
         grdClientes.setModel(tmCliente);
     }
+    
+    public void atualizarTabela(JTable grdClientes, Long idCliente) {
+        Object lst = repositorio.findbyId(idCliente);
+        TMCadCliente tmCliente = new TMCadCliente(lst); 
+        grdClientes.setModel(tmCliente);
+    }
 
     public void atualizarCliente(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException {
         ClienteValidate valid = new ClienteValidate(); 
@@ -87,6 +93,10 @@ public class ClienteController extends UsuarioController{
 
     public Cliente buscarCliente(String email) {
         return (Cliente) this.repositorio.findByEmail(email);   
+    }
+    
+    public Cliente buscarCliente(Long id) {
+        return (Cliente) this.repositorio.findbyId(id);   
     }
     
 }

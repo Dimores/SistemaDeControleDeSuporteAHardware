@@ -8,7 +8,9 @@ import factory.DatabaseJPA;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import model.Cliente;
 import model.Gerente;
+import model.Tecnico;
 import model.interfaces.IDao;
 
 /**
@@ -78,7 +80,15 @@ public class GerenteDAO implements IDao {
         this.entityManager.close();
         if(lst.isEmpty()){
             return null;
-        }return (Gerente) lst.get(0);
+        }        // Verifica o tipo de usuário com base na instância do primeiro elemento da lista
+        if (lst.get(0) instanceof Tecnico) {
+            return (Tecnico) lst.get(0);
+        } else if(lst.get(0) instanceof Cliente){
+            // Trate o caso em que o email não corresponde a um gerente (pode ser um cliente)
+            return (Cliente) lst.get(0);
+        }else{
+            return (Gerente) lst.get(0);
+        }
        
     }
 

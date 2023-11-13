@@ -4,16 +4,27 @@
  */
 package utils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author ruiz
  */
+
 public class SessionManager {
-   public static Long idUsuarioLogado = Long.valueOf(-1);
+   private static Long idUsuarioLogado = Long.valueOf(-1);
    public static int codePrivilegio = -1;
    
    public static void close(){
         idUsuarioLogado = Long.valueOf(-1);
         codePrivilegio = -1;
+   }
+   
+   public static void setId(Long id){
+       idUsuarioLogado= id;
+   }
+   public static Long getId(){
+       return idUsuarioLogado;
    }
 }

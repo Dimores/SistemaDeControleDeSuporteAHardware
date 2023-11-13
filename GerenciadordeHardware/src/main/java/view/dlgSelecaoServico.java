@@ -19,8 +19,8 @@ import utils.SessionManager;
  * @author diego
  */
 public class dlgSelecaoServico extends javax.swing.JDialog {
-    List<Servico> servicoSelecionado;
-    PecaController pecaController;
+   // List<Servico> servicoSelecionado;
+    Servico servicoEscolhido;
     ServicoController servicoController;
     /**
      * Creates new form dlgSelecaoPeca
@@ -29,7 +29,8 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();
-        servicoController.atualizarTabela(grdPecas,SessionManager.idUsuarioLogado);
+        servicoController.atualizarTabela(grdServicos,SessionManager.getId());
+        servicoEscolhido = new Servico();
     }
 
     /**
@@ -46,7 +47,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         lblTitulo = new javax.swing.JLabel();
         btnConfirmar = new view.graphicElements.BotaoVermelho();
         jScrollPane2 = new javax.swing.JScrollPane();
-        grdPecas = new view.graphicElements.TableDark();
+        grdServicos = new view.graphicElements.TableDark();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,7 +73,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
             }
         });
 
-        grdPecas.setModel(new javax.swing.table.DefaultTableModel(
+        grdServicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -83,12 +84,12 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        grdPecas.addMouseListener(new java.awt.event.MouseAdapter() {
+        grdServicos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdPecasMouseClicked(evt);
+                grdServicosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(grdPecas);
+        jScrollPane2.setViewportView(grdServicos);
 
         javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
         panFundo.setLayout(panFundoLayout);
@@ -126,14 +127,14 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
+        servicoEscolhido = (Servico) getObjetoSelecionadoNaGrid();
         
-
-        if (servicoSelecionado.isEmpty())
+        if (servicoEscolhido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher esse Serviço?  \n(",
+                "Deseja escolher esse Serviço? \n(",
                 "Confirmar escolha",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
@@ -145,28 +146,26 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
             }else if(response == JOptionPane.CANCEL_OPTION){
-                servicoSelecionado = null;
+                servicoEscolhido = null;
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
+    private void grdServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdServicosMouseClicked
         // TODO add your handling code here:
-        servicoSelecionado = getObjetosSelecionadosNaGrid();
+        servicoEscolhido = (Servico) getObjetoSelecionadoNaGrid();
+    }//GEN-LAST:event_grdServicosMouseClicked
 
-
-    }//GEN-LAST:event_grdPecasMouseClicked
-
-    public List<Servico> getServicoSelecionados(){
+   /* public List<Servico> getServicoSelecionados(){
         return this.servicoSelecionado;
-    }
+    }*/
     
     public List<Servico> getObjetosSelecionadosNaGrid() {
-        int[] selectedRows = grdPecas.getSelectedRows();
+        int[] selectedRows = grdServicos.getSelectedRows();
         List<Servico> objetosSelecionados = new ArrayList<>();
 
         for (int row : selectedRows) {
-            Object obj = grdPecas.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
+            Object obj = grdServicos.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
             if (obj != null) {
                 objetosSelecionados.add((Servico)(obj));
                 
@@ -174,6 +173,19 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         }
 
         return objetosSelecionados;
+    }
+    
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdServicos.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdServicos.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    public Servico getServicoSelecionado(){
+        return this.servicoEscolhido;
     }
     
     /**
@@ -221,7 +233,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConfirmar;
-    private view.graphicElements.TableDark grdPecas;
+    private view.graphicElements.TableDark grdServicos;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;

@@ -215,8 +215,7 @@ public class FrLogin extends javax.swing.JFrame {
                Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
                Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
                if(crip.decrypt(usuario.getSenha()).equals(edtSenha.getText())){
-                   SessionManager.idUsuarioLogado = usuario.getId();
-                   System.out.println(SessionManager.idUsuarioLogado +" " + usuario.getId());
+                   SessionManager.setId(usuario.getId()); 
                    this.setVisible(false);
                    telaUsuario = new dlgUsuario(loginController.accessManager(obj));
                    telaUsuario.getLblUserName().setText(usuario.getNome());

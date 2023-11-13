@@ -63,10 +63,15 @@ public class RelatorioRedeDAO implements IDao {
     }
 
   
-    public Object findByCliente(Object obj) {
-        // Relatorio de rede
-        
-        return 0;
+    public List<Object> findByCliente(Long id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Relatorio u Where cliente_id = :id AND tipo = :tipoRelatorio";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id",id);
+        qry.setParameter("tipoRelatorio", "RELATORIOREDE");
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        return (List<Object>) lst;
     }
     
     
@@ -90,7 +95,7 @@ public class RelatorioRedeDAO implements IDao {
         jpql = " DELETE FROM Relatorio WHERE id = :id";
         Relatorio p = (Relatorio) obj;
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("codigo", p.getIdRelatorio());
+        qry.setParameter("id", p.getIdRelatorio());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         this.entityManager.close();

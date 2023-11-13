@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import controller.ClienteController;
 import controller.RelatorioRedeController;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -10,16 +11,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
-import model.Data;
+import utils.Data;
 import model.RelatorioRede;
 import model.Tecnico;
 import model.exceptions.RelatorioRedeException;
+import utils.SessionManager;
 /**
  *
  * @author diego
  */
 public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     private String dataRelatorio;
+    private ClienteController clienteController;
     Long idRelatorioRedeEditando;
     
     dlgSelecaoCliente telaSelecaoCliente;
@@ -40,13 +43,14 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         dataRelatorio = Data.pegaDataSistema();     
         
         relatorioRedeController = new RelatorioRedeController();
+        clienteController = new ClienteController();
         
         clienteSelecionado = new Cliente();
         tecnicoSelecionado = new Tecnico();
         
         idRelatorioRedeEditando = -1L;
         
-        telaSelecaoCliente = new dlgSelecaoCliente(this, true);
+        clienteSelecionado = clienteController.buscarCliente(SessionManager.getId());
         telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
 
         relatorioRedeController.atualizarTabela(grdRelatoriosRede);
@@ -328,13 +332,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     }//GEN-LAST:event_edtClienteFocusGained
 
     private void edtClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMousePressed
-        // TODO add your handling code here:
-        telaSelecaoCliente.setVisible(true);
 
-        if(telaSelecaoCliente.getClienteEscolhido() != null){
-            edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
-            clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
-        }
     }//GEN-LAST:event_edtClienteMousePressed
 
     private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
@@ -443,7 +441,6 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         // Limpa os Edts
         edtDescricao.setText("");
         edtTipoRede.setText("");
-        edtCliente.setText("Clique aqui para adicionar um Cliente.");
         edtTecnico.setText("Clique aqui para adicionar um Ténico.");
     }
     

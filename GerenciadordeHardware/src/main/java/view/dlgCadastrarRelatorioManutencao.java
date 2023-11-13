@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
-import model.Data;
+import utils.Data;
 import model.RelatorioManutencao;
 import model.Tecnico;
 import model.exceptions.RelatorioManutencaoException;
