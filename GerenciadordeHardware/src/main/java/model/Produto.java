@@ -40,7 +40,7 @@ public class Produto {
     private int estoque;
     private String categoria;
     private String dataFabricacao;
-    
+    private boolean isPago; 
     
     public Produto(){
         this.codigo = "";
@@ -50,10 +50,11 @@ public class Produto {
         this.estoque = 0;
         this.categoria = "";
         this.dataFabricacao = "";
+        this.isPago = false;
     }
     
     
-   public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
+   public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, boolean isPago) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -61,6 +62,7 @@ public class Produto {
         this.estoque = estoque;
         this.categoria = categoria;
         this.dataFabricacao = dataFabricacao;
+        this.isPago = isPago;
     }
 
     @Override

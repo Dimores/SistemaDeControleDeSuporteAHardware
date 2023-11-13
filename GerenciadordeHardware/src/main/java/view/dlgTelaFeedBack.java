@@ -65,7 +65,6 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Deixe seu FeedBack");
 
-        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
         edtServicos.setEditable(false);
@@ -75,6 +74,14 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         edtServicos.setLabelText("Servico");
         edtServicos.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtServicos.setLineColor(new java.awt.Color(229, 9, 20));
+        edtServicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                edtServicosMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                edtServicosMouseReleased(evt);
+            }
+        });
         edtServicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edtServicosActionPerformed(evt);
@@ -98,6 +105,12 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Avalie nosso Serviço!");
+
+        starRating1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                starRating1VetoableChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
@@ -182,7 +195,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 236, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -271,13 +284,26 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        feedBackController.salvar(0, txtComentario.getText(), "", servicoSelecionado, SessionManager.idUsuarioLogado);
+        feedBackController.salvar(0, txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.idUsuarioLogado);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
         feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.idUsuarioLogado);
     }//GEN-LAST:event_btnHistoricoActionPerformed
+
+    private void edtServicosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtServicosMouseExited
+
+    private void edtServicosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicosMouseReleased
+       telaSelecaoServico.setVisible(true);
+       servicoSelecionado = telaSelecaoServico.getObjetosSelecionadosNaGrid().get(0);
+    }//GEN-LAST:event_edtServicosMouseReleased
+
+    private void starRating1VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_starRating1VetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_starRating1VetoableChange
 
     /**
      * @param args the command line arguments

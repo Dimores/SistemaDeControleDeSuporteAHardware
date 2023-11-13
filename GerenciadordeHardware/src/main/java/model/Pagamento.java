@@ -19,16 +19,43 @@ public class Pagamento implements IPagamento{
     private Double dinheiro;
     private Cliente clientePagante;
     private Tecnico tecnicoResponsavel;
-    
+    private float totalPagamento;
     
     
     @Override
     public void pagar(Double valorEmDinheiro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    
     }
     
     public void dadosToPDF(){
         
     }
     
+    public void AdicionarAoPagamento(Object obj){
+        
+        try{
+            if (obj instanceof Servico) {
+                lstServico.add((Servico) obj);
+            } else if (obj instanceof Produto) {
+                lstProduto.add((Produto) obj);
+            }
+        }catch (RuntimeException e){
+            throw new RuntimeException("Produto ou servico invalido" + e);
+        }
+     
+        
+    }
+    
+    
+    public float getTotalPagamento(){
+        float total = 0;
+        for (int i =0; i < lstServico.size(); i++){
+            total += lstServico.get(i).getValor();
+        }for(int i=0; i<lstProduto.size(); i++){
+            total += lstProduto.get(i).getPreco();
+        }
+        totalPagamento = total;
+        return totalPagamento;
+    }
 }

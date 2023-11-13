@@ -34,8 +34,8 @@ public class Cabo extends Peca {
         this.tipoDeCabo = "";
     }
 
-    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo) {
-        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
+    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo, boolean isPago) {
+        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.comprimento = comprimento;
         this.cor = cor;
         this.bitola = bitola;

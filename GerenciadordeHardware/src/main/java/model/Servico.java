@@ -41,7 +41,7 @@ public class Servico {
     private String descricaoServico;
     private String dataServico;
     private boolean concluido;
-    
+    private boolean isPago;
 
 
     public Servico() {
@@ -51,15 +51,17 @@ public class Servico {
         this.descricaoServico = "";
         this.dataServico = "";
         this.concluido = false;
+        isPago = false;
     }
 
-    public Servico(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido) {
+    public Servico(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico, String dataServico, boolean concluido, boolean isPago) {
         this.tecnicoResponsavel = tecnicoResponsavel;
         this.clienteAtendido = clienteAtendido;
         this.valor = valor;
         this.descricaoServico = descricaoServico;
         this.dataServico = dataServico;
         this.concluido = concluido;
+        this.isPago = isPago;
     }
 
     @Override

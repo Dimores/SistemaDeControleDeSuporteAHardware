@@ -89,7 +89,7 @@
               <Color blue="fb" green="fb" red="fb" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Selecione uma ou mais Pe&#xe7;a(s)"/>
+            <Property name="text" type="java.lang.String" value="Selecione um Servi&#xe7;o"/>
           </Properties>
         </Component>
         <Component class="view.graphicElements.BotaoVermelho" name="btnConfirmar">

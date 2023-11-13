@@ -47,8 +47,8 @@ public class ConsertoComputador extends Servico {
     }
 
     public ConsertoComputador(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                              String dataServico, boolean concluido, ArrayList pecasSubstituidas) {
-        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
+                              String dataServico, boolean concluido, ArrayList pecasSubstituidas, boolean isPago) {
+        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, isPago);
         this.pecasSubstituidas = pecasSubstituidas;
     }
 

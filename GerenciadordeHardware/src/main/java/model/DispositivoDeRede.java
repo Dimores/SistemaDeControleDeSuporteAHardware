@@ -34,8 +34,8 @@ public class DispositivoDeRede extends Produto {
     }
 
     public DispositivoDeRede(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, 
-                                            String enderecoIP, String fabricante, String modelo) { // Atributos de dispositivo de rede
-        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
+                                            String enderecoIP, String fabricante, String modelo, boolean isPago) { // Atributos de dispositivo de rede
+        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.id = id;
         this.enderecoIP = enderecoIP;
         this.fabricante = fabricante;

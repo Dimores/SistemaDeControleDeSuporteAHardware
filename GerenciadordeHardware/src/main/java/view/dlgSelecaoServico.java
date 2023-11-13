@@ -58,7 +58,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 44)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(251, 251, 251));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Selecione uma ou mais Peça(s)");
+        lblTitulo.setText("Selecione um Serviço");
 
         btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
         btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
@@ -161,7 +161,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         return this.servicoSelecionado;
     }
     
-    private List<Servico> getObjetosSelecionadosNaGrid() {
+    public List<Servico> getObjetosSelecionadosNaGrid() {
         int[] selectedRows = grdPecas.getSelectedRows();
         List<Servico> objetosSelecionados = new ArrayList<>();
 

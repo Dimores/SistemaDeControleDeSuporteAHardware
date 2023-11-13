@@ -33,8 +33,8 @@ public class Peca extends Produto implements Serializable {
         super();
     }
 
-    public Peca(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
-        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao);
+    public Peca(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao,boolean isPago) {
+        super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.id = id;
     }
 

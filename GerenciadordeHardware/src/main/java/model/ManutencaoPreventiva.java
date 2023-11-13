@@ -30,8 +30,8 @@ public class ManutencaoPreventiva extends Servico {
     }
 
     public ManutencaoPreventiva(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                String dataServico, boolean concluido, String equipamentos, String descricaoManutencao) {
-        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido);
+                                String dataServico, boolean concluido, String equipamentos, String descricaoManutencao, boolean isPago) {
+        super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, isPago);
     }
 
     @Override
