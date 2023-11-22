@@ -50,7 +50,7 @@ public class FeedBackController {
        feedBackDao.save(feedback);
    }
    
-   public void atualizar(Long id,int nota, String comentario, String data, Servico servico, Long client_id){
+   public void atualizar(Long id, int nota, String comentario, String data, Servico servico, Long client_id){
        FeedBack feedback;
        feedback = new FeedBack();
        feedback.setServico(servico);

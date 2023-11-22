@@ -34,16 +34,19 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grdHistóricoServico = new javax.swing.JTable();
-        edtCliente = new javax.swing.JTextField();
+        panFundo = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        grdHistóricoServico = new view.graphicElements.TableDark();
+        lblTitulo = new javax.swing.JLabel();
+        btnLimparFiltro = new view.graphicElements.BotaoVermelho();
         jLabel2 = new javax.swing.JLabel();
-        btnLimparFiltro = new javax.swing.JButton();
+        edtCliente = new javax.swing.JTextField();
+        btnCancelar1 = new view.graphicElements.BotaoVermelho();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jLabel1.setText("Histórico de Atendimentos");
+        panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
         grdHistóricoServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,9 +59,33 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(grdHistóricoServico);
+        jScrollPane2.setViewportView(grdHistóricoServico);
+
+        lblTitulo.setBackground(new java.awt.Color(20, 20, 20));
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(251, 251, 251));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Histórico de Atendimentos");
+
+        btnLimparFiltro.setBackground(new java.awt.Color(51, 51, 51));
+        btnLimparFiltro.setForeground(new java.awt.Color(251, 251, 251));
+        btnLimparFiltro.setText("Limpar Filtro");
+        btnLimparFiltro.setBorderPainted(false);
+        btnLimparFiltro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLimparFiltro.setRadius(20);
+        btnLimparFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparFiltroActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setForeground(new java.awt.Color(251, 251, 251));
+        jLabel2.setText("Filtrar por Cliente:");
 
         edtCliente.setEditable(false);
+        edtCliente.setBackground(new java.awt.Color(20, 20, 20));
+        edtCliente.setForeground(new java.awt.Color(251, 251, 251));
+        edtCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(229, 9, 20)));
         edtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 edtClienteMouseReleased(evt);
@@ -70,52 +97,60 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Filtrar por Cliente:");
-
-        btnLimparFiltro.setText("limparFiltro");
-        btnLimparFiltro.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar1.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar1.setForeground(new java.awt.Color(251, 251, 251));
+        btnCancelar1.setText("Sair");
+        btnCancelar1.setBorderPainted(false);
+        btnCancelar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar1.setRadius(40);
+        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparFiltroActionPerformed(evt);
+                btnCancelar1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)))
+        javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
+        panFundo.setLayout(panFundoLayout);
+        panFundoLayout.setHorizontalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimparFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 219, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLimparFiltro)
-                    .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panFundoLayout.setVerticalGroup(
+            panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFundoLayout.createSequentialGroup()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimparFiltro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(btnLimparFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
+        getContentPane().add(panFundo, java.awt.BorderLayout.PAGE_START);
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
@@ -131,9 +166,15 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
     }//GEN-LAST:event_edtClienteMouseReleased
 
     private void btnLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltroActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnLimparFiltroActionPerformed
+
+    private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
+        // TODO add your handling code here:
         edtCliente.setText("");
         servicoController.atualizarTabela(grdHistóricoServico);
-    }//GEN-LAST:event_btnLimparFiltroActionPerformed
+    }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,11 +182,13 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLimparFiltro;
+    private view.graphicElements.BotaoVermelho btnCancelar1;
+    private view.graphicElements.BotaoVermelho btnLimparFiltro;
     private javax.swing.JTextField edtCliente;
-    private javax.swing.JTable grdHistóricoServico;
-    private javax.swing.JLabel jLabel1;
+    private view.graphicElements.TableDark grdHistóricoServico;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panFundo;
     // End of variables declaration//GEN-END:variables
 }

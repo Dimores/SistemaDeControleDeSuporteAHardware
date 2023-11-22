@@ -5,6 +5,7 @@
 package view;
 
 import controller.PecaController;
+import controller.PecaExemplarController;
 import java.awt.Component;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -22,7 +23,9 @@ import model.exceptions.PecaException;
  */
 public class dlgCadastrarPeca extends javax.swing.JDialog {
         PecaController pecaController;
+        PecaExemplarController exemplarController;
         Long idPecaEditando;
+        private boolean canEditStock;
 
     /**
      * Creates new form dlgCadastroServico
@@ -30,11 +33,13 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     public dlgCadastrarPeca(java.awt.Dialog parent) {
         super(parent);
         pecaController = new PecaController();
+        exemplarController = new PecaExemplarController();
         idPecaEditando = -1L;
         initComponents();
         this.setModal(true);
         this.adicionarMascaranosCampos();
         pecaController.atualizarTabela(grdPecas);
+        canEditStock = true;
     }
 
     /**
@@ -112,6 +117,11 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtEstoque.setLabelText("Estoque");
         edtEstoque.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtEstoque.setLineColor(new java.awt.Color(229, 9, 20));
+        edtEstoque.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                edtEstoqueFocusGained(evt);
+            }
+        });
 
         edtCategoria.setBackground(new java.awt.Color(20, 20, 20));
         edtCategoria.setForeground(new java.awt.Color(251, 251, 251));
@@ -168,6 +178,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnEditar.setForeground(new java.awt.Color(251, 251, 251));
         btnEditar.setText("Editar");
         btnEditar.setBorderPainted(false);
+        btnEditar.setFocusPainted(false);
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEditar.setRadius(40);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +191,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
         btnExcluir.setText("Excluir");
         btnExcluir.setBorderPainted(false);
+        btnExcluir.setFocusPainted(false);
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnExcluir.setRadius(40);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +204,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorderPainted(false);
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setRadius(40);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +217,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFocusPainted(false);
         btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmar.setRadius(40);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +230,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnNovo.setForeground(new java.awt.Color(251, 251, 251));
         btnNovo.setText("Novo");
         btnNovo.setBorderPainted(false);
+        btnNovo.setFocusPainted(false);
         btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNovo.setRadius(40);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -316,6 +331,8 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     }//GEN-LAST:event_edtNomeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        canEditStock = false;
+        
         Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
 
         if (pecaEditando == null)
@@ -325,15 +342,14 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             this.habilitarCampos(true);
             this.preencherFormulario(pecaEditando);
             this.idPecaEditando = pecaEditando.getId();
-        }        // TODO add your handling code here:
-
+        }       
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
 
         if (pecaExcluida == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
@@ -344,9 +360,14 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
-
                 try {
-                    pecaController.excluirPeca(pecaExcluida);
+                    System.out.println(pecaExcluida.getEstoque());
+                    if(pecaExcluida.getEstoque() == 0){
+                        pecaController.excluirPeca(pecaExcluida);
+                    }else{
+                        exemplarController.excluirExemplarPeca(pecaExcluida);
+                        exemplarController.atualizarEstoquePeca(pecaExcluida);
+                    }
 
                     pecaController.atualizarTabela(grdPecas);
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
@@ -362,15 +383,17 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         this.idPecaEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);        // TODO add your handling code here:
-
+        canEditStock = true;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         try {
             if (idPecaEditando > 0) {
                 pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
             } else {
                 pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                pecaController.cadastrarExemplarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());   
             }
             //Comando bastante importante
             this.idPecaEditando = -1L;
@@ -392,9 +415,15 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
+        canEditStock = true;
         this.limparCampos();
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void edtEstoqueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtEstoqueFocusGained
+        // TODO add your handling code here:
+        edtEstoque.setEditable(canEditStock);
+    }//GEN-LAST:event_edtEstoqueFocusGained
 
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdPecas.getSelectedRow();

@@ -153,21 +153,8 @@ public class PasswordField2 extends JPasswordField {
         // Código para exibição e ocultação da senha
         // ...
 
-        // Carregamento das imagens
-        String imagePathHide = "GerenciadordeHardware\\src\\main\\resources\\images\\eye_hide.png";
-        String imagePathEye = "GerenciadordeHardware\\src\\main\\resources\\images\\eye.png";
-
-        if (getClass().getClassLoader().getResource(imagePathHide) != null) {
-            eye_hide = new ImageIcon(getClass().getClassLoader().getResource(imagePathHide)).getImage();
-        } else {
-            // Trate a ausência da imagem "eye_hide.png" como desejado
-        }
-
-        if (getClass().getClassLoader().getResource(imagePathEye) != null) {
-            eye = new ImageIcon(getClass().getClassLoader().getResource(imagePathEye)).getImage();
-        } else {
-            // Trate a ausência da imagem "eye.png" como desejado
-        }
+        eye = new ImageIcon(getClass().getResource("/images/eye.png")).getImage();
+        eye_hide = new ImageIcon(getClass().getResource("/images/eye_hide.png")).getImage();
 
 
         //eye_hide = new ImageIcon(getClass().getResource("/java/view/graphicElements/eye_hide.png")).getImage();

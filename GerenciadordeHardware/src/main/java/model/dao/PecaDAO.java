@@ -79,6 +79,19 @@ private EntityManager entityManager;
         }return (Peca) lst.get(0);
        
     }
+    
+    public Object findById(Long id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT c " + " FROM Produto c " + " WHERE  c.id like :id";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id", id);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+        if(lst.isEmpty()){
+            return null;
+        }return (Peca) lst.get(0);
+       
+    }
 
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se

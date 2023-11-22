@@ -227,6 +227,9 @@
                   <Color blue="14" green="9" red="e5" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="edtEstoqueFocusGained"/>
+              </Events>
             </Component>
             <Component class="view.graphicElements.TextField" name="edtCategoria">
               <Properties>
@@ -324,6 +327,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -343,6 +347,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -362,6 +367,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -381,6 +387,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -400,6 +407,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>

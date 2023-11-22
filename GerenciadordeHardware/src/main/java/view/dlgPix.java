@@ -17,7 +17,7 @@ public class dlgPix extends javax.swing.JDialog {
     /**
      * Creates new form dlgPix
      */
-    public dlgPix(java.awt.Frame parent, boolean modal) throws Exception {
+    public dlgPix(java.awt.Dialog parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         PixPaymentGenerator.generatePagamentoPix("aaaaaaaa", 100, lblQrCode);
@@ -50,8 +50,9 @@ public class dlgPix extends javax.swing.JDialog {
 
         btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
         btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
-        btnConfirmar.setText("Quitar");
+        btnConfirmar.setText("Sair");
         btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setFocusPainted(false);
         btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmar.setRadius(40);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +131,7 @@ public class dlgPix extends javax.swing.JDialog {
             public void run() {
                 dlgPix dialog = null;
                 try {
-                    dialog = new dlgPix(new javax.swing.JFrame(), true);
+                    dialog = new dlgPix(new javax.swing.JDialog(), true);
                 } catch (Exception ex) {
                     Logger.getLogger(dlgPix.class.getName()).log(Level.SEVERE, null, ex);
                 }

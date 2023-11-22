@@ -58,7 +58,6 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         panStars = new view.graphicElements.StarRating();
         panTodosBotoes = new javax.swing.JPanel();
-        btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
         btnSalvar = new view.graphicElements.BotaoVermelho();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -66,6 +65,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 153));
+        setResizable(false);
 
         panFundo.setBackground(new java.awt.Color(20, 20, 20));
 
@@ -154,18 +154,6 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
 
         panTodosBotoes.setOpaque(false);
 
-        btnEditar.setBackground(new java.awt.Color(51, 51, 51));
-        btnEditar.setForeground(new java.awt.Color(251, 251, 251));
-        btnEditar.setText("Editar");
-        btnEditar.setBorderPainted(false);
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnEditar.setRadius(40);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
         btnExcluir.setBackground(new java.awt.Color(51, 51, 51));
         btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
         btnExcluir.setText("Excluir");
@@ -197,7 +185,6 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodosBotoesLayout.createSequentialGroup()
                 .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51))
@@ -205,8 +192,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         panTodosBotoesLayout.setVerticalGroup(
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTodosBotoesLayout.createSequentialGroup()
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(71, 71, 71)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,11 +224,11 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                         .addContainerGap())
                     .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                        .addGap(0, 39, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
+                        .addContainerGap())))
         );
         panFundoLayout.setVerticalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,26 +247,12 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void edtServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtServicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edtServicoActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        feedBack = (FeedBack) this.getObjetoSelecionadoNaGrid();
-        
-        
-        if (feedBack == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-            this.limparCampos();
-            this.preencherFormulario(feedBack);
-            this.idFeedbackEditando = feedBack.getId();
-            System.out.print("id do maluco: " + idFeedbackEditando);
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
@@ -316,7 +288,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idFeedbackEditando > 0) {
-               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.getId());
+               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), "20/08/2009", servicoSelecionado, SessionManager.getId());
 
             } else {
 
@@ -371,7 +343,6 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.graphicElements.BotaoVermelho btnEditar;
     private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnSalvar;
     private view.graphicElements.TextField edtServico;
@@ -393,9 +364,5 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         panStars.setStar(0);
     }
 
-    private void preencherFormulario(FeedBack feedBackEditando) {
-        edtServico.setText(feedBackEditando.getServico().getDescricaoServico());
-        txtComentario.setText(feedBackEditando.getComentário());
-        panStars.setStar(feedBackEditando.getNotaServico());
-    }
+
 }

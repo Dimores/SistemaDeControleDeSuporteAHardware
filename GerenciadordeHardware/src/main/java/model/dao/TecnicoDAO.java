@@ -70,25 +70,18 @@ private EntityManager entityManager;
      */
     public Object findByEmail(String email) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = "SELECT u FROM Usuario u WHERE u.email like :email";
+        jpql = "SELECT u FROM Usuario u WHERE u.email like :email AND tipo = :tipo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("email", email);
+        qry.setParameter("tipo", "TECNICO");
         List<Usuario> lst = qry.getResultList();
         this.entityManager.close();
 
         if (lst.isEmpty()) {
             return null;
         }
+        return (Tecnico) lst.get(0);
 
-        // Verifica o tipo de usuário com base na instância do primeiro elemento da lista
-        if (lst.get(0) instanceof Tecnico) {
-            return (Tecnico) lst.get(0);
-        } else if(lst.get(0) instanceof Cliente){
-            // Trate o caso em que o email não corresponde a um técnico (pode ser um cliente)
-            return (Cliente) lst.get(0);
-        }else{
-            return (Gerente) lst.get(0);
-        }
     }
 
 

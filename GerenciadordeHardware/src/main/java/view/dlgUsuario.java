@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.SessionManager;
 
 /**
@@ -22,6 +24,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     dlgHistoricoAtendimentosGerente telaHistoricoGerente;
     dlgTelaFeedBack telaFeed;
     dlgSolicitarServicoCliente socilitarServicoCliente;
+    dlgPix telaPix;
     
     /**
      * Creates new form FrMain
@@ -52,6 +55,12 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaHistoricoGerente = new dlgHistoricoAtendimentosGerente(this, true);
         telaFeed = new dlgTelaFeedBack(this, true);
         socilitarServicoCliente = new dlgSolicitarServicoCliente(this, true);
+        try{
+            telaPix = new dlgPix(this, true);     
+        } catch (Exception ex) {
+            Logger.getLogger(dlgUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public javax.swing.JLabel getLblUserName(){
@@ -86,6 +95,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnHistoricoAtendimentoGerente.setVisible(false);
                 btnHistoricoAtendimento1.setVisible(false);
                 btnFeedBack1.setVisible(false);
+                btnRealizarPagamento.setVisible(false);
                    
             break;
             
@@ -98,6 +108,7 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnGerarRelatorioRede.setVisible(false);
                 btnSocilitarServico.setVisible(false);
                 btnCadastrarDispositivoDeRede.setVisible(false);
+                btnRealizarPagamento.setVisible(false);
             break;
             default: break;
         }
@@ -126,6 +137,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnHistoricoAtendimento1 = new view.graphicElements.BotaoVermelho();
         btnHistoricoAtendimentoGerente = new view.graphicElements.BotaoVermelho();
         btnFeedBack1 = new view.graphicElements.BotaoVermelho();
+        btnRealizarPagamento = new view.graphicElements.BotaoVermelho();
         btnSair = new view.graphicElements.BotaoVermelho();
         panUser = new javax.swing.JPanel();
         lblLoginIcone = new javax.swing.JLabel();
@@ -257,6 +269,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnSocilitarSuporte.setForeground(new java.awt.Color(251, 251, 251));
         btnSocilitarSuporte.setText("Socilitar Suporte");
         btnSocilitarSuporte.setBorderPainted(false);
+        btnSocilitarSuporte.setFocusPainted(false);
         btnSocilitarSuporte.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSocilitarSuporte.setRadius(40);
         btnSocilitarSuporte.addActionListener(new java.awt.event.ActionListener() {
@@ -270,6 +283,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnHistoricoAtendimento1.setForeground(new java.awt.Color(251, 251, 251));
         btnHistoricoAtendimento1.setText("Histórico Atendimento");
         btnHistoricoAtendimento1.setBorderPainted(false);
+        btnHistoricoAtendimento1.setFocusPainted(false);
         btnHistoricoAtendimento1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnHistoricoAtendimento1.setRadius(40);
         btnHistoricoAtendimento1.addActionListener(new java.awt.event.ActionListener() {
@@ -283,6 +297,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnHistoricoAtendimentoGerente.setForeground(new java.awt.Color(251, 251, 251));
         btnHistoricoAtendimentoGerente.setText("Histórico Atendimento");
         btnHistoricoAtendimentoGerente.setBorderPainted(false);
+        btnHistoricoAtendimentoGerente.setFocusPainted(false);
         btnHistoricoAtendimentoGerente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnHistoricoAtendimentoGerente.setRadius(40);
         btnHistoricoAtendimentoGerente.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +311,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnFeedBack1.setForeground(new java.awt.Color(251, 251, 251));
         btnFeedBack1.setText("Deixar FeedBack");
         btnFeedBack1.setBorderPainted(false);
+        btnFeedBack1.setFocusPainted(false);
         btnFeedBack1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFeedBack1.setRadius(40);
         btnFeedBack1.addActionListener(new java.awt.event.ActionListener() {
@@ -305,10 +321,25 @@ public class dlgUsuario extends javax.swing.JDialog {
         });
         panOpcoes.add(btnFeedBack1);
 
+        btnRealizarPagamento.setBackground(new java.awt.Color(51, 51, 51));
+        btnRealizarPagamento.setForeground(new java.awt.Color(251, 251, 251));
+        btnRealizarPagamento.setText("Realizar Pagamento");
+        btnRealizarPagamento.setBorderPainted(false);
+        btnRealizarPagamento.setFocusPainted(false);
+        btnRealizarPagamento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRealizarPagamento.setRadius(40);
+        btnRealizarPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarPagamentoActionPerformed(evt);
+            }
+        });
+        panOpcoes.add(btnRealizarPagamento);
+
         btnSair.setBackground(new java.awt.Color(51, 51, 51));
         btnSair.setForeground(new java.awt.Color(251, 251, 251));
         btnSair.setText("Sair");
         btnSair.setBorderPainted(false);
+        btnSair.setFocusPainted(false);
         btnSair.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSair.setRadius(40);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +484,11 @@ public class dlgUsuario extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnRealizarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPagamentoActionPerformed
+        // TODO add your handling code here:
+        telaPix.setVisible(true);
+    }//GEN-LAST:event_btnRealizarPagamentoActionPerformed
+
     /*public void fecharTodasAsJanelas()  {
         telaCliente.habilitarCampos(false);
         telaCliente.dispose();
@@ -507,6 +543,7 @@ public class dlgUsuario extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnGerarRelatorioRede;
     private view.graphicElements.BotaoVermelho btnHistoricoAtendimento1;
     private view.graphicElements.BotaoVermelho btnHistoricoAtendimentoGerente;
+    private view.graphicElements.BotaoVermelho btnRealizarPagamento;
     private view.graphicElements.BotaoVermelho btnSair;
     private view.graphicElements.BotaoVermelho btnSocilitarServico;
     private view.graphicElements.BotaoVermelho btnSocilitarSuporte;

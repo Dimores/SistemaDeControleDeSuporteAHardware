@@ -43,8 +43,6 @@ public class Usuario implements IUsuario{
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Cliente> clientes;
     
-
-
     public Usuario() {
         this.nome = "";
         this.CPF = "";

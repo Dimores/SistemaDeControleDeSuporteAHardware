@@ -74,16 +74,9 @@ public class ClienteController extends UsuarioController{
         }else{
              throw new ClienteException("Error - Já existe um cliente com este 'Email'.");
         }
-    
-    
-    
-    
-    
-    
     }
 
-    public void excluirCliente(Cliente clienteExcluido) {
-        
+    public void excluirCliente(Cliente clienteExcluido) {  
         if (clienteExcluido != null) {
             repositorio.delete(clienteExcluido);
         } else {

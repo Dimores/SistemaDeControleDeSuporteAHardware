@@ -104,18 +104,48 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         fEdtCpf.setLabelText("CPF");
         fEdtCpf.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtCpf.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtCpfFocusGained(evt);
+            }
+        });
+        fEdtCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtCpfMousePressed(evt);
+            }
+        });
 
         fEdtDataNasc.setBackground(new java.awt.Color(20, 20, 20));
         fEdtDataNasc.setForeground(new java.awt.Color(251, 251, 251));
         fEdtDataNasc.setLabelText("Data de Nascimento");
         fEdtDataNasc.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtDataNasc.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtDataNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtDataNascFocusGained(evt);
+            }
+        });
+        fEdtDataNasc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtDataNascMousePressed(evt);
+            }
+        });
 
         fEdtTelefone.setBackground(new java.awt.Color(20, 20, 20));
         fEdtTelefone.setForeground(new java.awt.Color(251, 251, 251));
         fEdtTelefone.setLabelText("Telefone");
         fEdtTelefone.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtTelefoneFocusGained(evt);
+            }
+        });
+        fEdtTelefone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtTelefoneMousePressed(evt);
+            }
+        });
 
         edtSenha.setBackground(new java.awt.Color(20, 20, 20));
         edtSenha.setForeground(new java.awt.Color(251, 251, 251));
@@ -157,11 +187,11 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
                 .addComponent(fEdtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fEdtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fEdtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         panTodosBotoes.setOpaque(false);
@@ -400,6 +430,36 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void fEdtCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtCpfFocusGained
+        // TODO add your handling code here:
+        fEdtCpf.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtCpfFocusGained
+
+    private void fEdtCpfMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtCpfMousePressed
+        // TODO add your handling code here:
+        fEdtCpf.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtCpfMousePressed
+
+    private void fEdtDataNascFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtDataNascFocusGained
+        // TODO add your handling code here:
+        fEdtDataNasc.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtDataNascFocusGained
+
+    private void fEdtDataNascMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtDataNascMousePressed
+        // TODO add your handling code here:
+        fEdtDataNasc.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtDataNascMousePressed
+
+    private void fEdtTelefoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtTelefoneFocusGained
+        // TODO add your handling code here:
+        fEdtTelefone.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtTelefoneFocusGained
+
+    private void fEdtTelefoneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtTelefoneMousePressed
+        // TODO add your handling code here:
+        fEdtTelefone.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtTelefoneMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

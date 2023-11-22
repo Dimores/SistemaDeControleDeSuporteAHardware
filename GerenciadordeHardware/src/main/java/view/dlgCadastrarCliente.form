@@ -142,11 +142,11 @@
                       <Component id="fEdtDataNasc" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fEdtEmail" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="fEdtTelefone" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="edtSenha" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -205,6 +205,10 @@
                   <Color blue="14" green="9" red="e5" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fEdtCpfFocusGained"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fEdtCpfMousePressed"/>
+              </Events>
             </Component>
             <Component class="view.graphicElements.FormattedTextField" name="fEdtDataNasc">
               <Properties>
@@ -222,6 +226,10 @@
                   <Color blue="14" green="9" red="e5" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fEdtDataNascFocusGained"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fEdtDataNascMousePressed"/>
+              </Events>
             </Component>
             <Component class="view.graphicElements.FormattedTextField" name="fEdtTelefone">
               <Properties>
@@ -239,6 +247,10 @@
                   <Color blue="14" green="9" red="e5" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fEdtTelefoneFocusGained"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fEdtTelefoneMousePressed"/>
+              </Events>
             </Component>
             <Component class="view.graphicElements.PasswordField" name="edtSenha">
               <Properties>

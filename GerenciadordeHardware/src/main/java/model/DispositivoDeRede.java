@@ -20,7 +20,6 @@ import lombok.*;
 @DiscriminatorValue("DISPOSITIVODEREDE")
 public class DispositivoDeRede extends Produto {
     
-    
     private Long id;
     private String enderecoIP;
     private String fabricante;

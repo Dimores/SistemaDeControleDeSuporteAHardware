@@ -98,30 +98,70 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         fEdtEmail.setLabelText("Email");
         fEdtEmail.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtEmail.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtEmailMousePressed(evt);
+            }
+        });
 
         fEdtCpf.setBackground(new java.awt.Color(20, 20, 20));
         fEdtCpf.setForeground(new java.awt.Color(251, 251, 251));
         fEdtCpf.setLabelText("CPF");
         fEdtCpf.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtCpf.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtCpfFocusGained(evt);
+            }
+        });
+        fEdtCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtCpfMousePressed(evt);
+            }
+        });
 
         fEdtDataNasc.setBackground(new java.awt.Color(20, 20, 20));
         fEdtDataNasc.setForeground(new java.awt.Color(251, 251, 251));
         fEdtDataNasc.setLabelText("Data de Nascimento");
         fEdtDataNasc.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtDataNasc.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtDataNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtDataNascFocusGained(evt);
+            }
+        });
+        fEdtDataNasc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtDataNascMousePressed(evt);
+            }
+        });
 
         fEdtSalario.setBackground(new java.awt.Color(20, 20, 20));
         fEdtSalario.setForeground(new java.awt.Color(251, 251, 251));
         fEdtSalario.setLabelText("Salário");
         fEdtSalario.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtSalario.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtSalario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtSalarioFocusGained(evt);
+            }
+        });
+        fEdtSalario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fEdtSalarioMousePressed(evt);
+            }
+        });
 
         fEdtTelefone.setBackground(new java.awt.Color(20, 20, 20));
         fEdtTelefone.setForeground(new java.awt.Color(251, 251, 251));
         fEdtTelefone.setLabelText("Telefone");
         fEdtTelefone.setLabelTextColor(new java.awt.Color(251, 251, 251));
         fEdtTelefone.setLineColor(new java.awt.Color(229, 9, 20));
+        fEdtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fEdtTelefoneFocusGained(evt);
+            }
+        });
 
         edtSenha.setBackground(new java.awt.Color(20, 20, 20));
         edtSenha.setForeground(new java.awt.Color(251, 251, 251));
@@ -402,6 +442,45 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
             Logger.getLogger(dlgCadastrarTecnico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void fEdtCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtCpfFocusGained
+        // TODO add your handling code here:
+        fEdtCpf.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtCpfFocusGained
+
+    private void fEdtDataNascFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtDataNascFocusGained
+        // TODO add your handling code here:
+        fEdtDataNasc.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtDataNascFocusGained
+
+    private void fEdtSalarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtSalarioFocusGained
+        // TODO add your handling code here:
+        fEdtSalario.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtSalarioFocusGained
+
+    private void fEdtTelefoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fEdtTelefoneFocusGained
+        // TODO add your handling code here:
+        fEdtTelefone.setCaretPosition(0);
+    }//GEN-LAST:event_fEdtTelefoneFocusGained
+
+    private void fEdtCpfMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtCpfMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_fEdtCpfMousePressed
+
+    private void fEdtDataNascMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtDataNascMousePressed
+        // TODO add your handling code here:
+        ;
+    }//GEN-LAST:event_fEdtDataNascMousePressed
+
+    private void fEdtSalarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtSalarioMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_fEdtSalarioMousePressed
+
+    private void fEdtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtEmailMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fEdtEmailMousePressed
 
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdTecnicos.getSelectedRow();

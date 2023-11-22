@@ -19,6 +19,7 @@ public class FeedBackDAO implements IDao {
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
+    
     @Override
     public void save(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
