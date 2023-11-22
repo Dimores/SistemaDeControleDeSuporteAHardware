@@ -288,11 +288,12 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idFeedbackEditando > 0) {
-               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), "20/08/2009", servicoSelecionado, SessionManager.getId());
+               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), "23/11/2023", servicoSelecionado, SessionManager.getId());
+
 
             } else {
 
-               feedBackController.salvar(panStars.getStar(), txtComentario.getText(), NtpTimeClient.dataAtualToString(), servicoSelecionado, SessionManager.getId());
+               feedBackController.salvar(panStars.getStar(), txtComentario.getText(),  "23/11/2023", servicoSelecionado, SessionManager.getId());
             }
             //Comando bastante importante
             this.idFeedbackEditando = -1L;
