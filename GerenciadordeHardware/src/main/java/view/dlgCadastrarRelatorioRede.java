@@ -4,6 +4,7 @@
  */
 package view;
 import controller.ClienteController;
+import controller.InstalacaoRedeController;
 import controller.RelatorioRedeController;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
+import model.InstalacaoRede;
 import utils.Data;
 import model.RelatorioRede;
 import model.Tecnico;
@@ -23,37 +25,41 @@ import utils.SessionManager;
 public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     private String dataRelatorio;
     private ClienteController clienteController;
+    private InstalacaoRedeController instalacaoController;
     Long idRelatorioRedeEditando;
     
-    dlgSelecaoCliente telaSelecaoCliente;
-    dlgSelecaoTecnico telaSelecaoTecnico;
+    dlgSelecaoInstalacaoRede telaSelecaoInstalacaoRede;
     
     Cliente clienteSelecionado;
-    Tecnico tecnicoSelecionado;
+    
+    InstalacaoRede instalacaoRedeRelacionada;
     
     RelatorioRedeController relatorioRedeController;
     /**
      * Creates new form dlgCadastrarRelatorioRede
      */
-    public dlgCadastrarRelatorioRede(java.awt.Dialog parent) {
+    public dlgCadastrarRelatorioRede(java.awt.Dialog parent, Long id) {
         super(parent);
         initComponents();
         this.setModal(true);
+        
+
                 
         dataRelatorio = Data.pegaDataSistema();     
         
         relatorioRedeController = new RelatorioRedeController();
         clienteController = new ClienteController();
+        instalacaoController = new InstalacaoRedeController();
         
         clienteSelecionado = new Cliente();
-        tecnicoSelecionado = new Tecnico();
+        
+        instalacaoRedeRelacionada = new InstalacaoRede();
         
         idRelatorioRedeEditando = -1L;
         
         clienteSelecionado = clienteController.buscarCliente(SessionManager.getId());
-        telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
-
-        relatorioRedeController.atualizarTabela(grdRelatoriosRede);
+        
+        relatorioRedeController.atualizarTabela(grdRelatoriosRede, SessionManager.getId());
     }
 
     /**
@@ -72,6 +78,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         edtDescricao = new view.graphicElements.TextField();
         edtCliente = new view.graphicElements.TextField();
         edtTecnico = new view.graphicElements.TextField();
+        edtInstalacaoRede = new view.graphicElements.TextField();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
@@ -92,6 +99,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
+        edtTipoRede.setEditable(false);
         edtTipoRede.setBackground(new java.awt.Color(20, 20, 20));
         edtTipoRede.setForeground(new java.awt.Color(251, 251, 251));
         edtTipoRede.setLabelText("Tipo de Rede");
@@ -112,7 +120,6 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         edtCliente.setEditable(false);
         edtCliente.setBackground(new java.awt.Color(20, 20, 20));
         edtCliente.setForeground(new java.awt.Color(251, 251, 251));
-        edtCliente.setText("Clique aqui para adicionar um Cliente.");
         edtCliente.setLabelText("Cliente");
         edtCliente.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtCliente.setLineColor(new java.awt.Color(229, 9, 20));
@@ -135,13 +142,25 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         edtTecnico.setEditable(false);
         edtTecnico.setBackground(new java.awt.Color(20, 20, 20));
         edtTecnico.setForeground(new java.awt.Color(251, 251, 251));
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
         edtTecnico.setLabelText("Técnico");
         edtTecnico.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtTecnico.setLineColor(new java.awt.Color(229, 9, 20));
         edtTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 edtTecnicoMouseClicked(evt);
+            }
+        });
+
+        edtInstalacaoRede.setEditable(false);
+        edtInstalacaoRede.setBackground(new java.awt.Color(20, 20, 20));
+        edtInstalacaoRede.setForeground(new java.awt.Color(251, 251, 251));
+        edtInstalacaoRede.setText("Clique aqui para selecionar 1 instalação de Rede.");
+        edtInstalacaoRede.setLabelText("Instalação de Rede");
+        edtInstalacaoRede.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtInstalacaoRede.setLineColor(new java.awt.Color(229, 9, 20));
+        edtInstalacaoRede.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtInstalacaoRedeMouseClicked(evt);
             }
         });
 
@@ -158,12 +177,16 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
                 .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtInstalacaoRede, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPreencherLayout.setVerticalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(edtInstalacaoRede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtTipoRede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +194,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
                 .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         panTodosBotoes.setOpaque(false);
@@ -342,12 +365,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
 
     private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
         // TODO add your handling code here:
-        telaSelecaoTecnico.setVisible(true);
 
-        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
-            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
-            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
-        }
     }//GEN-LAST:event_edtTecnicoMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -403,9 +421,13 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idRelatorioRedeEditando > 0) {
-                relatorioRedeController.atualizarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtTipoRede.getText());
+                relatorioRedeController.atualizarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(),
+                        instalacaoRedeRelacionada.getClienteAtendido(), instalacaoRedeRelacionada.getTecnicoResponsavel(),
+                        edtTipoRede.getText(), instalacaoRedeRelacionada);
             } else {
-                relatorioRedeController.cadastrarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtTipoRede.getText());
+                relatorioRedeController.cadastrarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), 
+                        instalacaoRedeRelacionada.getClienteAtendido(), instalacaoRedeRelacionada.getTecnicoResponsavel(), instalacaoRedeRelacionada.getTipoRede(),
+                        instalacaoRedeRelacionada);
             }
             //Comando bastante importante
             this.idRelatorioRedeEditando = -1L;
@@ -428,6 +450,19 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void edtInstalacaoRedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtInstalacaoRedeMouseClicked
+        // TODO add your handling code here:
+        telaSelecaoInstalacaoRede = new dlgSelecaoInstalacaoRede(this,true);
+        telaSelecaoInstalacaoRede.setVisible(true);
+        if(telaSelecaoInstalacaoRede.getInstalacaoRedeEscolhida() != null){
+            instalacaoRedeRelacionada = telaSelecaoInstalacaoRede.getInstalacaoRedeEscolhida();
+            edtInstalacaoRede.setText("Id: " + instalacaoRedeRelacionada.getId() + ", Descrição: " + instalacaoRedeRelacionada.getDescricaoServico());
+            edtCliente. setText(clienteSelecionado.getNome());
+            edtTecnico.setText(instalacaoRedeRelacionada.getTecnicoResponsavel().getNome());
+            edtTipoRede.setText(instalacaoRedeRelacionada.getTipoRede());
+        }
+    }//GEN-LAST:event_edtInstalacaoRedeMouseClicked
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdRelatoriosRede.getSelectedRow();
         Object obj = null;
@@ -439,9 +474,11 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
 
     private void limparCampos() {
         // Limpa os Edts
+        edtInstalacaoRede.setText("Clique aqui para selecionar 1 instalação de Rede.");
         edtDescricao.setText("");
         edtTipoRede.setText("");
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtCliente.setText(clienteSelecionado.getNome());
+        edtTecnico.setText("");
     }
     
     public void habilitarCampos(boolean flag) {
@@ -453,16 +490,11 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     public void preencherFormulario(RelatorioRede relatorioRede) {
         edtTipoRede.setText(relatorioRede.getTipoRede());
         edtDescricao.setText(relatorioRede.getDescricao());
-        
-        // Obtenha o técnico associado ao ConsertoComputador
-        tecnicoSelecionado = relatorioRede.getTecnico();
 
         // Obtenha o cliente associado ao ConsertoComputador
         clienteSelecionado = relatorioRede.getCliente();
         
-        if (tecnicoSelecionado != null) {
-            edtTecnico.setText(tecnicoSelecionado.getNome() + ".");
-        }
+        edtTecnico.setText(relatorioRede.getTecnico().getNome());
 
         // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
         if (clienteSelecionado != null) {
@@ -478,6 +510,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnNovo;
     private view.graphicElements.TextField edtCliente;
     private view.graphicElements.TextField edtDescricao;
+    private view.graphicElements.TextField edtInstalacaoRede;
     private view.graphicElements.TextField edtTecnico;
     private view.graphicElements.TextField edtTipoRede;
     private view.graphicElements.TableDark grdRelatoriosRede;

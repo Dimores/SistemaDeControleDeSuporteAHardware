@@ -3,37 +3,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.util.Calendar;
 import javax.persistence.*;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
  * @author ruiz
  */
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 public class Relatorio {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRelatorio;
     private String dataRelatorio;
     private String descricao;
-    
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")  // Nome da coluna que faz referência ao cliente na tabela Relatorio
     private Cliente cliente;
-    
+
     @ManyToOne
     @JoinColumn(name = "tecnico_id")  // Nome da coluna que faz referência ao cliente na tabela Relatorio
     private Tecnico tecnico;
+    
+    @ManyToOne
+    @JoinColumn(name = "instalacao_rede_id")
+    private InstalacaoRede instalacaoRede;
 
     public Relatorio() {
         this.dataRelatorio = "";
@@ -49,25 +54,21 @@ public class Relatorio {
         this.cliente = clienteRelacionado;
         this.tecnico = tecnicoResponsavel;
     }
-    
+
     public Relatorio(String dataRelatorio, String descricao, Cliente nomeClienteRelacionado, Tecnico nomeTecnicoResponsavel) {
         this.dataRelatorio = dataRelatorio;
         this.descricao = descricao;
         this.cliente = nomeClienteRelacionado;
         this.tecnico = nomeTecnicoResponsavel;
     }
-    
-    
-
 
     @Override
     public String toString() {
         //String clienteNome = (clienteRelacionado != null) ? getNomeClienteRelacionado() : "N/A";
         //String tecnicoNome = (tecnicoResponsavel != null) ? getNomeTecnicoResponsavel() : "N/A";
 
-        return "ID do Relatório: " + idRelatorio + "\n" +
-                "Data do Relatório: " + dataRelatorio + "\n" +
-                "Descrição: " + descricao;
+        return "ID do Relatório: " + idRelatorio + "\n"
+                + "Data do Relatório: " + dataRelatorio + "\n"
+                + "Descrição: " + descricao;
     }
 }
-

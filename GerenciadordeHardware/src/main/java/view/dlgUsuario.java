@@ -50,7 +50,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaServico = new dlgCadastroServico(this);
         telaDispositivoRede = new dlgCadastrarDispositivoRede(this);
         telaRelatorioManutencao = new dlgCadastrarRelatorioManutencao(this);
-        telaRelatorioRede = new dlgCadastrarRelatorioRede(this);
+        telaRelatorioRede = new dlgCadastrarRelatorioRede(this, SessionManager.getId());
         telaHistoricoCliente = new dlgHistoricoAtendimentosCliente(this,true,SessionManager.getId());
         telaHistoricoGerente = new dlgHistoricoAtendimentosGerente(this, true);
         telaFeed = new dlgTelaFeedBack(this, true);

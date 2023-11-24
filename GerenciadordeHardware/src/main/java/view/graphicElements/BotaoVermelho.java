@@ -19,6 +19,7 @@ public class BotaoVermelho extends JButton {
     public BotaoVermelho() {
         colorOver = new Color(229, 9, 20);
         setContentAreaFilled(false);
+        setFocusPainted(false);
         
         // Add event mouse
         addMouseListener(new MouseAdapter() {

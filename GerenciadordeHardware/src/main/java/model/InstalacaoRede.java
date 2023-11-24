@@ -5,11 +5,13 @@
 package model;
 import lombok.*;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
  
@@ -24,6 +26,9 @@ import javax.persistence.ManyToOne;
 public class InstalacaoRede extends Servico {
     private String tipoRede;
     private String enderecoRede;
+    
+    @OneToMany(mappedBy = "instalacaoRede")
+    private List<Relatorio> relatoriosRede;
 
     public InstalacaoRede() {
         super();

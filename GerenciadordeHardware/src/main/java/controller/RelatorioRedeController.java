@@ -30,25 +30,36 @@ public class RelatorioRedeController {
         repositorio = new RelatorioRedeDAO();
     }
     
-    public void atualizarRelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel, String tipoRede){
+    public void atualizarRelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado,
+            Tecnico tecnicoResponsavel, String tipoRede, InstalacaoRede instalacaoRede){
         RelatorioRedeValidate valid = new RelatorioRedeValidate();
         RelatorioRede novoRelatorioRede = valid.validaCamposEntrada(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel, tipoRede);
 
+        novoRelatorioRede.setInstalacaoRede(instalacaoRede);
         novoRelatorioRede.setIdRelatorio(idRelatorio);
         repositorio.update(novoRelatorioRede);
-        
     }
     
-    public void cadastrarRelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel, String tipoRede){
+    public void cadastrarRelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado,
+            Tecnico tecnicoResponsavel, String tipoRede, InstalacaoRede instalacaoRede){
         RelatorioRedeValidate valid = new RelatorioRedeValidate();
         RelatorioRede novoRelatorioRede = valid.validaCamposEntrada(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel, tipoRede);
 
+        novoRelatorioRede.setInstalacaoRede(instalacaoRede);
+        
         repositorio.save(novoRelatorioRede);
     }
     
     public void atualizarTabela(JTable grd){
         List<Object> lst = repositorio.findByCliente(SessionManager.getId());
 
+        TMRelatorioRede tmRelatorioRede = new TMRelatorioRede(lst);
+        grd.setModel(tmRelatorioRede);
+    }
+    
+    public void atualizarTabela(JTable grd, Long idCliente){
+        List<Object> lst = repositorio.findAllByCliente(idCliente);
+        
         TMRelatorioRede tmRelatorioRede = new TMRelatorioRede(lst);
         grd.setModel(tmRelatorioRede);
     }
