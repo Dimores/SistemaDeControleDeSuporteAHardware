@@ -3,33 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.dao;
+
 import factory.DatabaseJPA;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.*;
 import model.interfaces.IDao;
+
 /**
  *
  * @author ruiz
  */
-public class InstalacaoRedeDAO  implements IDao{
+public class InstalacaoRedeDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
-    
+
     @Override
     public void save(Object obj) {
-        
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.merge(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -55,11 +56,12 @@ public class InstalacaoRedeDAO  implements IDao{
         InstalacaoRede Procurado = (InstalacaoRede) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        InstalacaoRede c = this.entityManager.find(InstalacaoRede.class ,Procurado.getId());
+        InstalacaoRede c = this.entityManager.find(InstalacaoRede.class, Procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
+    
 
     /**
      * Procura produtos por codigodebarras, que é o identificador único
@@ -79,15 +81,13 @@ public class InstalacaoRedeDAO  implements IDao{
         }return (DispositivoDeRede) lst.get(0);
        
     }*/
-
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

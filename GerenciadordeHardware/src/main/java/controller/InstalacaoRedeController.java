@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import model.*;
 import lombok.*;
 import model.dao.InstalacaoRedeDAO;
+import model.dao.ServicoDAO;
 import model.exceptions.InstalacaoRedeException;
 import model.validations.InstalacaoRedeValidate;
 @Getter //constroi os metodos get
@@ -24,9 +25,11 @@ import model.validations.InstalacaoRedeValidate;
  */
 public class InstalacaoRedeController extends ServicoController {
     InstalacaoRedeDAO repositorio;
+    ServicoDAO servicoRepositorio;
     
     public InstalacaoRedeController() {
         repositorio = new InstalacaoRedeDAO();
+        servicoRepositorio = new ServicoDAO();
     }
     
     public void atualizarInstalacaoRede(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
@@ -54,11 +57,26 @@ public class InstalacaoRedeController extends ServicoController {
         repositorio.save(novaInstalacaoRede);
     }
     
-    public void buscarInstalacaoRede(){
-        
+    public InstalacaoRede buscarInstalacaoRedePorCliente(Long idCliente){
+        return (InstalacaoRede) servicoRepositorio.findInstalacaoRedeByCliente(idCliente);
     }
     
+    public InstalacaoRede buscarInstalacaoRedeConcluidaPorCliente(Long idCliente){
+        return (InstalacaoRede) servicoRepositorio.findInstalacaoRedeByCliente(idCliente);
+    }
+    
+    /*public List<InstalacaoRede> buscarInstalacoesRedeConcluidas(){
+        return servicoRepositorio.findAllInstalacaoRedeConcluida();
+    }*/
+    
     @Override
+    public void atualizarTabela(JTable grd, Long id){
+        List<Object> lst = servicoRepositorio.findAllInstalacaoRedeConcluidaPorCliente(id);
+
+        TMInstalacaoRede tmInstalacaoRede = new TMInstalacaoRede(lst); 
+        grd.setModel(tmInstalacaoRede);
+    }
+    
     public void atualizarTabela(JTable grd){
         List<Object> lst = repositorio.findAll();
 

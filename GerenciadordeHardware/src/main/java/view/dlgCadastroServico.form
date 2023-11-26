@@ -136,6 +136,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o Preventiva"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -155,6 +156,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Instala&#xe7;&#xe3;o de Rede"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
@@ -174,6 +176,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Conserto de Computador"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>

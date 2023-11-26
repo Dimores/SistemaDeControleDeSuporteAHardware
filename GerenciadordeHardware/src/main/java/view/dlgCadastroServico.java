@@ -87,6 +87,7 @@ public class dlgCadastroServico extends javax.swing.JDialog {
         btnManutencaoPreventiva.setForeground(new java.awt.Color(251, 251, 251));
         btnManutencaoPreventiva.setText("Manutenção Preventiva");
         btnManutencaoPreventiva.setBorderPainted(false);
+        btnManutencaoPreventiva.setFocusPainted(false);
         btnManutencaoPreventiva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnManutencaoPreventiva.setRadius(40);
         btnManutencaoPreventiva.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +100,7 @@ public class dlgCadastroServico extends javax.swing.JDialog {
         btnInstalacaoRede.setForeground(new java.awt.Color(251, 251, 251));
         btnInstalacaoRede.setText("Instalação de Rede");
         btnInstalacaoRede.setBorderPainted(false);
+        btnInstalacaoRede.setFocusPainted(false);
         btnInstalacaoRede.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInstalacaoRede.setRadius(40);
         btnInstalacaoRede.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +113,7 @@ public class dlgCadastroServico extends javax.swing.JDialog {
         btnConsertoComputador.setForeground(new java.awt.Color(251, 251, 251));
         btnConsertoComputador.setText("Conserto de Computador");
         btnConsertoComputador.setBorderPainted(false);
+        btnConsertoComputador.setFocusPainted(false);
         btnConsertoComputador.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsertoComputador.setRadius(40);
         btnConsertoComputador.addActionListener(new java.awt.event.ActionListener() {

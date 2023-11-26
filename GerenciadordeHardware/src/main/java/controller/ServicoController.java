@@ -47,7 +47,6 @@ public class ServicoController {
         Servico novoServico = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido); 
         novoServico.setId(idServico);
         servico.update(novoServico);
-
     }
     
     public void excluirServico(Servico s){

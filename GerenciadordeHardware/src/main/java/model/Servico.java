@@ -5,6 +5,7 @@
 package model;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +43,8 @@ public class Servico {
     private String dataServico;
     private boolean concluido;
     private boolean isPago;
+    
+    //private String tipo;
 
 
     public Servico() {
