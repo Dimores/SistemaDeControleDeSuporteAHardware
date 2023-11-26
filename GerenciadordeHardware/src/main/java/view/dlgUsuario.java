@@ -55,11 +55,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaHistoricoGerente = new dlgHistoricoAtendimentosGerente(this, true);
         telaFeed = new dlgTelaFeedBack(this, true);
         socilitarServicoCliente = new dlgSolicitarServicoCliente(this, true);
-        try{
-            telaPix = new dlgPix(this, true);     
-        } catch (Exception ex) {
-            Logger.getLogger(dlgUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }
 
@@ -82,6 +77,8 @@ public class dlgUsuario extends javax.swing.JDialog {
                    btnCadastrarCliente.setVisible(false);
                    btnGerarRelatorioManutencao.setVisible(false);
                    btnHistoricoAtendimentoGerente.setVisible(false);
+                   btnRealizarPagamento.setVisible(false);
+                   
             break;
             
             // Tecnico

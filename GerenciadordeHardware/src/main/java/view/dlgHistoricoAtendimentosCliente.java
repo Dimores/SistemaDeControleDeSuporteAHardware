@@ -5,6 +5,10 @@
 package view;
 
 import controller.ServicoController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Servico;
 
 /**
  *
@@ -12,12 +16,18 @@ import controller.ServicoController;
  */
 public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
     ServicoController servicoController ;
+    dlgPix telaPix;
     /**
      * Creates new form dlgHistoricoAtendimentos
      */
     public dlgHistoricoAtendimentosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try {
+            telaPix = new dlgPix(this, modal);
+        } catch (Exception ex) {
+            Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public dlgHistoricoAtendimentosCliente(java.awt.Dialog parent, boolean modal, Long id) {
@@ -25,6 +35,11 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
         initComponents();
         servicoController = new ServicoController();
         servicoController.atualizarTabela(grdHistóricoServico, id);
+        try {
+            telaPix = new dlgPix(this, modal);
+        } catch (Exception ex) {
+            Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -58,6 +73,11 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        grdHistóricoServico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdHistóricoServicoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(grdHistóricoServico);
 
         lblTitulo.setBackground(new java.awt.Color(20, 20, 20));
@@ -114,6 +134,20 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void grdHistóricoServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdHistóricoServicoMouseClicked
+        Servico servicoSelecionado = (Servico) this.getObjetoSelecionadoNaGrid(); 
+        try {
+            if(servicoSelecionado.isPago() == false){
+                telaPix.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Este Serviço já foi pago");
+            } 
+            
+        } catch (Exception e) {
+              Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_grdHistóricoServicoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -126,4 +160,13 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panFundo;
     // End of variables declaration//GEN-END:variables
+
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdHistóricoServico.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdHistóricoServico.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
 }

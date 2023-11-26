@@ -13,28 +13,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.interfaces.IDao;
 
-
 public class ClienteDAO implements IDao {
-    
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     public ClienteDAO() {
-    
+
     }
 
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.persist(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
@@ -59,21 +58,20 @@ public class ClienteDAO implements IDao {
         Cliente clienteProcurado = (Cliente) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        Cliente cliente = this.entityManager.find(Cliente.class ,clienteProcurado.getId());
+        Cliente cliente = this.entityManager.find(Cliente.class, clienteProcurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return cliente;   
+        return cliente;
     }
-    
-   
+
     public Object findbyId(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT u " + "FROM Usuario u Where id = :id";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id",id);
+        qry.setParameter("id", id);
         Object lst = qry.getSingleResult();
         this.entityManager.close();
-        if(lst instanceof Cliente){
+        if (lst instanceof Cliente) {
             return lst;
         }
         return null;
@@ -102,13 +100,12 @@ public class ClienteDAO implements IDao {
     }
 
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -122,6 +119,5 @@ public class ClienteDAO implements IDao {
         this.entityManager.close();
         return true;
     }
-
 
 }
