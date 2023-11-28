@@ -62,7 +62,7 @@ public class InstalacaoRedeDAO implements IDao {
         return c;
     }
     
-
+    
     /**
      * Procura produtos por codigodebarras, que é o identificador único
      *

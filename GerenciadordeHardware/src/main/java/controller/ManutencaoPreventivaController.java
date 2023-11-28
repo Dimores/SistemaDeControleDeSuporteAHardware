@@ -11,6 +11,7 @@ import lombok.*;
 import java.lang.Long;
 import java.util.List;
 import model.dao.ManutencaoPreventivaDAO;
+import model.dao.ServicoDAO;
 import model.exceptions.ManutencaoPreventivaException;
 import model.validations.ManutencaoPreventivaValidate;
 @Getter //constroi os metodos get
@@ -24,9 +25,11 @@ import model.validations.ManutencaoPreventivaValidate;
  */
 public class ManutencaoPreventivaController extends ServicoController{
     ManutencaoPreventivaDAO repositorio;
+    ServicoDAO servicoRepositorio;
     
     public ManutencaoPreventivaController() {
         repositorio = new ManutencaoPreventivaDAO();
+        servicoRepositorio = new ServicoDAO();
     }
 
     
@@ -62,6 +65,14 @@ public class ManutencaoPreventivaController extends ServicoController{
     @Override
     public void atualizarTabela(JTable grd){
         List<Object> lst = repositorio.findAll();
+
+        TMManutencaoPreventiva tmManutencaoPreventiva = new TMManutencaoPreventiva(lst); 
+        grd.setModel(tmManutencaoPreventiva);
+    }
+    
+    @Override
+    public void atualizarTabela(JTable grd, Long id){
+        List<Object> lst = servicoRepositorio.findAllManutencaoPreventivaConcluida();
 
         TMManutencaoPreventiva tmManutencaoPreventiva = new TMManutencaoPreventiva(lst); 
         grd.setModel(tmManutencaoPreventiva);

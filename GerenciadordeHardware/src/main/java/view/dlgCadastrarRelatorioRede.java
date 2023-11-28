@@ -35,6 +35,8 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
     InstalacaoRede instalacaoRedeRelacionada;
     
     RelatorioRedeController relatorioRedeController;
+    
+    Long idInstalacaoRede;
     /**
      * Creates new form dlgCadastrarRelatorioRede
      */
@@ -60,6 +62,8 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         clienteSelecionado = clienteController.buscarCliente(SessionManager.getId());
         
         relatorioRedeController.atualizarTabela(grdRelatoriosRede, SessionManager.getId());
+        
+        
     }
 
     /**
@@ -419,6 +423,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
+        
         try {
             if (idRelatorioRedeEditando > 0) {
                 relatorioRedeController.atualizarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(),
@@ -491,7 +496,7 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         edtTipoRede.setText(relatorioRede.getTipoRede());
         edtDescricao.setText(relatorioRede.getDescricao());
 
-        // Obtenha o cliente associado ao ConsertoComputador
+        // Obtenha o cliente associado ao relatorio de rede
         clienteSelecionado = relatorioRede.getCliente();
         
         edtTecnico.setText(relatorioRede.getTecnico().getNome());
@@ -500,6 +505,9 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         if (clienteSelecionado != null) {
             edtCliente.setText(clienteSelecionado.getNome() + ".");
         }
+        
+        instalacaoRedeRelacionada = relatorioRede.getInstalacaoRede();
+        edtInstalacaoRede.setText("Id: " + instalacaoRedeRelacionada.getId());
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

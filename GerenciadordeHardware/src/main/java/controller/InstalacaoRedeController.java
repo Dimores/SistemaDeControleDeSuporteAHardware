@@ -91,4 +91,8 @@ public class InstalacaoRedeController extends ServicoController {
             throw new InstalacaoRedeException("Error - Instalacao de Rede inexistente."); // Alterado de AlunoException para TecnicoException
         }
     }
+    
+    public InstalacaoRede buscarInstalacaoRede(Long id){
+        return (InstalacaoRede) this.servicoRepositorio.findById(id);   
+    }
 }

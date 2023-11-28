@@ -5,11 +5,13 @@
 package model;
 import lombok.*;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set 
@@ -23,6 +25,10 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("MANUTENCAOPREVENTIVA")
 public class ManutencaoPreventiva extends Servico {
     private String equipamentos;
+    
+    @OneToMany(mappedBy = "manutencaoPreventiva")
+    private List<Relatorio> relatoriosManutencao;
+
 
     public ManutencaoPreventiva() {
         super();

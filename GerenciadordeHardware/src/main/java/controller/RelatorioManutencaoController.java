@@ -30,19 +30,23 @@ public class RelatorioManutencaoController {
         repositorio = new RelatorioManutencaoDAO();
     }
     
-    public void atualizarRelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel, String equipamentos){
+    public void atualizarRelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, 
+            Tecnico tecnicoResponsavel, String equipamentos, ManutencaoPreventiva manutencaoPreventiva){
         RelatorioManutencaoValidate valid = new RelatorioManutencaoValidate();
         RelatorioManutencao novoRelatorioManutencao = valid.validaCamposEntrada(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel, equipamentos);
 
         novoRelatorioManutencao.setIdRelatorio(idRelatorio);
+        novoRelatorioManutencao.setManutencaoPreventiva(manutencaoPreventiva);
         repositorio.update(novoRelatorioManutencao);
         
     }
     
-    public void cadastrarRelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, Tecnico tecnicoResponsavel, String equipamentos){
+    public void cadastrarRelatorioManutencao(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado, 
+            Tecnico tecnicoResponsavel, String equipamentos, ManutencaoPreventiva manutencaoPreventiva){
         RelatorioManutencaoValidate valid = new RelatorioManutencaoValidate();
         RelatorioManutencao novoRelatorioManutencao = valid.validaCamposEntrada(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel, equipamentos);
 
+        novoRelatorioManutencao.setManutencaoPreventiva(manutencaoPreventiva);
         repositorio.save(novoRelatorioManutencao);
     }
     
