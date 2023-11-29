@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+
 import controller.tableModel.TMCadCabo;
 import java.awt.Color;
 import java.util.List;
@@ -13,71 +14,73 @@ import model.Cabo;
 import model.dao.CaboDAO;
 import model.exceptions.CaboException;
 import model.validations.CaboValidate;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
-
-
+@ToString
 
 /**
  *
  * @author ruiz
  */
 public class CaboController extends PecaController {
+    
     CaboDAO repositorio;
     //CaboExemplar caboExemplar;
     Cabo novoCabo;
     
-    public CaboController(){
+    public CaboController() {
         repositorio = new CaboDAO();
         //caboExemplar = new CaboExemplar();
     }
     
     @Override
-    public void atualizarTabela(JTable grd){
+    public void atualizarTabela(JTable grd) {
         List<Object> lst = repositorio.findAll();
         TMCadCabo tmCabo = new TMCadCabo(lst);
         grd.setModel(tmCabo);
     }
     
-    public void cadastrarCabo(Long id, String codigo, String nome, String descricao, double preco, 
-            int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo){
-        CaboValidate valid = new CaboValidate(); 
+    public void cadastrarCabo(Long id, String codigo, String nome, String descricao, double preco,
+            int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo) {
+        CaboValidate valid = new CaboValidate();
         novoCabo = valid.validaCamposEntrada(id, codigo, nome, descricao, preco,
-            estoque, categoria, dataFabricacao, comprimento, cor, bitola, tipoDeCabo); 
+                estoque, categoria, dataFabricacao, comprimento, cor, bitola, tipoDeCabo);
         
-        if(repositorio.findByCodigo(codigo) == null){
+        if (repositorio.findByCodigo(codigo) == null) {
             repositorio.save(novoCabo);
-        }else{
-             throw new CaboException("Error - Já existe um cabo com este 'Codigo'.");
+        } else {
+            throw new CaboException("Error - Já existe um cabo com este 'Codigo'.");
         }
         
     }
     
-    public void atualizarCabo(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
-        /*PecaValidate valid = new PecaValidate(); 
-        Peca novaPeca = valid.validaCamposEntrada(idPeca, codigo,  nome, descricao, preco, estoque, categoria, dataFabricacao); 
-        novaPeca.setId(idPeca); 
+    public void atualizarCabo(Long id, String codigo, String nome, String descricao, double preco,
+            int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo) {
         
-        repositorio.update(novaPeca);*/
+        CaboValidate valid = new CaboValidate();
+        novoCabo = valid.validaCamposEntrada(id, codigo, nome, descricao, preco,
+                estoque, categoria, dataFabricacao, comprimento, cor, bitola, tipoDeCabo);
+        
+        novoCabo.setId(id);
+        repositorio.update(novoCabo);
     }
     
-    public void excluirCabo(Cabo cabo){
-        /*if (peca != null) {
-            repositorio.delete(peca);
+    public void excluirCabo(Cabo cabo) {
+        if (cabo != null) {
+            repositorio.delete(cabo);
         } else {
-            throw new PecaException("Error - Peca inexistente."); // Alterado de AlunoException para TecnicoException
-        }*/
+            throw new CaboException("Error - Cabo inexistente."); 
+        }
     }
     
-    public void diminuirEstoque(Cabo cabo){
+    public void diminuirEstoque(Cabo cabo) {
         /*int estoque = peca.getEstoque();
         peca.setEstoque(estoque - 1);
         repositorio.update(peca);*/
     }
-   
-    
+
     // Métodos para lidar com PecaExemplar
     public void cadastrarExemplarCabo(Long idExemplar, String codigo, String nome, String descricao, double preco,
             int estoque, String categoria, String dataFabricacao) {
@@ -97,9 +100,7 @@ public class CaboController extends PecaController {
     }
     
     public Cabo buscarCabo(Long id) {
-        return (Cabo) this.repositorio.findById(id);   
+        return (Cabo) this.repositorio.findById(id);
     }
-
-
     
 }

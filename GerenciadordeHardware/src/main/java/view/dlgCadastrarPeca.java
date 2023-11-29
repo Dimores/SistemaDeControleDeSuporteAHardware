@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
+import model.Cabo;
 import model.Peca;
 import model.exceptions.CaboException;
 import model.exceptions.PecaException;
@@ -28,7 +29,7 @@ import model.exceptions.PecaException;
  * @author diego
  */
 public class dlgCadastrarPeca extends javax.swing.JDialog {
-    
+
     PecaController pecaController;
     CaboController caboController;
     PecaExemplarController exemplarController;
@@ -459,61 +460,103 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edtNomeActionPerformed
-    
+
     private void inicializarTela() {
         this.habilitarCampos(true); // Configura a visibilidade para true
         this.habilitarCamposCabo(true);
         this.habilitarCampos(false); // Atualiza novamente para false
         this.habilitarCamposCabo(false);
     }
-    
+
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         canEditStock = false;
-        
-        Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
-        
-        if (pecaEditando == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-            this.limparCampos();
-            this.habilitarCampos(true);
-            this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = pecaEditando.getId();
+
+        if (tipoPeca.equals("Generica")) {
+            Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
+
+            if (pecaEditando == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+                this.limparCampos();
+                this.habilitarCampos(true);
+                this.preencherFormulario(pecaEditando);
+                this.idPecaEditando = pecaEditando.getId();
+            }
+        } else {
+            Cabo caboEditando = (Cabo) this.getObjetoSelecionadoNaGrid();
+
+            if (caboEditando == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+                this.limparCampos();
+                this.habilitarCampos(true);
+                this.preencherFormularioCabo(caboEditando);
+                this.idCaboEditando = caboEditando.getId();
+            }
         }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
-        
-        if (pecaExcluida == null) {
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        } else {
-            
-            int response = JOptionPane.showConfirmDialog(null,
-                    "Deseja exlcuir a Peca  \n("
-                    + pecaExcluida.getNome() + ", "
-                    + pecaExcluida.getCodigo() + ") ?",
-                    "Confirmar exclusão",
-                    JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.OK_OPTION) {
-                try {
-                    System.out.println(pecaExcluida.getEstoque());
-                    if (pecaExcluida.getEstoque() == 0) {
-                        pecaController.excluirPeca(pecaExcluida);
-                    } else {
-                        exemplarController.excluirExemplarPeca(pecaExcluida);
-                        exemplarController.atualizarEstoquePeca(pecaExcluida);
+        if (tipoPeca.equals("Generica")) {
+            Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+
+            if (pecaExcluida == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+
+                int response = JOptionPane.showConfirmDialog(null,
+                        "Deseja exlcuir a Peca  \n("
+                        + pecaExcluida.getNome() + ", "
+                        + pecaExcluida.getCodigo() + ") ?",
+                        "Confirmar exclusão",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.OK_OPTION) {
+                    try {
+                        System.out.println(pecaExcluida.getEstoque());
+                        if (pecaExcluida.getEstoque() == 0) {
+                            pecaController.excluirPeca(pecaExcluida);
+                        } else {
+                            exemplarController.excluirExemplarPeca(pecaExcluida);
+                            exemplarController.atualizarEstoquePeca(pecaExcluida);
+                        }
+
+                        pecaController.atualizarTabela(grdPecas);
+                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                    } catch (PecaException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
                     }
-                    
-                    pecaController.atualizarTabela(grdPecas);
-                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                } catch (PecaException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
             }
-        }          // TODO add your handling code here:
+        } else {
+            Cabo caboExcluido = (Cabo) this.getObjetoSelecionadoNaGrid();
+
+            if (caboExcluido == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+
+                int response = JOptionPane.showConfirmDialog(null,
+                        "Deseja exlcuir o Cabo  \n("
+                        + caboExcluido.getNome() + ", "
+                        + caboExcluido.getCodigo() + ") ?",
+                        "Confirmar exclusão",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.OK_OPTION) {
+                    try {
+                        caboController.excluirCabo(caboExcluido);
+                        caboController.atualizarTabela(grdPecas);
+                        
+                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                    } catch (PecaException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
+                    }
+                }
+            }
+        }
+
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -523,7 +566,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         this.limparCampos();
         this.habilitarCampos(false);
         this.habilitarCamposCabo(false);
-        canEditStock = true;        
+        canEditStock = true;
         if (tipoPeca.equals("Generica")) {
             pecaController.atualizarTabela(grdPecas);
         } else {
@@ -543,25 +586,26 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 }
                 //Comando bastante importante
                 this.idPecaEditando = -1L;
-                
+
                 pecaController.atualizarTabela(grdPecas);
-                
+
                 this.habilitarCampos(false);
                 this.limparCampos();
-                
+
             } catch (PecaException e) {
                 System.err.println(e.getMessage());
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (Exception ex) {
                 Logger.getLogger(dlgCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
             try {
                 if (idCaboEditando > 0) {
-                    caboController.atualizarCabo(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(),
+                    caboController.atualizarCabo(idCaboEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(),
                             Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()),
-                            edtCategoria.getText(), fEdtDataFabricacao.getText());
+                            edtCategoria.getText(), fEdtDataFabricacao.getText(), Integer.parseInt(edtComprimento.getText()), corDoCabo,
+                            Integer.parseInt(edtBitola.getText()), edtTipoCabo.getText());
                     //exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
                 } else {
                     caboController.cadastrarCabo(idCaboEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(),
@@ -572,13 +616,13 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 }
                 //Comando bastante importante
                 this.idCaboEditando = -1L;
-                
+
                 caboController.atualizarTabela(grdPecas);
-                
+
                 this.habilitarCampos(false);
                 this.habilitarCamposCabo(false);
                 this.limparCampos();
-                
+
             } catch (CaboException e) {
                 System.err.println(e.getMessage());
                 JOptionPane.showMessageDialog(this, e.getMessage());
@@ -610,6 +654,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
     private void cbxTipoPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoPecaActionPerformed
         // TODO add your handling code here:
+        this.limparCampos();
         if (cbxTipoPeca.getSelectedIndex() == 0) {
             tipoPeca = "Generica";
             this.habilitarCamposCabo(false);
@@ -661,7 +706,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             edtCor.setText(rgbString);
         }
     }//GEN-LAST:event_edtCorMouseClicked
-    
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdPecas.getSelectedRow();
         Object obj = null;
@@ -670,7 +715,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public void preencherFormulario(Peca peca) {
         edtNome.setText(peca.getNome());
         edtCategoria.setText(peca.getCategoria());
@@ -679,22 +724,46 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtPreco.setText(String.valueOf(peca.getPreco()));
         edtDescricao.setText(peca.getDescricao());
         fEdtDataFabricacao.setText(peca.getDataFabricacao());
-        
     }
-    
+
+    public void preencherFormularioCabo(Cabo cabo) {
+        edtNome.setText(cabo.getNome());
+        edtCategoria.setText(cabo.getCategoria());
+        edtCodigo.setText(cabo.getCodigo());
+        edtEstoque.setText(String.valueOf(cabo.getEstoque()));
+        edtPreco.setText(String.valueOf(cabo.getPreco()));
+        edtDescricao.setText(cabo.getDescricao());
+        fEdtDataFabricacao.setText(cabo.getDataFabricacao());
+        edtComprimento.setText(String.valueOf(cabo.getComprimento()));
+        edtBitola.setText(String.valueOf(cabo.getBitola()));
+        edtTipoCabo.setText(cabo.getTipoDeCabo());
+
+        // Obtém o valor RGB da cor selecionada
+        int rgb = cabo.getCor().getRGB();
+
+        // Converte o valor RGB para uma string no formato "RGB[r, g, b]"
+        String rgbString = String.format("RGB[%d, %d, %d]",
+                (rgb >> 16) & 0xFF,
+                (rgb >> 8) & 0xFF,
+                rgb & 0xFF);
+
+        // Atualiza o texto do componente edtCor com o valor RGB
+        edtCor.setText(rgbString);
+    }
+
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
         }
     }
-    
+
     public void habilitarCamposCabo(boolean flag) {
         for (int i = 0; i < panCabo.getComponents().length; i++) {
             panCabo.getComponent(i).setVisible(flag);
         }
         separatorCabo.setVisible(flag);
     }
-    
+
     private void limparCampos() {
         edtCategoria.setText("");
         edtCodigo.setText("");
@@ -708,7 +777,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtBitola.setText("");
         edtTipoCabo.setText("");
     }
-    
+
     private void adicionarMascaranosCampos() {
         try {
             MaskFormatter dataFabric = new MaskFormatter("##/##/####");
@@ -716,7 +785,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         } catch (ParseException ex) {
             //Logger.getLogger(IntCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
 
