@@ -34,7 +34,8 @@ public class Cabo extends Peca {
         this.tipoDeCabo = "";
     }
 
-    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo, boolean isPago) {
+    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, 
+            String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo, boolean isPago) {
         super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.comprimento = comprimento;
         this.cor = cor;
@@ -65,7 +66,7 @@ public class Cabo extends Peca {
     }
 
     public String atributoToCSV() {
-        return super.atributoToCSV() + this.comprimento + ";" + this.cor.getRGB() + ";" + this.bitola + ";" + this.tipoDeCabo + "\n";
+        return super.atributoToCSV() + this.comprimento + ";" + this.cor + ";" + this.bitola + ";" + this.tipoDeCabo + "\n";
     }
 
     public void CSVToAtributo(String csv) {
