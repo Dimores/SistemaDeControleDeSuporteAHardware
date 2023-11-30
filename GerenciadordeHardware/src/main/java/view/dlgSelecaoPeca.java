@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Peca;
 import model.exceptions.PecaException;
-
+import controller.PecaExemplarController;
 /**
  *
  * @author diego
@@ -18,6 +18,7 @@ import model.exceptions.PecaException;
 public class dlgSelecaoPeca extends javax.swing.JDialog {
     List<Peca> pecasSelecionadas;
     PecaController pecaController;
+    PecaExemplarController exemplar;
     /**
      * Creates new form dlgSelecaoPeca
      */
@@ -26,6 +27,7 @@ public class dlgSelecaoPeca extends javax.swing.JDialog {
         initComponents();
         pecaController = new PecaController();
         pecaController.atualizarTabela(grdPecas);
+        exemplar = new PecaExemplarController();
     }
 
     /**
@@ -136,6 +138,10 @@ public class dlgSelecaoPeca extends javax.swing.JDialog {
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
+                    for (int i = 0; i< pecasSelecionadas.size(); i++){
+                        exemplar.excluirExemplarPeca(pecasSelecionadas.get(i));
+                        exemplar.atualizarEstoquePeca(pecasSelecionadas.get(i));
+                    }
                     this.dispose();
                 } catch (PecaException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
