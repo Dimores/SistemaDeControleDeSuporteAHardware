@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import lombok.*;
 import model.*;
 import model.dao.RelatorioRedeDAO;
+import model.dao.ServicoDAO;
 import model.exceptions.RelatorioRedeException;
 import model.validations.RelatorioRedeValidate;
 import utils.SessionManager;
@@ -25,9 +26,11 @@ import utils.SessionManager;
  */
 public class RelatorioRedeController {
     RelatorioRedeDAO repositorio;
+    ServicoDAO servicoRepositorio;
     
     public RelatorioRedeController() {
         repositorio = new RelatorioRedeDAO();
+        servicoRepositorio = new ServicoDAO();
     }
     
     public void atualizarRelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, Cliente clienteRelacionado,
@@ -71,4 +74,6 @@ public class RelatorioRedeController {
             throw new RelatorioRedeException("Error - Relatorio de Manutencao inexistente."); 
         }
     }
+    
+
 }

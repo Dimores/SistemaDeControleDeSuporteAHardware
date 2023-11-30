@@ -84,6 +84,18 @@ private EntityManager entityManager;
 
     }
 
+    public Object findbyId(Long id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Usuario u Where id = :id";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id",id);
+        Object lst = qry.getSingleResult();
+        this.entityManager.close();
+        if(lst instanceof Tecnico){
+            return lst;
+        }
+        return null;
+    }
 
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se

@@ -6,11 +6,8 @@ import model.Peca;
 
 public class TMCadPeca extends AbstractTableModel {
 
-
-
     private List<Object> lista;
-    private Object peca;
-    
+    private Object peca; 
 
     //private final int COL_ID = 0;
     private final int COL_NOME = 0;

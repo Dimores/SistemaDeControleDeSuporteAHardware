@@ -4,7 +4,9 @@
  */
 package view;
 
+import controller.ManutencaoPreventivaController;
 import controller.RelatorioManutencaoController;
+import controller.TecnicoController;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,10 +14,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
+import model.ManutencaoPreventiva;
 import utils.Data;
 import model.RelatorioManutencao;
 import model.Tecnico;
 import model.exceptions.RelatorioManutencaoException;
+import utils.SessionManager;
 
 /**
  *
@@ -25,11 +29,12 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     private String dataRelatorio;
     Long idManutencaoEditando;
     
-    dlgSelecaoCliente telaSelecaoCliente;
-    dlgSelecaoTecnico telaSelecaoTecnico;
+    ManutencaoPreventiva manutencaoPreventivaRelacionada;
     
-    Cliente clienteSelecionado;
-    Tecnico tecnicoSelecionado;
+    private TecnicoController tecnicoController;
+    private ManutencaoPreventivaController manutencaoController;
+    
+    dlgSelecaoManutencaoPreventiva telaSelecaoManutencaoPreventiva;
     
     RelatorioManutencaoController relatorioManutencaoController;
     /**
@@ -42,16 +47,16 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         dataRelatorio = Data.pegaDataSistema();   
         
         relatorioManutencaoController = new RelatorioManutencaoController();
-        
-        clienteSelecionado = new Cliente();
-        tecnicoSelecionado = new Tecnico();
+        tecnicoController = new TecnicoController();
+        manutencaoController = new ManutencaoPreventivaController();
+              
+        manutencaoPreventivaRelacionada = new ManutencaoPreventiva();
         
         idManutencaoEditando = -1L;
-        
-        telaSelecaoCliente = new dlgSelecaoCliente(this, true);
-        telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
-        
+                
         relatorioManutencaoController.atualizarTabela(grdRelatoriosManutencao);
+        
+        //edtTecnico.setText(tecnicoSelecionado.getNome());
     }
 
     /**
@@ -70,6 +75,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         edtDescricao = new view.graphicElements.TextField();
         edtCliente = new view.graphicElements.TextField();
         edtTecnico = new view.graphicElements.TextField();
+        edtManutencaoPreventiva = new view.graphicElements.TextField();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
@@ -90,6 +96,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
+        edtEquipamentos.setEditable(false);
         edtEquipamentos.setBackground(new java.awt.Color(20, 20, 20));
         edtEquipamentos.setForeground(new java.awt.Color(251, 251, 251));
         edtEquipamentos.setLabelText("Equipamentos");
@@ -110,7 +117,6 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         edtCliente.setEditable(false);
         edtCliente.setBackground(new java.awt.Color(20, 20, 20));
         edtCliente.setForeground(new java.awt.Color(251, 251, 251));
-        edtCliente.setText("Clique aqui para adicionar um Cliente.");
         edtCliente.setLabelText("Cliente");
         edtCliente.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtCliente.setLineColor(new java.awt.Color(229, 9, 20));
@@ -133,13 +139,25 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         edtTecnico.setEditable(false);
         edtTecnico.setBackground(new java.awt.Color(20, 20, 20));
         edtTecnico.setForeground(new java.awt.Color(251, 251, 251));
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
         edtTecnico.setLabelText("Técnico");
         edtTecnico.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtTecnico.setLineColor(new java.awt.Color(229, 9, 20));
         edtTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 edtTecnicoMouseClicked(evt);
+            }
+        });
+
+        edtManutencaoPreventiva.setEditable(false);
+        edtManutencaoPreventiva.setBackground(new java.awt.Color(20, 20, 20));
+        edtManutencaoPreventiva.setForeground(new java.awt.Color(251, 251, 251));
+        edtManutencaoPreventiva.setText("Clique aqui para selecionar 1 Manutenção Preventiva.");
+        edtManutencaoPreventiva.setLabelText("Manutenção Preventiva");
+        edtManutencaoPreventiva.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtManutencaoPreventiva.setLineColor(new java.awt.Color(229, 9, 20));
+        edtManutencaoPreventiva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtManutencaoPreventivaMouseClicked(evt);
             }
         });
 
@@ -156,12 +174,16 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
                 .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtManutencaoPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPreencherLayout.setVerticalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(edtManutencaoPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +191,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
                 .addComponent(edtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         panTodosBotoes.setOpaque(false);
@@ -331,12 +353,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
 
     private void edtClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMousePressed
         // TODO add your handling code here:
-        telaSelecaoCliente.setVisible(true);
 
-        if(telaSelecaoCliente.getClienteEscolhido() != null){
-            edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
-            clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
-        }
 
     }//GEN-LAST:event_edtClienteMousePressed
 
@@ -346,13 +363,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     }//GEN-LAST:event_edtClienteActionPerformed
 
     private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
-        // TODO add your handling code here:
-        telaSelecaoTecnico.setVisible(true);
 
-        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
-            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
-            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
-        }
 
     }//GEN-LAST:event_edtTecnicoMouseClicked
 
@@ -411,9 +422,15 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idManutencaoEditando > 0) {
-                relatorioManutencaoController.atualizarRelatorioManutencao(idManutencaoEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtEquipamentos.getText());
+                relatorioManutencaoController.atualizarRelatorioManutencao(idManutencaoEditando, dataRelatorio, 
+                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(), 
+                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(), 
+                        edtEquipamentos.getText(), manutencaoPreventivaRelacionada);
             } else {
-                relatorioManutencaoController.cadastrarRelatorioManutencao(idManutencaoEditando, dataRelatorio, edtDescricao.getText(), clienteSelecionado, tecnicoSelecionado, edtEquipamentos.getText());
+                relatorioManutencaoController.cadastrarRelatorioManutencao(idManutencaoEditando, dataRelatorio, 
+                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(), 
+                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(), 
+                        edtEquipamentos.getText(), manutencaoPreventivaRelacionada);
             }
             //Comando bastante importante
             this.idManutencaoEditando = -1L;
@@ -436,6 +453,19 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void edtManutencaoPreventivaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtManutencaoPreventivaMouseClicked
+        // TODO add your handling code here:
+        telaSelecaoManutencaoPreventiva = new dlgSelecaoManutencaoPreventiva(this, true);
+        telaSelecaoManutencaoPreventiva.setVisible(true);
+        if(telaSelecaoManutencaoPreventiva.getManutencaoPreventivaEscolhida() != null){
+            manutencaoPreventivaRelacionada = telaSelecaoManutencaoPreventiva.getManutencaoPreventivaEscolhida();
+            edtManutencaoPreventiva.setText("Id: " + manutencaoPreventivaRelacionada.getId() + ", Descrição: " + manutencaoPreventivaRelacionada.getDescricaoServico());
+            edtCliente.setText(manutencaoPreventivaRelacionada.getClienteAtendido().getNome());
+            edtTecnico.setText(manutencaoPreventivaRelacionada.getTecnicoResponsavel().getNome());
+            edtEquipamentos.setText(manutencaoPreventivaRelacionada.getEquipamentos());
+        }
+    }//GEN-LAST:event_edtManutencaoPreventivaMouseClicked
+
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
@@ -444,10 +474,11 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     
     private void limparCampos() {
         // Limpa os Edts
+        edtManutencaoPreventiva.setText("Clique aqui para selecionar 1 Manutenção Preventiva.");
         edtDescricao.setText("");
         edtEquipamentos.setText("");
-        edtCliente.setText("Clique aqui para adicionar um Cliente.");
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtCliente.setText("");
+        edtTecnico.setText("");
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -462,21 +493,13 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     public void preencherFormulario(RelatorioManutencao relatorioManutencao) {
         edtEquipamentos.setText(relatorioManutencao.getEquipamentos());
         edtDescricao.setText(relatorioManutencao.getDescricao());
-        
-        // Obtenha o técnico associado ao ConsertoComputador
-        tecnicoSelecionado = relatorioManutencao.getTecnico();
 
         // Obtenha o cliente associado ao ConsertoComputador
-        clienteSelecionado = relatorioManutencao.getCliente();
+        edtCliente.setText(relatorioManutencao.getCliente().getNome());
+        edtTecnico.setText(relatorioManutencao.getTecnico().getNome());
         
-        if (tecnicoSelecionado != null) {
-            edtTecnico.setText(tecnicoSelecionado.getNome() + ".");
-        }
-
-        // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
-        if (clienteSelecionado != null) {
-            edtCliente.setText(clienteSelecionado.getNome() + ".");
-        }
+        manutencaoPreventivaRelacionada = relatorioManutencao.getManutencaoPreventiva();
+        edtManutencaoPreventiva.setText("Id: " + manutencaoPreventivaRelacionada.getId());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -488,6 +511,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     private view.graphicElements.TextField edtCliente;
     private view.graphicElements.TextField edtDescricao;
     private view.graphicElements.TextField edtEquipamentos;
+    private view.graphicElements.TextField edtManutencaoPreventiva;
     private view.graphicElements.TextField edtTecnico;
     private view.graphicElements.TableDark grdRelatoriosManutencao;
     private javax.swing.JScrollPane jScrollPane3;

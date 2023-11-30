@@ -58,6 +58,10 @@ public class TecnicoController  extends UsuarioController{
     public Tecnico buscarTecnico(String email) { // Alterado de buscarAluno para buscarTecnico
         return (Tecnico) this.repositorio.findByEmail(email); // Alterado de Aluno para Tecnico
     }
+    
+    public Tecnico buscarTecnico(Long id) {
+        return (Tecnico) this.repositorio.findbyId(id);   
+    }
 
     public void atualizarTabela(JTable grd) { // Alterado de atualizarTabela para atualizarTabela
         List<Object> lst = repositorio.findAll();

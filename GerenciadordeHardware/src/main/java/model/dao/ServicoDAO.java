@@ -98,7 +98,7 @@ public class ServicoDAO implements IDao {
 
     public List<Object> findAllInstalacaoRedeConcluidaPorCliente(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = "SELECT u FROM Servico u WHERE cliente_id = :id AND tipo = 'INSTALACAOREDE'";
+        jpql = "SELECT u FROM Servico u WHERE cliente_id = :id AND tipo = 'INSTALACAOREDE' AND concluido = 1";
         qry = this.entityManager.createQuery(jpql, Servico.class);
         qry.setParameter("id", id);
         List lst = qry.getResultList();
@@ -107,6 +107,15 @@ public class ServicoDAO implements IDao {
         return lst;
     }
 
+    public Object findById(Long id){
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u " + "FROM Servico u Where id = :id";
+        qry = this.entityManager.createQuery(jpql);
+        qry.setParameter("id",id);
+        Object lst = qry.getSingleResult();
+        this.entityManager.close();
+        return lst;
+    }
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
      * remove ele da lstCliente.
@@ -127,4 +136,16 @@ public class ServicoDAO implements IDao {
         this.entityManager.close();
         return true;
     }
+
+    public List<Object> findAllManutencaoPreventivaConcluida() {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = " SELECT u FROM Servico u WHERE tipo = 'MANUTENCAOPREVENTIVA' AND concluido = 1";
+        qry = this.entityManager.createQuery(jpql);
+        List lst = qry.getResultList();
+        this.entityManager.close();
+
+        return lst;
+    }
+
+
 }

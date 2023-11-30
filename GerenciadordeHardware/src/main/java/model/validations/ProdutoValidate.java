@@ -13,7 +13,9 @@ import model.exceptions.ProdutoException;
  */
 public class ProdutoValidate {
 
-    public Produto validaCamposEntrada(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
+    public Produto validaCamposEntrada(Long id, String codigo, String nome, String descricao, 
+            double preco, int estoque, String categoria, String dataFabricacao){
+        
         Produto produto = new Produto();
         
         if(codigo.isBlank()){

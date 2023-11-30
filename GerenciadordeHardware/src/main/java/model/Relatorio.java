@@ -39,6 +39,11 @@ public class Relatorio {
     @ManyToOne
     @JoinColumn(name = "instalacao_rede_id")
     private InstalacaoRede instalacaoRede;
+    
+    @ManyToOne
+    @JoinColumn(name = "manutencao_preventiva_id")
+    private ManutencaoPreventiva manutencaoPreventiva;
+
 
     public Relatorio() {
         this.dataRelatorio = "";

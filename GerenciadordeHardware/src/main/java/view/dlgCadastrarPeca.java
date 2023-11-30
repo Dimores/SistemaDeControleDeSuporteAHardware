@@ -4,17 +4,24 @@
  */
 package view;
 
+import controller.CaboController;
 import controller.PecaController;
 import controller.PecaExemplarController;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
+import model.Cabo;
 import model.Peca;
+import model.exceptions.CaboException;
 import model.exceptions.PecaException;
 
 /**
@@ -22,10 +29,15 @@ import model.exceptions.PecaException;
  * @author diego
  */
 public class dlgCadastrarPeca extends javax.swing.JDialog {
-        PecaController pecaController;
-        PecaExemplarController exemplarController;
-        Long idPecaEditando;
-        private boolean canEditStock;
+
+    PecaController pecaController;
+    CaboController caboController;
+    PecaExemplarController exemplarController;
+    Long idPecaEditando;
+    Long idCaboEditando;
+    private boolean canEditStock;
+    private String tipoPeca = "Generica";
+    private Color corDoCabo;
 
     /**
      * Creates new form dlgCadastroServico
@@ -34,12 +46,23 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         super(parent);
         pecaController = new PecaController();
         exemplarController = new PecaExemplarController();
+        caboController = new CaboController();
         idPecaEditando = -1L;
+        idCaboEditando = -1L;
         initComponents();
         this.setModal(true);
         this.adicionarMascaranosCampos();
         pecaController.atualizarTabela(grdPecas);
         canEditStock = true;
+        corDoCabo = new Color(20, 20, 20);
+
+        // Adiciona um ComponentListener para monitorar quando o Dialog está visível
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                inicializarTela();
+            }
+        });
     }
 
     /**
@@ -61,6 +84,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtEstoque = new view.graphicElements.TextField();
         edtCategoria = new view.graphicElements.TextField();
         edtDescricao = new view.graphicElements.TextField();
+        cbxTipoPeca = new view.graphicElements.ComboBoxSuggestion();
         panTodosBotoes = new javax.swing.JPanel();
         btnEditar = new view.graphicElements.BotaoVermelho();
         btnExcluir = new view.graphicElements.BotaoVermelho();
@@ -69,6 +93,12 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnNovo = new view.graphicElements.BotaoVermelho();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdPecas = new view.graphicElements.TableDark();
+        panCabo = new javax.swing.JPanel();
+        edtComprimento = new view.graphicElements.TextField();
+        edtCor = new view.graphicElements.TextField();
+        edtBitola = new view.graphicElements.TextField();
+        edtTipoCabo = new view.graphicElements.TextField();
+        separatorCabo = new javax.swing.JSeparator();
 
         setResizable(false);
 
@@ -135,27 +165,43 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtDescricao.setLabelTextColor(new java.awt.Color(251, 251, 251));
         edtDescricao.setLineColor(new java.awt.Color(229, 9, 20));
 
+        cbxTipoPeca.setBackground(new java.awt.Color(20, 20, 20));
+        cbxTipoPeca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Peça Genérica", "Cabo" }));
+        cbxTipoPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTipoPecaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panPreencherLayout = new javax.swing.GroupLayout(panPreencher);
         panPreencher.setLayout(panPreencherLayout);
         panPreencherLayout.setHorizontalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+            .addGroup(panPreencherLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(edtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fEdtDataFabricacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtCategoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                        .addGroup(panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(edtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fEdtDataFabricacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(edtCategoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(edtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(edtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(edtPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panPreencherLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(222, 222, 222))
                     .addGroup(panPreencherLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(222, 222, 222))
+                        .addComponent(cbxTipoPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panPreencherLayout.setVerticalGroup(
             panPreencherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPreencherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbxTipoPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +215,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 .addComponent(fEdtDataFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         panTodosBotoes.setOpaque(false);
@@ -178,7 +224,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnEditar.setForeground(new java.awt.Color(251, 251, 251));
         btnEditar.setText("Editar");
         btnEditar.setBorderPainted(false);
-        btnEditar.setFocusPainted(false);
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEditar.setRadius(40);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +236,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnExcluir.setForeground(new java.awt.Color(251, 251, 251));
         btnExcluir.setText("Excluir");
         btnExcluir.setBorderPainted(false);
-        btnExcluir.setFocusPainted(false);
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnExcluir.setRadius(40);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +248,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnCancelar.setForeground(new java.awt.Color(251, 251, 251));
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorderPainted(false);
-        btnCancelar.setFocusPainted(false);
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setRadius(40);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +260,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnConfirmar.setForeground(new java.awt.Color(251, 251, 251));
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setBorderPainted(false);
-        btnConfirmar.setFocusPainted(false);
         btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmar.setRadius(40);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +272,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         btnNovo.setForeground(new java.awt.Color(251, 251, 251));
         btnNovo.setText("Novo");
         btnNovo.setBorderPainted(false);
-        btnNovo.setFocusPainted(false);
         btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNovo.setRadius(40);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -288,23 +329,111 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(grdPecas);
 
+        panCabo.setBackground(new java.awt.Color(255, 0, 102));
+        panCabo.setOpaque(false);
+
+        edtComprimento.setBackground(new java.awt.Color(20, 20, 20));
+        edtComprimento.setForeground(new java.awt.Color(251, 251, 251));
+        edtComprimento.setLabelText("Comprimento");
+        edtComprimento.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtComprimento.setLineColor(new java.awt.Color(229, 9, 20));
+        edtComprimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtComprimentoActionPerformed(evt);
+            }
+        });
+
+        edtCor.setEditable(false);
+        edtCor.setBackground(new java.awt.Color(20, 20, 20));
+        edtCor.setForeground(new java.awt.Color(251, 251, 251));
+        edtCor.setLabelText("Cor");
+        edtCor.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtCor.setLineColor(new java.awt.Color(229, 9, 20));
+        edtCor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edtCorMouseClicked(evt);
+            }
+        });
+        edtCor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtCorActionPerformed(evt);
+            }
+        });
+
+        edtBitola.setBackground(new java.awt.Color(20, 20, 20));
+        edtBitola.setForeground(new java.awt.Color(251, 251, 251));
+        edtBitola.setLabelText("Bitola");
+        edtBitola.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtBitola.setLineColor(new java.awt.Color(229, 9, 20));
+        edtBitola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtBitolaActionPerformed(evt);
+            }
+        });
+
+        edtTipoCabo.setBackground(new java.awt.Color(20, 20, 20));
+        edtTipoCabo.setForeground(new java.awt.Color(251, 251, 251));
+        edtTipoCabo.setLabelText("Tipo de Cabo");
+        edtTipoCabo.setLabelTextColor(new java.awt.Color(251, 251, 251));
+        edtTipoCabo.setLineColor(new java.awt.Color(229, 9, 20));
+        edtTipoCabo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtTipoCaboActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCaboLayout = new javax.swing.GroupLayout(panCabo);
+        panCabo.setLayout(panCaboLayout);
+        panCaboLayout.setHorizontalGroup(
+            panCaboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCaboLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panCaboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtBitola, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtTipoCabo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panCaboLayout.setVerticalGroup(
+            panCaboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCaboLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(edtComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtBitola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtTipoCabo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        separatorCabo.setBackground(new java.awt.Color(255, 255, 255));
+        separatorCabo.setForeground(new java.awt.Color(20, 20, 20));
+        separatorCabo.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout panFundoLayout = new javax.swing.GroupLayout(panFundo);
         panFundo.setLayout(panFundoLayout);
         panFundoLayout.setHorizontalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panFundoLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
             .addGroup(panFundoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(panFundoLayout.createSequentialGroup()
+                                .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(separatorCabo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panCabo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         panFundoLayout.setVerticalGroup(
             panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,12 +441,14 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panCabo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(separatorCabo))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
@@ -330,100 +461,251 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_edtNomeActionPerformed
 
+    private void inicializarTela() {
+        this.habilitarCampos(true); // Configura a visibilidade para true
+        this.habilitarCamposCabo(true);
+        this.habilitarCampos(false); // Atualiza novamente para false
+        this.habilitarCamposCabo(false);
+    }
+
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         canEditStock = false;
-        
-        Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
 
-        if (pecaEditando == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-            this.limparCampos();
-            this.habilitarCampos(true);
-            this.preencherFormulario(pecaEditando);
-            this.idPecaEditando = pecaEditando.getId();
-        }       
+        if (tipoPeca.equals("Generica")) {
+            Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
+
+            if (pecaEditando == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+                this.limparCampos();
+                this.habilitarCampos(true);
+                this.preencherFormulario(pecaEditando);
+                this.idPecaEditando = pecaEditando.getId();
+            }
+        } else {
+            Cabo caboEditando = (Cabo) this.getObjetoSelecionadoNaGrid();
+
+            if (caboEditando == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+                this.limparCampos();
+                this.habilitarCampos(true);
+                this.preencherFormularioCabo(caboEditando);
+                this.idCaboEditando = caboEditando.getId();
+            }
+        }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+        if (tipoPeca.equals("Generica")) {
+            Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
 
-        if (pecaExcluida == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
+            if (pecaExcluida == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
 
-            int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir a Peca  \n("
-                + pecaExcluida.getNome() + ", "
-                + pecaExcluida.getCodigo() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.OK_OPTION) {
-                try {
-                    System.out.println(pecaExcluida.getEstoque());
-                    if(pecaExcluida.getEstoque() == 0){
-                        pecaController.excluirPeca(pecaExcluida);
-                    }else{
-                        exemplarController.excluirExemplarPeca(pecaExcluida);
-                        exemplarController.atualizarEstoquePeca(pecaExcluida);
+                int response = JOptionPane.showConfirmDialog(null,
+                        "Deseja exlcuir a Peca  \n("
+                        + pecaExcluida.getNome() + ", "
+                        + pecaExcluida.getCodigo() + ") ?",
+                        "Confirmar exclusão",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.OK_OPTION) {
+                    try {
+                        System.out.println(pecaExcluida.getEstoque());
+                        if (pecaExcluida.getEstoque() == 0) {
+                            pecaController.excluirPeca(pecaExcluida);
+                        } else {
+                            exemplarController.excluirExemplarPeca(pecaExcluida);
+                            exemplarController.atualizarEstoquePeca(pecaExcluida);
+                        }
+
+                        pecaController.atualizarTabela(grdPecas);
+                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                    } catch (PecaException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
                     }
-
-                    pecaController.atualizarTabela(grdPecas);
-                    JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                } catch (PecaException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
             }
-        }          // TODO add your handling code here:
+        } else {
+            Cabo caboExcluido = (Cabo) this.getObjetoSelecionadoNaGrid();
+
+            if (caboExcluido == null) {
+                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            } else {
+
+                int response = JOptionPane.showConfirmDialog(null,
+                        "Deseja exlcuir o Cabo  \n("
+                        + caboExcluido.getNome() + ", "
+                        + caboExcluido.getCodigo() + ") ?",
+                        "Confirmar exclusão",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.OK_OPTION) {
+                    try {
+                        caboController.excluirCabo(caboExcluido);
+                        caboController.atualizarTabela(grdPecas);
+                        
+                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                    } catch (PecaException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
+                    }
+                }
+            }
+        }
+
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.idPecaEditando = -1L;
+        this.idCaboEditando = -1L;
         this.limparCampos();
-        this.habilitarCampos(false);        // TODO add your handling code here:
+        this.habilitarCampos(false);
+        this.habilitarCamposCabo(false);
         canEditStock = true;
+        if (tipoPeca.equals("Generica")) {
+            pecaController.atualizarTabela(grdPecas);
+        } else {
+            caboController.atualizarTabela(grdPecas);
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        try {
-            if (idPecaEditando > 0) {
-                pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
-                exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
-            } else {
-                pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
-                pecaController.cadastrarExemplarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());   
+        if (tipoPeca.equals("Generica")) {
+            try {
+                if (idPecaEditando > 0) {
+                    pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                    exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
+                } else {
+                    pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                    pecaController.cadastrarExemplarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                }
+                //Comando bastante importante
+                this.idPecaEditando = -1L;
+
+                pecaController.atualizarTabela(grdPecas);
+
+                this.habilitarCampos(false);
+                this.limparCampos();
+
+            } catch (PecaException e) {
+                System.err.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (Exception ex) {
+                Logger.getLogger(dlgCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //Comando bastante importante
-            this.idPecaEditando = -1L;
 
-            pecaController.atualizarTabela(grdPecas);
+        } else {
+            try {
+                if (idCaboEditando > 0) {
+                    caboController.atualizarCabo(idCaboEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(),
+                            Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()),
+                            edtCategoria.getText(), fEdtDataFabricacao.getText(), Integer.parseInt(edtComprimento.getText()), corDoCabo,
+                            Integer.parseInt(edtBitola.getText()), edtTipoCabo.getText());
+                    //exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
+                } else {
+                    caboController.cadastrarCabo(idCaboEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(),
+                            Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()),
+                            edtCategoria.getText(), fEdtDataFabricacao.getText(), Integer.parseInt(edtComprimento.getText()), corDoCabo,
+                            Integer.parseInt(edtBitola.getText()), edtTipoCabo.getText());
+                    //caboController.cadastrarExemplarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
+                }
+                //Comando bastante importante
+                this.idCaboEditando = -1L;
 
-            this.habilitarCampos(false);
-            this.limparCampos();
-        
-            
-        } catch (PecaException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(dlgCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
-        }         // TODO add your handling code here:
+                caboController.atualizarTabela(grdPecas);
+
+                this.habilitarCampos(false);
+                this.habilitarCamposCabo(false);
+                this.limparCampos();
+
+            } catch (CaboException e) {
+                System.err.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (Exception ex) {
+                Logger.getLogger(dlgCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
         canEditStock = true;
         this.limparCampos();
-        this.habilitarCampos(true);
+        if (tipoPeca.equals("Generica")) {
+            this.habilitarCampos(true);
+            this.habilitarCamposCabo(false);
+            pecaController.atualizarTabela(grdPecas);
+        } else {
+            this.habilitarCampos(true);
+            this.habilitarCamposCabo(true);
+            caboController.atualizarTabela(grdPecas);
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void edtEstoqueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtEstoqueFocusGained
         // TODO add your handling code here:
         edtEstoque.setEditable(canEditStock);
     }//GEN-LAST:event_edtEstoqueFocusGained
+
+    private void cbxTipoPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoPecaActionPerformed
+        // TODO add your handling code here:
+        this.limparCampos();
+        if (cbxTipoPeca.getSelectedIndex() == 0) {
+            tipoPeca = "Generica";
+            this.habilitarCamposCabo(false);
+            pecaController.atualizarTabela(grdPecas);
+        } else {
+            tipoPeca = "Cabo";
+            this.habilitarCamposCabo(true);
+            caboController.atualizarTabela(grdPecas);
+        }
+    }//GEN-LAST:event_cbxTipoPecaActionPerformed
+
+    private void edtComprimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtComprimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtComprimentoActionPerformed
+
+    private void edtCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtCorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtCorActionPerformed
+
+    private void edtBitolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtBitolaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtBitolaActionPerformed
+
+    private void edtTipoCaboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTipoCaboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtTipoCaboActionPerformed
+
+    private void edtCorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtCorMouseClicked
+        // Cria um JColorChooser
+        JColorChooser colorChooser = new JColorChooser();
+
+        // Exibe o diálogo do seletor de cores
+        Color selectedColor = JColorChooser.showDialog(this, "Escolha uma cor", Color.BLACK);
+
+        // Verifica se o usuário selecionou uma cor
+        if (selectedColor != null) {
+            corDoCabo = selectedColor;
+
+            // Obtém o valor RGB da cor selecionada
+            int rgb = corDoCabo.getRGB();
+
+            // Converte o valor RGB para uma string no formato "RGB[r, g, b]"
+            String rgbString = String.format("RGB[%d, %d, %d]",
+                    (rgb >> 16) & 0xFF,
+                    (rgb >> 8) & 0xFF,
+                    rgb & 0xFF);
+
+            // Atualiza o texto do componente edtCor com o valor RGB
+            edtCor.setText(rgbString);
+        }
+    }//GEN-LAST:event_edtCorMouseClicked
 
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdPecas.getSelectedRow();
@@ -433,7 +715,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public void preencherFormulario(Peca peca) {
         edtNome.setText(peca.getNome());
         edtCategoria.setText(peca.getCategoria());
@@ -442,15 +724,46 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtPreco.setText(String.valueOf(peca.getPreco()));
         edtDescricao.setText(peca.getDescricao());
         fEdtDataFabricacao.setText(peca.getDataFabricacao());
-
     }
-    
+
+    public void preencherFormularioCabo(Cabo cabo) {
+        edtNome.setText(cabo.getNome());
+        edtCategoria.setText(cabo.getCategoria());
+        edtCodigo.setText(cabo.getCodigo());
+        edtEstoque.setText(String.valueOf(cabo.getEstoque()));
+        edtPreco.setText(String.valueOf(cabo.getPreco()));
+        edtDescricao.setText(cabo.getDescricao());
+        fEdtDataFabricacao.setText(cabo.getDataFabricacao());
+        edtComprimento.setText(String.valueOf(cabo.getComprimento()));
+        edtBitola.setText(String.valueOf(cabo.getBitola()));
+        edtTipoCabo.setText(cabo.getTipoDeCabo());
+
+        // Obtém o valor RGB da cor selecionada
+        int rgb = cabo.getCor().getRGB();
+
+        // Converte o valor RGB para uma string no formato "RGB[r, g, b]"
+        String rgbString = String.format("RGB[%d, %d, %d]",
+                (rgb >> 16) & 0xFF,
+                (rgb >> 8) & 0xFF,
+                rgb & 0xFF);
+
+        // Atualiza o texto do componente edtCor com o valor RGB
+        edtCor.setText(rgbString);
+    }
+
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
-        }  
+        }
     }
-        
+
+    public void habilitarCamposCabo(boolean flag) {
+        for (int i = 0; i < panCabo.getComponents().length; i++) {
+            panCabo.getComponent(i).setVisible(flag);
+        }
+        separatorCabo.setVisible(flag);
+    }
+
     private void limparCampos() {
         edtCategoria.setText("");
         edtCodigo.setText("");
@@ -459,9 +772,13 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         edtPreco.setText("");
         edtDescricao.setText("");
         fEdtDataFabricacao.setText("");
+        edtComprimento.setText("");
+        edtCor.setText("");
+        edtBitola.setText("");
+        edtTipoCabo.setText("");
     }
 
-    private void adicionarMascaranosCampos()  {
+    private void adicionarMascaranosCampos() {
         try {
             MaskFormatter dataFabric = new MaskFormatter("##/##/####");
             dataFabric.install(fEdtDataFabricacao);
@@ -478,18 +795,25 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnEditar;
     private view.graphicElements.BotaoVermelho btnExcluir;
     private view.graphicElements.BotaoVermelho btnNovo;
+    private view.graphicElements.ComboBoxSuggestion cbxTipoPeca;
+    private view.graphicElements.TextField edtBitola;
     private view.graphicElements.TextField edtCategoria;
     private view.graphicElements.TextField edtCodigo;
+    private view.graphicElements.TextField edtComprimento;
+    private view.graphicElements.TextField edtCor;
     private view.graphicElements.TextField edtDescricao;
     private view.graphicElements.TextField edtEstoque;
     private view.graphicElements.TextField edtNome;
     private view.graphicElements.TextField edtPreco;
+    private view.graphicElements.TextField edtTipoCabo;
     private view.graphicElements.FormattedTextField fEdtDataFabricacao;
     private view.graphicElements.TableDark grdPecas;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JPanel panCabo;
     private javax.swing.JPanel panFundo;
     private javax.swing.JPanel panPreencher;
     private javax.swing.JPanel panTodosBotoes;
+    private javax.swing.JSeparator separatorCabo;
     // End of variables declaration//GEN-END:variables
 }
