@@ -24,17 +24,17 @@ public class CaboValidate {
         Cabo cabo = new Cabo();
         
         if(comprimento <= 0){
-            throw new CaboException("Cabo sem comprimento? ai não né amigo :/");
+            throw new CaboException("Error - Campo invalido: 'comprimento'.");
         }
         cabo.setComprimento(comprimento);
         
         if(cor == null){
-            throw new CaboException("Você não selecionou uma cor? ai não né amigo :/");
+            throw new CaboException("Error - Campo vazio: 'Cor'.");
         }
         cabo.setCor(cor);
         
         if(bitola <= 0){
-            throw new CaboException("Que bitola é essa? Kkkkkkkkk");
+            throw new CaboException("Error - Campo invalido: 'bitola'.");
         }
         cabo.setBitola(bitola);
         

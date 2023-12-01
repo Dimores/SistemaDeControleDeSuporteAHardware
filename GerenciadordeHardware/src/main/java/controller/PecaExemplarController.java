@@ -17,15 +17,15 @@ import utils.CodigoBarra;
  * @author diego
  */
 public class PecaExemplarController {
+
     PecaExemplar pecaExemplar;
     PecaExemplarDAO repositorio;
-    
-    
-    public PecaExemplarController(){
+
+    public PecaExemplarController() {
         repositorio = new PecaExemplarDAO();
         pecaExemplar = new PecaExemplar();
     }
-    
+
     // Métodos para lidar com PecaExemplar
     public void cadastrarExemplarPeca(Long idExemplar, String codigo, String nome, String descricao, double preco,
             int estoque, String categoria, String dataFabricacao, Peca peca) {
@@ -38,36 +38,34 @@ public class PecaExemplarController {
         pecaExemplar.setCategoria(categoria);
         pecaExemplar.setDataFabricacao(dataFabricacao);
         pecaExemplar.setPeca(peca);
-        
-        for(int i = 0; i < estoque; i++){
+
+        for (int i = 0; i < estoque; i++) {
             repositorio.update(pecaExemplar);
         }
     }
-    
-    public void atualizarEstoquePeca(Peca peca){
+
+    public void atualizarEstoquePeca(Peca peca) {
         int estoque = 0;
         List<PecaExemplar> lst = repositorio.findAllByNome(peca.getNome());
 
-        System.out.println("Lista de exemplares antes da atualização de estoque: " + lst);
-
+        //System.out.println("Lista de exemplares antes da atualização de estoque: " + lst);
         estoque = lst.size();
 
-        System.out.println("Estoque antes da atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
-
+        //System.out.println("Estoque antes da atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
         peca.setEstoque(estoque);
 
         // Força a atualização do estado da entidade Peca
         repositorio.update(peca);
 
-        System.out.println("Estoque após a atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
+        //System.out.println("Estoque após a atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
     }
 
     // Primeiro pegar o ID da peca que esta relacionada com seus exemplares
     public void excluirExemplarPeca(Peca peca) {
-        String nomePeca = peca.getNome();
+        Long idPeca = peca.getId();
 
         // Lógica para excluir um exemplar de Peca com o mesmo nome
-        List<PecaExemplar> lst = repositorio.findAllByNome(nomePeca);
+        List<PecaExemplar> lst = repositorio.findAllByIdPeca(idPeca);
 
         if (!lst.isEmpty()) {
             PecaExemplar primeiroExemplar = (PecaExemplar) lst.get(0);
@@ -81,9 +79,9 @@ public class PecaExemplarController {
             // Trate o caso em que não há exemplares associados à peça
         }
     }
-    
+
     // OBS SEM EDITAR ESTOQUE
-    public void atualizarExemplaresPeca(Peca peca){
+    public void atualizarExemplaresPeca(Peca peca) {
         Long idPeca = peca.getId();
         List<PecaExemplar> lst = repositorio.findAllByIdPeca(idPeca);
 
@@ -102,7 +100,7 @@ public class PecaExemplarController {
     }
 
     // Se caso o estoque de uma Peça for aumentado, essa função será usada
-    public void adicionarExemplares(int quantidade, Peca peca){
+    public void adicionarExemplares(int quantidade, Peca peca) {
         pecaExemplar.setCategoria(peca.getCategoria());
         pecaExemplar.setCodigo(peca.getCodigo());
         pecaExemplar.setDataFabricacao(peca.getDataFabricacao());
@@ -112,15 +110,37 @@ public class PecaExemplarController {
         pecaExemplar.setNome(peca.getNome());
         pecaExemplar.setPreco(peca.getPreco());
         pecaExemplar.setId(peca.getId());
-        for(int i = 0; i < quantidade; i++){
-            repositorio.save(pecaExemplar);
+        pecaExemplar.setPeca(peca);
+        for (int i = 0; i < quantidade; i++) {
+            repositorio.update(pecaExemplar);
         }
     }
-    
-    public void removerExemplares(int quantidade, Peca peca){
-        for(int i = 0; i < quantidade; i++){
+
+    public void alterarExemplarDeAcordoComEstoque(int estoqueNovo, Peca peca) {
+        Long idPeca = peca.getId();
+        List<PecaExemplar> lst = repositorio.findAllByIdPeca(idPeca);
+        int estoqueAntigo = lst.size();
+        System.out.println("Estoque antigo = " + estoqueAntigo);
+        System.out.println("Estoque novo = " + estoqueNovo);
+        
+        int diferenca = estoqueAntigo - estoqueNovo;
+        System.out.println("Diferenca = " + diferenca);
+        
+        if(diferenca > 0){
+            System.out.println("Diminuindo " + diferenca + " do estoque.");
+            removerExemplares(diferenca, peca);
+        }else if(diferenca < 0){
+            System.out.println("Aumentando " + Math.abs(diferenca) + " do estoque.");
+            adicionarExemplares(Math.abs(diferenca), peca);
+        }else{
+            System.out.println("Estoque nao mudou.");
+        }
+    }
+
+    public void removerExemplares(int quantidade, Peca peca) {
+        for (int i = 0; i < quantidade; i++) {
             excluirExemplarPeca(peca);
         }
     }
-        
+
 }

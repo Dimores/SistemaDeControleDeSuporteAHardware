@@ -17,10 +17,11 @@ import model.interfaces.IDao;
  * @author diego
  */
 public class PecaExemplarDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     @Override
     public void save(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -29,7 +30,7 @@ public class PecaExemplarDAO implements IDao {
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -48,8 +49,7 @@ public class PecaExemplarDAO implements IDao {
         this.entityManager.close();
         return (List<Object>) lst;
     }
-    
-       
+
     public List<PecaExemplar> findAllByNome(String nome) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT p " + "FROM PecaExemplar p WHERE nome = :nome";
@@ -59,7 +59,7 @@ public class PecaExemplarDAO implements IDao {
         this.entityManager.close();
         return (List<PecaExemplar>) lst;
     }
-    
+
     public List<PecaExemplar> findAllByIdPeca(Long idPeca) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT p " + "FROM PecaExemplar p WHERE peca_id = :peca_id";
@@ -69,17 +69,16 @@ public class PecaExemplarDAO implements IDao {
         this.entityManager.close();
         return (List<PecaExemplar>) lst;
     }
-    
 
     @Override
     public Object find(Object obj) {
-        PecaExemplar procurado = (PecaExemplar)  obj;
+        PecaExemplar procurado = (PecaExemplar) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        procurado = this.entityManager.find(PecaExemplar.class ,procurado.getCodigo());
+        procurado = this.entityManager.find(PecaExemplar.class, procurado.getCodigo());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return procurado;   
+        return procurado;
     }
 
     /**
@@ -95,12 +94,38 @@ public class PecaExemplarDAO implements IDao {
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
         this.entityManager.close();
-        if(lst.isEmpty()){
+        if (lst.isEmpty()) {
             return null;
-        }return (Peca) lst.get(0);
-       
+        }
+        return (Peca) lst.get(0);
+
     }
 
+    // Atualizar a lista de exemplares no banco de dados
+    public void updateAll(List<PecaExemplar> exemplares) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+
+        for (PecaExemplar exemplar : exemplares) {
+            this.entityManager.merge(exemplar);
+        }
+
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+    }
+    
+    // Salvar uma lista de exemplares no banco de dados
+    public void saveAll(List<PecaExemplar> exemplares) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+
+        for (PecaExemplar exemplar : exemplares) {
+            this.entityManager.persist(exemplar);
+        }
+
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+    }
 
     @Override
     public boolean delete(Object obj) {

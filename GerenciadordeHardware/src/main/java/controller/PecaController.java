@@ -96,9 +96,5 @@ public class PecaController extends ProdutoController{
         return (Peca) this.repositorio.findById(id);   
     }
 
-    public void excluirExemplarPeca(PecaExemplar exemplar) {
-        // Lógica para excluir um exemplar de Peca
-        
-    }
     
 }

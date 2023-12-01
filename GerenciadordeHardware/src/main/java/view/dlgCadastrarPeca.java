@@ -35,7 +35,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     PecaExemplarController exemplarController;
     Long idPecaEditando;
     Long idCaboEditando;
-    private boolean canEditStock;
     private String tipoPeca = "Generica";
     private Color corDoCabo;
 
@@ -53,7 +52,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         this.setModal(true);
         this.adicionarMascaranosCampos();
         pecaController.atualizarTabela(grdPecas);
-        canEditStock = true;
         corDoCabo = new Color(20, 20, 20);
 
         // Adiciona um ComponentListener para monitorar quando o Dialog está visível
@@ -470,7 +468,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        canEditStock = false;
+
 
         if (tipoPeca.equals("Generica")) {
             Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
@@ -566,7 +564,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
         this.limparCampos();
         this.habilitarCampos(false);
         this.habilitarCamposCabo(false);
-        canEditStock = true;
         if (tipoPeca.equals("Generica")) {
             pecaController.atualizarTabela(grdPecas);
         } else {
@@ -580,6 +577,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                 if (idPecaEditando > 0) {
                     pecaController.atualizarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
                     exemplarController.atualizarExemplaresPeca(pecaController.buscarPeca(idPecaEditando));
+                    exemplarController.alterarExemplarDeAcordoComEstoque(Integer.parseInt(edtEstoque.getText()), pecaController.buscarPeca(idPecaEditando));
                 } else {
                     pecaController.cadastrarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
                     pecaController.cadastrarExemplarPeca(idPecaEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(edtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText());
@@ -634,7 +632,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        canEditStock = true;
+
         this.limparCampos();
         if (tipoPeca.equals("Generica")) {
             this.habilitarCampos(true);
@@ -649,7 +647,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
     private void edtEstoqueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtEstoqueFocusGained
         // TODO add your handling code here:
-        edtEstoque.setEditable(canEditStock);
+
     }//GEN-LAST:event_edtEstoqueFocusGained
 
     private void cbxTipoPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoPecaActionPerformed
