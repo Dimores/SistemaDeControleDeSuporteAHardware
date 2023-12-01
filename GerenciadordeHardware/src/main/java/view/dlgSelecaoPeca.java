@@ -123,33 +123,38 @@ public class dlgSelecaoPeca extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
-        
-
-        if (pecasSelecionadas.isEmpty())
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-
-            int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher essas Peças?  \n(",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.OK_OPTION) {
-                try {
-                    //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
-                    for (int i = 0; i< pecasSelecionadas.size(); i++){
-                        exemplar.excluirExemplarPeca(pecasSelecionadas.get(i));
-                        exemplar.atualizarEstoquePeca(pecasSelecionadas.get(i));
-                    }
-                    this.dispose();
-                } catch (PecaException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage());
-                }
-            }else if(response == JOptionPane.CANCEL_OPTION){
-                pecasSelecionadas = null;
-            }
-        }
+     if (pecasSelecionadas.isEmpty()) {
+         JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+     } else {
+         int response = JOptionPane.showConfirmDialog(null,
+                 "Deseja escolher essas Peças?  \n(",
+                 "Confirmar escolha",
+                 JOptionPane.OK_CANCEL_OPTION,
+                 JOptionPane.QUESTION_MESSAGE);
+         if (response == JOptionPane.OK_OPTION) {
+             try {
+                 List<Peca> pecasRemover = new ArrayList<>();
+                 for (Peca peca : pecasSelecionadas) {
+                     if (peca.getEstoque() > 0) {
+                         exemplar.excluirExemplarPeca(peca);
+                         exemplar.atualizarEstoquePeca(peca);
+                     } else {
+                         pecasRemover.add(peca);
+                     }
+                 }
+                 if(!pecasRemover.isEmpty()){
+                     JOptionPane.showMessageDialog(this, "Algumas peças estavam fora dde estoque e não puderam ser selecionadas");
+                 }
+                 pecasSelecionadas.removeAll(pecasRemover);
+                 
+                 this.dispose();
+             } catch (PecaException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+             }
+         } else if (response == JOptionPane.CANCEL_OPTION) {
+             pecasSelecionadas = null;
+         }
+     }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
