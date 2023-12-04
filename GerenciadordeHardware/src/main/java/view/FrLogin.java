@@ -212,15 +212,21 @@ public class FrLogin extends javax.swing.JFrame {
             Criptografia crip = new Criptografia();
 
             try {
-                loginController.validarLogin(fEdtEmail.getText(), edtSenha.getText());
+                loginController.validarLogin(fEdtEmail.getText(), edtSenha.getText()); 
                 Usuario usuario = (Usuario) usuarioController.buscarUsuario(fEdtEmail.getText());
-                Object obj = usuarioController.buscarUsuario(fEdtEmail.getText());
+                if(usuario == null){
+                    JOptionPane.showMessageDialog(null, "Email fornecido não consta na base de dados!");
+                    return;
+                }
+                Object obj = usuario;
+                
                 if (crip.decrypt(usuario.getSenha()).equals(edtSenha.getText())) {
                     SessionManager.setId(usuario.getId());
                     this.setVisible(false);
                     telaUsuario = new dlgUsuario(loginController.accessManager(obj));
                     telaUsuario.getLblUserName().setText(usuario.getNome());
                     telaUsuario.setVisible(true);
+                    edtSenha.setEchoChar('*');
                     this.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Email ou Senha invalidos");

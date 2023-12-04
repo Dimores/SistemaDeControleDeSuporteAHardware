@@ -39,6 +39,7 @@ public class ConsertoComputador extends Servico {
     public ConsertoComputador() {
         super();
         this.pecasSubstituidas = new ArrayList();
+        super.valor = 100;
     }
 
     public ConsertoComputador(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
