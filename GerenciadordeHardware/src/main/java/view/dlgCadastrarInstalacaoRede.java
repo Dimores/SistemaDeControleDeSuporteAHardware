@@ -414,13 +414,14 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
     private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
         // TODO add your handling code here:
-        telaSelecaoTecnico.setVisible(true);
+        if (!(code == 2)) {
+            telaSelecaoTecnico.setVisible(true);
 
-        if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
-            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
-            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
+                edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
+                tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            }
         }
-
     }//GEN-LAST:event_edtTecnicoMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -526,7 +527,6 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtEnderecoRede.setText("");
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
-        
 
     }
 
