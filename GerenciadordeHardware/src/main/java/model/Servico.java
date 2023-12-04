@@ -36,7 +36,7 @@ public class Servico {
     @ManyToOne
     @JoinColumn(name = "cliente_id")  // Nome da coluna que faz referência ao cliente na tabela Servico
     private Cliente clienteAtendido;
-    private float valor;
+    protected float valor;
     private String descricaoServico;
     private String dataServico;
     private boolean concluido;

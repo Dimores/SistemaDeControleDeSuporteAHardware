@@ -32,7 +32,8 @@ public class ConsertoComputadorController extends ServicoController {
     }
 
     public void atualizarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-            String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
+            
+        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
 
         ConsertoComputadorValidate valid = new ConsertoComputadorValidate();
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
@@ -46,7 +47,7 @@ public class ConsertoComputadorController extends ServicoController {
     }
 
     public void cadastrarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-            String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
+        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
         ConsertoComputadorValidate valid = new ConsertoComputadorValidate();
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
                 dataServico, concluido, pecasSubstituidas);
