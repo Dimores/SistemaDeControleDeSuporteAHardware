@@ -13,13 +13,14 @@ public class dlgCadastroServico extends javax.swing.JDialog {
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
     dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
     dlgCadastrarConsertoComputador dlgConsertoComputador;
-
+    int codigo;
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastroServico(java.awt.Dialog parent) {
+    public dlgCadastroServico(java.awt.Dialog parent, int code) {
         super(parent);
         initComponents();
+        codigo = code;
     }
 
     /**
@@ -153,19 +154,19 @@ public class dlgCadastroServico extends javax.swing.JDialog {
 
     private void btnConsertoComputadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsertoComputadorActionPerformed
         // TODO add your handling code here:
-        this.dlgConsertoComputador = new dlgCadastrarConsertoComputador(this, true);
+        this.dlgConsertoComputador = new dlgCadastrarConsertoComputador(this, true, codigo);
         dlgConsertoComputador.setVisible(true);
     }//GEN-LAST:event_btnConsertoComputadorActionPerformed
 
     private void btnInstalacaoRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstalacaoRedeActionPerformed
         // TODO add your handling code here:
-        this.dlgInstalacaoRede = new dlgCadastrarInstalacaoRede(this, true);
+        this.dlgInstalacaoRede = new dlgCadastrarInstalacaoRede(this, true, codigo);
         dlgInstalacaoRede.setVisible(true);
     }//GEN-LAST:event_btnInstalacaoRedeActionPerformed
 
     private void btnManutencaoPreventivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManutencaoPreventivaActionPerformed
         // TODO add your handling code here:
-        this.dlgManutencaoPreventiva = new dlgCadastrarManutencaoPreventiva(this, true);
+        this.dlgManutencaoPreventiva = new dlgCadastrarManutencaoPreventiva(this, true, codigo);
         dlgManutencaoPreventiva.setVisible(true);
     }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 

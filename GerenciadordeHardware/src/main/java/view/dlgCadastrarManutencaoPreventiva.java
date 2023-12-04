@@ -6,6 +6,7 @@ package view;
 
 import controller.ManutencaoPreventivaController;
 import controller.ServicoController;
+import controller.TecnicoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import utils.Data;
 import model.ManutencaoPreventiva;
 import model.Tecnico;
 import model.exceptions.ServicoException;
+import utils.SessionManager;
 
 /**
  *
@@ -24,6 +26,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
 
     ServicoController servicoController;
     ManutencaoPreventivaController manutencaoPreventivaController;
+    TecnicoController tecnicoController;
     private Long idManutencaoEditando;
     private String data;
 
@@ -36,19 +39,22 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     // Preço padrao de instalação de rede
     private float precoManutencaoPreventiva = 60;
 
+    int code;
+
     /**
      * Creates new form dlgCadastrarManutencaoPreventiva
      *
      * @param parent
      * @param modal
      */
-    public dlgCadastrarManutencaoPreventiva(java.awt.Dialog parent, boolean modal) {
+    public dlgCadastrarManutencaoPreventiva(java.awt.Dialog parent, boolean modal, int code) {
         super(parent, modal);
         initComponents();
         manutencaoPreventivaController = new ManutencaoPreventivaController();
         servicoController = new ServicoController();
+        tecnicoController = new TecnicoController();
         this.habilitarCampos(false);
-
+        this.code = code;
         idManutencaoEditando = -1L;
         data = Data.pegaDataSistema();
         manutencaoPreventivaController.atualizarTabela(grdManutencoes);
@@ -60,6 +66,12 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
 
         edtPreco.setText(String.valueOf(precoManutencaoPreventiva));
+
+        if (code == 2) {
+            tecnicoSelecionado = (Tecnico) tecnicoController.buscarTecnico(SessionManager.getId());
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+            edtTecnico.setEnabled(false);
+        }
     }
 
     /**
@@ -387,11 +399,13 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
 
     private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
         // TODO add your handling code here:
-        telaSelecaoTecnico.setVisible(true);
+        if (!(code == 2)) {
+            telaSelecaoTecnico.setVisible(true);
 
-        if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
-            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
-            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
+                edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
+                tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            }
         }
     }//GEN-LAST:event_edtTecnicoMouseClicked
 
@@ -489,7 +503,11 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         edtEquipamentos.setText("");
         edtDescricao.setText("");
         edtCliente.setText("Clique aqui para adicionar um Cliente.");
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        if (this.code == 2) {
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+        } else {
+            edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        }
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
     }

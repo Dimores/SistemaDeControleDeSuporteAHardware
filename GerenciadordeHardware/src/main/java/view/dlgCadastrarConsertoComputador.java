@@ -9,6 +9,8 @@ import controller.ConsertoComputadorController;
 import controller.PecaController;
 import controller.PecaExemplarController;
 import controller.ServicoController;
+import controller.TecnicoController;
+import controller.UsuarioController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,10 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.Cliente;
 import model.ConsertoComputador;
+import model.Gerente;
 import utils.Data;
 import model.Peca;
 import model.Tecnico;
+import model.Usuario;
 import model.exceptions.ServicoException;
+import utils.SessionManager;
 
 /**
  *
@@ -43,8 +48,12 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     Tecnico tecnicoSelecionado;
     PecaExemplarController exemplarController;
 
+    TecnicoController tecnicoController;
+
     // O preço do conserto vai ser sempre 100 + o preço das Peças.
     private float preco = 100;
+
+    int code;
 
     /**
      * Creates new form dlgCadastrarConcertoComputador
@@ -52,9 +61,10 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public dlgCadastrarConsertoComputador(java.awt.Dialog parent, boolean modal) {
+    public dlgCadastrarConsertoComputador(java.awt.Dialog parent, boolean modal, int code) {
         super(parent, modal);
         initComponents();
+        this.code = code;
         servicoController = new ServicoController();
         idConsertoComputadorEditando = -1L;
 
@@ -76,6 +86,13 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         // Setando o preco inicial
         edtValor.setText(String.valueOf(preco));
         exemplarController = new PecaExemplarController();
+        tecnicoController = new TecnicoController();
+
+        if (this.code == 2) {
+            tecnicoSelecionado = (Tecnico) tecnicoController.buscarTecnico(SessionManager.getId());
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+            edtTecnico.setEnabled(false);
+        }
     }
 
     /**
@@ -406,7 +423,6 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
             this.preencherFormulario(consertoComputadorEditando);
             this.idConsertoComputadorEditando = consertoComputadorEditando.getId();
         }
-
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -491,8 +507,8 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
+        this.limparCampos();
         this.habilitarCampos(true);
-
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
@@ -503,6 +519,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
     private void edtClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMousePressed
         // TODO add your handling code here:
+
         telaSelecaoCliente.setVisible(true);
 
         if (telaSelecaoCliente.getClienteEscolhido() != null) {
@@ -519,13 +536,14 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
     private void edtTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtTecnicoMouseClicked
         // TODO add your handling code here:
-        telaSelecaoTecnico.setVisible(true);
+        if (!(code == 2)) {
+            telaSelecaoTecnico.setVisible(true);
 
-        if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
-            edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
-            tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
+                edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
+                tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
+            }
         }
-
     }//GEN-LAST:event_edtTecnicoMouseClicked
 
     private void edtPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtPecaMouseClicked
@@ -534,7 +552,8 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
         pecasSelecionadas = telaSelecaoPeca.getPecasSelecionadas();
 
-        if (!pecasSelecionadas.isEmpty()) {
+        if (pecasSelecionadas != null && !pecasSelecionadas.isEmpty()) {
+
             StringBuilder builder = new StringBuilder();
             int totalPecas = pecasSelecionadas.size();
 
@@ -574,11 +593,16 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         // Limpa os Edts
         edtDescricaoProblema.setText("");
         edtValor.setText(String.valueOf(preco));
-        edtCliente.setText("Clique aqui para adicionar um Cliente.");
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        edtCliente.setText("Clique aqui para adicionar um C liente.");
+        if (this.code == 2) {
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+        } else {
+            edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        }
         edtPeca.setText("Clique aqui para adicionar uma ou mais Peça(s).");
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
+        pecasSelecionadas = new ArrayList();
 
     }
 

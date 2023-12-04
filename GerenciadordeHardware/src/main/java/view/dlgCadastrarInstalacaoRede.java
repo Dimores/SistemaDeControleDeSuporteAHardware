@@ -6,6 +6,7 @@ package view;
 
 import controller.InstalacaoRedeController;
 import controller.ServicoController;
+import controller.TecnicoController;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import utils.Data;
 import model.InstalacaoRede;
 import model.Tecnico;
 import model.exceptions.ServicoException;
+import utils.SessionManager;
 
 /**
  *
@@ -25,6 +27,7 @@ import model.exceptions.ServicoException;
 public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
     ServicoController servicoController;
+    TecnicoController tecnicoController;
     InstalacaoRedeController instalacaoRedeController;
     private Long idRedeEditando;
     private String dataInstalacaoRede;
@@ -38,17 +41,21 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
     // Preço padrao de instalação de rede
     private float precoInstalacaoRede = 80;
 
+    int code;
+
     /**
      * Creates new form dlgCadastrarInstalacaoRede
      *
      * @param parent
      * @param modal
      */
-    public dlgCadastrarInstalacaoRede(java.awt.Dialog parent, boolean modal) {
+    public dlgCadastrarInstalacaoRede(java.awt.Dialog parent, boolean modal, int code) {
         super(parent, modal);
         initComponents();
+        this.code = code;
         instalacaoRedeController = new InstalacaoRedeController();
         servicoController = new ServicoController();
+        tecnicoController = new TecnicoController();
 
         telaSelecaoCliente = new dlgSelecaoCliente(this, true);
         telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
@@ -63,6 +70,12 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtValor.setText(String.valueOf(precoInstalacaoRede));
 
         this.criarMascaraCampos();
+
+        if (this.code == 2) {
+            tecnicoSelecionado = (Tecnico) tecnicoController.buscarTecnico(SessionManager.getId());
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+            edtTecnico.setEnabled(false);
+        }
     }
 
     /**
@@ -504,11 +517,16 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtValor.setText(String.valueOf(precoInstalacaoRede));
         edtDescricao.setText("");
         edtCliente.setText("Clique aqui para adicionar um Cliente.");
-        edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        if (this.code == 2) {
+            edtTecnico.setText(tecnicoSelecionado.getNome());
+        } else {
+            edtTecnico.setText("Clique aqui para adicionar um Ténico.");
+        }
         edtTipoRede.setText("");
         edtEnderecoRede.setText("");
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
+        
 
     }
 

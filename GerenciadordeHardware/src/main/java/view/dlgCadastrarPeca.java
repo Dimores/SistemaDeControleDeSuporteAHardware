@@ -485,6 +485,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             } else {
                 this.limparCampos();
                 this.habilitarCampos(true);
+                this.habilitarCamposCabo(true);
                 this.preencherFormularioCabo(caboEditando);
                 this.idCaboEditando = caboEditando.getId();
             }

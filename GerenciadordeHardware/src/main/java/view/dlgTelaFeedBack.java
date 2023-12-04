@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.FeedBack;
 import model.Servico;
+import utils.Data;
 import utils.SessionManager;
 
 /**
@@ -191,11 +192,11 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         panTodosBotoesLayout.setVerticalGroup(
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTodosBotoesLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
         grdFeedBacks.setModel(new javax.swing.table.DefaultTableModel(
@@ -223,7 +224,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                         .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                                .addGap(0, 92, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -235,12 +236,14 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
@@ -286,11 +289,11 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idFeedbackEditando > 0) {
-                feedBackController.atualizar(idFeedbackEditando, panStars.getStar(), txtComentario.getText(), "23/11/2023", servicoSelecionado, SessionManager.getId());
+                feedBackController.atualizar(idFeedbackEditando, panStars.getStar(), txtComentario.getText(), Data.pegaDataSistema(), servicoSelecionado, SessionManager.getId());
 
             } else {
 
-                feedBackController.salvar(panStars.getStar(), txtComentario.getText(), "23/11/2023", servicoSelecionado, SessionManager.getId());
+                feedBackController.salvar(panStars.getStar(), txtComentario.getText(), Data.pegaDataSistema(), servicoSelecionado, SessionManager.getId());
             }
             //Comando bastante importante
             this.idFeedbackEditando = -1L;
