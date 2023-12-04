@@ -4,17 +4,17 @@
  */
 package controller;
 
-import model.*;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
  * @author ruiz
  */
 public class ProdutoController {
-    
+
 }

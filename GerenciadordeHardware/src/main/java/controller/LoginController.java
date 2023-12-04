@@ -7,10 +7,11 @@ package controller;
 import model.*;
 import lombok.*;
 import model.validations.LoginValidate;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
@@ -19,15 +20,15 @@ import model.validations.LoginValidate;
 public class LoginController {
 
     private UsuarioController usuarioController;
-        
-    public Login validarLogin(String email , String senha) throws Exception{
+
+    public Login validarLogin(String email, String senha) throws Exception {
         LoginValidate loginValidate = new LoginValidate();
         return loginValidate.validar(email, senha);
     }
-    
-    public int accessManager(Object obj){
+
+    public int accessManager(Object obj) {
         LoginValidate loginValidate = new LoginValidate();
         return loginValidate.accessManager(obj);
     }
-    
+
 }

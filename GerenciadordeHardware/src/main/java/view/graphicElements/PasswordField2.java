@@ -56,7 +56,7 @@ public class PasswordField2 extends JPasswordField {
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
-    
+
     // Add getter and setter for label text color
     public Color getLabelTextColor() {
         return labelTextColor;
@@ -66,7 +66,6 @@ public class PasswordField2 extends JPasswordField {
         this.labelTextColor = labelTextColor;
         repaint(); // Redraw the component to reflect the new color
     }
-    
 
     private final Animator animator;
     private boolean animateHinText = true;
@@ -155,7 +154,6 @@ public class PasswordField2 extends JPasswordField {
 
         eye = new ImageIcon(getClass().getResource("/images/eye.png")).getImage();
         eye_hide = new ImageIcon(getClass().getResource("/images/eye_hide.png")).getImage();
-
 
         //eye_hide = new ImageIcon(getClass().getResource("/java/view/graphicElements/eye_hide.png")).getImage();
         animator = new Animator(300, target);

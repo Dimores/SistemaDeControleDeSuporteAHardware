@@ -6,7 +6,6 @@ package view;
 
 import controller.InstalacaoRedeController;
 import controller.ServicoController;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +15,6 @@ import javax.swing.text.MaskFormatter;
 import model.Cliente;
 import utils.Data;
 import model.InstalacaoRede;
-import model.ManutencaoPreventiva;
 import model.Tecnico;
 import model.exceptions.ServicoException;
 
@@ -25,21 +23,24 @@ import model.exceptions.ServicoException;
  * @author diego
  */
 public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
+
     ServicoController servicoController;
     InstalacaoRedeController instalacaoRedeController;
     private Long idRedeEditando;
     private String dataInstalacaoRede;
-    
+
     dlgSelecaoCliente telaSelecaoCliente;
     dlgSelecaoTecnico telaSelecaoTecnico;
-    
+
     Cliente clienteSelecionado;
     Tecnico tecnicoSelecionado;
-    
+
     // Preço padrao de instalação de rede
     private float precoInstalacaoRede = 80;
+
     /**
      * Creates new form dlgCadastrarInstalacaoRede
+     *
      * @param parent
      * @param modal
      */
@@ -51,16 +52,16 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
         telaSelecaoCliente = new dlgSelecaoCliente(this, true);
         telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
-        
+
         clienteSelecionado = new Cliente();
         tecnicoSelecionado = new Tecnico();
-        
+
         idRedeEditando = -1L;
         dataInstalacaoRede = Data.pegaDataSistema();
         instalacaoRedeController.atualizarTabela(grdRedes);
-        
+
         edtValor.setText(String.valueOf(precoInstalacaoRede));
-        
+
         this.criarMascaraCampos();
     }
 
@@ -386,7 +387,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaSelecaoCliente.setVisible(true);
 
-        if(telaSelecaoCliente.getClienteEscolhido() != null){
+        if (telaSelecaoCliente.getClienteEscolhido() != null) {
             edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
             clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
         }
@@ -402,7 +403,7 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaSelecaoTecnico.setVisible(true);
 
-        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
+        if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
             edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
             tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
         }
@@ -411,15 +412,15 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         InstalacaoRede instalacaoRedeEditando = (InstalacaoRede) this.getObjetoSelecionadoNaGrid(grdRedes);
-        
-        if(instalacaoRedeEditando == null){
+
+        if (instalacaoRedeEditando == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        }else{
+        } else {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(instalacaoRedeEditando);
-            this.idRedeEditando = instalacaoRedeEditando.getId();         
-        }  
+            this.idRedeEditando = instalacaoRedeEditando.getId();
+        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -428,15 +429,15 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         InstalacaoRede instalacaoRedeExcluida = (InstalacaoRede) this.getObjetoSelecionadoNaGrid(grdRedes);
 
         if (instalacaoRedeExcluida == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir a Instalação de Rede  \n("
-                + instalacaoRedeExcluida.getId()+ ", "
-                + instalacaoRedeExcluida.getEnderecoRede() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir a Instalação de Rede  \n("
+                    + instalacaoRedeExcluida.getId() + ", "
+                    + instalacaoRedeExcluida.getEnderecoRede() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -460,16 +461,16 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             if (idRedeEditando > 0) {
-                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoSelecionado, 
-                        clienteSelecionado, Float.parseFloat(edtValor.getText()), 
-                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), 
+                instalacaoRedeController.atualizarInstalacaoRede(idRedeEditando, tecnicoSelecionado,
+                        clienteSelecionado, Float.parseFloat(edtValor.getText()),
+                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(),
                         edtTipoRede.getText(), edtEnderecoRede.getText(), chkPago.isSelected());
             } else {
-                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoSelecionado, 
-                        clienteSelecionado, Float.parseFloat(edtValor.getText()), 
-                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(), 
+                instalacaoRedeController.cadastrarInstalacaoRede(idRedeEditando, tecnicoSelecionado,
+                        clienteSelecionado, Float.parseFloat(edtValor.getText()),
+                        edtDescricao.getText(), dataInstalacaoRede, chkConcluido.isSelected(),
                         edtTipoRede.getText(), edtEnderecoRede.getText(), chkPago.isSelected());
             }
             //Comando bastante importante
@@ -493,14 +494,13 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    
-    public void habilitarCampos(boolean flag){
+    public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
-        }   
+        }
     }
 
-    private void limparCampos(){
+    private void limparCampos() {
         edtValor.setText(String.valueOf(precoInstalacaoRede));
         edtDescricao.setText("");
         edtCliente.setText("Clique aqui para adicionar um Cliente.");
@@ -509,9 +509,9 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtEnderecoRede.setText("");
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
-        
+
     }
-    
+
     private Object getObjetoSelecionadoNaGrid(JTable grd) {
         int rowCliked = grd.getSelectedRow();
         Object obj = null;
@@ -548,7 +548,6 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         edtTipoRede.setText(instalacaoRedeEditando.getTipoRede());
         edtEnderecoRede.setText(instalacaoRedeEditando.getEnderecoRede());
         edtDescricao.setText(instalacaoRedeEditando.getDescricaoServico());
-        
 
         // Obtenha o técnico associado à InstalacaoRede
         tecnicoSelecionado = instalacaoRedeEditando.getTecnicoResponsavel();
@@ -564,11 +563,11 @@ public class dlgCadastrarInstalacaoRede extends javax.swing.JDialog {
         if (clienteSelecionado != null) {
             edtCliente.setText(clienteSelecionado.getNome() + ".");
         }
-        
+
         chkConcluido.setSelected(instalacaoRedeEditando.isConcluido());
         chkPago.setSelected(instalacaoRedeEditando.isPago());
     }
-    
+
     private void criarMascaraCampos() {
         try {
             MaskFormatter ipMask = new MaskFormatter("###.###.##.#");

@@ -3,14 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
@@ -19,7 +20,7 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("DISPOSITIVODEREDE")
 public class DispositivoDeRede extends Produto {
-    
+
     private Long id;
     private String enderecoIP;
     private String fabricante;
@@ -32,8 +33,8 @@ public class DispositivoDeRede extends Produto {
         this.modelo = "";
     }
 
-    public DispositivoDeRede(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, 
-                                            String enderecoIP, String fabricante, String modelo, boolean isPago) { // Atributos de dispositivo de rede
+    public DispositivoDeRede(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao,
+            String enderecoIP, String fabricante, String modelo, boolean isPago) { // Atributos de dispositivo de rede
         super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.id = id;
         this.enderecoIP = enderecoIP;
@@ -62,10 +63,10 @@ public class DispositivoDeRede extends Produto {
     }
 
     public String atributoToCSV() {
-        return this.getNome() + ";" +
-                this.enderecoIP + ";" +
-                this.fabricante + ";" +
-                this.modelo + "\n";
+        return this.getNome() + ";"
+                + this.enderecoIP + ";"
+                + this.fabricante + ";"
+                + this.modelo + "\n";
     }
 
     public void CSVToAtributo(String csv) {
@@ -76,4 +77,3 @@ public class DispositivoDeRede extends Produto {
         this.modelo = vetor[3];
     }
 }
-

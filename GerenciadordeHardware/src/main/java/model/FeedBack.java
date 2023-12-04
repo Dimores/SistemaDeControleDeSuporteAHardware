@@ -26,6 +26,7 @@ import lombok.Setter;
 @Entity
 
 public class FeedBack implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,5 +36,5 @@ public class FeedBack implements Serializable {
     private int notaServico;
     private Long clientID;
     private String dataFeedBack;
-    
+
 }

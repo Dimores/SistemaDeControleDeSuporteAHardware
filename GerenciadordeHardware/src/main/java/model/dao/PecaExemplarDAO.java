@@ -89,7 +89,7 @@ public class PecaExemplarDAO implements IDao {
      */
     public Object findByCodigo(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM PecaExemplar c " + " WHERE codigo = :codigo";
+        jpql = " SELECT c " + " FROM PecaExemplar c " + " WHERE  codigo = :codigo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
@@ -99,32 +99,6 @@ public class PecaExemplarDAO implements IDao {
         }
         return (Peca) lst.get(0);
 
-    }
-
-    // Atualizar a lista de exemplares no banco de dados
-    public void updateAll(List<PecaExemplar> exemplares) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        this.entityManager.getTransaction().begin();
-
-        for (PecaExemplar exemplar : exemplares) {
-            this.entityManager.merge(exemplar);
-        }
-
-        this.entityManager.getTransaction().commit();
-        this.entityManager.close();
-    }
-    
-    // Salvar uma lista de exemplares no banco de dados
-    public void saveAll(List<PecaExemplar> exemplares) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        this.entityManager.getTransaction().begin();
-
-        for (PecaExemplar exemplar : exemplares) {
-            this.entityManager.persist(exemplar);
-        }
-
-        this.entityManager.getTransaction().commit();
-        this.entityManager.close();
     }
 
     @Override

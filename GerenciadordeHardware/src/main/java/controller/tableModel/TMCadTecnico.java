@@ -76,8 +76,6 @@ public class TMCadTecnico extends AbstractTableModel {
                     return aux.getEmail();
                 case COL_TELEFONE:
                     return aux.getTelefone();
-                //case COL_EXCLUIR:
-                    //return new ImageIcon(getClass().getResource("/images/remove.png"));
                
                 default: 
                     break;

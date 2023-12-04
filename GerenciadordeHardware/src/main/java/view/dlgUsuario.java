@@ -4,8 +4,6 @@
  */
 package view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utils.SessionManager;
 
 /**
@@ -13,6 +11,7 @@ import utils.SessionManager;
  * @author ruiz
  */
 public class dlgUsuario extends javax.swing.JDialog {
+
     dlgCadastrarCliente telaCliente;
     dlgCadastrarTecnico telaTecnico;
     dlgCadastrarPeca telaCadastroPeca;
@@ -25,21 +24,20 @@ public class dlgUsuario extends javax.swing.JDialog {
     dlgTelaFeedBack telaFeed;
     dlgSolicitarServicoCliente socilitarServicoCliente;
     dlgPix telaPix;
-    
+
     /**
      * Creates new form FrMain
      */
-    
-    public dlgUsuario(boolean modal){
+    public dlgUsuario(boolean modal) {
         initComponents();
-    
+
     }
-    
-    public dlgUsuario(){
-        
+
+    public dlgUsuario() {
+
     }
-    
-    public dlgUsuario(int code)  {
+
+    public dlgUsuario(int code) {
         initComponents();
         setModal(true);
         habilitarCamposDeAcordoComPrevilegio(code);
@@ -51,38 +49,38 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaDispositivoRede = new dlgCadastrarDispositivoRede(this);
         telaRelatorioManutencao = new dlgCadastrarRelatorioManutencao(this);
         telaRelatorioRede = new dlgCadastrarRelatorioRede(this, SessionManager.getId());
-        telaHistoricoCliente = new dlgHistoricoAtendimentosCliente(this,true,SessionManager.getId());
+        telaHistoricoCliente = new dlgHistoricoAtendimentosCliente(this, true, SessionManager.getId());
         telaHistoricoGerente = new dlgHistoricoAtendimentosGerente(this, true);
         telaFeed = new dlgTelaFeedBack(this, true);
         socilitarServicoCliente = new dlgSolicitarServicoCliente(this, true);
-        
+
     }
 
-    public javax.swing.JLabel getLblUserName(){
+    public javax.swing.JLabel getLblUserName() {
         return this.lblUserName;
     }
-    
-    public String getNomeUsuario(){
+
+    public String getNomeUsuario() {
         return lblUserName.getText();
     }
-    
-    public void habilitarCamposDeAcordoComPrevilegio(int code){
-        switch (code){
+
+    public void habilitarCamposDeAcordoComPrevilegio(int code) {
+        switch (code) {
             // Cliente
             case 1:
-                   btnCadastrarServico.setVisible(false);
-                   btnCadastrarPeca.setVisible(false);
-                   btnCadastrarTecnico.setVisible(false);
-                   btnCadastrarDispositivoDeRede.setVisible(false);
-                   btnCadastrarCliente.setVisible(false);
-                   btnGerarRelatorioManutencao.setVisible(false);
-                   btnHistoricoAtendimentoGerente.setVisible(false);
-                   btnRealizarPagamento.setVisible(false);
-                   
-            break;
-            
+                btnCadastrarServico.setVisible(false);
+                btnCadastrarPeca.setVisible(false);
+                btnCadastrarTecnico.setVisible(false);
+                btnCadastrarDispositivoDeRede.setVisible(false);
+                btnCadastrarCliente.setVisible(false);
+                btnGerarRelatorioManutencao.setVisible(false);
+                btnHistoricoAtendimentoGerente.setVisible(false);
+                btnRealizarPagamento.setVisible(false);
+
+                break;
+
             // Tecnico
-            case 2: 
+            case 2:
                 btnSocilitarServico.setVisible(false);
                 btnSocilitarSuporte.setVisible(false);
                 btnCadastrarTecnico.setVisible(false);
@@ -93,9 +91,9 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnHistoricoAtendimento1.setVisible(false);
                 btnFeedBack1.setVisible(false);
                 btnRealizarPagamento.setVisible(false);
-                   
-            break;
-            
+
+                break;
+
             // Gerente
             case 3:
                 btnSocilitarSuporte.setVisible(false);
@@ -106,11 +104,13 @@ public class dlgUsuario extends javax.swing.JDialog {
                 btnSocilitarServico.setVisible(false);
                 btnCadastrarDispositivoDeRede.setVisible(false);
                 btnRealizarPagamento.setVisible(false);
-            break;
-            default: break;
+                break;
+            default:
+                break;
         }
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -495,7 +495,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaCadastroPeca.habilitarCampos(telaCadastroPeca.getPanCampos2(),false);
         telaCadastroPeca.dispose();
     }*/
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCadastrarCliente;
@@ -520,4 +519,3 @@ public class dlgUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel panUser;
     // End of variables declaration//GEN-END:variables
 }
-

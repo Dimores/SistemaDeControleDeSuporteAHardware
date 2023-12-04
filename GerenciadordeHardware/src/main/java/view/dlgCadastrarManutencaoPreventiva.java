@@ -21,21 +21,24 @@ import model.exceptions.ServicoException;
  * @author diego
  */
 public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
+
     ServicoController servicoController;
     ManutencaoPreventivaController manutencaoPreventivaController;
     private Long idManutencaoEditando;
     private String data;
-    
+
     dlgSelecaoCliente telaSelecaoCliente;
     dlgSelecaoTecnico telaSelecaoTecnico;
-    
+
     Cliente clienteSelecionado;
     Tecnico tecnicoSelecionado;
-    
+
     // Preço padrao de instalação de rede
     private float precoManutencaoPreventiva = 60;
+
     /**
      * Creates new form dlgCadastrarManutencaoPreventiva
+     *
      * @param parent
      * @param modal
      */
@@ -45,17 +48,17 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         manutencaoPreventivaController = new ManutencaoPreventivaController();
         servicoController = new ServicoController();
         this.habilitarCampos(false);
-        
+
         idManutencaoEditando = -1L;
         data = Data.pegaDataSistema();
         manutencaoPreventivaController.atualizarTabela(grdManutencoes);
-        
+
         clienteSelecionado = new Cliente();
         tecnicoSelecionado = new Tecnico();
-        
+
         telaSelecaoCliente = new dlgSelecaoCliente(this, true);
         telaSelecaoTecnico = new dlgSelecaoTecnico(this, true);
-        
+
         edtPreco.setText(String.valueOf(precoManutencaoPreventiva));
     }
 
@@ -371,7 +374,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaSelecaoCliente.setVisible(true);
 
-        if(telaSelecaoCliente.getClienteEscolhido() != null){
+        if (telaSelecaoCliente.getClienteEscolhido() != null) {
             edtCliente.setText(telaSelecaoCliente.getClienteEscolhido().getNome() + ".");
             clienteSelecionado = telaSelecaoCliente.getClienteEscolhido();
         }
@@ -386,7 +389,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaSelecaoTecnico.setVisible(true);
 
-        if(telaSelecaoTecnico.getTecnicoEscolhido() != null){
+        if (telaSelecaoTecnico.getTecnicoEscolhido() != null) {
             edtTecnico.setText(telaSelecaoTecnico.getTecnicoEscolhido().getNome() + ".");
             tecnicoSelecionado = telaSelecaoTecnico.getTecnicoEscolhido();
         }
@@ -395,14 +398,14 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         ManutencaoPreventiva manutencaoPreventivaEditando = (ManutencaoPreventiva) this.getObjetoSelecionadoNaGrid(grdManutencoes);
 
-        if(manutencaoPreventivaEditando == null){
+        if (manutencaoPreventivaEditando == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        }else{
+        } else {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(manutencaoPreventivaEditando);
-            this.idManutencaoEditando = manutencaoPreventivaEditando.getId();         
-        }  
+            this.idManutencaoEditando = manutencaoPreventivaEditando.getId();
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -410,15 +413,15 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         ManutencaoPreventiva manutencaoPreventivaExcluida = (ManutencaoPreventiva) this.getObjetoSelecionadoNaGrid(grdManutencoes);
 
         if (manutencaoPreventivaExcluida == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir a Manutenção  \n("
-                + manutencaoPreventivaExcluida.getId()+ ", "
-                + manutencaoPreventivaExcluida.getValor() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir a Manutenção  \n("
+                    + manutencaoPreventivaExcluida.getId() + ", "
+                    + manutencaoPreventivaExcluida.getValor() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -445,13 +448,13 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
             if (idManutencaoEditando > 0) {
                 manutencaoPreventivaController.atualizarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado,
                         clienteSelecionado, Float.parseFloat(edtPreco.getText()), edtDescricao.getText(),
-                        data, chkConcluido.isSelected(), edtEquipamentos.getText(), 
+                        data, chkConcluido.isSelected(), edtEquipamentos.getText(),
                         edtDescricao.getText(), chkPago.isSelected());
             } else {
                 manutencaoPreventivaController.cadastrarManutencaoPreventiva(idManutencaoEditando, tecnicoSelecionado,
-                        clienteSelecionado, Float.parseFloat(edtPreco.getText()), 
-                        edtDescricao.getText(), data, chkConcluido.isSelected(), 
-                        edtEquipamentos.getText(), 
+                        clienteSelecionado, Float.parseFloat(edtPreco.getText()),
+                        edtDescricao.getText(), data, chkConcluido.isSelected(),
+                        edtEquipamentos.getText(),
                         edtDescricao.getText(), chkPago.isSelected());
             }
             //Comando bastante importante
@@ -475,13 +478,13 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         this.habilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    public void habilitarCampos(boolean flag){
+    public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
-        } 
+        }
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         edtPreco.setText(String.valueOf(precoManutencaoPreventiva));
         edtEquipamentos.setText("");
         edtDescricao.setText("");
@@ -490,7 +493,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
     }
-    
+
     private Object getObjetoSelecionadoNaGrid(JTable grd) {
         int rowCliked = grd.getSelectedRow();
         Object obj = null;
@@ -499,7 +502,7 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public void preencherFormulario(ManutencaoPreventiva manutencaoPreventivaEditando) {
         // Preencha os campos com os dados do consertoComputadorEditando
         edtPreco.setText(String.valueOf(manutencaoPreventivaEditando.getValor()));
@@ -521,12 +524,11 @@ public class dlgCadastrarManutencaoPreventiva extends javax.swing.JDialog {
             edtCliente.setText(clienteSelecionado.getNome() + ".");
         }
 
-        
         chkConcluido.setSelected(manutencaoPreventivaEditando.isConcluido());
         chkPago.setSelected(manutencaoPreventivaEditando.isPago());
-        
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCancelar;

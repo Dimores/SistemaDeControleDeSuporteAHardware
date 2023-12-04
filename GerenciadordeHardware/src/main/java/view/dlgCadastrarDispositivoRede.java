@@ -5,14 +5,11 @@
 package view;
 
 import controller.DispositivoRedeController;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import model.Cliente;
 import model.DispositivoDeRede;
 import model.exceptions.DispositivoRedeException;
 
@@ -21,9 +18,9 @@ import model.exceptions.DispositivoRedeException;
  * @author diego
  */
 public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
+
     DispositivoRedeController dispositivoRedeController;
     Long idDispositivoEditando;
-    
 
     /**
      * Creates new form dlgCadastroServico
@@ -406,7 +403,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             this.habilitarCampos(true);
             this.preencherFormulario(dispositivoRedeEditando);
             this.idDispositivoEditando = dispositivoRedeEditando.getId();
-        }  
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -419,7 +416,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Dispositivo mesmo?  \n("
                     + dispositivoRedeExcluido.getNome() + ", "
-                    + dispositivoRedeExcluido.getEnderecoIP()+ ") ?",
+                    + dispositivoRedeExcluido.getEnderecoIP() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -449,9 +446,9 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             if (idDispositivoEditando > 0) {
                 dispositivoRedeController.atualizarDispositivoRede(idDispositivoEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(fEdtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), fEdtIP.getText(), edtFabricante.getText(), edtModelo.getText());
             } else {
-                dispositivoRedeController.cadastrarDispositivoRede(idDispositivoEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(fEdtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), fEdtIP.getText(), edtFabricante.getText(), edtModelo.getText());          
+                dispositivoRedeController.cadastrarDispositivoRede(idDispositivoEditando, edtCodigo.getText(), edtNome.getText(), edtDescricao.getText(), Double.parseDouble(fEdtPreco.getText()), Integer.parseInt(edtEstoque.getText()), edtCategoria.getText(), fEdtDataFabricacao.getText(), fEdtIP.getText(), edtFabricante.getText(), edtModelo.getText());
             }
-            
+
             //Comando bastante importante
             this.idDispositivoEditando = -1L;
 
@@ -502,7 +499,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             panPreencher.getComponent(i).setVisible(flag);
         }
     }
-    
+
     public void limparCampos() {
         edtNome.setText("");
         edtFabricante.setText("");
@@ -510,7 +507,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
         fEdtPreco.setText("");
         fEdtIP.setText("");
     }
-    
+
     public void preencherFormulario(DispositivoDeRede dr) {
         edtNome.setText(dr.getNome());
         edtFabricante.setText(dr.getFabricante());
@@ -523,8 +520,8 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
         edtEstoque.setText(String.valueOf(dr.getEstoque()));
         edtCategoria.setText(dr.getCategoria());
     }
-    
-    private void criarMascaraCampos(){
+
+    private void criarMascaraCampos() {
         try {
             MaskFormatter ipMask = new MaskFormatter("###.###.##.#");
             ipMask.install(fEdtIP);
@@ -536,7 +533,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdDispositivosRede.getSelectedRow();
         Object obj = null;

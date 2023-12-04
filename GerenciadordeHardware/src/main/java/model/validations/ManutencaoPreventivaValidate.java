@@ -15,13 +15,13 @@ import model.Tecnico;
 public class ManutencaoPreventivaValidate {
 
     public ManutencaoPreventivaValidate() {
-        
+
     }
-    
+
     public ManutencaoPreventiva validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                            String dataServico, boolean concluido, String equipamentos){
+            String dataServico, boolean concluido, String equipamentos) {
         ManutencaoPreventiva manutencaoPreventiva = new ManutencaoPreventiva();
-        
+
         // Validar aqui
         manutencaoPreventiva.setTecnicoResponsavel(tecnicoResponsavel);
         manutencaoPreventiva.setClienteAtendido(clienteAtendido);
@@ -30,9 +30,8 @@ public class ManutencaoPreventivaValidate {
         manutencaoPreventiva.setDataServico(dataServico);
         manutencaoPreventiva.setConcluido(concluido);
         manutencaoPreventiva.setEquipamentos(equipamentos);
-        
-        
+
         return manutencaoPreventiva;
     }
-    
+
 }

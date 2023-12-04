@@ -21,8 +21,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-
-
 public class TextField extends JTextField {
 
     public String getLabelText() {
@@ -40,7 +38,7 @@ public class TextField extends JTextField {
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
-    
+
     // Add getter and setter for label text color
     public Color getLabelTextColor() {
         return labelTextColor;
@@ -59,8 +57,6 @@ public class TextField extends JTextField {
     private String labelText = "Label";
     private Color lineColor = new Color(3, 155, 216);
     private Color labelTextColor = new Color(150, 150, 150);
-
-
 
     public TextField() {
         setOpaque(false); // Set the component as non-opaque
@@ -139,25 +135,25 @@ public class TextField extends JTextField {
         g2.dispose();
     }
 
-private void createHintText(Graphics2D g2) {
-    Insets in = getInsets();
-    g2.setColor(labelTextColor);  // Use the labelTextColor here
-    FontMetrics ft = g2.getFontMetrics();
-    Rectangle2D r2 = ft.getStringBounds(labelText, g2);
-    double height = getHeight() - in.top - in.bottom;
-    double textY = (height - r2.getHeight()) / 2;
-    double size;
-    if (animateHinText) {
-        if (show) {
-            size = 18 * (1 - location);
+    private void createHintText(Graphics2D g2) {
+        Insets in = getInsets();
+        g2.setColor(labelTextColor);  // Use the labelTextColor here
+        FontMetrics ft = g2.getFontMetrics();
+        Rectangle2D r2 = ft.getStringBounds(labelText, g2);
+        double height = getHeight() - in.top - in.bottom;
+        double textY = (height - r2.getHeight()) / 2;
+        double size;
+        if (animateHinText) {
+            if (show) {
+                size = 18 * (1 - location);
+            } else {
+                size = 18 * location;
+            }
         } else {
-            size = 18 * location;
+            size = 18;
         }
-    } else {
-        size = 18;
+        g2.drawString(labelText, in.right, (int) (in.top + textY + ft.getAscent() - size));
     }
-    g2.drawString(labelText, in.right, (int) (in.top + textY + ft.getAscent() - size));
-}
 
     private void createLineStyle(Graphics2D g2) {
         if (isFocusOwner()) {

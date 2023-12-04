@@ -7,26 +7,25 @@ package controller.tableModel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.FeedBack;
-import model.RelatorioRede;
 
 /**
  *
  * @author diego
  */
 public class TMCadFeedBack extends AbstractTableModel {
-    
+
     private List<Object> lista;
-    
+
     public TMCadFeedBack(List<Object> listaFeedBack) {
         this.lista = listaFeedBack;
     }
-    
+
     private final int COL_DATA = 0;
     private final int COL_SERVICO = 1;
-    private final int COL_NOTA = 2; 
-    private final int COL_COMENTARIO = 3;   
-    private final int COL_NOME_CLIENTE = 4;  
-    private final int COL_NOME_TECNICO = 5;  
+    private final int COL_NOTA = 2;
+    private final int COL_COMENTARIO = 3;
+    private final int COL_NOME_CLIENTE = 4;
+    private final int COL_NOME_TECNICO = 5;
 
     @Override
     public int getRowCount() {
@@ -40,7 +39,7 @@ public class TMCadFeedBack extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       FeedBack aux = new FeedBack();
+        FeedBack aux = new FeedBack();
         if (lista.isEmpty()) {
             return aux;
         } else {
@@ -61,22 +60,22 @@ public class TMCadFeedBack extends AbstractTableModel {
                 case COL_NOME_CLIENTE:
                     return aux.getServico().getClienteAtendido().getNome();
                 case COL_NOME_TECNICO:
-                    return aux.getServico().getTecnicoResponsavel().getNome();           
-                default: 
+                    return aux.getServico().getTecnicoResponsavel().getNome();
+                default:
                     break;
             }
         }
         return aux;
     }
-    
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-    
+
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_DATA:
                 return "Data";
@@ -89,7 +88,7 @@ public class TMCadFeedBack extends AbstractTableModel {
             case COL_NOME_CLIENTE:
                 return "Cliente";
             case COL_NOME_TECNICO:
-                return "Tecnico";           
+                return "Tecnico";
             default:
                 break;
         }
@@ -102,5 +101,5 @@ public class TMCadFeedBack extends AbstractTableModel {
         // Aqui você pode definir o tipo de dados das colunas, por exemplo, Double.class para COL_PRECO
         return String.class; // Neste exemplo, todas as colunas são tratadas como Strings
     }
-    
+
 }

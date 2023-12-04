@@ -15,7 +15,8 @@ import java.net.URL;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class PublicIP{
+public class PublicIP {
+
     public static String getPublicIpAdress() {
         try {
             URL url = new URL("https://ipinfo.io");
@@ -33,15 +34,13 @@ public class PublicIP{
             String publicIPAddress = response.toString();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(publicIPAddress);
-            
-            
+
             objectMapper.readTree(publicIPAddress);
             String country = jsonNode.get("country").asText();
             String region = jsonNode.get("region").asText();
             String city = jsonNode.get("city").asText();
 
-           
-           return country + " " + region + " "+ city;
+            return country + " " + region + " " + city;
         } catch (Exception e) {
             e.printStackTrace();
         }

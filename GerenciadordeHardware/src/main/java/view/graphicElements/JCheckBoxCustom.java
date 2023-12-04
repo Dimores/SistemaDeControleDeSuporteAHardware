@@ -16,8 +16,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import javax.swing.JCheckBox;
 import javax.swing.plaf.basic.BasicCheckBoxUI;
-import lombok.Getter;
-import lombok.Setter;
 
 public class JCheckBoxCustom extends JCheckBox {
 
@@ -30,7 +28,7 @@ public class JCheckBoxCustom extends JCheckBox {
     public void setCustomColor(Color customColor) {
         this.customColor = customColor;
     }
-    private Color customColor = new Color(229,9,20);
+    private Color customColor = new Color(229, 9, 20);
 
     public JCheckBoxCustom() {
         setCursor(new Cursor(Cursor.HAND_CURSOR));

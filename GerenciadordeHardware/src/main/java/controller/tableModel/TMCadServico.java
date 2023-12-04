@@ -12,12 +12,11 @@ import model.Servico;
  *
  * @author diegomorelo
  */
-public class TMCadServico extends AbstractTableModel{
-    
+public class TMCadServico extends AbstractTableModel {
+
     private List<Object> lista;
-    
-//idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, tipoSevico
-    private final int COL_TECNICO = 0;    
+
+    private final int COL_TECNICO = 0;
     private final int COL_CLIENTE = 1;
     private final int COL_VALOR = 2;
     private final int COL_DESCRICAO = 3;
@@ -25,8 +24,8 @@ public class TMCadServico extends AbstractTableModel{
     private final int COL_DATA = 5;
     private final int COL_CONCLUIDO = 6;
     private final int COL_PAGO = 7;
-    
-    public TMCadServico(List<Object> lstServicos){
+
+    public TMCadServico(List<Object> lstServicos) {
         lista = lstServicos;
     }
 
@@ -70,18 +69,17 @@ public class TMCadServico extends AbstractTableModel{
                 default:
                     break;
             }
-            
-            
+
         }
-        return aux;   
+        return aux;
     }
-    
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-    
-        @Override
+
+    @Override
     public String getColumnName(int column) {
 
         switch (column) {
@@ -107,11 +105,11 @@ public class TMCadServico extends AbstractTableModel{
 
         return "";
     }
-    
+
     @Override
     public Class getColumnClass(int columnIndex) {
         // Aqui você pode definir o tipo de dados das colunas, por exemplo, Double.class para COL_PRECO
         return String.class; // Neste exemplo, todas as colunas são tratadas como Strings
     }
-    
+
 }

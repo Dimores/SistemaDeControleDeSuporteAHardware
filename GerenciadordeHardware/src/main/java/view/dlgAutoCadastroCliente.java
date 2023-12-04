@@ -19,8 +19,10 @@ import utils.Email;
  * @author diego
  */
 public class dlgAutoCadastroCliente extends javax.swing.JDialog {
+
     ClienteController clienteController;
     Long idClienteEditando;
+
     // Comentario
     /**
      * Creates new form dlgCadastroServico
@@ -245,9 +247,9 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-         try {
-            if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
-                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+        try {
+            if (edtSenha.getText().equals(edtConfirmarSenha.getText())) {
+                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText(), edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
                 Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Mensagem de boas vindas da CyberNinja Support", "Seja Bem-Vindo!", "EmailBoasVindas.html");
                 //Comando bastante importante
                 this.idClienteEditando = -1L;
@@ -260,7 +262,7 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception ex) {
             Logger.getLogger(dlgAutoCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -305,30 +307,27 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
             Logger.getLogger(dlgAutoCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
-    
     public void habilitarCampos(boolean flag) {
-            for (int i = 0; i < panPreencher.getComponents().length; i++) {
-                panPreencher.getComponent(i).setVisible(flag);
-            }
+        for (int i = 0; i < panPreencher.getComponents().length; i++) {
+            panPreencher.getComponent(i).setVisible(flag);
         }
-        
-        public void limparCampos() {
-            edtNome.setText("");
-            fEdtCpf.setText("");
-            fEdtDataNasc.setText("");
-            fEdtEmail.setText("");
-            fEdtTelefone.setText("");
     }
-        
-        public void preencherFormulario(Cliente c) {
-            edtNome.setText(c.getNome());
-            fEdtCpf.setText(c.getCPF());
-            fEdtDataNasc.setText(c.getDataNasc());
-            //edtSenha.setText(c.getSenha());
-            fEdtEmail.setText(c.getEmail());
-            fEdtTelefone.setText(c.getTelefone());
+
+    public void limparCampos() {
+        edtNome.setText("");
+        fEdtCpf.setText("");
+        fEdtDataNasc.setText("");
+        fEdtEmail.setText("");
+        fEdtTelefone.setText("");
+    }
+
+    public void preencherFormulario(Cliente c) {
+        edtNome.setText(c.getNome());
+        fEdtCpf.setText(c.getCPF());
+        fEdtDataNasc.setText(c.getDataNasc());
+        //edtSenha.setText(c.getSenha());
+        fEdtEmail.setText(c.getEmail());
+        fEdtTelefone.setText(c.getTelefone());
     }
 }
-

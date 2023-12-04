@@ -25,6 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PecaExemplar {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,10 +36,10 @@ public class PecaExemplar {
     private int estoque;
     private String categoria;
     private String dataFabricacao;
-    private boolean isPago; 
-    
+    private boolean isPago;
+
     @ManyToOne
     @JoinColumn(name = "peca_id")
     private Peca peca;
-    
+
 }

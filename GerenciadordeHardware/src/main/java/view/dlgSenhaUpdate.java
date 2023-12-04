@@ -5,10 +5,9 @@
 package view;
 
 import controller.UsuarioController;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JOptionPane;
 import model.Usuario;
 import model.validations.SenhaValidate;
 import utils.Criptografia;
@@ -19,7 +18,9 @@ import utils.Email;
  * @author ruiz
  */
 public class dlgSenhaUpdate extends javax.swing.JDialog {
+
     private String verificador;
+
     /**
      * Creates new form dlgSenhaUpdate
      */
@@ -27,9 +28,9 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
         verificador = Criptografia.generateRandomCode();
         setModal(true);
         initComponents();
-       
+
     }
-    
+
     public dlgSenhaUpdate(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         verificador = Criptografia.generateRandomCode();
@@ -198,36 +199,36 @@ public class dlgSenhaUpdate extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        UsuarioController userControll =  new UsuarioController(); 
+        UsuarioController userControll = new UsuarioController();
         SenhaValidate validaSenha = new SenhaValidate();
-        if(!verificador.equals(edtCodigo.getText())){
-            System.out.println("era pra prar"); 
+        if (!verificador.equals(edtCodigo.getText())) {
             return;
         }
-        if(edtSenha.getText().equals(edtConfirmarSenha.getText())){
-            if(validaSenha.validar(edtSenha.getText())){
+        if (edtSenha.getText().equals(edtConfirmarSenha.getText())) {
+            if (validaSenha.validar(edtSenha.getText())) {
                 try {
                     userControll.atualizarSenha((Usuario) userControll.buscarUsuario(edtEmail.getText()), edtSenha.getText());
+                    JOptionPane.showMessageDialog(null, "Senha alterada com sucesso");
+                    this.dispose();
                 } catch (Exception ex) {
                     Logger.getLogger(dlgSenhaUpdate.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } 
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
         // TODO add your handling code here:
-       UsuarioController userControll =  new UsuarioController(); 
-       Usuario usr = (Usuario) userControll.buscarUsuario(edtEmail.getText());
-     
-       Email email = new Email(usr.getNome(), edtEmail.getText(),"Código de Recupercao da CyberNinja" ,verificador, "EmailRecuperacaoSenha.html");
-    }//GEN-LAST:event_btnEnviarCodigoActionPerformed
+        UsuarioController userControll = new UsuarioController();
+        Usuario usr = (Usuario) userControll.buscarUsuario(edtEmail.getText());
 
+        Email email = new Email(usr.getNome(), edtEmail.getText(), "Código de Recupercao da CyberNinja", verificador, "EmailRecuperacaoSenha.html");
+    }//GEN-LAST:event_btnEnviarCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

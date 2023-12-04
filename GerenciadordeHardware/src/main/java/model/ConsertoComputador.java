@@ -3,24 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.util.ArrayList;
 import lombok.*;
-import java.util.Calendar;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
@@ -30,16 +27,14 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue("CONSERTOCOMPUTADOR")
 public class ConsertoComputador extends Servico {
-    
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "peca_conserto",
-        joinColumns = @JoinColumn(name = "conserto_id"),
-        inverseJoinColumns = @JoinColumn(name = "peca_id")
+            name = "peca_conserto",
+            joinColumns = @JoinColumn(name = "conserto_id"),
+            inverseJoinColumns = @JoinColumn(name = "peca_id")
     )
     private List<Peca> pecasSubstituidas;
-    
 
     public ConsertoComputador() {
         super();
@@ -47,21 +42,18 @@ public class ConsertoComputador extends Servico {
     }
 
     public ConsertoComputador(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                              String dataServico, boolean concluido, ArrayList pecasSubstituidas, boolean isPago) {
+            String dataServico, boolean concluido, ArrayList pecasSubstituidas, boolean isPago) {
         super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, isPago);
         this.pecasSubstituidas = pecasSubstituidas;
     }
-
-
 
     @Override
     public String toString() {
         StringBuilder pecas = new StringBuilder();
 
-
-        String txt = super.toString() +
-                "Descrição do Problema: " + super.getDescricaoServico() + "\n" +
-                "Peças Substituídas: " + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "Nenhuma") + "\n";
+        String txt = super.toString()
+                + "Descrição do Problema: " + super.getDescricaoServico() + "\n"
+                + "Peças Substituídas: " + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "Nenhuma") + "\n";
         return txt;
     }
 
@@ -73,7 +65,6 @@ public class ConsertoComputador extends Servico {
     @Override
     public String atributoToCSV() {
         StringBuilder pecas = new StringBuilder();
-
 
         return super.atributoToCSV() + super.getDescricaoServico() + ";" + (pecas.length() > 0 ? pecas.substring(0, pecas.length() - 2) : "") + "\n";
     }
@@ -88,7 +79,5 @@ public class ConsertoComputador extends Servico {
         String pecasCSV = vetor[9];
         String[] pecasArray = pecasCSV.split(",");
 
-
     }
 }
-

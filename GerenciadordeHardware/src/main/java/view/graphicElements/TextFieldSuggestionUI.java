@@ -23,25 +23,24 @@ public class TextFieldSuggestionUI extends MetalTextFieldUI {
     private int round = 15;
     private List<String> items = new ArrayList<>();
     private Color nonEditableBorderColor = new Color(229, 9, 20); // Cor da borda quando não é editável
-    
+
     public List<String> getItems() {
         return items;
     }
-    
+
     public void setItems(List<String> items) {
         this.items = items;
     }
-    
+
     public int getRound() {
         return round;
     }
-    
+
     public void setRound(int round) {
         this.round = round;
         border.setRound(round);
         textfield.repaint();
     }
-    
 
     public TextFieldSuggestionUI(JTextField textfield) {
         this.textfield = textfield;
@@ -95,6 +94,7 @@ public class TextFieldSuggestionUI extends MetalTextFieldUI {
     }
 
     private class Border extends EmptyBorder {
+
         private Color focusColor = new Color(229, 9, 20);
         private Color color = new Color(229, 9, 20);
         private int round;

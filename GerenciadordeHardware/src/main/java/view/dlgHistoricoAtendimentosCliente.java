@@ -15,8 +15,10 @@ import model.Servico;
  * @author ruiz
  */
 public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
-    ServicoController servicoController ;
+
+    ServicoController servicoController;
     dlgPix telaPix;
+
     /**
      * Creates new form dlgHistoricoAtendimentos
      */
@@ -29,7 +31,7 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
             Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public dlgHistoricoAtendimentosCliente(java.awt.Dialog parent, boolean modal, Long id) {
         super(parent, modal);
         initComponents();
@@ -135,23 +137,22 @@ public class dlgHistoricoAtendimentosCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void grdHistóricoServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdHistóricoServicoMouseClicked
-        Servico servicoSelecionado = (Servico) this.getObjetoSelecionadoNaGrid(); 
+        Servico servicoSelecionado = (Servico) this.getObjetoSelecionadoNaGrid();
         try {
-            if(servicoSelecionado.isPago() == false){
+            if (servicoSelecionado.isPago() == false) {
                 telaPix.setVisible(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Este Serviço já foi pago");
-            } 
-            
+            }
+
         } catch (Exception e) {
-              Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(dlgHistoricoAtendimentosCliente.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_grdHistóricoServicoMouseClicked
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCancelar;

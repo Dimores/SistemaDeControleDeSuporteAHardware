@@ -4,43 +4,22 @@
  */
 package view;
 
-import controller.ServicoController;
-import model.Cliente;
-import model.Tecnico;
-import java.lang.String;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import utils.Data;
-import model.Servico;
-import model.exceptions.ServicoException;
-
 /**
  *
  * @author diego
  */
 public class dlgCadastroServico extends javax.swing.JDialog {
-    //Cliente clienteEscolhido;
-    //Tecnico tecnicoEscolhido;
+
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
     dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
     dlgCadastrarConsertoComputador dlgConsertoComputador;
-    
 
     /**
      * Creates new form dlgCadastroServico
      */
     public dlgCadastroServico(java.awt.Dialog parent) {
         super(parent);
-        //clienteEscolhido = new Cliente();
-        //tecnicoEscolhido = new Tecnico();
         initComponents();
-        this.habilitarCampos(false);
-        //servicoController.atualizarTabelaCliente(grdClientes);;
-        //servicoController.atualizarTabelaTecnico(grdTecnicos);
-        //servicoController.atualizarTabela(grdServicos);
     }
 
     /**
@@ -191,34 +170,6 @@ public class dlgCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 
 
-    
-        public void habilitarCampos(boolean flag) {
-                /*lblServicoEfetuado.setEnabled(flag);
-                boxEscolhaServico.setEnabled(flag);
-                lblValor.setEnabled(flag);
-                edtValor.setEnabled(flag);
-                lblCpfCliente.setEnabled(flag);
-                fEdtEmailCliente.setEnabled(flag);
-                btnBuscarCliente.setEnabled(flag);
-                grdClientes.setEnabled(flag);
-                lblCpfTecnico.setEnabled(flag);
-                fEdtEmailTecnico.setEnabled(flag);
-                btnBuscarTecnico.setEnabled(flag);
-                grdTecnicos.setEnabled(flag);
-                lblDescricaoServico.setEnabled(flag);
-                edtDescricaoServico.setEnabled(flag);
-                lblServicos.setEnabled(flag);
-                grdServicos.setEnabled(flag);*/
-                
-        }
-        
-        public void limparCampos(){
-                /*edtValor.setText("");
-                fEdtEmailCliente.setText("");
-                fEdtEmailTecnico.setText("");
-                edtDescricaoServico.setText("");*/
-        }
-        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConsertoComputador;
     private view.graphicElements.BotaoVermelho btnInstalacaoRede;

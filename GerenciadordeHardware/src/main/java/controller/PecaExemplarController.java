@@ -4,13 +4,10 @@
  */
 package controller;
 
-import controller.tableModel.TMCadPeca;
 import java.util.List;
-import javax.swing.JTable;
 import model.Peca;
 import model.PecaExemplar;
 import model.dao.PecaExemplarDAO;
-import utils.CodigoBarra;
 
 /**
  *
@@ -48,16 +45,13 @@ public class PecaExemplarController {
         int estoque = 0;
         List<PecaExemplar> lst = repositorio.findAllByNome(peca.getNome());
 
-        //System.out.println("Lista de exemplares antes da atualização de estoque: " + lst);
         estoque = lst.size();
 
-        //System.out.println("Estoque antes da atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
         peca.setEstoque(estoque);
 
         // Força a atualização do estado da entidade Peca
         repositorio.update(peca);
 
-        //System.out.println("Estoque após a atualização para a peça " + peca.getNome() + ": " + peca.getEstoque());
     }
 
     // Primeiro pegar o ID da peca que esta relacionada com seus exemplares
@@ -69,13 +63,10 @@ public class PecaExemplarController {
 
         if (!lst.isEmpty()) {
             PecaExemplar primeiroExemplar = (PecaExemplar) lst.get(0);
-            //System.out.println("Excluindo exemplar: " + primeiroExemplar);
 
             repositorio.delete(primeiroExemplar);
 
-            //System.out.println("Exemplar excluído com sucesso!");
         } else {
-            System.out.println("Nenhum exemplar encontrado para a peça: " + peca.getNome());
             // Trate o caso em que não há exemplares associados à peça
         }
     }
@@ -120,16 +111,17 @@ public class PecaExemplarController {
         Long idPeca = peca.getId();
         List<PecaExemplar> lst = repositorio.findAllByIdPeca(idPeca);
         int estoqueAntigo = lst.size();
-        int diferenca = estoqueAntigo - estoqueNovo;  
-        
-        if(diferenca > 0){
-           
+        int diferenca = estoqueAntigo - estoqueNovo;
+
+        if (diferenca > 0) {
+
             removerExemplares(diferenca, peca);
-        }else if(diferenca < 0){
-            
+        } else if (diferenca < 0) {
+
             adicionarExemplares(Math.abs(diferenca), peca);
         }
     }
+
     public void removerExemplares(int quantidade, Peca peca) {
         for (int i = 0; i < quantidade; i++) {
             excluirExemplarPeca(peca);

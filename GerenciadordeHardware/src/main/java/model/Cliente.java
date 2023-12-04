@@ -3,17 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
+
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.*;
 import model.interfaces.IUsuario;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 /**
@@ -23,17 +22,17 @@ import model.interfaces.IUsuario;
 
 @Entity
 @DiscriminatorValue("CLIENTE")
-public class Cliente extends Usuario implements IUsuario{
-    
+public class Cliente extends Usuario implements IUsuario {
+
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "usuario_id") // Nome da coluna que faz a ligação com a tabela de usuário
     private Usuario usuario;
-    
+
     @OneToMany(mappedBy = "clienteAtendido")
     private List<Servico> servicosAtendidos;
-    
+
     @OneToMany(mappedBy = "cliente")
     private List<Relatorio> relatoriosCliente;
 
@@ -46,7 +45,6 @@ public class Cliente extends Usuario implements IUsuario{
         this.id = id;
     }
 
-
     @Override
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
@@ -58,31 +56,29 @@ public class Cliente extends Usuario implements IUsuario{
                 + "ID do Cliente: " + this.id + "\n";
         return txt;
     }
-    
-public void copiar(Cliente outro) {
-    super.setNome(outro.getNome());
-    super.setCPF(outro.getCPF());
-    super.setDataNasc(outro.getDataNasc());
-    super.setSenha(outro.getSenha());
-    super.setEmail(outro.getEmail());
-    super.setTelefone(outro.getTelefone());
-    this.setId(outro.getId());
-}
 
-    
-    
+    public void copiar(Cliente outro) {
+        super.setNome(outro.getNome());
+        super.setCPF(outro.getCPF());
+        super.setDataNasc(outro.getDataNasc());
+        super.setSenha(outro.getSenha());
+        super.setEmail(outro.getEmail());
+        super.setTelefone(outro.getTelefone());
+        this.setId(outro.getId());
+    }
+
     public String cabecalho() {
         return "Nome;CPF;Data de Nascimento;Senha;Email;Telefone;ID do Cliente\n";
     }
 
     public String atributoToCSV() {
-        String aux = this.nome + ";" +
-                this.CPF + ";" +
-                this.dataNasc+ ";" +
-                this.senha + ";" +
-                this.email + ";" +
-                this.telefone + ";" +
-                this.id + "\n";
+        String aux = this.nome + ";"
+                + this.CPF + ";"
+                + this.dataNasc + ";"
+                + this.senha + ";"
+                + this.email + ";"
+                + this.telefone + ";"
+                + this.id + "\n";
         return aux;
     }
 
@@ -105,4 +101,3 @@ public void copiar(Cliente outro) {
     }
 
 }
-

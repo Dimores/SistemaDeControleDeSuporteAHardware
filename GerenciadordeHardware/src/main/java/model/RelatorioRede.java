@@ -4,11 +4,8 @@
  */
 package model;
 
-import java.util.Calendar;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.*;
 
 @Getter //constroi os metodos get
@@ -21,33 +18,32 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("RELATORIOREDE")
 public class RelatorioRede extends Relatorio {
-    
+
     private String tipoRede;
-   
-    
+
     public RelatorioRede() {
         super();
         this.tipoRede = "";
     }
-    
+
     public RelatorioRede(Long idRelatorio, String dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
         super(idRelatorio, dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.tipoRede = tipoRede;
     }
-    
+
     public RelatorioRede(String dataRelatorio, String descricao, String tipoRede, Cliente clienteRelacionado, Tecnico tecnicoResponsavel) {
         super(dataRelatorio, descricao, clienteRelacionado, tecnicoResponsavel);
         this.tipoRede = tipoRede;
     }
-    
+
     public String getTipoRede() {
         return tipoRede;
     }
-    
+
     public void setTipoRede(String tipoRede) {
         this.tipoRede = tipoRede;
     }
-    
+
     @Override
     public String toString() {
         return super.toString()

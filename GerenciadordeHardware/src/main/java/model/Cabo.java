@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.awt.Color;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set 
 
@@ -18,13 +19,12 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("CABO")
 public class Cabo extends Peca {
-    
+
     private Long idCabo;
     private int comprimento;
     private Color cor;
     private int bitola;
     private String tipoDeCabo;
-
 
     public Cabo() {
         super();
@@ -34,22 +34,23 @@ public class Cabo extends Peca {
         this.tipoDeCabo = "";
     }
 
-    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria, 
+    public Cabo(Long id, String codigo, String nome, String descricao, double preco, int estoque, String categoria,
             String dataFabricacao, int comprimento, Color cor, int bitola, String tipoDeCabo, boolean isPago) {
         super(codigo, nome, descricao, preco, estoque, categoria, dataFabricacao, isPago);
         this.comprimento = comprimento;
         this.cor = cor;
         this.bitola = bitola;
         this.tipoDeCabo = tipoDeCabo;
+
     }
 
     @Override
     public String toString() {
-        String txt = super.toString() +
-                "Comprimento: " + this.comprimento + " metros\n" +
-                "Cor: " + this.cor.toString() + "\n" +
-                "Bitola: " + this.bitola + " mm\n" +
-                "Tipo de Cabo: " + this.tipoDeCabo + "\n";
+        String txt = super.toString()
+                + "Comprimento: " + this.comprimento + " metros\n"
+                + "Cor: " + this.cor.toString() + "\n"
+                + "Bitola: " + this.bitola + " mm\n"
+                + "Tipo de Cabo: " + this.tipoDeCabo + "\n";
         return txt;
     }
 
@@ -78,4 +79,3 @@ public class Cabo extends Peca {
         this.tipoDeCabo = vetor[vetor.length - 1];
     }
 }
-

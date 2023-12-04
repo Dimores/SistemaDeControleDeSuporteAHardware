@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import model.Cliente;
@@ -23,6 +22,7 @@ import utils.PublicIP;
  * @author diego
  */
 public class dlgCadastrarCliente extends javax.swing.JDialog {
+
     ClienteController clienteController;
     Long idClienteEditando;
 
@@ -353,7 +353,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         Cliente clienteEditando = (Cliente) this.getObjetoSelecionadoNaGrid();
 
         if (clienteEditando == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.habilitarCampos(true);
@@ -367,16 +367,16 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         Cliente clienteExcluido = (Cliente) this.getObjetoSelecionadoNaGrid();
 
         if (clienteExcluido == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Cliente  \n("
-                + clienteExcluido.getNome() + ", "
-                + clienteExcluido.getEmail() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir o Cliente  \n("
+                    + clienteExcluido.getNome() + ", "
+                    + clienteExcluido.getEmail() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -403,10 +403,10 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         try {
             if (idClienteEditando > 0) {
                 Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Alteções no seu cadastro", NtpTimeClient.dataAtualToString() + " em " + PublicIP.getPublicIpAdress(), "EmailAlteracaoCadastro.html");
-                clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   ,edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
-               
+                clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText(), edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+
             } else {
-                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                clienteController.cadastrarCliente(idClienteEditando, edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText(), edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
                 Email email = new Email(edtNome.getText(), fEdtEmail.getText(), "Mensagem de boas vindas da CyberNinja Support", "Seja Bem-Vindo!", "EmailBoasVindas.html");
             }
             //Comando bastante importante
@@ -495,36 +495,36 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
             Logger.getLogger(dlgCadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private Object getObjetoSelecionadoNaGrid() {
-            int rowCliked = grdClientes.getSelectedRow();
-            Object obj = null;
-            if (rowCliked >= 0) {
-                obj = grdClientes.getModel().getValueAt(rowCliked, -1);
-            }
-            return obj;
+        int rowCliked = grdClientes.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdClientes.getModel().getValueAt(rowCliked, -1);
         }
-    
-    public void habilitarCampos(boolean flag) {
-            for (int i = 0; i < panPreencher.getComponents().length; i++) {
-                panPreencher.getComponent(i).setVisible(flag);
-            }
-        }
-        
-        public void limparCampos() {
-            edtNome.setText("");
-            fEdtCpf.setText("");
-            fEdtDataNasc.setText("");
-            fEdtEmail.setText("");
-            fEdtTelefone.setText("");
+        return obj;
     }
-        
-        public void preencherFormulario(Cliente c) {
-            edtNome.setText(c.getNome());
-            fEdtCpf.setText(c.getCPF());
-            fEdtDataNasc.setText(c.getDataNasc());
-            //edtSenha.setText(c.getSenha());
-            fEdtEmail.setText(c.getEmail());
-            fEdtTelefone.setText(c.getTelefone());
+
+    public void habilitarCampos(boolean flag) {
+        for (int i = 0; i < panPreencher.getComponents().length; i++) {
+            panPreencher.getComponent(i).setVisible(flag);
+        }
+    }
+
+    public void limparCampos() {
+        edtNome.setText("");
+        fEdtCpf.setText("");
+        fEdtDataNasc.setText("");
+        fEdtEmail.setText("");
+        fEdtTelefone.setText("");
+    }
+
+    public void preencherFormulario(Cliente c) {
+        edtNome.setText(c.getNome());
+        fEdtCpf.setText(c.getCPF());
+        fEdtDataNasc.setText(c.getDataNasc());
+        //edtSenha.setText(c.getSenha());
+        fEdtEmail.setText(c.getEmail());
+        fEdtTelefone.setText(c.getTelefone());
     }
 }

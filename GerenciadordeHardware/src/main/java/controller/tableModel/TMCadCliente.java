@@ -17,21 +17,18 @@ public class TMCadCliente extends AbstractTableModel {
 
     private List<Object> lista;
     private Object cliente;
-    
-    //private final int COL_ID = 0;       
+     
     private final int COL_NOME = 0;
     private final int COL_CPF = 1;
     private final int COL_DATA_NASC = 2;
-    //private final int COL_SENHA = 4;
     private final int COL_EMAIL = 3;
     private final int COL_TELEFONE = 4;
-    
 
-    public TMCadCliente(List<Object> lstClientes) {        
-        lista = lstClientes;        
+    public TMCadCliente(List<Object> lstClientes) {
+        lista = lstClientes;
     }
-    
-    public TMCadCliente(Object cliente){
+
+    public TMCadCliente(Object cliente) {
         this.cliente = cliente;
     }
 
@@ -46,7 +43,7 @@ public class TMCadCliente extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {               
+    public Object getValueAt(int rowIndex, int columnIndex) {
         Cliente aux = new Cliente();
         if (lista.isEmpty()) {
             return aux;
@@ -67,8 +64,8 @@ public class TMCadCliente extends AbstractTableModel {
                     return aux.getEmail();
                 case COL_TELEFONE:
                     return aux.getTelefone();
-               
-                default: 
+
+                default:
                     break;
             }
         }
@@ -82,10 +79,10 @@ public class TMCadCliente extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_NOME:
-                return "Nome"; 
+                return "Nome";
             case COL_CPF:
                 return "CPF";
             case COL_DATA_NASC:
@@ -105,7 +102,7 @@ public class TMCadCliente extends AbstractTableModel {
     public Class getColumnClass(int columnIndex) {
 //        if(columnIndex == COL_MATRICULA)
 //            return Boolean.class;
-        
+
         return String.class;
     }
 

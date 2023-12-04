@@ -16,36 +16,40 @@ import model.interfaces.Ivalidate;
  * @author ruiz
  */
 public class LoginValidate {
+
     Ivalidate validaEmail;
     Ivalidate validaSenha;
-    
-    public LoginValidate (){
+
+    public LoginValidate() {
         validaEmail = new EmailValidate();
         validaSenha = new SenhaValidate();
     }
-    
-    public Login validar(String email, String senha) throws Exception{
-        if (email.isEmpty()  || senha.isEmpty()){
+
+    public Login validar(String email, String senha) throws Exception {
+        if (email.isEmpty() || senha.isEmpty()) {
             throw new LoginException("Campo Vazio");
         }
-        if(!validaEmail.validar(email)){
+        if (!validaEmail.validar(email)) {
             throw new LoginException("Email invalido");
-        }if (!validaSenha.validar(senha)){
+        }
+        if (!validaSenha.validar(senha)) {
             throw new LoginException("Senha invalida");
         }
-        
-        return new Login();               
+
+        return new Login();
     }
-    
-    public int  accessManager(Object obj){
-        if(obj instanceof Cliente){
+
+    public int accessManager(Object obj) {
+        if (obj instanceof Cliente) {
             return 1;
-        }if(obj instanceof Tecnico){
+        }
+        if (obj instanceof Tecnico) {
             return 2;
-        }if(obj instanceof Gerente){
+        }
+        if (obj instanceof Gerente) {
             return 3;
         }
         return 0;
     }
-    
+
 }

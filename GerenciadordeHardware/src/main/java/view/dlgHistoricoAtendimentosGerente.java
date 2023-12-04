@@ -11,8 +11,10 @@ import controller.ServicoController;
  * @author ruiz
  */
 public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
-    ServicoController servicoController ;
+
+    ServicoController servicoController;
     dlgSelecaoCliente selecaoCliente;
+
     /**
      * Creates new form dlgHistoricoAtendimentos
      */
@@ -23,7 +25,6 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
         servicoController = new ServicoController();
         servicoController.atualizarTabela(grdHistóricoServico);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,15 +155,15 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void edtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtClienteActionPerformed
-      
+
     }//GEN-LAST:event_edtClienteActionPerformed
 
     private void edtClienteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtClienteMouseReleased
-       Long idCliente = new Long(0);
-       selecaoCliente.setVisible(rootPaneCheckingEnabled);
-       idCliente = selecaoCliente.getClienteEscolhido().getId();
-       servicoController.atualizarTabela(grdHistóricoServico, idCliente);// TODO add your handling code here:
-       edtCliente.setText(selecaoCliente.getClienteEscolhido().getNome());
+        Long idCliente = new Long(0);
+        selecaoCliente.setVisible(rootPaneCheckingEnabled);
+        idCliente = selecaoCliente.getClienteEscolhido().getId();
+        servicoController.atualizarTabela(grdHistóricoServico, idCliente);// TODO add your handling code here:
+        edtCliente.setText(selecaoCliente.getClienteEscolhido().getNome());
     }//GEN-LAST:event_edtClienteMouseReleased
 
     private void btnLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltroActionPerformed
@@ -179,7 +180,6 @@ public class dlgHistoricoAtendimentosGerente extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCancelar1;

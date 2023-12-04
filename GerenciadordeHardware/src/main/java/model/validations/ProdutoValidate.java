@@ -13,48 +13,48 @@ import model.exceptions.ProdutoException;
  */
 public class ProdutoValidate {
 
-    public Produto validaCamposEntrada(Long id, String codigo, String nome, String descricao, 
-            double preco, int estoque, String categoria, String dataFabricacao){
-        
+    public Produto validaCamposEntrada(Long id, String codigo, String nome, String descricao,
+            double preco, int estoque, String categoria, String dataFabricacao) {
+
         Produto produto = new Produto();
-        
-        if(codigo.isBlank()){
+
+        if (codigo.isBlank()) {
             throw new ProdutoException("Error - Campo vazio: 'codigo'.");
-        }else if(codigo.length() < 8){
+        } else if (codigo.length() < 8) {
             throw new ProdutoException("Error - Campo inválido: 'codigo'.");
         }
         produto.setCodigo(codigo);
-        
-        if(nome.isBlank()){
+
+        if (nome.isBlank()) {
             throw new ProdutoException("Error - Campo vazio: 'nome'.");
         }
         produto.setNome(nome);
-        
-        if(descricao.isBlank()){
+
+        if (descricao.isBlank()) {
             throw new ProdutoException("Error - Campo vazio: 'descricao'.");
         }
         produto.setDescricao(descricao);
-        
-        if(preco < 0){
+
+        if (preco < 0) {
             throw new ProdutoException("Error - Campo invalido: 'preco'.");
         }
         produto.setPreco(preco);
-        
-        if(estoque < 0){
+
+        if (estoque < 0) {
             throw new ProdutoException("Error - Campo invalido: 'estoque'.");
         }
         produto.setEstoque(estoque);
-        
-        if(categoria.isBlank()){
+
+        if (categoria.isBlank()) {
             throw new ProdutoException("Error - Campo vazio: 'categoria'.");
         }
         produto.setCategoria(categoria);
-        
-        if(dataFabricacao.matches("  /  /    ")){
+
+        if (dataFabricacao.matches("  /  /    ")) {
             throw new ProdutoException("Error - Campo vazio: 'dataFabricacao'.");
         }
         produto.setDataFabricacao(dataFabricacao);
-        
+
         return produto;
     }
 }

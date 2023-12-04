@@ -6,7 +6,8 @@ import java.net.InetAddress;
 import java.util.Date;
 
 public class NtpTimeClient {
-    public static String dataAtualToString (){
+
+    public static String dataAtualToString() {
         try {
             String ntpServer = "pool.ntp.org"; // Servidor NTP de acesso gratuito
             NTPUDPClient client = new NTPUDPClient();
@@ -19,7 +20,7 @@ public class NtpTimeClient {
 
             // Exibe a hora obtida do servidor NTP
             client.close();
-            return ""+date;
+            return "" + date;
         } catch (Exception e) {
             e.printStackTrace();
         }

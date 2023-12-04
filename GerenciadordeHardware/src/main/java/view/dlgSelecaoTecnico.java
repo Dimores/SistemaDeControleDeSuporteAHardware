@@ -14,8 +14,10 @@ import model.exceptions.TecnicoException;
  * @author diego
  */
 public class dlgSelecaoTecnico extends javax.swing.JDialog {
+
     Tecnico tecnicoEscolhido;
     TecnicoController tecnicoController;
+
     /**
      * Creates new form dlgSelecaoTecnico
      */
@@ -141,16 +143,16 @@ public class dlgSelecaoTecnico extends javax.swing.JDialog {
         tecnicoEscolhido = (Tecnico) this.getObjetoSelecionadoNaGrid();
 
         if (tecnicoEscolhido == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher o Tecnico  \n("
-                + tecnicoEscolhido.getNome() + ", "
-                + tecnicoEscolhido.getEmail() + ") ?",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja escolher o Tecnico  \n("
+                    + tecnicoEscolhido.getNome() + ", "
+                    + tecnicoEscolhido.getEmail() + ") ?",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
@@ -158,13 +160,12 @@ public class dlgSelecaoTecnico extends javax.swing.JDialog {
                 } catch (TecnicoException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-            }else if(response == JOptionPane.CANCEL_OPTION){
+            } else if (response == JOptionPane.CANCEL_OPTION) {
                 tecnicoEscolhido = null;
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdTecnicos.getSelectedRow();
         Object obj = null;
@@ -173,11 +174,11 @@ public class dlgSelecaoTecnico extends javax.swing.JDialog {
         }
         return obj;
     }
-    
-    public Tecnico getTecnicoEscolhido(){
+
+    public Tecnico getTecnicoEscolhido() {
         return this.tecnicoEscolhido;
     }
-    
+
     /**
      * @param args the command line arguments
      */

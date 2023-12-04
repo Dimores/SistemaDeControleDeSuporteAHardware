@@ -3,21 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
-import java.util.List;
-import javax.persistence.CascadeType;
+
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 
@@ -25,14 +20,14 @@ import lombok.*;
  *
  * @author ruiz
  */
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 public class Produto {
-    @Id    
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
     private String codigo;
     private String nome;
     private String descricao;
@@ -40,9 +35,9 @@ public class Produto {
     private int estoque;
     private String categoria;
     private String dataFabricacao;
-    private boolean isPago; 
-    
-    public Produto(){
+    private boolean isPago;
+
+    public Produto() {
         this.codigo = "";
         this.nome = "";
         this.descricao = "";
@@ -52,9 +47,8 @@ public class Produto {
         this.dataFabricacao = "";
         this.isPago = false;
     }
-    
-    
-   public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, boolean isPago) {
+
+    public Produto(String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao, boolean isPago) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -92,13 +86,13 @@ public class Produto {
     }
 
     public String atributoToCSV() {
-        String aux = this.codigo + ";" +
-                this.nome + ";" +
-                this.descricao + ";" +
-                this.preco + ";" +
-                this.estoque + ";" +
-                this.categoria + ";" +
-                this.dataFabricacao + "\n";
+        String aux = this.codigo + ";"
+                + this.nome + ";"
+                + this.descricao + ";"
+                + this.preco + ";"
+                + this.estoque + ";"
+                + this.categoria + ";"
+                + this.dataFabricacao + "\n";
         return aux;
     }
 
@@ -115,4 +109,3 @@ public class Produto {
         // Exemplo: this.dataFabricacao = converterStringParaCalendar(vetor[6]);
     }
 }
-

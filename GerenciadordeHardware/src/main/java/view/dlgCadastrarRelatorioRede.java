@@ -3,11 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+
 import controller.ClienteController;
 import controller.InstalacaoRedeController;
 import controller.RelatorioRedeController;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,28 +14,30 @@ import model.Cliente;
 import model.InstalacaoRede;
 import utils.Data;
 import model.RelatorioRede;
-import model.Tecnico;
 import model.exceptions.RelatorioRedeException;
 import utils.SessionManager;
+
 /**
  *
  * @author diego
  */
 public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
+
     private String dataRelatorio;
     private ClienteController clienteController;
     private InstalacaoRedeController instalacaoController;
     Long idRelatorioRedeEditando;
-    
+
     dlgSelecaoInstalacaoRede telaSelecaoInstalacaoRede;
-    
+
     Cliente clienteSelecionado;
-    
+
     InstalacaoRede instalacaoRedeRelacionada;
-    
+
     RelatorioRedeController relatorioRedeController;
-    
+
     Long idInstalacaoRede;
+
     /**
      * Creates new form dlgCadastrarRelatorioRede
      */
@@ -44,26 +45,23 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         super(parent);
         initComponents();
         this.setModal(true);
-        
 
-                
-        dataRelatorio = Data.pegaDataSistema();     
-        
+        dataRelatorio = Data.pegaDataSistema();
+
         relatorioRedeController = new RelatorioRedeController();
         clienteController = new ClienteController();
         instalacaoController = new InstalacaoRedeController();
-        
+
         clienteSelecionado = new Cliente();
-        
+
         instalacaoRedeRelacionada = new InstalacaoRede();
-        
+
         idRelatorioRedeEditando = -1L;
-        
+
         clienteSelecionado = clienteController.buscarCliente(SessionManager.getId());
-        
+
         relatorioRedeController.atualizarTabela(grdRelatoriosRede, SessionManager.getId());
-        
-        
+
     }
 
     /**
@@ -376,9 +374,9 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         // TODO add your handling code here:
         RelatorioRede relatorioRedeEditando = (RelatorioRede) this.getObjetoSelecionadoNaGrid();
 
-        if(relatorioRedeEditando == null){
+        if (relatorioRedeEditando == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        }else{
+        } else {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(relatorioRedeEditando);
@@ -391,15 +389,15 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         RelatorioRede relatorioRedeExcluido = (RelatorioRede) this.getObjetoSelecionadoNaGrid();
 
         if (relatorioRedeExcluido == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Relatorio de Rede  \n("
-                + relatorioRedeExcluido.getIdRelatorio()+ ", "
-                + relatorioRedeExcluido.getDescricao()+ ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir o Relatorio de Rede  \n("
+                    + relatorioRedeExcluido.getIdRelatorio() + ", "
+                    + relatorioRedeExcluido.getDescricao() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -423,14 +421,14 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             if (idRelatorioRedeEditando > 0) {
                 relatorioRedeController.atualizarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(),
                         instalacaoRedeRelacionada.getClienteAtendido(), instalacaoRedeRelacionada.getTecnicoResponsavel(),
                         edtTipoRede.getText(), instalacaoRedeRelacionada);
             } else {
-                relatorioRedeController.cadastrarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(), 
+                relatorioRedeController.cadastrarRelatorioRede(idRelatorioRedeEditando, dataRelatorio, edtDescricao.getText(),
                         instalacaoRedeRelacionada.getClienteAtendido(), instalacaoRedeRelacionada.getTecnicoResponsavel(), instalacaoRedeRelacionada.getTipoRede(),
                         instalacaoRedeRelacionada);
             }
@@ -457,12 +455,12 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
 
     private void edtInstalacaoRedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtInstalacaoRedeMouseClicked
         // TODO add your handling code here:
-        telaSelecaoInstalacaoRede = new dlgSelecaoInstalacaoRede(this,true);
+        telaSelecaoInstalacaoRede = new dlgSelecaoInstalacaoRede(this, true);
         telaSelecaoInstalacaoRede.setVisible(true);
-        if(telaSelecaoInstalacaoRede.getInstalacaoRedeEscolhida() != null){
+        if (telaSelecaoInstalacaoRede.getInstalacaoRedeEscolhida() != null) {
             instalacaoRedeRelacionada = telaSelecaoInstalacaoRede.getInstalacaoRedeEscolhida();
             edtInstalacaoRede.setText("Id: " + instalacaoRedeRelacionada.getId() + ", Descrição: " + instalacaoRedeRelacionada.getDescricaoServico());
-            edtCliente. setText(clienteSelecionado.getNome());
+            edtCliente.setText(clienteSelecionado.getNome());
             edtTecnico.setText(instalacaoRedeRelacionada.getTecnicoResponsavel().getNome());
             edtTipoRede.setText(instalacaoRedeRelacionada.getTipoRede());
         }
@@ -485,31 +483,31 @@ public class dlgCadastrarRelatorioRede extends javax.swing.JDialog {
         edtCliente.setText(clienteSelecionado.getNome());
         edtTecnico.setText("");
     }
-    
+
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
-        }    
+        }
     }
-    
+
     public void preencherFormulario(RelatorioRede relatorioRede) {
         edtTipoRede.setText(relatorioRede.getTipoRede());
         edtDescricao.setText(relatorioRede.getDescricao());
 
         // Obtenha o cliente associado ao relatorio de rede
         clienteSelecionado = relatorioRede.getCliente();
-        
+
         edtTecnico.setText(relatorioRede.getTecnico().getNome());
 
         // Se o cliente não for nulo, selecione-o na grade de clientes (grdClientes)
         if (clienteSelecionado != null) {
             edtCliente.setText(clienteSelecionado.getNome() + ".");
         }
-        
+
         instalacaoRedeRelacionada = relatorioRede.getInstalacaoRede();
         edtInstalacaoRede.setText("Id: " + instalacaoRedeRelacionada.getId());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnCancelar;
     private view.graphicElements.BotaoVermelho btnConfirmar;

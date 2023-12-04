@@ -13,13 +13,12 @@ import model.Tecnico;
  * @author diego
  */
 public class InstalacaoRedeValidate {
-    
-    
+
     public InstalacaoRede validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                          String dataServico, boolean concluido, String tipoRede, String enderecoRede){
-        
+            String dataServico, boolean concluido, String tipoRede, String enderecoRede) {
+
         InstalacaoRede instalacaoRede = new InstalacaoRede();
-        
+
         // Validação aqui
         instalacaoRede.setTecnicoResponsavel(tecnicoResponsavel);
         instalacaoRede.setClienteAtendido(clienteAtendido);
@@ -29,8 +28,8 @@ public class InstalacaoRedeValidate {
         instalacaoRede.setConcluido(concluido);
         instalacaoRede.setTipoRede(tipoRede);
         instalacaoRede.setEnderecoRede(enderecoRede);
-        
+
         return instalacaoRede;
     }
-    
+
 }

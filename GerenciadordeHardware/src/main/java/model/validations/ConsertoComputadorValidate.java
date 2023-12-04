@@ -4,7 +4,6 @@
  */
 package model.validations;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
 import model.ConsertoComputador;
@@ -16,8 +15,9 @@ import model.exceptions.ConsertoComputadorException;
  * @author diego
  */
 public class ConsertoComputadorValidate {
+
     public ConsertoComputador validaCamposEntrada(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                    String dataServico, boolean concluido, List pecasSubstituidas) {
+            String dataServico, boolean concluido, List pecasSubstituidas) {
         // Valide os campos
         if (tecnicoResponsavel == null) {
             throw new ConsertoComputadorException("Técnico responsável não pode ser nulo.");
@@ -34,7 +34,7 @@ public class ConsertoComputadorValidate {
         if (dataServico == null || dataServico.isEmpty()) {
             throw new ConsertoComputadorException("A data do serviço não pode ser vazia.");
         }
-        
+
         // Crie a instância de ConsertoComputador
         ConsertoComputador consertoComputador = new ConsertoComputador();
         consertoComputador.setTecnicoResponsavel(tecnicoResponsavel);
@@ -48,4 +48,3 @@ public class ConsertoComputadorValidate {
         return consertoComputador;
     }
 }
-

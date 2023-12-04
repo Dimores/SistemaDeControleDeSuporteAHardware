@@ -13,18 +13,18 @@ import model.RelatorioRede;
  * @author diego
  */
 public class TMRelatorioRede extends AbstractTableModel {
-    
+
     private List<Object> lista;
-    
+
     public TMRelatorioRede(List<Object> listaRelatoriosRede) {
         this.lista = listaRelatoriosRede;
     }
-    
+
     private final int COL_DATA = 0;
-    private final int COL_DESCRICAO = 1;    
+    private final int COL_DESCRICAO = 1;
     private final int COL_TIPO_REDE = 2;
-    private final int COL_NOME_CLIENTE = 3;  
-    private final int COL_NOME_TECNICO = 4;  
+    private final int COL_NOME_CLIENTE = 3;
+    private final int COL_NOME_TECNICO = 4;
 
     @Override
     public int getRowCount() {
@@ -57,33 +57,33 @@ public class TMRelatorioRede extends AbstractTableModel {
                 case COL_NOME_CLIENTE:
                     return aux.getCliente().getNome();
                 case COL_NOME_TECNICO:
-                    return aux.getTecnico().getNome();           
-                default: 
+                    return aux.getTecnico().getNome();
+                default:
                     break;
             }
         }
         return aux;
     }
-    
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-    
+
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_DATA:
                 return "Data";
             case COL_DESCRICAO:
-                return "Descricao"; 
+                return "Descricao";
             case COL_TIPO_REDE:
                 return "Tipo de Rede";
             case COL_NOME_CLIENTE:
                 return "Cliente";
             case COL_NOME_TECNICO:
-                return "Tecnico";           
+                return "Tecnico";
             default:
                 break;
         }
@@ -96,5 +96,5 @@ public class TMRelatorioRede extends AbstractTableModel {
         // Aqui você pode definir o tipo de dados das colunas, por exemplo, Double.class para COL_PRECO
         return String.class; // Neste exemplo, todas as colunas são tratadas como Strings
     }
-    
+
 }

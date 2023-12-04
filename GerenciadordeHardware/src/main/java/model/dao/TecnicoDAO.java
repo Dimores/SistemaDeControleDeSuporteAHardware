@@ -1,37 +1,29 @@
 package model.dao;
 
 import factory.DatabaseJPA;
-import factory.Persistencia;
 import model.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.interfaces.*;
 
 public class TecnicoDAO implements IDao {
-private EntityManager entityManager;
+
+    private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
-
 
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.persist(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
@@ -56,10 +48,10 @@ private EntityManager entityManager;
         Tecnico procurado = (Tecnico) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        procurado = this.entityManager.find(Tecnico.class ,procurado.getId());
+        procurado = this.entityManager.find(Tecnico.class, procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return procurado;   
+        return procurado;
     }
 
     /**
@@ -88,23 +80,22 @@ private EntityManager entityManager;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT u " + "FROM Usuario u Where id = :id";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id",id);
+        qry.setParameter("id", id);
         Object lst = qry.getSingleResult();
         this.entityManager.close();
-        if(lst instanceof Tecnico){
+        if (lst instanceof Tecnico) {
             return lst;
         }
         return null;
     }
 
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

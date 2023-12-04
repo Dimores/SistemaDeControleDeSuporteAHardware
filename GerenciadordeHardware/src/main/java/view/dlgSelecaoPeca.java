@@ -11,14 +11,17 @@ import javax.swing.JOptionPane;
 import model.Peca;
 import model.exceptions.PecaException;
 import controller.PecaExemplarController;
+
 /**
  *
  * @author diego
  */
 public class dlgSelecaoPeca extends javax.swing.JDialog {
+
     List<Peca> pecasSelecionadas;
     PecaController pecaController;
     PecaExemplarController exemplar;
+
     /**
      * Creates new form dlgSelecaoPeca
      */
@@ -123,55 +126,46 @@ public class dlgSelecaoPeca extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-     if (pecasSelecionadas.isEmpty()) {
-         JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-     } else {
-         int response = JOptionPane.showConfirmDialog(null,
-                 "Deseja escolher essas Peças?  \n(",
-                 "Confirmar escolha",
-                 JOptionPane.OK_CANCEL_OPTION,
-                 JOptionPane.QUESTION_MESSAGE);
-         if (response == JOptionPane.OK_OPTION) {
-             try {
-                 List<Peca> pecasRemover = new ArrayList<>();
-                 for (Peca peca : pecasSelecionadas) {
-                    if(peca.getEstoque() <=0){
-                       pecasRemover.add(peca);
+        if (pecasSelecionadas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null,
+                    "Deseja escolher essas Peças?  \n(",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+                try {
+                    List<Peca> pecasRemover = new ArrayList<>();
+                    for (Peca peca : pecasSelecionadas) {
+                        if (peca.getEstoque() <= 0) {
+                            pecasRemover.add(peca);
+                        }
                     }
-                 }
-                 if(!pecasRemover.isEmpty()){
-                     JOptionPane.showMessageDialog(this, "Algumas peças estavam fora dde estoque e não puderam ser selecionadas");
-                 }
-                 pecasSelecionadas.removeAll(pecasRemover);
-                 
-                 this.dispose();
-             } catch (PecaException ex) {
-                 JOptionPane.showMessageDialog(this, ex.getMessage());
-             }
-         } else if (response == JOptionPane.CANCEL_OPTION) {
-             pecasSelecionadas = null;
-         }
-     }
+                    if (!pecasRemover.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Algumas peças estavam fora dde estoque e não puderam ser selecionadas");
+                    }
+                    pecasSelecionadas.removeAll(pecasRemover);
+
+                    this.dispose();
+                } catch (PecaException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            } else if (response == JOptionPane.CANCEL_OPTION) {
+                pecasSelecionadas = null;
+            }
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void grdPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdPecasMouseClicked
         // TODO add your handling code here:
         pecasSelecionadas = getObjetosSelecionadosNaGrid();
-
-        if (!pecasSelecionadas.isEmpty()) {
-            //System.out.println("Peças Selecionadas:");
-            for (Peca peca : pecasSelecionadas) {
-                //System.out.println(peca.getNome());
-            }
-        } else {
-            //System.out.println("Nenhuma peça selecionada.");
-        }
     }//GEN-LAST:event_grdPecasMouseClicked
 
-    public List<Peca> getPecasSelecionadas(){
+    public List<Peca> getPecasSelecionadas() {
         return this.pecasSelecionadas;
     }
-    
+
     private List<Peca> getObjetosSelecionadosNaGrid() {
         int[] selectedRows = grdPecas.getSelectedRows();
         List<Peca> objetosSelecionados = new ArrayList<>();
@@ -179,14 +173,14 @@ public class dlgSelecaoPeca extends javax.swing.JDialog {
         for (int row : selectedRows) {
             Object obj = grdPecas.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
             if (obj != null) {
-                objetosSelecionados.add((Peca)(obj));
-                
+                objetosSelecionados.add((Peca) (obj));
+
             }
         }
 
         return objetosSelecionados;
     }
-    
+
     /**
      * @param args the command line arguments
      */

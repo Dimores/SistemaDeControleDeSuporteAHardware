@@ -5,8 +5,6 @@
 package view;
 
 import controller.ClienteController;
-import controller.UsuarioController;
-import javax.swing.JOptionPane;
 import model.Cliente;
 import utils.Email;
 import utils.NtpTimeClient;
@@ -18,9 +16,11 @@ import utils.SessionManager;
  * @author diego
  */
 public class dlgSolicitarServicoCliente extends javax.swing.JDialog {
+
     ClienteController usuarioController;
     Cliente cliente;
     private String tipoServico;
+
     /**
      * Creates new form dlgCadastroServico
      */
@@ -191,31 +191,30 @@ public class dlgSolicitarServicoCliente extends javax.swing.JDialog {
 
     private void cbxTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoServicoActionPerformed
         // TODO add your handling code here:
-        if(cbxTipoServico.getSelectedIndex() == 0){
+        if (cbxTipoServico.getSelectedIndex() == 0) {
             tipoServico = "Consertar PC";
-        }else if(cbxTipoServico.getSelectedIndex() == 1){
+        } else if (cbxTipoServico.getSelectedIndex() == 1) {
             tipoServico = "Instalar Rede";
-        }else{
+        } else {
             tipoServico = "Manutencao Preventiva";
         }
     }//GEN-LAST:event_cbxTipoServicoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        try{
-            Email email = new Email(cliente.getNome() + " " + cliente.getCPF() + " "+ cliente.getEmail(),"cyberninja087@gmail.com",
-                "Nova Solicitação de serviço", tipoServico + "<br>" + " " + NtpTimeClient.dataAtualToString() + " em " + PublicIP.getPublicIpAdress() + "<br>" + txtProblema.getText()
-                , "EmailSocilitarServico.html");
+        try {
+            Email email = new Email(cliente.getNome() + " " + cliente.getCPF() + " " + cliente.getEmail(), "cyberninja087@gmail.com",
+                    "Nova Solicitação de serviço", tipoServico + "<br>" + " " + NtpTimeClient.dataAtualToString() + " em " + PublicIP.getPublicIpAdress() + "<br>" + txtProblema.getText(),
+                     "EmailSocilitarServico.html");
             lblMensagem.setText("Sua solicitação foi enviada com sucesso! \n Acompanhe o cadastro no seu histórico de atendimento.");
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException("Nao foi possivel enviar o email");
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-    this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
