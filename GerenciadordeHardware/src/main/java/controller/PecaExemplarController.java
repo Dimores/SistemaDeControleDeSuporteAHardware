@@ -120,23 +120,16 @@ public class PecaExemplarController {
         Long idPeca = peca.getId();
         List<PecaExemplar> lst = repositorio.findAllByIdPeca(idPeca);
         int estoqueAntigo = lst.size();
-        System.out.println("Estoque antigo = " + estoqueAntigo);
-        System.out.println("Estoque novo = " + estoqueNovo);
-        
-        int diferenca = estoqueAntigo - estoqueNovo;
-        System.out.println("Diferenca = " + diferenca);
+        int diferenca = estoqueAntigo - estoqueNovo;  
         
         if(diferenca > 0){
-            System.out.println("Diminuindo " + diferenca + " do estoque.");
+           
             removerExemplares(diferenca, peca);
         }else if(diferenca < 0){
-            System.out.println("Aumentando " + Math.abs(diferenca) + " do estoque.");
+            
             adicionarExemplares(Math.abs(diferenca), peca);
-        }else{
-            System.out.println("Estoque nao mudou.");
         }
     }
-
     public void removerExemplares(int quantidade, Peca peca) {
         for (int i = 0; i < quantidade; i++) {
             excluirExemplarPeca(peca);

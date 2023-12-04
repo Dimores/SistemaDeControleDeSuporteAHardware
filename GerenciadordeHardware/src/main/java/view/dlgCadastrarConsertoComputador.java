@@ -7,6 +7,7 @@ package view;
 
 import controller.ConsertoComputadorController;
 import controller.PecaController;
+import controller.PecaExemplarController;
 import controller.ServicoController;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
     
     Cliente clienteSelecionado;
     Tecnico tecnicoSelecionado;
+    PecaExemplarController exemplarController;
 
     // O preço do conserto vai ser sempre 100 + o preço das Peças.
     private float preco = 100;
@@ -74,6 +76,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         
         // Setando o preco inicial
         edtValor.setText(String.valueOf(preco));
+        exemplarController = new PecaExemplarController();
     }
 
     /**
@@ -459,6 +462,14 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
                         edtDescricaoProblema.getText(), data, chkConcluido.isSelected(), 
                         pecasSelecionadas, chkPago.isSelected());
             }
+            for(Peca peca : pecasSelecionadas){
+                if (peca.getEstoque() > 0) {
+                         exemplarController.excluirExemplarPeca(peca);
+                         exemplarController.atualizarEstoquePeca(peca);
+                     }
+            }
+            
+            
             //Comando bastante importante
             this.idConsertoComputadorEditando = -1L;
             

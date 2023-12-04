@@ -89,7 +89,7 @@ public class PecaExemplarDAO implements IDao {
      */
     public Object findByCodigo(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM PecaExemplar c " + " WHERE  c.codigo like :codigo";
+        jpql = " SELECT c " + " FROM PecaExemplar c " + " WHERE codigo = :codigo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();

@@ -69,7 +69,7 @@ private EntityManager entityManager;
      */
     public Object findByCodigo(String codigo) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM Produto c " + " WHERE  c.codigo like :codigo";
+        jpql = " SELECT c " + " FROM Produto c " + " WHERE  codigo = :codigo";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
@@ -82,7 +82,7 @@ private EntityManager entityManager;
     
     public Object findById(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT c " + " FROM Produto c " + " WHERE  c.id like :id";
+        jpql = " SELECT c " + " FROM Produto c " + " WHERE  id = :id";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("id", id);
         List lst = qry.getResultList();
