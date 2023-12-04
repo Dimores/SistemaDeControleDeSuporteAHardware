@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.util.Calendar;
 import javax.persistence.*;
 import lombok.*;
 
@@ -35,15 +34,14 @@ public class Relatorio {
     @ManyToOne
     @JoinColumn(name = "tecnico_id")  // Nome da coluna que faz referência ao cliente na tabela Relatorio
     private Tecnico tecnico;
-    
+
     @ManyToOne
     @JoinColumn(name = "instalacao_rede_id")
     private InstalacaoRede instalacaoRede;
-    
+
     @ManyToOne
     @JoinColumn(name = "manutencao_preventiva_id")
     private ManutencaoPreventiva manutencaoPreventiva;
-
 
     public Relatorio() {
         this.dataRelatorio = "";

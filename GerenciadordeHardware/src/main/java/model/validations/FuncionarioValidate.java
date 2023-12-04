@@ -9,5 +9,5 @@ package model.validations;
  * @author diegomorelo
  */
 public class FuncionarioValidate extends UsuarioValidate {
-    
+
 }

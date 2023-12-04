@@ -15,18 +15,18 @@ import utils.SessionManager;
  * @author diego
  */
 public class dlgSelecaoInstalacaoRede extends javax.swing.JDialog {
+
     InstalacaoRede instalacaoRedeEscolhida;
 
     InstalacaoRedeController instalacaoRedeController;
-    
-    
+
     /**
      * Creates new form dlgSelecaoInstalacaoRede
      */
     public dlgSelecaoInstalacaoRede(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         instalacaoRedeEscolhida = new InstalacaoRede();
         instalacaoRedeController = new InstalacaoRedeController();
         instalacaoRedeController.atualizarTabela(grdInstalacoesRede, SessionManager.getId());
@@ -129,12 +129,12 @@ public class dlgSelecaoInstalacaoRede extends javax.swing.JDialog {
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher a Instalacao de Rede  \n("
-                + instalacaoRedeEscolhida.getId() + ", "
-                + instalacaoRedeEscolhida.getDescricaoServico() + ") ?",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja escolher a Instalacao de Rede  \n("
+                    + instalacaoRedeEscolhida.getId() + ", "
+                    + instalacaoRedeEscolhida.getDescricaoServico() + ") ?",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
@@ -142,7 +142,7 @@ public class dlgSelecaoInstalacaoRede extends javax.swing.JDialog {
                 } catch (InstalacaoRedeException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-            }else if(response == JOptionPane.CANCEL_OPTION){
+            } else if (response == JOptionPane.CANCEL_OPTION) {
                 instalacaoRedeEscolhida = null;
             }
         }
@@ -156,11 +156,11 @@ public class dlgSelecaoInstalacaoRede extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public InstalacaoRede getInstalacaoRedeEscolhida() {
         return instalacaoRedeEscolhida;
     }
-    
+
     /**
      * @param args the command line arguments
      */

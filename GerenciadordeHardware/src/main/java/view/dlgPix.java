@@ -4,8 +4,6 @@
  */
 package view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utils.PixPaymentGenerator;
 
 /**
@@ -102,7 +100,6 @@ public class dlgPix extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConfirmar;

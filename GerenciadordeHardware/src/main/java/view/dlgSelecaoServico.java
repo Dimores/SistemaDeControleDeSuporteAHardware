@@ -4,12 +4,10 @@
  */
 package view;
 
-import controller.PecaController;
 import controller.ServicoController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.Peca;
 import model.Servico;
 import model.exceptions.PecaException;
 import utils.SessionManager;
@@ -19,9 +17,9 @@ import utils.SessionManager;
  * @author diego
  */
 public class dlgSelecaoServico extends javax.swing.JDialog {
-   // List<Servico> servicoSelecionado;
     Servico servicoEscolhido;
     ServicoController servicoController;
+
     /**
      * Creates new form dlgSelecaoPeca
      */
@@ -29,7 +27,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         servicoController = new ServicoController();
-        servicoController.atualizarTabela(grdServicos,SessionManager.getId());
+        servicoController.atualizarTabela(grdServicos, SessionManager.getId());
         servicoEscolhido = new Servico();
     }
 
@@ -128,16 +126,16 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         servicoEscolhido = (Servico) getObjetoSelecionadoNaGrid();
-        
+
         if (servicoEscolhido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher esse Serviço? \n(",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja escolher esse Serviço? \n(",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
@@ -145,7 +143,7 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
                 } catch (PecaException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-            }else if(response == JOptionPane.CANCEL_OPTION){
+            } else if (response == JOptionPane.CANCEL_OPTION) {
                 servicoEscolhido = null;
             }
         }
@@ -156,10 +154,9 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         servicoEscolhido = (Servico) getObjetoSelecionadoNaGrid();
     }//GEN-LAST:event_grdServicosMouseClicked
 
-   /* public List<Servico> getServicoSelecionados(){
+    /* public List<Servico> getServicoSelecionados(){
         return this.servicoSelecionado;
     }*/
-    
     public List<Servico> getObjetosSelecionadosNaGrid() {
         int[] selectedRows = grdServicos.getSelectedRows();
         List<Servico> objetosSelecionados = new ArrayList<>();
@@ -167,14 +164,14 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         for (int row : selectedRows) {
             Object obj = grdServicos.getModel().getValueAt(row, -1); // Substitua o índice da coluna de acordo com sua necessidade
             if (obj != null) {
-                objetosSelecionados.add((Servico)(obj));
-                
+                objetosSelecionados.add((Servico) (obj));
+
             }
         }
 
         return objetosSelecionados;
     }
-    
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdServicos.getSelectedRow();
         Object obj = null;
@@ -183,11 +180,11 @@ public class dlgSelecaoServico extends javax.swing.JDialog {
         }
         return obj;
     }
-    
-    public Servico getServicoSelecionado(){
+
+    public Servico getServicoSelecionado() {
         return this.servicoEscolhido;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConfirmar;
     private view.graphicElements.TableDark grdServicos;

@@ -16,10 +16,11 @@ import model.interfaces.IDao;
  * @author ruiz
  */
 public class FeedBackDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     @Override
     public void save(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -51,10 +52,9 @@ public class FeedBackDAO implements IDao {
         FeedBack c = this.entityManager.find(procurado.getClass(), procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
 
-    
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -73,15 +73,15 @@ public class FeedBackDAO implements IDao {
         this.entityManager.close();
         return (List<Object>) lst;
     }
-    
-    public List<Object>findAllByClient(Long id){
+
+    public List<Object> findAllByClient(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT u " + "FROM FeedBack u Where clientID = :id";
         qry = this.entityManager.createQuery(jpql);
-         qry.setParameter("id",id);
+        qry.setParameter("id", id);
         List lst = qry.getResultList();
         this.entityManager.close();
         return (List<Object>) lst;
     }
-    
+
 }

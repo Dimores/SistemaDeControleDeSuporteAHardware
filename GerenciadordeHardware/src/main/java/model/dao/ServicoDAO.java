@@ -1,17 +1,9 @@
 package model.dao;
 
 import factory.DatabaseJPA;
-import factory.Persistencia;
 import model.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import model.interfaces.IDao;
 
@@ -107,15 +99,16 @@ public class ServicoDAO implements IDao {
         return lst;
     }
 
-    public Object findById(Long id){
+    public Object findById(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT u " + "FROM Servico u Where id = :id";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id",id);
+        qry.setParameter("id", id);
         Object lst = qry.getSingleResult();
         this.entityManager.close();
         return lst;
     }
+
     /**
      * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
      * remove ele da lstCliente.
@@ -146,6 +139,5 @@ public class ServicoDAO implements IDao {
 
         return lst;
     }
-
 
 }

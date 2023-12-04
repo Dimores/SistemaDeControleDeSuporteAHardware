@@ -9,28 +9,28 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.Cabo;
-import model.Peca;
 
 /**
  *
  * @author ruiz
  */
-public class CaboDAO  extends PecaDAO{
+public class CaboDAO extends PecaDAO {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.persist(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -53,13 +53,13 @@ public class CaboDAO  extends PecaDAO{
 
     @Override
     public Object find(Object obj) {
-        Cabo procurado = (Cabo)  obj;
+        Cabo procurado = (Cabo) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        procurado = this.entityManager.find(Cabo.class ,procurado.getCodigo());
+        procurado = this.entityManager.find(Cabo.class, procurado.getCodigo());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return procurado;   
+        return procurado;
     }
 
     /**
@@ -75,20 +75,20 @@ public class CaboDAO  extends PecaDAO{
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
         this.entityManager.close();
-        if(lst.isEmpty()){
+        if (lst.isEmpty()) {
             return null;
-        }return (Cabo) lst.get(0);
-       
+        }
+        return (Cabo) lst.get(0);
+
     }
 
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -102,5 +102,5 @@ public class CaboDAO  extends PecaDAO{
         this.entityManager.close();
         return true;
     }
-    
+
 }

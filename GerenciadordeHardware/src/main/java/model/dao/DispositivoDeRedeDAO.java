@@ -15,22 +15,23 @@ import model.interfaces.IDao;
  *
  * @author ruiz
  */
-public class DispositivoDeRedeDAO implements IDao{
+public class DispositivoDeRedeDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.merge(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -56,10 +57,10 @@ public class DispositivoDeRedeDAO implements IDao{
         DispositivoDeRede Procurado = (DispositivoDeRede) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        DispositivoDeRede c = this.entityManager.find(DispositivoDeRede.class ,Procurado.getId());
+        DispositivoDeRede c = this.entityManager.find(DispositivoDeRede.class, Procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
 
     /**
@@ -75,20 +76,20 @@ public class DispositivoDeRedeDAO implements IDao{
         qry.setParameter("codigo", codigo);
         List lst = qry.getResultList();
         this.entityManager.close();
-        if(lst.isEmpty()){
+        if (lst.isEmpty()) {
             return null;
-        }return (DispositivoDeRede) lst.get(0);
-       
+        }
+        return (DispositivoDeRede) lst.get(0);
+
     }
 
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

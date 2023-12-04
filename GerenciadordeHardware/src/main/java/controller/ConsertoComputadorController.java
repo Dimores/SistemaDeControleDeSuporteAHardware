@@ -13,68 +13,68 @@ import lombok.*;
 import model.dao.ConsertoComputadorDAO;
 import model.exceptions.ConsertoComputadorException;
 import model.validations.ConsertoComputadorValidate;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
  * @author ruiz
  */
-public class ConsertoComputadorController extends ServicoController{
+public class ConsertoComputadorController extends ServicoController {
+
     ConsertoComputadorDAO repositorio;
-    
-    public ConsertoComputadorController(){
+
+    public ConsertoComputadorController() {
         repositorio = new ConsertoComputadorDAO();
     }
-    
+
     public void atualizarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago){
-        
-        ConsertoComputadorValidate valid = new ConsertoComputadorValidate(); 
+            String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
+
+        ConsertoComputadorValidate valid = new ConsertoComputadorValidate();
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
-                                                        dataServico, concluido, pecasSubstituidas); 
+                dataServico, concluido, pecasSubstituidas);
         novoConsertoComputador.setPago(isPago);
-        
-        
-        novoConsertoComputador.setId(idServico); 
-        
+
+        novoConsertoComputador.setId(idServico);
+
         repositorio.update(novoConsertoComputador);
-        
-        
+
     }
-    
+
     public void cadastrarConsertoComputador(Long idServico, Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                                        String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago){
-        ConsertoComputadorValidate valid = new ConsertoComputadorValidate(); 
+            String dataServico, boolean concluido, List pecasSubstituidas, boolean isPago) {
+        ConsertoComputadorValidate valid = new ConsertoComputadorValidate();
         ConsertoComputador novoConsertoComputador = valid.validaCamposEntrada(idServico, tecnicoResponsavel, clienteAtendido, valor, descricaoServico,
-                                                        dataServico, concluido, pecasSubstituidas); 
-        
+                dataServico, concluido, pecasSubstituidas);
+
         novoConsertoComputador.setPago(isPago);
-        novoConsertoComputador.setId(idServico); 
+        novoConsertoComputador.setId(idServico);
         repositorio.save(novoConsertoComputador);
     }
-    
-    public void buscarConsertoComputador(){
-        
+
+    public void buscarConsertoComputador() {
+
     }
-    
+
     @Override
-    public void atualizarTabela(JTable grd){
+    public void atualizarTabela(JTable grd) {
         List<Object> lst = repositorio.findAll();
 
         TMConsertoComputador tmConsertoComputador = new TMConsertoComputador(lst); // Alterado de TMCadAluno para TMCadTecnico
         grd.setModel(tmConsertoComputador);
     }
-    
-    public void excluirConsertoComputador(ConsertoComputador consertoComputador){
-        if(consertoComputador != null){
+
+    public void excluirConsertoComputador(ConsertoComputador consertoComputador) {
+        if (consertoComputador != null) {
             repositorio.delete(consertoComputador);
-        }else{
+        } else {
             throw new ConsertoComputadorException("Error - ConsertoComputador inexistente."); // Alterado de AlunoException para TecnicoException
         }
-        
+
     }
-    
+
 }

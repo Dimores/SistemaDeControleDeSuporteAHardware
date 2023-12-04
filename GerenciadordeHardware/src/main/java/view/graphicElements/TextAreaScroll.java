@@ -14,7 +14,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-
 public class TextAreaScroll extends JScrollPane {
 
     private final Animator animator;
@@ -150,7 +149,7 @@ public class TextAreaScroll extends JScrollPane {
     public void setShow(boolean show) {
         this.show = show;
     }
-    
+
     public Color getLabelTextColor() {
         return labelTextColor;
     }

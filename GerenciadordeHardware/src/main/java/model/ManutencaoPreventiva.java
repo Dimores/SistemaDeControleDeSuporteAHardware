@@ -3,14 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import lombok.*;
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Getter //constroi os metodos get
@@ -20,15 +17,14 @@ import javax.persistence.OneToMany;
  *
  * @author ruiz
  */
-
 @Entity
 @DiscriminatorValue("MANUTENCAOPREVENTIVA")
 public class ManutencaoPreventiva extends Servico {
+
     private String equipamentos;
-    
+
     @OneToMany(mappedBy = "manutencaoPreventiva")
     private List<Relatorio> relatoriosManutencao;
-
 
     public ManutencaoPreventiva() {
         super();
@@ -36,14 +32,14 @@ public class ManutencaoPreventiva extends Servico {
     }
 
     public ManutencaoPreventiva(Tecnico tecnicoResponsavel, Cliente clienteAtendido, float valor, String descricaoServico,
-                                String dataServico, boolean concluido, String equipamentos, String descricaoManutencao, boolean isPago) {
+            String dataServico, boolean concluido, String equipamentos, String descricaoManutencao, boolean isPago) {
         super(tecnicoResponsavel, clienteAtendido, valor, descricaoServico, dataServico, concluido, isPago);
     }
 
     @Override
     public String toString() {
-        String txt = super.toString() +
-                "Equipamentos: " + this.equipamentos + "\n";
+        String txt = super.toString()
+                + "Equipamentos: " + this.equipamentos + "\n";
         return txt;
     }
 
@@ -64,4 +60,3 @@ public class ManutencaoPreventiva extends Servico {
         this.equipamentos = vetor[8]; // Suponha que equipamentos sejam o nono elemento no CSV
     }
 }
-

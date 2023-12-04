@@ -17,7 +17,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.File;
 
 import javax.swing.*;
-import java.net.URLEncoder;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -33,15 +32,15 @@ public class PixPaymentGenerator {
         String urlPix = buildPixUrl(chavePix, valor);
 
         // Gerar o QR Code usando a biblioteca zxing
-            Map<EncodeHintType, Object> hints = new HashMap<>();
-            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(urlPix, BarcodeFormat.QR_CODE, 300, 300, hints);
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(urlPix, BarcodeFormat.QR_CODE, 300, 300, hints);
 
-            // Salvar o QR Code como imagem
-            Path path = FileSystems.getDefault().getPath(outputPath);
-            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+        // Salvar o QR Code como imagem
+        Path path = FileSystems.getDefault().getPath(outputPath);
+        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
     }
 

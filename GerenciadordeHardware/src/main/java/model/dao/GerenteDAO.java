@@ -8,9 +8,7 @@ import factory.DatabaseJPA;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Cliente;
 import model.Gerente;
-import model.Tecnico;
 import model.Usuario;
 import model.interfaces.IDao;
 
@@ -19,22 +17,22 @@ import model.interfaces.IDao;
  * @author ruiz
  */
 public class GerenteDAO implements IDao {
-    
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
+
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.persist(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -60,10 +58,10 @@ public class GerenteDAO implements IDao {
         Gerente Procurado = (Gerente) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        Gerente c = this.entityManager.find(Gerente.class ,Procurado.getId());
+        Gerente c = this.entityManager.find(Gerente.class, Procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
 
     /**
@@ -87,16 +85,14 @@ public class GerenteDAO implements IDao {
         return (Gerente) lst.get(0);
 
     }
-   
 
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

@@ -4,23 +4,18 @@
  */
 package model;
 
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import model.interfaces.IUsuario;
-
 
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @NoArgsConstructor
-
 
 /**
  *
@@ -29,16 +24,16 @@ import model.interfaces.IUsuario;
 @Entity
 @DiscriminatorValue("TECNICO")
 public class Tecnico extends Usuario implements IUsuario {
+
     private Long id;
     private double salario;
-    
+
     @OneToMany(mappedBy = "tecnicoResponsavel")
     private List<Servico> servicosAtendidos;
-    
+
     @OneToMany(mappedBy = "tecnico")
     private List<Relatorio> relatoriosCliente;
 
-    
     public Tecnico(Long id, double salario, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
         super(nome, CPF, dataNasc, senha, email, telefone);
         this.id = id;
@@ -74,14 +69,14 @@ public class Tecnico extends Usuario implements IUsuario {
     }
 
     public String atributoToCSV() {
-        String aux = this.nome + ";" +
-                this.CPF + ";" +
-                this.dataNasc + ";" +
-                this.senha + ";" +
-                this.email + ";" +
-                this.telefone + ";" +
-                this.id + ";" +
-                this.salario + "\n";
+        String aux = this.nome + ";"
+                + this.CPF + ";"
+                + this.dataNasc + ";"
+                + this.senha + ";"
+                + this.email + ";"
+                + this.telefone + ";"
+                + this.id + ";"
+                + this.salario + "\n";
         return aux;
     }
 

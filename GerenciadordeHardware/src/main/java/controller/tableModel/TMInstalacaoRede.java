@@ -17,7 +17,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
 
     private List<Object> lista;
     private Object instalacaoRede;
-      
+
     private final int COL_CONCLUIDO = 0;
     private final int COL_DATA_SERVICO = 1;
     private final int COL_DESCRICAO_SERVICO = 2;
@@ -26,11 +26,11 @@ public class TMInstalacaoRede extends AbstractTableModel {
     private final int COL_ENDERECO_REDE = 5;
     private final int COL_PAGO = 6;
 
-    public TMInstalacaoRede(List<Object> lstInstalacaoRede) {        
-        lista = lstInstalacaoRede;        
+    public TMInstalacaoRede(List<Object> lstInstalacaoRede) {
+        lista = lstInstalacaoRede;
     }
-    
-    public TMInstalacaoRede(Object instalacaoRede){
+
+    public TMInstalacaoRede(Object instalacaoRede) {
         this.instalacaoRede = instalacaoRede;
     }
 
@@ -45,7 +45,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {               
+    public Object getValueAt(int rowIndex, int columnIndex) {
         InstalacaoRede aux = new InstalacaoRede();
         if (lista.isEmpty()) {
             return aux;
@@ -70,7 +70,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
                     return aux.getEnderecoRede();
                 case COL_PAGO:
                     return aux.isPago();
-                default: 
+                default:
                     break;
             }
         }
@@ -84,10 +84,10 @@ public class TMInstalacaoRede extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_CONCLUIDO:
-                return "Concluido?"; 
+                return "Concluido?";
             case COL_DATA_SERVICO:
                 return "Data";
             case COL_DESCRICAO_SERVICO:
@@ -111,7 +111,7 @@ public class TMInstalacaoRede extends AbstractTableModel {
     public Class getColumnClass(int columnIndex) {
 //        if(columnIndex == COL_MATRICULA)
 //            return Boolean.class;
-        
+
         return String.class;
     }
 

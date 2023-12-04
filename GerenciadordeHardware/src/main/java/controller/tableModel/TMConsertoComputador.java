@@ -5,14 +5,9 @@
  */
 package controller.tableModel;
 
-import java.awt.Component;
 import java.util.List;
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import model.ConsertoComputador;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -22,8 +17,7 @@ public class TMConsertoComputador extends AbstractTableModel {
 
     private List<Object> lista;
     private Object consertoComputador;
-    
-    //private final int COL_ID = 0;       
+
     private final int COL_CONCLUIDO = 0;
     private final int COL_DATA_SERVICO = 1;
     private final int COL_DESCRICAO_SERVICO = 2;
@@ -31,11 +25,11 @@ public class TMConsertoComputador extends AbstractTableModel {
     private final int COL_PECASSUBSTITUIDAS = 4;
     private final int COL_PAGO = 5;
 
-    public TMConsertoComputador(List<Object> lstConsertoComputador) {        
-        lista = lstConsertoComputador;        
+    public TMConsertoComputador(List<Object> lstConsertoComputador) {
+        lista = lstConsertoComputador;
     }
-    
-    public TMConsertoComputador(Object consertoComputador){
+
+    public TMConsertoComputador(Object consertoComputador) {
         this.consertoComputador = consertoComputador;
     }
 
@@ -50,7 +44,7 @@ public class TMConsertoComputador extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {               
+    public Object getValueAt(int rowIndex, int columnIndex) {
         ConsertoComputador aux = new ConsertoComputador();
         if (lista.isEmpty()) {
             return aux;
@@ -74,7 +68,7 @@ public class TMConsertoComputador extends AbstractTableModel {
                     return aux.getPecasSubstituidas();
                 case COL_PAGO:
                     return aux.isPago();
-                default: 
+                default:
                     break;
             }
         }
@@ -88,10 +82,10 @@ public class TMConsertoComputador extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_CONCLUIDO:
-                return "Concluido"; 
+                return "Concluido";
             case COL_DATA_SERVICO:
                 return "Data";
             case COL_DESCRICAO_SERVICO:
@@ -108,12 +102,5 @@ public class TMConsertoComputador extends AbstractTableModel {
 
         return "";
     }
-    
-
-
 
 }
-
-
-
-

@@ -3,16 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
+
 import lombok.*;
 import model.interfaces.IUsuario;
 
-import java.util.Calendar;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-
-
 
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
@@ -21,11 +17,10 @@ import javax.persistence.Id;
  *
  * @author ruiz
  */
-
-
 @Entity
 @DiscriminatorValue("GERENTE")
 public class Gerente extends Usuario implements IUsuario {
+
     private Long id;
     private double salario;
     private String departamento;
@@ -48,7 +43,7 @@ public class Gerente extends Usuario implements IUsuario {
     public String toString() {
         String txt = "Nome: " + this.nome + "\n"
                 + "CPF: " + this.CPF + "\n"
-                + "Data de Nascimento: " + this.dataNasc+ "\n"
+                + "Data de Nascimento: " + this.dataNasc + "\n"
                 + "Senha: " + this.senha + "\n"
                 + "Email: " + this.email + "\n"
                 + "Telefone: " + this.telefone + "\n"
@@ -75,15 +70,15 @@ public class Gerente extends Usuario implements IUsuario {
     }
 
     public String atributoToCSV() {
-        String aux = this.nome + ";" +
-                this.CPF + ";" +
-                this.dataNasc + ";" +
-                this.senha + ";" +
-                this.email + ";" +
-                this.telefone + ";" +
-                this.id + ";" +
-                this.salario + ";" +
-                this.departamento + "\n";
+        String aux = this.nome + ";"
+                + this.CPF + ";"
+                + this.dataNasc + ";"
+                + this.senha + ";"
+                + this.email + ";"
+                + this.telefone + ";"
+                + this.id + ";"
+                + this.salario + ";"
+                + this.departamento + "\n";
         return aux;
     }
 
@@ -102,5 +97,3 @@ public class Gerente extends Usuario implements IUsuario {
         this.departamento = vetor[8];
     }
 }
-
-

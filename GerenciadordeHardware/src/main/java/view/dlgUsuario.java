@@ -4,8 +4,6 @@
  */
 package view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utils.SessionManager;
 
 /**
@@ -47,7 +45,7 @@ public class dlgUsuario extends javax.swing.JDialog {
         telaCliente = new dlgCadastrarCliente(this);
         telaCadastroPeca = new dlgCadastrarPeca(this);
         new dlgCadastrarRelatorioManutencao(this);
-        telaServico = new dlgCadastroServico(this);
+        telaServico = new dlgCadastroServico(this, code);
         telaDispositivoRede = new dlgCadastrarDispositivoRede(this);
         telaRelatorioManutencao = new dlgCadastrarRelatorioManutencao(this);
         telaRelatorioRede = new dlgCadastrarRelatorioRede(this, SessionManager.getId());

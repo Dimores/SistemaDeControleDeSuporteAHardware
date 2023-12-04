@@ -15,19 +15,21 @@ import utils.SessionManager;
  * @author diego
  */
 public class dlgSelecaoManutencaoPreventiva extends javax.swing.JDialog {
+
     ManutencaoPreventiva manutencaoPreventivaEscolhida;
-    
+
     ManutencaoPreventivaController manutencaoPreventivaController;
+
     /**
      * Creates new form dlgSelecaoManutencaoPreventiva
      */
     public dlgSelecaoManutencaoPreventiva(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         manutencaoPreventivaEscolhida = new ManutencaoPreventiva();
         manutencaoPreventivaController = new ManutencaoPreventivaController();
-        
+
         manutencaoPreventivaController.atualizarTabela(grdManutencoesPreventivas, SessionManager.getId());
     }
 
@@ -128,12 +130,12 @@ public class dlgSelecaoManutencaoPreventiva extends javax.swing.JDialog {
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher a Manutencao Preventiva \n("
-                + manutencaoPreventivaEscolhida.getId() + ", "
-                + manutencaoPreventivaEscolhida.getDescricaoServico() + ") ?",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja escolher a Manutencao Preventiva \n("
+                    + manutencaoPreventivaEscolhida.getId() + ", "
+                    + manutencaoPreventivaEscolhida.getDescricaoServico() + ") ?",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
@@ -141,7 +143,7 @@ public class dlgSelecaoManutencaoPreventiva extends javax.swing.JDialog {
                 } catch (ManutencaoPreventivaException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-            }else if(response == JOptionPane.CANCEL_OPTION){
+            } else if (response == JOptionPane.CANCEL_OPTION) {
                 manutencaoPreventivaEscolhida = null;
             }
         }
@@ -155,12 +157,11 @@ public class dlgSelecaoManutencaoPreventiva extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public ManutencaoPreventiva getManutencaoPreventivaEscolhida() {
         return manutencaoPreventivaEscolhida;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */

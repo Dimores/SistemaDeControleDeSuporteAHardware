@@ -174,8 +174,6 @@ public class PasswordField extends JPasswordField {
         g2.dispose();
     }
 
-
-
     private void createHintText(Graphics2D g2) {
         Insets in = getInsets();
         g2.setColor(labelTextColor);

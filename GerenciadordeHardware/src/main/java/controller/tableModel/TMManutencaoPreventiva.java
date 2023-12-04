@@ -7,7 +7,6 @@ package controller.tableModel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.ConsertoComputador;
 import model.ManutencaoPreventiva;
 
 /**
@@ -18,7 +17,7 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
 
     private List<Object> lista;
     private Object manutencaoPreventiva;
-    
+
     //private final int COL_ID = 0;       
     private final int COL_CONCLUIDO = 0;
     private final int COL_DATA_SERVICO = 1;
@@ -27,11 +26,11 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
     private final int COL_EQUIPAMENTOS = 4;
     private final int COL_PAGO = 5;
 
-    public TMManutencaoPreventiva(List<Object> lstManutencaoPreventiva) {        
-        lista = lstManutencaoPreventiva;        
+    public TMManutencaoPreventiva(List<Object> lstManutencaoPreventiva) {
+        lista = lstManutencaoPreventiva;
     }
-    
-    public TMManutencaoPreventiva(Object manutencaoPreventiva){
+
+    public TMManutencaoPreventiva(Object manutencaoPreventiva) {
         this.manutencaoPreventiva = manutencaoPreventiva;
     }
 
@@ -46,7 +45,7 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {               
+    public Object getValueAt(int rowIndex, int columnIndex) {
         ManutencaoPreventiva aux = new ManutencaoPreventiva();
         if (lista.isEmpty()) {
             return aux;
@@ -67,10 +66,10 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
                 case COL_VALOR:
                     return aux.getValor();
                 case COL_EQUIPAMENTOS:
-                    return aux.getEquipamentos();   
+                    return aux.getEquipamentos();
                 case COL_PAGO:
                     return aux.isPago();
-                default: 
+                default:
                     break;
             }
         }
@@ -84,10 +83,10 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        
+
         switch (column) {
             case COL_CONCLUIDO:
-                return "Concluido"; 
+                return "Concluido";
             case COL_DATA_SERVICO:
                 return "Data";
             case COL_DESCRICAO_SERVICO:
@@ -109,7 +108,7 @@ public class TMManutencaoPreventiva extends AbstractTableModel {
     public Class getColumnClass(int columnIndex) {
 //        if(columnIndex == COL_MATRICULA)
 //            return Boolean.class;
-        
+
         return String.class;
     }
 

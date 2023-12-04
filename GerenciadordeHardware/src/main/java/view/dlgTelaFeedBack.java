@@ -5,13 +5,12 @@
 package view;
 
 import controller.FeedBackController;
-import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.FeedBack;
 import model.Servico;
-import utils.NtpTimeClient;
+import utils.Data;
 import utils.SessionManager;
 
 /**
@@ -19,11 +18,13 @@ import utils.SessionManager;
  * @author ruiz
  */
 public class dlgTelaFeedBack extends javax.swing.JDialog {
+
     FeedBackController feedBackController;
     dlgSelecaoServico telaSelecaoServico;
     Servico servicoSelecionado;
     FeedBack feedBack;
     private Long idFeedbackEditando;
+
     //feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.idUsuarioLogado);
     /**
      * Creates new form dlgTelaFeedBack
@@ -33,11 +34,10 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         initComponents();
         feedBackController = new FeedBackController();
         telaSelecaoServico = new dlgSelecaoServico(this, modal);
-        feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+        feedBackController.atualizarTabelaHistórico(grdFeedBacks, SessionManager.getId());
         feedBack = new FeedBack();
         servicoSelecionado = new Servico();
         idFeedbackEditando = -1L;
-        //feedBackController.salvar(panStars.getStar(), " ", NtpTimeClient.dataAtualToString(), null, SessionManager.idUsuarioLogado);
     }
 
     /**
@@ -192,11 +192,11 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         panTodosBotoesLayout.setVerticalGroup(
             panTodosBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTodosBotoesLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
         grdFeedBacks.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,7 +224,7 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                         .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFundoLayout.createSequentialGroup()
-                                .addGap(0, 92, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -236,12 +236,14 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(panFundo, java.awt.BorderLayout.CENTER);
@@ -257,24 +259,23 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         FeedBack feedBackExcluido = (FeedBack) this.getObjetoSelecionadoNaGrid();
-        
 
-        if (feedBackExcluido == null)
+        if (feedBackExcluido == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
+        } else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Feedback  \n("
-                + feedBackExcluido.getComentário(),
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir o Feedback  \n("
+                    + feedBackExcluido.getComentário(),
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
                     feedBackController.excluir(feedBackExcluido);
 
-                    feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+                    feedBackController.atualizarTabelaHistórico(grdFeedBacks, SessionManager.getId());
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -288,19 +289,18 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idFeedbackEditando > 0) {
-               feedBackController.atualizar(idFeedbackEditando,panStars.getStar(), txtComentario.getText(), "23/11/2023", servicoSelecionado, SessionManager.getId());
-
+                feedBackController.atualizar(idFeedbackEditando, panStars.getStar(), txtComentario.getText(), Data.pegaDataSistema(), servicoSelecionado, SessionManager.getId());
 
             } else {
 
-               feedBackController.salvar(panStars.getStar(), txtComentario.getText(),  "23/11/2023", servicoSelecionado, SessionManager.getId());
+                feedBackController.salvar(panStars.getStar(), txtComentario.getText(), Data.pegaDataSistema(), servicoSelecionado, SessionManager.getId());
             }
             //Comando bastante importante
             this.idFeedbackEditando = -1L;
 
-            feedBackController.atualizarTabelaHistórico(grdFeedBacks,SessionManager.getId());
+            feedBackController.atualizarTabelaHistórico(grdFeedBacks, SessionManager.getId());
             this.limparCampos();
-            
+
         } catch (RuntimeException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -324,8 +324,8 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
     private void edtServicoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edtServicoMousePressed
         // TODO add your handling code here:
         telaSelecaoServico.setVisible(true);
-       
-        if(telaSelecaoServico.getServicoSelecionado() != null){
+
+        if (telaSelecaoServico.getServicoSelecionado() != null) {
             edtServico.setText(telaSelecaoServico.getServicoSelecionado().getDescricaoServico());
             servicoSelecionado = telaSelecaoServico.getServicoSelecionado();
         }
@@ -364,6 +364,5 @@ public class dlgTelaFeedBack extends javax.swing.JDialog {
         txtComentario.setText("");
         panStars.setStar(0);
     }
-
 
 }

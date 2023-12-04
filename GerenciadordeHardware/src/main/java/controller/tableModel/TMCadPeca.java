@@ -7,9 +7,8 @@ import model.Peca;
 public class TMCadPeca extends AbstractTableModel {
 
     private List<Object> lista;
-    private Object peca; 
+    private Object peca;
 
-    //private final int COL_ID = 0;
     private final int COL_NOME = 0;
     private final int COL_CODIGO = 1;
     private final int COL_DESCRICAO = 2;
@@ -17,12 +16,11 @@ public class TMCadPeca extends AbstractTableModel {
     private final int COL_ESTOQUE = 4;
     private final int COL_CATEGORIA = 5;
     private final int COL_DATA_FABRICACAO = 6;
-    //private final int COL_TIPO = 8;
 
     public TMCadPeca(Object peca) {
         this.peca = peca;
     }
-    
+
     public TMCadPeca(List<Object> lstPecas) {
         lista = lstPecas;
     }

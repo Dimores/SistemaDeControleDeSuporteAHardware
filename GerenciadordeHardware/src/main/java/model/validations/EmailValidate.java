@@ -14,21 +14,21 @@ import model.interfaces.Ivalidate;
  *
  * @author ruiz
  */
-public class EmailValidate implements Ivalidate{
-   
-    
-    public EmailValidate(){
-       
+public class EmailValidate implements Ivalidate {
+
+    public EmailValidate() {
+
     }
-    
-    public boolean validar(Object o)  {
+
+    public boolean validar(Object o) {
         String email = (String) o;
-        if("".equals(email)){
+        if ("".equals(email)) {
             return false;
-        }else if(!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+        } else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             return false;
-        }return true;
-                
+        }
+        return true;
+
     }
 
 }

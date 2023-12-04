@@ -3,17 +3,12 @@ package controller.tableModel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.DispositivoDeRede;
-import model.Peca;
 
 public class TMCadDispositivoRede extends AbstractTableModel {
 
-
-
     private List<Object> lista;
     private Object dispositivoDeRede;
-    
 
-    //private final int COL_ID = 0;
     private final int COL_NOME = 0;
     private final int COL_CODIGO = 1;
     private final int COL_DESCRICAO = 2;
@@ -22,12 +17,11 @@ public class TMCadDispositivoRede extends AbstractTableModel {
     private final int COL_CATEGORIA = 5;
     private final int COL_DATA_FABRICACAO = 6;
     private final int COL_ENDERECO_IP = 7;
-    //private final int COL_TIPO = 8;
 
     public TMCadDispositivoRede(Object dispositivoDeRede) {
         this.dispositivoDeRede = dispositivoDeRede;
     }
-    
+
     public TMCadDispositivoRede(List<Object> lstDispositivosRede) {
         lista = lstDispositivosRede;
     }

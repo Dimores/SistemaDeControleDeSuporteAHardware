@@ -3,45 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package utils;
+
 import org.apache.commons.mail.HtmlEmail;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+
 /**
  *
  * @author ruiz
  */
 public class Email {
+
     String emailRemetente = "cyberninja087@gmail.com";
     String senhaEmailRemetente = "jkhi trmb acak aqgl";
-   
-     public Email(String nome, String emailUsuario, String subject, String msg, String tipoEmail) {
-         Thread emailThread = new Thread(() ->{
-             try {
-            String template = getTemplate(tipoEmail);
-            String emailContent = template.replace("$nome", nome).replace("$msg", msg);
 
-            HtmlEmail email = new HtmlEmail();
-            email.setHostName("smtp.gmail.com");
-            email.setSmtpPort(465);
-            email.setAuthentication(emailRemetente, senhaEmailRemetente);
-            email.setSSLOnConnect(true);
+    public Email(String nome, String emailUsuario, String subject, String msg, String tipoEmail) {
+        Thread emailThread = new Thread(() -> {
+            try {
+                String template = getTemplate(tipoEmail);
+                String emailContent = template.replace("$nome", nome).replace("$msg", msg);
 
-            email.setFrom(emailRemetente);
-            email.addTo(emailUsuario);
-            email.setSubject(subject);
-            email.setHtmlMsg(emailContent);
+                HtmlEmail email = new HtmlEmail();
+                email.setHostName("smtp.gmail.com");
+                email.setSmtpPort(465);
+                email.setAuthentication(emailRemetente, senhaEmailRemetente);
+                email.setSSLOnConnect(true);
 
-            email.send();
-        
-        }catch (Exception e) {
-            e.printStackTrace();
-        }             
-         });
-         emailThread.start();
-         
-         try {
+                email.setFrom(emailRemetente);
+                email.addTo(emailUsuario);
+                email.setSubject(subject);
+                email.setHtmlMsg(emailContent);
+
+                email.send();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        emailThread.start();
+
+        try {
             emailThread.join(); // Aguarda a thread terminar
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -49,7 +52,7 @@ public class Email {
     }
 
     private String getTemplate(String tipoEmail) {
-          // Define o caminho do arquivo HTML no diretório de recursos
+        // Define o caminho do arquivo HTML no diretório de recursos
         // Define o caminho do arquivo HTML no diretório de recursos
         String filePath = "EmailTemplates/" + tipoEmail;
 
@@ -58,7 +61,7 @@ public class Email {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
 
             if (inputStream != null) {
-                try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
+                try ( Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
                     return scanner.useDelimiter("\\A").next();
                 }
             } else {
@@ -70,7 +73,3 @@ public class Email {
         }
     }
 }
-
-
-
-

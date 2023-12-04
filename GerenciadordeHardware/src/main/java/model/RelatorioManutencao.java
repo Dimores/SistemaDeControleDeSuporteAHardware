@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import lombok.*;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 
@@ -17,6 +18,7 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("RELATORIOMANUTENCAO")
 public class RelatorioManutencao extends Relatorio {
+
     private String equipamentos;
 
     public RelatorioManutencao() {
@@ -39,8 +41,8 @@ public class RelatorioManutencao extends Relatorio {
 
     @Override
     public String toString() {
-        return super.toString() +
-                "Equipamentos: " + equipamentos + "\n";
+        return super.toString()
+                + "Equipamentos: " + equipamentos + "\n";
     }
 
 }

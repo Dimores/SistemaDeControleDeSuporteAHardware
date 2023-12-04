@@ -8,16 +8,13 @@ import controller.CaboController;
 import controller.PecaController;
 import controller.PecaExemplarController;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JColorChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 import model.Cabo;
 import model.Peca;
@@ -469,7 +466,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-
         if (tipoPeca.equals("Generica")) {
             Peca pecaEditando = (Peca) this.getObjetoSelecionadoNaGrid();
 
@@ -489,6 +485,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
             } else {
                 this.limparCampos();
                 this.habilitarCampos(true);
+                this.habilitarCamposCabo(true);
                 this.preencherFormularioCabo(caboEditando);
                 this.idCaboEditando = caboEditando.getId();
             }
@@ -513,7 +510,6 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                         JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.OK_OPTION) {
                     try {
-                        System.out.println(pecaExcluida.getEstoque());
                         if (pecaExcluida.getEstoque() == 0) {
                             pecaController.excluirPeca(pecaExcluida);
                         } else {
@@ -546,7 +542,7 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
                     try {
                         caboController.excluirCabo(caboExcluido);
                         caboController.atualizarTabela(grdPecas);
-                        
+
                         JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
                     } catch (PecaException ex) {
                         JOptionPane.showMessageDialog(this, ex.getMessage());

@@ -4,43 +4,23 @@
  */
 package view;
 
-import controller.ServicoController;
-import model.Cliente;
-import model.Tecnico;
-import java.lang.String;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import utils.Data;
-import model.Servico;
-import model.exceptions.ServicoException;
-
 /**
  *
  * @author diego
  */
 public class dlgCadastroServico extends javax.swing.JDialog {
-    //Cliente clienteEscolhido;
-    //Tecnico tecnicoEscolhido;
+
     dlgCadastrarInstalacaoRede dlgInstalacaoRede;
     dlgCadastrarManutencaoPreventiva dlgManutencaoPreventiva;
     dlgCadastrarConsertoComputador dlgConsertoComputador;
-    
-
+    int codigo;
     /**
      * Creates new form dlgCadastroServico
      */
-    public dlgCadastroServico(java.awt.Dialog parent) {
+    public dlgCadastroServico(java.awt.Dialog parent, int code) {
         super(parent);
-        //clienteEscolhido = new Cliente();
-        //tecnicoEscolhido = new Tecnico();
         initComponents();
-        this.habilitarCampos(false);
-        //servicoController.atualizarTabelaCliente(grdClientes);;
-        //servicoController.atualizarTabelaTecnico(grdTecnicos);
-        //servicoController.atualizarTabela(grdServicos);
+        codigo = code;
     }
 
     /**
@@ -174,51 +154,23 @@ public class dlgCadastroServico extends javax.swing.JDialog {
 
     private void btnConsertoComputadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsertoComputadorActionPerformed
         // TODO add your handling code here:
-        this.dlgConsertoComputador = new dlgCadastrarConsertoComputador(this, true);
+        this.dlgConsertoComputador = new dlgCadastrarConsertoComputador(this, true, codigo);
         dlgConsertoComputador.setVisible(true);
     }//GEN-LAST:event_btnConsertoComputadorActionPerformed
 
     private void btnInstalacaoRedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstalacaoRedeActionPerformed
         // TODO add your handling code here:
-        this.dlgInstalacaoRede = new dlgCadastrarInstalacaoRede(this, true);
+        this.dlgInstalacaoRede = new dlgCadastrarInstalacaoRede(this, true, codigo);
         dlgInstalacaoRede.setVisible(true);
     }//GEN-LAST:event_btnInstalacaoRedeActionPerformed
 
     private void btnManutencaoPreventivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManutencaoPreventivaActionPerformed
         // TODO add your handling code here:
-        this.dlgManutencaoPreventiva = new dlgCadastrarManutencaoPreventiva(this, true);
+        this.dlgManutencaoPreventiva = new dlgCadastrarManutencaoPreventiva(this, true, codigo);
         dlgManutencaoPreventiva.setVisible(true);
     }//GEN-LAST:event_btnManutencaoPreventivaActionPerformed
 
 
-    
-        public void habilitarCampos(boolean flag) {
-                /*lblServicoEfetuado.setEnabled(flag);
-                boxEscolhaServico.setEnabled(flag);
-                lblValor.setEnabled(flag);
-                edtValor.setEnabled(flag);
-                lblCpfCliente.setEnabled(flag);
-                fEdtEmailCliente.setEnabled(flag);
-                btnBuscarCliente.setEnabled(flag);
-                grdClientes.setEnabled(flag);
-                lblCpfTecnico.setEnabled(flag);
-                fEdtEmailTecnico.setEnabled(flag);
-                btnBuscarTecnico.setEnabled(flag);
-                grdTecnicos.setEnabled(flag);
-                lblDescricaoServico.setEnabled(flag);
-                edtDescricaoServico.setEnabled(flag);
-                lblServicos.setEnabled(flag);
-                grdServicos.setEnabled(flag);*/
-                
-        }
-        
-        public void limparCampos(){
-                /*edtValor.setText("");
-                fEdtEmailCliente.setText("");
-                fEdtEmailTecnico.setText("");
-                edtDescricaoServico.setText("");*/
-        }
-        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConsertoComputador;
     private view.graphicElements.BotaoVermelho btnInstalacaoRede;

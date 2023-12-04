@@ -5,12 +5,10 @@
 package view;
 
 import controller.TecnicoController;
-import java.awt.Color;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
@@ -21,7 +19,8 @@ import model.exceptions.TecnicoException;
  *
  * @author diego
  */
-public class dlgCadastrarTecnico extends javax.swing.JDialog{
+public class dlgCadastrarTecnico extends javax.swing.JDialog {
+
     TecnicoController tecnicoController;
     Long idTecnicoEditando;
 
@@ -35,10 +34,10 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         initComponents();
         this.setModal(true);
         this.criarMascaraCadastros();
-        
+
         //this.habilitarCampos(false , panPreencher);
         tecnicoController.atualizarTabela(grdTecnicos);
-        
+
     }
 
     /**
@@ -368,16 +367,16 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         Tecnico tecnicoExcluido = (Tecnico) this.getObjetoSelecionadoNaGrid();
 
         if (tecnicoExcluido == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Tecnico  \n("
-                + tecnicoExcluido.getNome() + ", "
-                + tecnicoExcluido.getEmail() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir o Tecnico  \n("
+                    + tecnicoExcluido.getNome() + ", "
+                    + tecnicoExcluido.getEmail() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -422,9 +421,9 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         // TODO add your handling code here:
         try {
             if (idTecnicoEditando > 0) {
-                tecnicoController.atualizarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()   , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                tecnicoController.atualizarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText(), edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             } else {
-                tecnicoController.cadastrarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText()  , edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
+                tecnicoController.cadastrarTecnico(idTecnicoEditando, Double.valueOf(fEdtSalario.getText()), edtNome.getText(), fEdtCpf.getText(), fEdtDataNasc.getText(), edtSenha.getText(), fEdtEmail.getText(), fEdtTelefone.getText());
             }
             //Comando bastante importante
             this.idTecnicoEditando = -1L;
@@ -465,7 +464,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
 
     private void fEdtCpfMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtCpfMousePressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_fEdtCpfMousePressed
 
     private void fEdtDataNascMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtDataNascMousePressed
@@ -475,7 +474,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
 
     private void fEdtSalarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtSalarioMousePressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_fEdtSalarioMousePressed
 
     private void fEdtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fEdtEmailMousePressed
@@ -490,30 +489,29 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog{
         }
         return obj;
     }
-    
-    
+
     public void habilitarCampos(boolean flag, JPanel painel) {
         for (int i = 0; i < painel.getComponents().length; i++) {
             painel.getComponent(i).setVisible(flag);
         }
     }
-        
-        public void limparCampos() {
-            edtNome.setText("");
-            fEdtCpf.setText("");
-            fEdtDataNasc.setText("");
-            fEdtEmail.setText("");
-            fEdtSalario.setText("");
-            fEdtTelefone.setText("");
+
+    public void limparCampos() {
+        edtNome.setText("");
+        fEdtCpf.setText("");
+        fEdtDataNasc.setText("");
+        fEdtEmail.setText("");
+        fEdtSalario.setText("");
+        fEdtTelefone.setText("");
     }
-        
+
     public void preencherFormulario(Tecnico t) {
-            edtNome.setText(t.getNome());
-            fEdtCpf.setText(t.getCPF());
-            fEdtDataNasc.setText(t.getDataNasc());
-            fEdtEmail.setText(t.getEmail());
-            fEdtSalario.setText(String.valueOf(t.getSalario()));
-            fEdtTelefone.setText(t.getTelefone());
+        edtNome.setText(t.getNome());
+        fEdtCpf.setText(t.getCPF());
+        fEdtDataNasc.setText(t.getDataNasc());
+        fEdtEmail.setText(t.getEmail());
+        fEdtSalario.setText(String.valueOf(t.getSalario()));
+        fEdtTelefone.setText(t.getTelefone());
     }
     /**
      * @param args the command line arguments

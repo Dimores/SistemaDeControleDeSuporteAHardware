@@ -11,10 +11,11 @@ import model.Usuario;
  *
  * @author ruiz
  */
-public class ClienteValidate extends UsuarioValidate{
-      public Cliente validaCamposEntrada(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone){
-         Usuario cliente = new Cliente();
-         cliente = (Cliente) super.validaCamposEntrada(cliente, id, nome, CPF, dataNasc, senha, email, telefone);
-         return (Cliente) cliente; 
-      }
+public class ClienteValidate extends UsuarioValidate {
+
+    public Cliente validaCamposEntrada(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) {
+        Usuario cliente = new Cliente();
+        cliente = (Cliente) super.validaCamposEntrada(cliente, id, nome, CPF, dataNasc, senha, email, telefone);
+        return (Cliente) cliente;
+    }
 }

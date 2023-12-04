@@ -3,33 +3,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.dao;
+
 import factory.DatabaseJPA;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.*;
 import model.interfaces.IDao;
+
 /**
  *
  * @author ruiz
  */
-public class ManutencaoPreventivaDAO  implements IDao{
+public class ManutencaoPreventivaDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
-    
+
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.merge(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -55,10 +57,10 @@ public class ManutencaoPreventivaDAO  implements IDao{
         ManutencaoPreventiva Procurado = (ManutencaoPreventiva) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        ManutencaoPreventiva c = this.entityManager.find(ManutencaoPreventiva.class ,Procurado.getId());
+        ManutencaoPreventiva c = this.entityManager.find(ManutencaoPreventiva.class, Procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
 
     /**
@@ -79,15 +81,13 @@ public class ManutencaoPreventivaDAO  implements IDao{
         }return (DispositivoDeRede) lst.get(0);
        
     }*/
-
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

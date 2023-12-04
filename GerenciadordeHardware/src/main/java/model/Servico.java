@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.util.Calendar;
-import java.util.List;
-import javax.persistence.Column;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +13,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.*;
 
 @Getter //constroi os metodos get
@@ -29,6 +26,7 @@ import lombok.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
 public class Servico {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -43,10 +41,8 @@ public class Servico {
     private String dataServico;
     private boolean concluido;
     private boolean isPago;
-    
+
     //private String tipo;
-
-
     public Servico() {
         this.tecnicoResponsavel = new Tecnico();
         this.clienteAtendido = new Cliente();
@@ -94,13 +90,13 @@ public class Servico {
     }
 
     public String atributoToCSV() {
-        return this.id + ";" +
-                this.tecnicoResponsavel.getId() + ";" +
-                this.clienteAtendido.getId() + ";" +
-                this.valor + ";" +
-                this.descricaoServico + ";" +
-                this.dataServico + ";" +
-                (this.concluido ? "Sim" : "Não") + "\n";
+        return this.id + ";"
+                + this.tecnicoResponsavel.getId() + ";"
+                + this.clienteAtendido.getId() + ";"
+                + this.valor + ";"
+                + this.descricaoServico + ";"
+                + this.dataServico + ";"
+                + (this.concluido ? "Sim" : "Não") + "\n";
     }
 
     public void CSVToAtributo(String csv, Tecnico tecnico, Cliente cliente) {
@@ -113,8 +109,6 @@ public class Servico {
         // Converter a string de data para um objeto Calendar, se necessário
         // Exemplo: this.dataServico = converterStringParaCalendar(vetor[5]);
         this.concluido = vetor[7].equalsIgnoreCase("Sim");
+    }
+
 }
-
-
-}
-

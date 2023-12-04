@@ -7,55 +7,51 @@ package view;
 import controller.ManutencaoPreventivaController;
 import controller.RelatorioManutencaoController;
 import controller.TecnicoController;
-import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Cliente;
 import model.ManutencaoPreventiva;
 import utils.Data;
 import model.RelatorioManutencao;
-import model.Tecnico;
 import model.exceptions.RelatorioManutencaoException;
-import utils.SessionManager;
 
 /**
  *
  * @author diego
  */
 public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
+
     private String dataRelatorio;
     Long idManutencaoEditando;
-    
+
     ManutencaoPreventiva manutencaoPreventivaRelacionada;
-    
+
     private TecnicoController tecnicoController;
     private ManutencaoPreventivaController manutencaoController;
-    
+
     dlgSelecaoManutencaoPreventiva telaSelecaoManutencaoPreventiva;
-    
+
     RelatorioManutencaoController relatorioManutencaoController;
+
     /**
      * Creates new form dlgCadastrarRelatorioRede
      */
     public dlgCadastrarRelatorioManutencao(java.awt.Dialog parent) {
         super(parent);
-        initComponents();  
+        initComponents();
         this.setModal(true);
-        dataRelatorio = Data.pegaDataSistema();   
-        
+        dataRelatorio = Data.pegaDataSistema();
+
         relatorioManutencaoController = new RelatorioManutencaoController();
         tecnicoController = new TecnicoController();
         manutencaoController = new ManutencaoPreventivaController();
-              
+
         manutencaoPreventivaRelacionada = new ManutencaoPreventiva();
-        
+
         idManutencaoEditando = -1L;
-                
+
         relatorioManutencaoController.atualizarTabela(grdRelatoriosManutencao);
-        
+
         //edtTecnico.setText(tecnicoSelecionado.getNome());
     }
 
@@ -370,15 +366,15 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         RelatorioManutencao relatorioManutencaoEditando = (RelatorioManutencao) this.getObjetoSelecionadoNaGrid();
-        
-        if(relatorioManutencaoEditando == null){
+
+        if (relatorioManutencaoEditando == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        }else{
+        } else {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(relatorioManutencaoEditando);
-            this.idManutencaoEditando = relatorioManutencaoEditando.getIdRelatorio();         
-        }  
+            this.idManutencaoEditando = relatorioManutencaoEditando.getIdRelatorio();
+        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -386,16 +382,16 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         // TODO add your handling code here:
         RelatorioManutencao relatorioManutencaoExcluido = (RelatorioManutencao) this.getObjetoSelecionadoNaGrid();
 
-        if (relatorioManutencaoExcluido == null)
+        if (relatorioManutencaoExcluido == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
+        } else {
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir o Relatorio de Manutencao  \n("
-                + relatorioManutencaoExcluido.getIdRelatorio()+ ", "
-                + relatorioManutencaoExcluido.getDescricao()+ ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir o Relatorio de Manutencao  \n("
+                    + relatorioManutencaoExcluido.getIdRelatorio() + ", "
+                    + relatorioManutencaoExcluido.getDescricao() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -422,14 +418,14 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (idManutencaoEditando > 0) {
-                relatorioManutencaoController.atualizarRelatorioManutencao(idManutencaoEditando, dataRelatorio, 
-                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(), 
-                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(), 
+                relatorioManutencaoController.atualizarRelatorioManutencao(idManutencaoEditando, dataRelatorio,
+                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(),
+                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(),
                         edtEquipamentos.getText(), manutencaoPreventivaRelacionada);
             } else {
-                relatorioManutencaoController.cadastrarRelatorioManutencao(idManutencaoEditando, dataRelatorio, 
-                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(), 
-                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(), 
+                relatorioManutencaoController.cadastrarRelatorioManutencao(idManutencaoEditando, dataRelatorio,
+                        edtDescricao.getText(), manutencaoPreventivaRelacionada.getClienteAtendido(),
+                        manutencaoPreventivaRelacionada.getTecnicoResponsavel(),
                         edtEquipamentos.getText(), manutencaoPreventivaRelacionada);
             }
             //Comando bastante importante
@@ -457,7 +453,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaSelecaoManutencaoPreventiva = new dlgSelecaoManutencaoPreventiva(this, true);
         telaSelecaoManutencaoPreventiva.setVisible(true);
-        if(telaSelecaoManutencaoPreventiva.getManutencaoPreventivaEscolhida() != null){
+        if (telaSelecaoManutencaoPreventiva.getManutencaoPreventivaEscolhida() != null) {
             manutencaoPreventivaRelacionada = telaSelecaoManutencaoPreventiva.getManutencaoPreventivaEscolhida();
             edtManutencaoPreventiva.setText("Id: " + manutencaoPreventivaRelacionada.getId() + ", Descrição: " + manutencaoPreventivaRelacionada.getDescricaoServico());
             edtCliente.setText(manutencaoPreventivaRelacionada.getClienteAtendido().getNome());
@@ -469,9 +465,9 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panPreencher.getComponents().length; i++) {
             panPreencher.getComponent(i).setVisible(flag);
-        }    
+        }
     }
-    
+
     private void limparCampos() {
         // Limpa os Edts
         edtManutencaoPreventiva.setText("Clique aqui para selecionar 1 Manutenção Preventiva.");
@@ -480,7 +476,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         edtCliente.setText("");
         edtTecnico.setText("");
     }
-    
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdRelatoriosManutencao.getSelectedRow();
         Object obj = null;
@@ -489,7 +485,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     public void preencherFormulario(RelatorioManutencao relatorioManutencao) {
         edtEquipamentos.setText(relatorioManutencao.getEquipamentos());
         edtDescricao.setText(relatorioManutencao.getDescricao());
@@ -497,7 +493,7 @@ public class dlgCadastrarRelatorioManutencao extends javax.swing.JDialog {
         // Obtenha o cliente associado ao ConsertoComputador
         edtCliente.setText(relatorioManutencao.getCliente().getNome());
         edtTecnico.setText(relatorioManutencao.getTecnico().getNome());
-        
+
         manutencaoPreventivaRelacionada = relatorioManutencao.getManutencaoPreventiva();
         edtManutencaoPreventiva.setText("Id: " + manutencaoPreventivaRelacionada.getId());
     }

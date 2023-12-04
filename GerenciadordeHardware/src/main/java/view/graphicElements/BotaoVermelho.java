@@ -20,7 +20,7 @@ public class BotaoVermelho extends JButton {
         colorOver = new Color(229, 9, 20);
         setContentAreaFilled(false);
         setFocusPainted(false);
-        
+
         // Add event mouse
         addMouseListener(new MouseAdapter() {
             @Override
@@ -63,10 +63,10 @@ public class BotaoVermelho extends JButton {
         g2.setColor(borderColor);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
         g2.setColor(getBackground());
-        
+
         // Border set 2Pix
         g2.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius, radius);
-        
+
         super.paintComponent(g);
     }
 }

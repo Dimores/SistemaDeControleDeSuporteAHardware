@@ -16,80 +16,81 @@ import model.dao.ClienteDAO;
 import model.exceptions.ClienteException;
 import model.validations.ClienteValidate;
 import utils.Criptografia;
+
 @Getter //constroi os metodos get
 @Setter //constroi os metodos set
 @EqualsAndHashCode //constroi os metodos equals e hashCode 
-@ToString 
+@ToString
 
 /**
  *
  * @author ruiz
  */
+public class ClienteController extends UsuarioController {
 
-
-public class ClienteController extends UsuarioController{
     ClienteDAO repositorio;
     Criptografia crip;
-    public ClienteController(){
+
+    public ClienteController() {
         repositorio = new ClienteDAO();
     }
-    
+
     public void atualizarTabela(JTable grdClientes) {
         List<Object> lst = repositorio.findAll();
 
-        TMCadCliente tmCliente = new TMCadCliente(lst); 
+        TMCadCliente tmCliente = new TMCadCliente(lst);
         grdClientes.setModel(tmCliente);
     }
-    
+
     public void atualizarTabela(JTable grdClientes, Long idCliente) {
         Object lst = repositorio.findbyId(idCliente);
-        TMCadCliente tmCliente = new TMCadCliente(lst); 
+        TMCadCliente tmCliente = new TMCadCliente(lst);
         grdClientes.setModel(tmCliente);
     }
 
     public void atualizarCliente(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException {
-        ClienteValidate valid = new ClienteValidate(); 
+        ClienteValidate valid = new ClienteValidate();
         this.crip = new Criptografia();
-        Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone); 
+        Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone);
         novoCliente.setId(id);
-        
+
         try {
-            
+
             novoCliente.setSenha(crip.encrypt(senha));
-            
+
         } catch (Exception ex) {
             Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         repositorio.update(novoCliente);
     }
 
     public void cadastrarCliente(Long id, String nome, String CPF, String dataNasc, String senha, String email, String telefone) throws NoSuchAlgorithmException, Exception {
-        ClienteValidate valid = new ClienteValidate(); 
+        ClienteValidate valid = new ClienteValidate();
         this.crip = new Criptografia();
-        Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone); 
+        Cliente novoCliente = valid.validaCamposEntrada(id, nome, CPF, dataNasc, senha, email, telefone);
         novoCliente.setSenha(crip.encrypt(senha));
-        if(repositorio.findByEmail(email) == null){
+        if (repositorio.findByEmail(email) == null) {
             repositorio.save(novoCliente);
-        }else{
-             throw new ClienteException("Error - Já existe um cliente com este 'Email'.");
+        } else {
+            throw new ClienteException("Error - Já existe um cliente com este 'Email'.");
         }
     }
 
-    public void excluirCliente(Cliente clienteExcluido) {  
+    public void excluirCliente(Cliente clienteExcluido) {
         if (clienteExcluido != null) {
             repositorio.delete(clienteExcluido);
         } else {
-            throw new ClienteException("Error - Cliente inexistente."); 
+            throw new ClienteException("Error - Cliente inexistente.");
         }
     }
 
     public Cliente buscarCliente(String email) {
-        return (Cliente) this.repositorio.findByEmail(email);   
+        return (Cliente) this.repositorio.findByEmail(email);
     }
-    
+
     public Cliente buscarCliente(Long id) {
-        return (Cliente) this.repositorio.findbyId(id);   
+        return (Cliente) this.repositorio.findbyId(id);
     }
-    
+
 }

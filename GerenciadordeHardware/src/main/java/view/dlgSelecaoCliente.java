@@ -8,15 +8,16 @@ import controller.ClienteController;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.exceptions.ClienteException;
-import utils.SessionManager;
 
 /**
  *
  * @author diego
  */
 public class dlgSelecaoCliente extends javax.swing.JDialog {
+
     Cliente clienteEscolhido;
     ClienteController clienteController;
+
     /**
      * Creates new form dlgSelecaoCliente
      */
@@ -128,18 +129,18 @@ public class dlgSelecaoCliente extends javax.swing.JDialog {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         clienteEscolhido = (Cliente) this.getObjetoSelecionadoNaGrid();
-        
+
         if (clienteEscolhido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja escolher o Cliente  \n("
-                + clienteEscolhido.getNome() + ", "
-                + clienteEscolhido.getEmail() + ") ?",
-                "Confirmar escolha",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja escolher o Cliente  \n("
+                    + clienteEscolhido.getNome() + ", "
+                    + clienteEscolhido.getEmail() + ") ?",
+                    "Confirmar escolha",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
                 try {
                     //JOptionPane.showMessageDialog(this, "Escolha feita com sucesso!");
@@ -147,13 +148,12 @@ public class dlgSelecaoCliente extends javax.swing.JDialog {
                 } catch (ClienteException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
-            }else if(response == JOptionPane.CANCEL_OPTION){
+            } else if (response == JOptionPane.CANCEL_OPTION) {
                 clienteEscolhido = null;
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdClientes.getSelectedRow();
         Object obj = null;
@@ -162,15 +162,14 @@ public class dlgSelecaoCliente extends javax.swing.JDialog {
         }
         return obj;
     }
-    
-    public Cliente getClienteEscolhido(){
+
+    public Cliente getClienteEscolhido() {
         return this.clienteEscolhido;
     }
-    
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.graphicElements.BotaoVermelho btnConfirmar;

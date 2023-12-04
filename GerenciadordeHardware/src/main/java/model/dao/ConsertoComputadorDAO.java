@@ -5,35 +5,33 @@
 package model.dao;
 
 import factory.DatabaseJPA;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.ConsertoComputador;
-import model.Peca;
 import model.interfaces.IDao;
 
 /**
  *
  * @author ruiz
  */
-public class ConsertoComputadorDAO implements IDao{
+public class ConsertoComputadorDAO implements IDao {
+
     private EntityManager entityManager;
     private Query qry;
     private String jpql;
-    
-    
+
     @Override
     public void save(Object obj) {
-        
+
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
         this.entityManager.merge(obj);
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-      
+
     }
-    
+
     @Override
     public void update(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -59,18 +57,17 @@ public class ConsertoComputadorDAO implements IDao{
         ConsertoComputador Procurado = (ConsertoComputador) obj;
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        ConsertoComputador c = this.entityManager.find(ConsertoComputador.class ,Procurado.getId());
+        ConsertoComputador c = this.entityManager.find(ConsertoComputador.class, Procurado.getId());
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
-        return c;   
+        return c;
     }
-    
+
     public List<Object> stringToPeca(String idPeca) {
-        
+
         List lst = null;
         return (List<Object>) lst;
     }
-
 
     /**
      * Procura produtos por codigodebarras, que é o identificador único
@@ -90,15 +87,13 @@ public class ConsertoComputadorDAO implements IDao{
         }return (DispositivoDeRede) lst.get(0);
        
     }*/
-
     /**
-     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se
-     * encontrar, remove ele da lstCliente.
+     * Recebe um Cliente como parametro, procura o Cliente pelo ID Se encontrar,
+     * remove ele da lstCliente.
      *
      * @param obj
      * @return
      */
-
     @Override
     public boolean delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
@@ -112,6 +107,5 @@ public class ConsertoComputadorDAO implements IDao{
         this.entityManager.close();
         return true;
     }
-    
-    
+
 }

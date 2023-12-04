@@ -4,82 +4,74 @@
  */
 package model.validations;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import model.Peca;
 import model.exceptions.PecaException;
+import utils.Data;
 
 /**
  *
  * @author diegomorelo
  */
 public class PecaValidate {
-    
-    public Peca validaCamposEntrada(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao){
+
+    public Peca validaCamposEntrada(Long idPeca, String codigo, String nome, String descricao, double preco, int estoque, String categoria, String dataFabricacao) {
         Peca peca = new Peca();
-        
+        String data = Data.pegaDataSistema();
+        String[] partesDataSistema = data.split("/");
+        int diaSistema = Integer.parseInt(partesDataSistema[0]);
+        int mesSistema = Integer.parseInt(partesDataSistema[1]);
+        int anoSistema = Integer.parseInt(partesDataSistema[2]);
+
         // Dia/Mes/Ano
         String[] partes = dataFabricacao.split("/");
         int dia = Integer.parseInt(partes[0]);
         int mes = Integer.parseInt(partes[1]);
         int ano = Integer.parseInt(partes[2]);
-        
-        if(codigo.isEmpty())
+
+        if (codigo.isEmpty()) {
             throw new PecaException("Error - Campo vazio - 'codigo'");
-        
-        if(codigo.length() < 8)
-            throw new PecaException("Error - Campo invalido - 'codigo'");       
+        }
+
+        if (codigo.length() < 8) {
+            throw new PecaException("Error - Campo invalido - 'codigo'");
+        }
         peca.setCodigo(codigo);
-        
-        if(nome.isEmpty())
-            throw new PecaException("Error - Campo vazio - 'nome'");        
+
+        if (nome.isEmpty()) {
+            throw new PecaException("Error - Campo vazio - 'nome'");
+        }
         peca.setNome(nome);
-        
-        if(descricao.isEmpty())
+
+        if (descricao.isEmpty()) {
             throw new PecaException("Error - Campo vazio - 'descricao'");
+        }
         peca.setDescricao(descricao);
-        
-        if(preco <= 0 && preco > 20000)
-            throw new PecaException("Error - Campo invalido - 'preco'");        
+
+        if (preco <= 0 && preco > 20000) {
+            throw new PecaException("Error - Campo invalido - 'preco'");
+        }
         peca.setPreco(preco);
-        
-        if(estoque <= 0 & estoque > 5000)
-            throw new PecaException("Error - Campo invalido - 'estoque'");        
+
+        if (estoque <= 0 & estoque > 5000) {
+            throw new PecaException("Error - Campo invalido - 'estoque'");
+        }
         peca.setEstoque(estoque);
 
-        if(categoria.isEmpty())
-            throw new PecaException("Error - Campo vazio - 'categoria'");        
+        if (categoria.isEmpty()) {
+            throw new PecaException("Error - Campo vazio - 'categoria'");
+        }
         peca.setCategoria(categoria);
-        
-        if(dataFabricacao.isEmpty())
-            throw new PecaException("Error - Campo vazio - 'dataFabricacao'");        
-        
-        if(!(verificaDia(dia) && verificaMes(mes) && verificaAno(ano)))
-            throw new PecaException("Error - Campo invalido - 'dataFabricacao'");   
+
+        if (dataFabricacao.isEmpty()) {
+            throw new PecaException("Error - Campo vazio - 'dataFabricacao'");
+        }
+
+        if (!(dia <= diaSistema && mes <= mesSistema && ano <= anoSistema)) {
+            throw new PecaException("Error - Campo invalido - 'dataFabricacao'");
+        }
         peca.setDataFabricacao(dataFabricacao);
-               
-        
-        
+
         return peca;
     }
-    
-    private boolean verificaDia(int dia){
-        if(dia >= 0 && dia <= 31)
-            return true;
-        return false;
-    }
-    
-    private boolean verificaMes(int mes){
-        if(mes >= 01 && mes <= 12)
-            return true;
-        return false;
-    }
-    
-    private boolean verificaAno(int ano){
-        if(ano >= 1960 && ano <= 2023)
-            return true;
-        return false;
-    }
-}
 
+}
