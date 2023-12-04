@@ -576,6 +576,8 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
 
             // Mostrando o preço final na tela
             edtValor.setText(String.valueOf(preco));
+        }else{
+            preco = 100;
         }
     }//GEN-LAST:event_edtPecaMouseClicked
 
@@ -603,6 +605,7 @@ public class dlgCadastrarConsertoComputador extends javax.swing.JDialog {
         chkConcluido.setSelected(false);
         chkPago.setSelected(false);
         pecasSelecionadas = new ArrayList();
+        preco = 100;
 
     }
 

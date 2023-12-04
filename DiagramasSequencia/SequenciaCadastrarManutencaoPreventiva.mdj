@@ -44,7 +44,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGMKsGQ6Rnw6Zo="
 							},
-							"name": "SequenciaCadastrarConsertoComputador",
+							"name": "SequenciaCadastrarManutencaoPreventiva",
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -65,9 +65,9 @@
 											"font": "Arial;13;0",
 											"left": 32.72998046875,
 											"top": 13,
-											"width": 243.80419921875,
+											"width": 252.48779296875,
 											"height": 13,
-											"text": "SequenciaCadastrarConsertoComputador"
+											"text": "SequenciaCadastrarManutencaoPreventiva"
 										},
 										{
 											"_type": "LabelView",
@@ -2677,7 +2677,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGMKsGQ6Bnv8VM="
 					},
-					"name": "Role4"
+					"name": "Role4",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2703,7 +2704,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGMKsGQ6Bnv8VM="
 					},
-					"name": "Role7"
+					"name": "Role7",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2711,7 +2713,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGMKsGQ6Bnv8VM="
 					},
-					"name": "Role8"
+					"name": "Role8",
+					"type": ""
 				}
 			]
 		}
