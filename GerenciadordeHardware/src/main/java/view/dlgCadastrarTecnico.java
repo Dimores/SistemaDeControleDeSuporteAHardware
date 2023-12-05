@@ -37,6 +37,7 @@ public class dlgCadastrarTecnico extends javax.swing.JDialog {
 
         //this.habilitarCampos(false , panPreencher);
         tecnicoController.atualizarTabela(grdTecnicos);
+        edtSenha.setToolTipText("Pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.");
 
     }
 

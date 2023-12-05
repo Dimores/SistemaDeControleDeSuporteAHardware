@@ -36,6 +36,7 @@ public class dlgAutoCadastroCliente extends javax.swing.JDialog {
         this.limparCampos();
         this.setModal(modal);
         setDefaultCloseOperation(dlgAutoCadastroCliente.DISPOSE_ON_CLOSE);
+        edtSenha.setToolTipText("Pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.");
     }
 
     /**

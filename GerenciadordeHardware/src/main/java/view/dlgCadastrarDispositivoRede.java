@@ -76,7 +76,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Cadastrar dispositivo de Rede");
 
-        panPreencher.setForeground(new java.awt.Color(0, 0, 0));
         panPreencher.setOpaque(false);
 
         edtCodigo.setBackground(new java.awt.Color(20, 20, 20));
@@ -331,7 +330,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         grdDispositivosRede.setModel(new javax.swing.table.DefaultTableModel(
@@ -371,13 +370,14 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             .addGroup(panFundoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panFundoLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(32, 32, 32)
+                        .addComponent(panPreencher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panFundoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panTodosBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -519,6 +519,7 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
         fEdtDataFabricacao.setText(dr.getDataFabricacao());
         edtEstoque.setText(String.valueOf(dr.getEstoque()));
         edtCategoria.setText(dr.getCategoria());
+        fEdtPreco.setText(String.valueOf(dr.getPreco()));
     }
 
     private void criarMascaraCampos() {
@@ -527,8 +528,6 @@ public class dlgCadastrarDispositivoRede extends javax.swing.JDialog {
             ipMask.install(fEdtIP);
             MaskFormatter datFabricacaoMask = new MaskFormatter("##/##/####");
             datFabricacaoMask.install(fEdtDataFabricacao);
-            MaskFormatter precoMask = new MaskFormatter("####.##");
-            precoMask.install(fEdtPreco);
         } catch (ParseException ex) {
             Logger.getLogger(dlgCadastrarDispositivoRede.class.getName()).log(Level.SEVERE, null, ex);
         }

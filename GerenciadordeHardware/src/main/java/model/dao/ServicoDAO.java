@@ -90,9 +90,10 @@ public class ServicoDAO implements IDao {
 
     public List<Object> findAllInstalacaoRedeConcluidaPorCliente(Long id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = "SELECT u FROM Servico u WHERE cliente_id = :id AND tipo = 'INSTALACAOREDE' AND concluido = 1";
+        jpql = "SELECT u FROM Servico u WHERE cliente_id = :id AND tipo = :tipo AND concluido = true";
         qry = this.entityManager.createQuery(jpql, Servico.class);
         qry.setParameter("id", id);
+        qry.setParameter("tipo", "INSTALACAOREDE");
         List lst = qry.getResultList();
         this.entityManager.close();
 

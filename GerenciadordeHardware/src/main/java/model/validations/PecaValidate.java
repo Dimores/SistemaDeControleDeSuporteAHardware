@@ -21,7 +21,7 @@ public class PecaValidate {
         int diaSistema = Integer.parseInt(partesDataSistema[0]);
         int mesSistema = Integer.parseInt(partesDataSistema[1]);
         int anoSistema = Integer.parseInt(partesDataSistema[2]);
-
+        System.out.println(diaSistema + " " + mesSistema +" " +anoSistema);
         // Dia/Mes/Ano
         String[] partes = dataFabricacao.split("/");
         int dia = Integer.parseInt(partes[0]);
@@ -66,7 +66,7 @@ public class PecaValidate {
             throw new PecaException("Error - Campo vazio - 'dataFabricacao'");
         }
 
-        if (!(dia <= diaSistema && mes <= mesSistema && ano <= anoSistema)) {
+        if (!((dia <= 31 && dia > 0)  && (mes <= 12 && mes > 0 ) && ano <= anoSistema)) {
             throw new PecaException("Error - Campo invalido - 'dataFabricacao'");
         }
         peca.setDataFabricacao(dataFabricacao);

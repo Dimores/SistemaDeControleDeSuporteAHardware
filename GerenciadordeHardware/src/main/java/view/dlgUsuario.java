@@ -43,8 +43,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         habilitarCamposDeAcordoComPrevilegio(code);
         telaTecnico = new dlgCadastrarTecnico(this);
         telaCliente = new dlgCadastrarCliente(this);
-        telaCadastroPeca = new dlgCadastrarPeca(this);
-        new dlgCadastrarRelatorioManutencao(this);
         telaServico = new dlgCadastroServico(this, code);
         telaDispositivoRede = new dlgCadastrarDispositivoRede(this);
         telaRelatorioManutencao = new dlgCadastrarRelatorioManutencao(this);
@@ -82,7 +80,6 @@ public class dlgUsuario extends javax.swing.JDialog {
             // Tecnico
             case 2:
                 btnSocilitarServico.setVisible(false);
-                btnSocilitarSuporte.setVisible(false);
                 btnCadastrarTecnico.setVisible(false);
                 btnCadastrarCliente.setVisible(false);
                 btnGerarRelatorioManutencao.setVisible(false);
@@ -96,7 +93,6 @@ public class dlgUsuario extends javax.swing.JDialog {
 
             // Gerente
             case 3:
-                btnSocilitarSuporte.setVisible(false);
                 btnHistoricoAtendimento1.setVisible(false);
                 btnFeedBack1.setVisible(false);
                 btnCadastrarPeca.setVisible(false);
@@ -130,7 +126,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarDispositivoDeRede = new view.graphicElements.BotaoVermelho();
         btnCadastrarCliente = new view.graphicElements.BotaoVermelho();
         btnGerarRelatorioManutencao = new view.graphicElements.BotaoVermelho();
-        btnSocilitarSuporte = new view.graphicElements.BotaoVermelho();
         btnHistoricoAtendimento1 = new view.graphicElements.BotaoVermelho();
         btnHistoricoAtendimentoGerente = new view.graphicElements.BotaoVermelho();
         btnFeedBack1 = new view.graphicElements.BotaoVermelho();
@@ -154,7 +149,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarServico.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarServico.setText("Cadastrar Serviço");
         btnCadastrarServico.setBorderPainted(false);
-        btnCadastrarServico.setFocusPainted(false);
         btnCadastrarServico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarServico.setRadius(40);
         btnCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +162,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarPeca.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarPeca.setText("Cadastrar Peça");
         btnCadastrarPeca.setBorderPainted(false);
-        btnCadastrarPeca.setFocusPainted(false);
         btnCadastrarPeca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarPeca.setRadius(40);
         btnCadastrarPeca.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +175,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarTecnico.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarTecnico.setText("Cadastrar Técnico");
         btnCadastrarTecnico.setBorderPainted(false);
-        btnCadastrarTecnico.setFocusPainted(false);
         btnCadastrarTecnico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarTecnico.setRadius(40);
         btnCadastrarTecnico.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +188,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnGerarRelatorioRede.setForeground(new java.awt.Color(251, 251, 251));
         btnGerarRelatorioRede.setText("Gerar Relatório de Rede");
         btnGerarRelatorioRede.setBorderPainted(false);
-        btnGerarRelatorioRede.setFocusPainted(false);
         btnGerarRelatorioRede.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGerarRelatorioRede.setRadius(40);
         btnGerarRelatorioRede.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +201,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnSocilitarServico.setForeground(new java.awt.Color(251, 251, 251));
         btnSocilitarServico.setText("Socilitar Serviço");
         btnSocilitarServico.setBorderPainted(false);
-        btnSocilitarServico.setFocusPainted(false);
         btnSocilitarServico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSocilitarServico.setRadius(40);
         btnSocilitarServico.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +214,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarDispositivoDeRede.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarDispositivoDeRede.setText("Cadastrar Dispositivo de Rede");
         btnCadastrarDispositivoDeRede.setBorderPainted(false);
-        btnCadastrarDispositivoDeRede.setFocusPainted(false);
         btnCadastrarDispositivoDeRede.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarDispositivoDeRede.setRadius(40);
         btnCadastrarDispositivoDeRede.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +227,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnCadastrarCliente.setForeground(new java.awt.Color(251, 251, 251));
         btnCadastrarCliente.setText("Cadastrar Cliente");
         btnCadastrarCliente.setBorderPainted(false);
-        btnCadastrarCliente.setFocusPainted(false);
         btnCadastrarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCadastrarCliente.setRadius(40);
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +240,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnGerarRelatorioManutencao.setForeground(new java.awt.Color(251, 251, 251));
         btnGerarRelatorioManutencao.setText("Gerar Relatório de Manutenção");
         btnGerarRelatorioManutencao.setBorderPainted(false);
-        btnGerarRelatorioManutencao.setFocusPainted(false);
         btnGerarRelatorioManutencao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGerarRelatorioManutencao.setRadius(40);
         btnGerarRelatorioManutencao.addActionListener(new java.awt.event.ActionListener() {
@@ -262,25 +249,10 @@ public class dlgUsuario extends javax.swing.JDialog {
         });
         panOpcoes.add(btnGerarRelatorioManutencao);
 
-        btnSocilitarSuporte.setBackground(new java.awt.Color(51, 51, 51));
-        btnSocilitarSuporte.setForeground(new java.awt.Color(251, 251, 251));
-        btnSocilitarSuporte.setText("Socilitar Suporte");
-        btnSocilitarSuporte.setBorderPainted(false);
-        btnSocilitarSuporte.setFocusPainted(false);
-        btnSocilitarSuporte.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnSocilitarSuporte.setRadius(40);
-        btnSocilitarSuporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSocilitarSuporteActionPerformed(evt);
-            }
-        });
-        panOpcoes.add(btnSocilitarSuporte);
-
         btnHistoricoAtendimento1.setBackground(new java.awt.Color(51, 51, 51));
         btnHistoricoAtendimento1.setForeground(new java.awt.Color(251, 251, 251));
         btnHistoricoAtendimento1.setText("Histórico Atendimento");
         btnHistoricoAtendimento1.setBorderPainted(false);
-        btnHistoricoAtendimento1.setFocusPainted(false);
         btnHistoricoAtendimento1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnHistoricoAtendimento1.setRadius(40);
         btnHistoricoAtendimento1.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +266,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnHistoricoAtendimentoGerente.setForeground(new java.awt.Color(251, 251, 251));
         btnHistoricoAtendimentoGerente.setText("Histórico Atendimento");
         btnHistoricoAtendimentoGerente.setBorderPainted(false);
-        btnHistoricoAtendimentoGerente.setFocusPainted(false);
         btnHistoricoAtendimentoGerente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnHistoricoAtendimentoGerente.setRadius(40);
         btnHistoricoAtendimentoGerente.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +279,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnFeedBack1.setForeground(new java.awt.Color(251, 251, 251));
         btnFeedBack1.setText("Deixar FeedBack");
         btnFeedBack1.setBorderPainted(false);
-        btnFeedBack1.setFocusPainted(false);
         btnFeedBack1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFeedBack1.setRadius(40);
         btnFeedBack1.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +292,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnRealizarPagamento.setForeground(new java.awt.Color(251, 251, 251));
         btnRealizarPagamento.setText("Realizar Pagamento");
         btnRealizarPagamento.setBorderPainted(false);
-        btnRealizarPagamento.setFocusPainted(false);
         btnRealizarPagamento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRealizarPagamento.setRadius(40);
         btnRealizarPagamento.addActionListener(new java.awt.event.ActionListener() {
@@ -336,7 +305,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         btnSair.setForeground(new java.awt.Color(251, 251, 251));
         btnSair.setText("Sair");
         btnSair.setBorderPainted(false);
-        btnSair.setFocusPainted(false);
         btnSair.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSair.setRadius(40);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +395,7 @@ public class dlgUsuario extends javax.swing.JDialog {
 
     private void btnCadastrarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPecaActionPerformed
         // TODO add your handling code here:
+        telaCadastroPeca = new dlgCadastrarPeca(this);
         telaCadastroPeca.setVisible(true);
     }//GEN-LAST:event_btnCadastrarPecaActionPerformed
 
@@ -463,10 +432,6 @@ public class dlgUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         telaRelatorioManutencao.setVisible(true);
     }//GEN-LAST:event_btnGerarRelatorioManutencaoActionPerformed
-
-    private void btnSocilitarSuporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSocilitarSuporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSocilitarSuporteActionPerformed
 
     private void btnFeedBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedBack1ActionPerformed
         telaFeed.setVisible(true);
@@ -510,7 +475,6 @@ public class dlgUsuario extends javax.swing.JDialog {
     private view.graphicElements.BotaoVermelho btnRealizarPagamento;
     private view.graphicElements.BotaoVermelho btnSair;
     private view.graphicElements.BotaoVermelho btnSocilitarServico;
-    private view.graphicElements.BotaoVermelho btnSocilitarSuporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblLoginIcone;
     private javax.swing.JLabel lblUserName;

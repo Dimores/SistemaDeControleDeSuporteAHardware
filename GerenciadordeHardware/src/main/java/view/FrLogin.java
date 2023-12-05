@@ -32,6 +32,8 @@ public class FrLogin extends javax.swing.JFrame {
     public FrLogin() throws ParseException {
         initComponents();
         telaCadastroCliente = new dlgAutoCadastroCliente(this, true);
+        edtSenha.setToolTipText("Pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.");
+
     }
 
     /**
@@ -64,7 +66,6 @@ public class FrLogin extends javax.swing.JFrame {
         btnLogar.setForeground(new java.awt.Color(251, 251, 251));
         btnLogar.setText("Entrar");
         btnLogar.setBorderPainted(false);
-        btnLogar.setFocusPainted(false);
         btnLogar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLogar.setRadius(40);
         btnLogar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +78,6 @@ public class FrLogin extends javax.swing.JFrame {
         btnResetPassword.setForeground(new java.awt.Color(251, 251, 251));
         btnResetPassword.setText("Esqueci minha senha");
         btnResetPassword.setBorderPainted(false);
-        btnResetPassword.setFocusPainted(false);
         btnResetPassword.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnResetPassword.setRadius(40);
         btnResetPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +97,11 @@ public class FrLogin extends javax.swing.JFrame {
         edtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edtSenhaActionPerformed(evt);
+            }
+        });
+        edtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                edtSenhaKeyReleased(evt);
             }
         });
 
@@ -259,6 +264,10 @@ public class FrLogin extends javax.swing.JFrame {
         telaCadastroCliente.setVisible(true);
 
     }//GEN-LAST:event_lblCriarContaMousePressed
+
+    private void edtSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtSenhaKeyReleased
+       
+    }//GEN-LAST:event_edtSenhaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

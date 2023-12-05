@@ -37,6 +37,7 @@ public class dlgCadastrarCliente extends javax.swing.JDialog {
         this.limparCampos();
         this.setModal(true);
         clienteController.atualizarTabela(grdClientes);
+        edtSenha.setToolTipText("Pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.");
         setDefaultCloseOperation(dlgCadastrarCliente.DISPOSE_ON_CLOSE);
     }
 

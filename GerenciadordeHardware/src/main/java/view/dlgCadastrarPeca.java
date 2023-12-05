@@ -494,61 +494,67 @@ public class dlgCadastrarPeca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (tipoPeca.equals("Generica")) {
-            Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
+        try {
+            if (tipoPeca.equals("Generica")) {
 
-            if (pecaExcluida == null) {
-                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-            } else {
+                Peca pecaExcluida = (Peca) this.getObjetoSelecionadoNaGrid();
 
-                int response = JOptionPane.showConfirmDialog(null,
-                        "Deseja exlcuir a Peca  \n("
-                        + pecaExcluida.getNome() + ", "
-                        + pecaExcluida.getCodigo() + ") ?",
-                        "Confirmar exclusão",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.OK_OPTION) {
-                    try {
-                        if (pecaExcluida.getEstoque() == 0) {
-                            pecaController.excluirPeca(pecaExcluida);
-                        } else {
-                            exemplarController.excluirExemplarPeca(pecaExcluida);
-                            exemplarController.atualizarEstoquePeca(pecaExcluida);
+                if (pecaExcluida == null) {
+                    JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+                } else {
+
+                    int response = JOptionPane.showConfirmDialog(null,
+                            "Deseja exlcuir a Peca  \n("
+                            + pecaExcluida.getNome() + ", "
+                            + pecaExcluida.getCodigo() + ") ?",
+                            "Confirmar exclusão",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (response == JOptionPane.OK_OPTION) {
+                        try {
+                            if (pecaExcluida.getEstoque() == 0) {
+                                pecaController.excluirPeca(pecaExcluida);
+                            } else {
+                                exemplarController.excluirExemplarPeca(pecaExcluida);
+                                exemplarController.atualizarEstoquePeca(pecaExcluida);
+                            }
+
+                            pecaController.atualizarTabela(grdPecas);
+                            JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                        } catch (PecaException ex) {
+                            JOptionPane.showMessageDialog(this, ex.getMessage());
                         }
-
-                        pecaController.atualizarTabela(grdPecas);
-                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                    } catch (PecaException ex) {
-                        JOptionPane.showMessageDialog(this, ex.getMessage());
                     }
                 }
-            }
-        } else {
-            Cabo caboExcluido = (Cabo) this.getObjetoSelecionadoNaGrid();
-
-            if (caboExcluido == null) {
-                JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
             } else {
+                Cabo caboExcluido = (Cabo) this.getObjetoSelecionadoNaGrid();
 
-                int response = JOptionPane.showConfirmDialog(null,
-                        "Deseja exlcuir o Cabo  \n("
-                        + caboExcluido.getNome() + ", "
-                        + caboExcluido.getCodigo() + ") ?",
-                        "Confirmar exclusão",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.OK_OPTION) {
-                    try {
-                        caboController.excluirCabo(caboExcluido);
-                        caboController.atualizarTabela(grdPecas);
+                if (caboExcluido == null) {
+                    JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+                } else {
 
-                        JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                    } catch (PecaException ex) {
-                        JOptionPane.showMessageDialog(this, ex.getMessage());
+                    int response = JOptionPane.showConfirmDialog(null,
+                            "Deseja exlcuir o Cabo  \n("
+                            + caboExcluido.getNome() + ", "
+                            + caboExcluido.getCodigo() + ") ?",
+                            "Confirmar exclusão",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (response == JOptionPane.OK_OPTION) {
+                        try {
+                            caboController.excluirCabo(caboExcluido);
+                            caboController.atualizarTabela(grdPecas);
+
+                            JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+                        } catch (PecaException ex) {
+                            JOptionPane.showMessageDialog(this, ex.getMessage());
+                        }
                     }
                 }
             }
+        }catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, "Houve um erro ao excluir essa peça!.");
+            Logger.getLogger(dlgCadastrarPeca.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 

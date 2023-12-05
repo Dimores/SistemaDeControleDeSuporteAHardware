@@ -43,6 +43,7 @@ public class PecaDAO implements IDao {
         this.entityManager.close();
         return (List<Object>) lst;
     }
+    
 
     @Override
     public Object find(Object obj) {
