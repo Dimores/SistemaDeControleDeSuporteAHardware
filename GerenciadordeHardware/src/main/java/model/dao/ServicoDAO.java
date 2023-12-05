@@ -133,7 +133,7 @@ public class ServicoDAO implements IDao {
 
     public List<Object> findAllManutencaoPreventivaConcluida() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = " SELECT u FROM Servico u WHERE tipo = 'MANUTENCAOPREVENTIVA' AND concluido = 1";
+        jpql = " SELECT u FROM Servico u WHERE tipo = 'MANUTENCAOPREVENTIVA' AND concluido = true";
         qry = this.entityManager.createQuery(jpql);
         List lst = qry.getResultList();
         this.entityManager.close();
